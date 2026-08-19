@@ -1,0 +1,43 @@
+name: Add Aiseeki contact email
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/add-contact-email.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  update-contact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Add contact email to footer
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('src/pages/index.astro')
+          s = p.read_text(encoding='utf-8')
+          email = 'aiseeki@agent.qq.com'
+          if email not in s:
+              old = '<a href="#top">Back to top ↑</a>'
+              new = f'<a href="mailto:{email}">{email}</a>' + old
+              if old not in s:
+                  raise SystemExit('Footer anchor not found')
+              s = s.replace(old, new, 1)
+              p.write_text(s, encoding='utf-8')
+      - name: Commit change
+        run: |
+          if git diff --quiet; then
+            echo "No change needed"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/pages/index.astro
+          git commit -m "Add Aiseeki contact email to website"
+          git push origin main
