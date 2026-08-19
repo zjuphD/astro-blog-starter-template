@@ -1,5 +1,5 @@
-// Place any global data in this file.
-// You can import this data from anywhere in your site by using the `import` keyword.
+// Global site metadata for Aiseeki.
 
-export const SITE_TITLE = "Astro Blog";
-export const SITE_DESCRIPTION = "Welcome to my website!";
+export const SITE_TITLE = "Aiseeki — AI for Research";
+export const SITE_DESCRIPTION =
+	"Aiseeki is building AI-native tools for research: discover literature, analyze data, reason across evidence, and turn questions into reproducible research workflows.";
