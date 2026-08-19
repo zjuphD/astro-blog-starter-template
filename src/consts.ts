@@ -1,4 +1,5 @@
 // Global site metadata for Aiseeki.
+// Deployment refresh: landing page v1.
 
 export const SITE_TITLE = "Aiseeki — AI for Research";
 export const SITE_DESCRIPTION =
