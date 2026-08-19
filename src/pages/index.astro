@@ -1,7 +1,5 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
@@ -11,40 +9,194 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
-		</main>
-		<Footer />
+		<div class="page-shell">
+			<header class="site-header">
+				<a class="brand" href="#top" aria-label="Aiseeki home">
+					<span class="brand-mark">A</span>
+					<span>Aiseeki</span>
+				</a>
+				<nav>
+					<a href="#product">Product</a>
+					<a href="#workflow">Workflow</a>
+					<a href="#research">Research</a>
+				</nav>
+				<a class="header-cta" href="#early-access">Join early access</a>
+			</header>
+
+			<main id="top">
+				<section class="hero">
+					<p class="eyebrow">AI for Research</p>
+					<h1>Turn research questions<br />into working evidence.</h1>
+					<p class="hero-copy">
+						Aiseeki helps researchers search literature, analyze data, reason across evidence,
+						and build reproducible workflows with AI.
+					</p>
+					<div class="hero-actions">
+						<a class="primary-button" href="#early-access">Join early access</a>
+						<a class="text-link" href="#product">See how it works <span>↘</span></a>
+					</div>
+
+					<div class="demo-window" id="product">
+						<div class="demo-topbar">
+							<div class="dots"><span></span><span></span><span></span></div>
+							<span class="demo-label">Aiseeki Research Agent</span>
+							<span class="status-dot">live</span>
+						</div>
+						<div class="demo-grid">
+							<div class="prompt-panel">
+								<p class="panel-label">Research question</p>
+								<h2>Do R-loops associate with mutation hotspots in viral genomes?</h2>
+								<div class="prompt-tags">
+									<span>Literature</span><span>Genomics</span><span>Evidence synthesis</span>
+								</div>
+							</div>
+							<div class="agent-panel">
+								<p class="panel-label">Working plan</p>
+								<ol>
+									<li><span>01</span><div><strong>Search</strong><small>Find primary studies and relevant datasets.</small></div></li>
+									<li><span>02</span><div><strong>Compare</strong><small>Map claims, methods, and evidence strength.</small></div></li>
+									<li><span>03</span><div><strong>Analyze</strong><small>Intersect genomic signals and test enrichment.</small></div></li>
+									<li><span>04</span><div><strong>Create</strong><small>Generate figures, methods, and a reproducible report.</small></div></li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="statement">
+					<p>Research software should understand the work, not just the prompt.</p>
+				</section>
+
+				<section class="capabilities" id="workflow">
+					<div class="section-intro">
+						<p class="eyebrow">One workspace, many research modes</p>
+						<h2>From discovery to analysis,<br />without breaking your flow.</h2>
+					</div>
+					<div class="capability-grid">
+						<article>
+							<span class="number">01</span>
+							<h3>Discover</h3>
+							<p>Search papers, methods, datasets, and technical context with source-aware reasoning.</p>
+							<div class="mini-ui search-ui"><span>R-loop viral genome instability</span><b>⌘K</b></div>
+						</article>
+						<article>
+							<span class="number">02</span>
+							<h3>Analyze</h3>
+							<p>Move from raw results to interpretable statistics, plots, and reproducible analysis plans.</p>
+							<div class="bars"><i style="height:36%"></i><i style="height:54%"></i><i style="height:78%"></i><i style="height:62%"></i><i style="height:91%"></i><i style="height:71%"></i></div>
+						</article>
+						<article>
+							<span class="number">03</span>
+							<h3>Reason</h3>
+							<p>Compare competing explanations, expose uncertainty, and connect evidence across projects.</p>
+							<div class="reason-lines"><span></span><span></span><span></span><span></span></div>
+						</article>
+						<article>
+							<span class="number">04</span>
+							<h3>Create</h3>
+							<p>Turn analysis into figure plans, methods, reports, and research-ready outputs.</p>
+							<div class="doc-preview"><span></span><span></span><span></span><span></span><span></span></div>
+						</article>
+					</div>
+				</section>
+
+				<section class="dark-section" id="research">
+					<div class="dark-copy">
+						<p class="eyebrow light">Built for real research work</p>
+						<h2>An AI research layer<br />across your scientific stack.</h2>
+						<p>
+							Aiseeki is designed around the tools researchers already use — literature databases,
+							code, files, analysis pipelines, and scientific writing.
+						</p>
+					</div>
+					<div class="stack-map" aria-label="Research stack illustration">
+						<div class="orbit orbit-one"><span>PubMed</span><span>NCBI</span><span>GitHub</span><span>Zotero</span></div>
+						<div class="orbit orbit-two"><span>Data</span><span>Code</span><span>Papers</span></div>
+						<div class="core">A</div>
+					</div>
+				</section>
+
+				<section class="use-cases">
+					<div class="section-intro compact">
+						<p class="eyebrow">Start with the work you already do</p>
+						<h2>Research tasks, not chatbot features.</h2>
+					</div>
+					<div class="task-list">
+						<div><span>Literature synthesis</span><p>“Compare how recent studies define genomic hypervariable regions.”</p></div>
+						<div><span>Bioinformatics</span><p>“Intersect R-loop peaks with SNP, indel, and recombination signals.”</p></div>
+						<div><span>Experiment planning</span><p>“Turn this mechanism into a decisive validation workflow.”</p></div>
+						<div><span>Scientific writing</span><p>“Build a figure narrative that matches the strength of the evidence.”</p></div>
+					</div>
+				</section>
+
+				<section class="final-cta" id="early-access">
+					<p class="eyebrow">Aiseeki</p>
+					<h2>Research, with an AI<br />that works with you.</h2>
+					<p>We’re building the first version now.</p>
+					<a class="primary-button" href="mailto:hello@aiseeki.com">Get in touch</a>
+				</section>
+			</main>
+
+			<footer>
+				<a class="brand footer-brand" href="#top"><span class="brand-mark">A</span><span>Aiseeki</span></a>
+				<p>AI for Research.</p>
+				<p>© 2026 Aiseeki</p>
+			</footer>
+		</div>
 	</body>
 </html>
+
+<style>
+	:global(html) { scroll-behavior: smooth; }
+	:global(body) { background: #f3f0e8; color: #10100e; }
+	:global(main) { width: auto; max-width: none; margin: 0; padding: 0; }
+	:global(a) { text-decoration: none; color: inherit; }
+	.page-shell { min-height: 100vh; overflow: hidden; }
+	.site-header { width: min(1380px, calc(100% - 56px)); margin: 0 auto; height: 88px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-bottom: 1px solid rgba(16,16,14,.14); font-size: 15px; }
+	.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.02em; font-size: 19px; justify-self: start; }
+	.brand-mark { width: 28px; height: 28px; display: inline-grid; place-items: center; border: 1px solid #151512; border-radius: 50%; font-family: Georgia, serif; font-size: 16px; }
+	nav { display: flex; gap: 34px; color: #4b4b45; }
+	nav a:hover, .text-link:hover { opacity: .55; }
+	.header-cta { justify-self: end; padding: 11px 18px; border: 1px solid #151512; border-radius: 999px; transition: .2s ease; }
+	.header-cta:hover { background: #151512; color: #f3f0e8; }
+	.hero { width: min(1380px, calc(100% - 56px)); margin: 0 auto; padding: 115px 0 80px; }
+	.eyebrow { margin: 0 0 22px; text-transform: uppercase; letter-spacing: .14em; font-size: 12px; font-weight: 700; color: #64645d; }
+	.hero h1, .section-intro h2, .dark-copy h2, .final-cta h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -.052em; }
+	.hero h1 { margin: 0; max-width: 1120px; font-size: clamp(64px, 8.2vw, 132px); line-height: .9; }
+	.hero-copy { max-width: 690px; margin: 38px 0 0; font-size: clamp(20px, 2vw, 28px); line-height: 1.35; color: #454540; letter-spacing: -.02em; }
+	.hero-actions { margin-top: 38px; display: flex; gap: 28px; align-items: center; }
+	.primary-button { display: inline-flex; align-items: center; justify-content: center; padding: 14px 22px; border-radius: 999px; background: #151512; color: #f8f5ee; font-size: 15px; }
+	.primary-button:hover { transform: translateY(-1px); }
+	.text-link { font-size: 15px; border-bottom: 1px solid rgba(16,16,14,.35); padding-bottom: 3px; }
+	.demo-window { margin-top: 92px; border: 1px solid rgba(16,16,14,.16); border-radius: 24px; background: #faf8f2; box-shadow: 0 30px 80px rgba(40,35,25,.08); overflow: hidden; }
+	.demo-topbar { min-height: 60px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 0 22px; border-bottom: 1px solid rgba(16,16,14,.12); font-size: 12px; color: #68685f; }
+	.dots { display: flex; gap: 7px; }.dots span { width: 7px; height: 7px; background: #b9b6ae; border-radius: 50%; }
+	.demo-label { justify-self: center; }.status-dot { justify-self: end; }.status-dot::before { content: ''; display: inline-block; width: 7px; height: 7px; margin-right: 7px; border-radius: 50%; background: #64a56a; }
+	.demo-grid { display: grid; grid-template-columns: 1.02fr .98fr; min-height: 520px; }
+	.prompt-panel, .agent-panel { padding: clamp(32px, 5vw, 70px); }
+	.prompt-panel { display: flex; flex-direction: column; justify-content: center; border-right: 1px solid rgba(16,16,14,.12); background: radial-gradient(circle at 20% 15%, rgba(255,255,255,.95), rgba(247,243,234,.8) 45%, rgba(239,233,219,.8)); }
+	.panel-label { margin: 0 0 24px; color: #77756c; text-transform: uppercase; font-size: 11px; letter-spacing: .13em; }
+	.prompt-panel h2 { max-width: 610px; margin: 0; font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: clamp(36px, 4.2vw, 66px); line-height: 1.02; letter-spacing: -.045em; }
+	.prompt-tags { margin-top: 42px; display: flex; gap: 9px; flex-wrap: wrap; }.prompt-tags span { padding: 8px 11px; border: 1px solid rgba(16,16,14,.15); border-radius: 999px; font-size: 12px; color: #5d5c55; }
+	.agent-panel { background: #171714; color: #f5f1e8; }.agent-panel .panel-label { color: #898980; }.agent-panel ol { list-style: none; margin: 8px 0 0; padding: 0; }.agent-panel li { display: grid; grid-template-columns: 42px 1fr; gap: 16px; padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,.12); }.agent-panel li:last-child { border-bottom: 0; }.agent-panel li > span { color: #77776f; font: 14px Georgia, serif; }.agent-panel strong { display: block; margin-bottom: 5px; font-size: 18px; font-weight: 500; }.agent-panel small { display: block; font-size: 14px; line-height: 1.45; color: #aaa99f; }
+	.statement { padding: 160px 28px; text-align: center; }.statement p { max-width: 1100px; margin: 0 auto; font: 400 clamp(42px, 6vw, 92px)/1.02 Georgia, serif; letter-spacing: -.05em; }
+	.capabilities { width: min(1380px, calc(100% - 56px)); margin: 0 auto; padding: 50px 0 145px; }
+	.section-intro { display: grid; grid-template-columns: .6fr 1.4fr; gap: 30px; align-items: start; margin-bottom: 62px; }.section-intro h2 { margin: 0; font-size: clamp(48px, 5.7vw, 88px); line-height: .98; }.section-intro .eyebrow { padding-top: 12px; }
+	.capability-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }.capability-grid article { min-height: 390px; padding: 34px; display: flex; flex-direction: column; background: #e9e4d8; border-radius: 18px; position: relative; overflow: hidden; }.number { color: #747168; font: 12px Georgia, serif; }.capability-grid h3 { margin: auto 0 12px; font: 400 44px Georgia, serif; letter-spacing: -.04em; }.capability-grid p { max-width: 480px; margin: 0; color: #5c5a53; font-size: 16px; line-height: 1.5; }.mini-ui, .bars, .reason-lines, .doc-preview { position: absolute; right: 30px; top: 34px; width: 42%; }
+	.search-ui { padding: 13px 14px; display: flex; justify-content: space-between; gap: 12px; border: 1px solid rgba(16,16,14,.15); border-radius: 10px; background: rgba(255,255,255,.45); font-size: 11px; color: #66645d; }.search-ui b { font-weight: 400; }
+	.bars { height: 108px; display: flex; align-items: end; gap: 7px; }.bars i { display: block; flex: 1; background: #24241f; border-radius: 4px 4px 0 0; opacity: .78; }
+	.reason-lines { display: grid; gap: 10px; }.reason-lines span { display: block; height: 1px; background: #282822; }.reason-lines span:nth-child(2) { width: 76%; }.reason-lines span:nth-child(3) { width: 54%; }.reason-lines span:nth-child(4) { width: 88%; }
+	.doc-preview { padding: 13px; border: 1px solid rgba(16,16,14,.12); background: rgba(255,255,255,.38); border-radius: 8px; display: grid; gap: 8px; }.doc-preview span { height: 5px; border-radius: 3px; background: #7d7a70; opacity: .45; }.doc-preview span:nth-child(2) { width: 82%; }.doc-preview span:nth-child(3) { width: 91%; }.doc-preview span:nth-child(4) { width: 64%; }.doc-preview span:nth-child(5) { width: 77%; }
+	.dark-section { min-height: 760px; padding: 90px max(28px, calc((100vw - 1380px)/2)); background: #141411; color: #f2eee4; display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: center; }.eyebrow.light { color: #8f8e83; }.dark-copy h2 { margin: 0; font-size: clamp(52px, 6.3vw, 98px); line-height: .94; }.dark-copy > p:last-child { max-width: 650px; margin-top: 36px; color: #9f9e94; font-size: 18px; line-height: 1.55; }
+	.stack-map { position: relative; min-height: 560px; display: grid; place-items: center; }.core { width: 112px; height: 112px; display: grid; place-items: center; border-radius: 50%; background: #f1ede3; color: #151512; font: 42px Georgia, serif; z-index: 3; }.orbit { position: absolute; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; }.orbit-one { width: min(520px, 92%); aspect-ratio: 1; }.orbit-two { width: min(330px, 62%); aspect-ratio: 1; }.orbit span { position: absolute; padding: 8px 12px; border: 1px solid rgba(255,255,255,.15); background: #1d1d19; border-radius: 999px; color: #aaa99e; font-size: 11px; }.orbit-one span:nth-child(1){top:2%;left:45%}.orbit-one span:nth-child(2){right:-3%;top:48%}.orbit-one span:nth-child(3){bottom:3%;left:42%}.orbit-one span:nth-child(4){left:-3%;top:48%}.orbit-two span:nth-child(1){top:9%;left:43%}.orbit-two span:nth-child(2){right:-5%;bottom:26%}.orbit-two span:nth-child(3){left:-7%;bottom:26%}
+	.use-cases { width: min(1380px, calc(100% - 56px)); margin: 0 auto; padding: 145px 0; }.section-intro.compact { grid-template-columns: 1fr; max-width: 960px; }.section-intro.compact h2 { font-size: clamp(52px, 6.5vw, 96px); }.task-list { border-top: 1px solid rgba(16,16,14,.18); }.task-list > div { display: grid; grid-template-columns: .55fr 1.45fr; gap: 30px; padding: 28px 0; border-bottom: 1px solid rgba(16,16,14,.18); align-items: center; }.task-list span { color: #66645d; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; }.task-list p { margin: 0; font: 400 clamp(25px, 3vw, 44px)/1.15 Georgia, serif; letter-spacing: -.035em; }
+	.final-cta { padding: 160px 28px 170px; text-align: center; border-top: 1px solid rgba(16,16,14,.14); }.final-cta h2 { margin: 0; font-size: clamp(60px, 8vw, 120px); line-height: .9; }.final-cta > p:not(.eyebrow) { margin: 30px 0; color: #65635c; }.final-cta .primary-button { margin-top: 6px; }
+	footer { width: min(1380px, calc(100% - 56px)); margin: 0 auto; padding: 28px 0 38px; border-top: 1px solid rgba(16,16,14,.14); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; color: #65635c; font-size: 12px; }.footer-brand { color: #151512; font-size: 16px; }.footer-brand .brand-mark { width: 24px; height: 24px; font-size: 13px; }.footer-brand + p { justify-self: center; margin: 0; }footer > p:last-child { justify-self: end; margin: 0; }
+	@media (max-width: 900px) {
+		.site-header { grid-template-columns: 1fr auto; } nav { display: none; }
+		.hero { padding-top: 80px; }.hero h1 { font-size: clamp(58px, 14vw, 100px); }.demo-grid, .dark-section { grid-template-columns: 1fr; }.prompt-panel { border-right: 0; border-bottom: 1px solid rgba(16,16,14,.12); }.section-intro { grid-template-columns: 1fr; }.capability-grid { grid-template-columns: 1fr; }.dark-section { padding-top: 100px; padding-bottom: 80px; }.stack-map { min-height: 450px; }.task-list > div { grid-template-columns: 1fr; gap: 12px; }.mini-ui, .bars, .reason-lines, .doc-preview { width: 34%; }.footer-brand + p { display: none; }footer { grid-template-columns: 1fr auto; }
+	}
+	@media (max-width: 620px) {
+		.site-header, .hero, .capabilities, .use-cases, footer { width: min(100% - 30px, 1380px); }.site-header { height: 72px; }.header-cta { padding: 9px 12px; font-size: 12px; }.hero { padding-top: 62px; }.hero h1 { font-size: 54px; }.hero-copy { font-size: 19px; }.hero-actions { align-items: flex-start; flex-direction: column; gap: 17px; }.demo-window { margin-top: 58px; border-radius: 16px; }.demo-topbar { grid-template-columns: 1fr 1fr; }.demo-label { display: none; }.prompt-panel, .agent-panel { padding: 28px 22px; }.prompt-panel h2 { font-size: 38px; }.statement { padding: 110px 18px; }.statement p { font-size: 46px; }.capabilities { padding-bottom: 100px; }.capability-grid article { min-height: 330px; padding: 24px; }.capability-grid h3 { font-size: 38px; }.mini-ui, .bars, .reason-lines, .doc-preview { width: 46%; right: 22px; top: 25px; }.dark-section { padding-left: 18px; padding-right: 18px; }.dark-copy h2 { font-size: 56px; }.stack-map { min-height: 350px; }.orbit-one { width: 330px; }.orbit-two { width: 210px; }.use-cases { padding: 100px 0; }.task-list p { font-size: 29px; }.final-cta { padding: 110px 18px 120px; }.final-cta h2 { font-size: 57px; }
+	}
+</style>
