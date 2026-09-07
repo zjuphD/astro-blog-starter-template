@@ -1,6 +1,8 @@
 name: Site Check
 
 on:
+  push:
+    branches: [main, feature/ai-for-science-briefing]
   pull_request:
     branches: [main]
   workflow_dispatch:
