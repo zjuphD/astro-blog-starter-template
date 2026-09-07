@@ -8,7 +8,7 @@ export default function briefingHome() {
           `
 (function(){
   if (location.pathname !== "/" && location.pathname !== "/index.html") return;
-  function esc(s){return String(s ?? "").replace(/[&<>\"']/g,function(c){return ({"&":"&amp;","<":"&lt;",">":"&gt;","\\\"":"&quot;","'":"&#39;"})[c] || c;});}
+  function esc(s){return String(s ?? "").replace(/[&<>]/g,function(c){return c==="&"?"&amp;":c==="<"?"&lt;":"&gt;";});}
   function init(){
     var nav = document.querySelector('.nav-links');
     if(nav && !nav.querySelector('[data-briefing-link]')){
