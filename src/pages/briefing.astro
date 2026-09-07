@@ -1,0 +1,103 @@
+---
+import briefings from "../data/briefings.json";
+
+const categories = [
+  "全部",
+  "精准医疗",
+  "肿瘤生物学",
+  "AI 药物发现",
+  "基因组与单细胞",
+  "蛋白质与结构生物学",
+  "AI for Science",
+];
+
+const sorted = [...briefings].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt) || b.score - a.score);
+const latestDate = sorted[0]?.publishedAt ?? "";
+const dateLabel = latestDate ? new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(`${latestDate}T00:00:00+08:00`)) : "";
+---
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aiseeki 前沿快讯｜AI for Science Daily</title>
+  <meta name="description" content="每日筛选精准医疗、肿瘤生物学、AI 药物发现、组学、结构生物学与 AI for Science 的重要新进展。" />
+  <link rel="icon" type="image/png" href="/aiseeki-redesign-assets/favicon-64.png" />
+  <style is:global>
+    :root{--bg:#EEF0EA;--ink:#24312B;--soft:#5A6A62;--sage:#6E8F7C;--sage2:#54745F;--ochre:#C08A2D;--line:rgba(36,49,43,.13);--glass:rgba(255,255,255,.58);--glass2:rgba(255,255,255,.78);--shadow:rgba(36,49,43,.10)}
+    @media(prefers-color-scheme:dark){:root{--bg:#141A17;--ink:#E9ECE5;--soft:#A7B4AB;--sage:#8FB49F;--sage2:#A9CBB8;--ochre:#D9A94E;--line:rgba(233,236,229,.13);--glass:rgba(30,38,34,.55);--glass2:rgba(34,43,38,.78);--shadow:rgba(0,0,0,.42)}}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;line-height:1.72;-webkit-font-smoothing:antialiased}a{color:inherit;text-decoration:none}
+    body:before,body:after{content:"";position:fixed;z-index:-2;border-radius:50%;filter:blur(100px);pointer-events:none}body:before{width:52vw;height:52vw;left:-12vw;top:-16vw;background:rgba(110,143,124,.34)}body:after{width:44vw;height:44vw;right:-14vw;top:34vh;background:rgba(192,138,45,.20)}
+    .wrap{width:min(1160px,calc(100% - 36px));margin:auto}.glass{background:var(--glass);backdrop-filter:blur(18px) saturate(1.3);border:1px solid var(--line);box-shadow:0 10px 34px var(--shadow);border-radius:20px}
+    .nav{position:sticky;top:14px;z-index:20;margin-top:14px;padding:10px 12px 10px 18px;display:flex;align-items:center;gap:16px;background:var(--glass2);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:16px}.brand{display:flex;align-items:center;gap:10px;margin-right:auto}.brand img{width:38px}.brand b{letter-spacing:.18em}.brand small{color:var(--soft);font-size:.68rem}.nav a:not(.brand){font-size:.88rem;color:var(--soft)}.nav .cta{padding:8px 14px;border-radius:999px;background:var(--ink);color:var(--bg)!important;font-weight:600}
+    .hero{padding:8rem 0 3.6rem}.eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:var(--soft);font-size:.72rem}.hero h1{font-size:clamp(2.5rem,6vw,4.7rem);line-height:1.08;letter-spacing:-.04em;margin:.7rem 0 1rem}.hero h1 em{font-style:normal;color:var(--sage2)}.lede{max-width:760px;color:var(--soft);font-size:1.08rem}.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:1.4rem}.pill{padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--glass);font-size:.76rem;color:var(--soft)}
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin:1.4rem 0 2rem}.filter{border:1px solid var(--line);background:var(--glass);color:var(--soft);padding:8px 13px;border-radius:999px;cursor:pointer;font:inherit;font-size:.82rem}.filter.active{background:var(--ink);color:var(--bg)}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;padding-bottom:5rem}.brief{grid-column:span 6;padding:1.5rem;display:flex;flex-direction:column;min-height:360px;transition:.25s}.brief:hover{transform:translateY(-4px)}.brief.featured{grid-column:span 12;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;min-height:300px}.topline{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:1rem}.cat{font-size:.7rem;letter-spacing:.08em;color:var(--sage2);font-weight:700}.type{font-size:.68rem;color:var(--soft)}.score{margin-left:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.72rem;color:var(--ochre)}.brief h2{font-size:clamp(1.25rem,2.4vw,1.75rem);line-height:1.38;margin:.2rem 0 .7rem}.brief.featured h2{font-size:clamp(1.8rem,3.4vw,2.65rem)}.source{font-size:.78rem;color:var(--soft);margin-bottom:1rem}.summary{color:var(--soft);margin:0 0 1rem}.why{padding:12px 14px;border-radius:14px;background:rgba(110,143,124,.09);border:1px solid var(--line);font-size:.9rem}.why b{display:block;color:var(--ink);margin-bottom:3px}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:1rem}.tag{font-size:.68rem;color:var(--soft);border:1px solid var(--line);border-radius:999px;padding:4px 9px}.read{display:inline-flex;margin-top:1rem;font-size:.86rem;font-weight:700;color:var(--sage2)}
+    .empty{display:none;grid-column:1/-1;text-align:center;padding:4rem 1rem;color:var(--soft)}footer{padding:2rem 0 4rem;color:var(--soft);font-size:.78rem;text-align:center}
+    @media(max-width:800px){.nav small,.nav a:not(.brand):not(.cta){display:none}.hero{padding-top:6rem}.brief,.brief.featured{grid-column:span 12;display:block;min-height:auto}.brief.featured h2{font-size:1.7rem}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="nav">
+      <a class="brand" href="/"><img src="/aiseeki-redesign-assets/logo-mark.png" alt="" /><b>AISEEKI</b><small>AI FOR SCIENCE DAILY</small></a>
+      <a href="/">首页</a><a href="/briefing">前沿快讯</a><a href="https://github.com/zjuphD/GeneCode" target="_blank" rel="noopener">GitHub</a>
+      <a class="cta" href="https://genecode-agent.pages.dev" target="_blank" rel="noopener">GeneCode ↗</a>
+    </nav>
+
+    <header class="hero">
+      <p class="eyebrow">AISEEKI INTELLIGENCE · DAILY SIGNAL</p>
+      <h1>每天过滤噪音，留下<em>值得科研人员看的进展</em>。</h1>
+      <p class="lede">聚焦精准医疗、肿瘤生物学、AI 药物发现、组学、结构生物学与 AI for Science。优先原始论文、临床研究和官方来源，区分论文、临床试验与产业动态。</p>
+      <div class="hero-meta"><span class="pill">最近更新 · {dateLabel}</span><span class="pill">{sorted.length} 条精选</span><span class="pill">人工可审阅 · 原文可追溯</span></div>
+    </header>
+
+    <div class="filters" aria-label="快讯分类筛选">
+      {categories.map((category, index) => <button class:list={["filter", { active: index === 0 }]} data-filter={category}>{category}</button>)}
+    </div>
+
+    <main class="grid" id="briefingGrid">
+      {sorted.map((item, index) => (
+        <article class:list={["glass", "brief", { featured: index === 0 }]} data-category={item.category}>
+          <div>
+            <div class="topline"><span class="cat">{item.category}</span><span class="type">· {item.sourceType}</span><span class="score">AISK / {item.score}</span></div>
+            <h2>{item.titleZh}</h2>
+            <p class="source">{item.source} · {item.publishedAt}</p>
+            <p class="summary">{item.summary}</p>
+          </div>
+          <div>
+            <div class="why"><b>为什么值得关注</b>{item.whyItMatters}</div>
+            <div class="tags">{item.tags.map(tag => <span class="tag">{tag}</span>)}</div>
+            <a class="read" href={item.originalUrl} target="_blank" rel="noopener noreferrer">查看原始来源 ↗</a>
+          </div>
+        </article>
+      ))}
+      <div class="empty" id="emptyState">这个分类暂时没有快讯。</div>
+    </main>
+
+    <footer>© 2026 AISEEKI · AI for Research · 快讯仅用于科研信息整理，不替代原始论文与专业判断。</footer>
+  </div>
+
+  <script is:inline>
+    (function(){
+      var buttons = document.querySelectorAll('[data-filter]');
+      var cards = document.querySelectorAll('[data-category]');
+      var empty = document.getElementById('emptyState');
+      buttons.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          buttons.forEach(function(b){ b.classList.remove('active'); });
+          btn.classList.add('active');
+          var filter = btn.getAttribute('data-filter');
+          var visible = 0;
+          cards.forEach(function(card){
+            var show = filter === '全部' || card.getAttribute('data-category') === filter;
+            card.style.display = show ? '' : 'none';
+            if(show) visible++;
+          });
+          empty.style.display = visible ? 'none' : 'block';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
