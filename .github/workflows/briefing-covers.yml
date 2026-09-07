@@ -1,0 +1,48 @@
+name: Briefing Source Covers
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/data/briefings.json"
+      - "scripts/capture-briefing-covers.sh"
+      - ".github/workflows/briefing-covers.yml"
+  schedule:
+    - cron: "10 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Chromium
+        run: npx -y playwright@1.55.0 install --with-deps chromium
+
+      - name: Capture source pages
+        run: bash scripts/capture-briefing-covers.sh
+
+      - name: Commit new covers
+        shell: bash
+        run: |
+          if git diff --quiet -- public/briefing-covers; then
+            echo "No new source covers."
+            exit 0
+          fi
+          git config user.name "aiseeki-briefing-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/briefing-covers
+          git commit -m "assets: refresh briefing source covers"
+          git push origin HEAD:main
