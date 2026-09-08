@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - "src/data/briefings.json"
-      - "scripts/capture-briefing-covers.sh"
+      - "scripts/capture-briefing-covers.mjs"
       - ".github/workflows/briefing-covers.yml"
   schedule:
     - cron: "10 0 * * *"
@@ -34,11 +34,15 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install Chromium
-        run: npx -y playwright@1.55.0 install --with-deps chromium
+      - name: Install Playwright + Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
 
       - name: Capture source pages
-        run: bash scripts/capture-briefing-covers.sh
+        env:
+          REFRESH_EXISTING: "1"
+        run: node scripts/capture-briefing-covers.mjs
 
       - name: Commit new covers
         shell: bash
