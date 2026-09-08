@@ -14,9 +14,14 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: briefing-source-covers
+  cancel-in-progress: true
+
 jobs:
   capture:
     runs-on: ubuntu-latest
+    timeout-minutes: 8
     steps:
       - name: Checkout main
         uses: actions/checkout@v4

@@ -25,14 +25,14 @@ for(const x of items){
   echo "capturing: $id"
   tmp="$target.tmp.png"
   rm -f "$tmp"
-  if npx -y playwright@1.55.0 screenshot \
+  if timeout 35s npx -y playwright@1.55.0 screenshot \
       --browser chromium \
       --viewport-size "1280,720" \
-      --wait-for-timeout 2600 \
+      --wait-for-timeout 1800 \
       "$url" "$tmp"; then
     mv "$tmp" "$target"
   else
-    echo "warning: failed to capture $url" >&2
+    echo "warning: failed or timed out while capturing $url" >&2
     rm -f "$tmp"
   fi
 done
