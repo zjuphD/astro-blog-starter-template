@@ -37,7 +37,7 @@ jobs:
       - name: Commit new covers
         shell: bash
         run: |
-          if git diff --quiet -- public/briefing-covers; then
+          if [ -z "$(git status --porcelain -- public/briefing-covers)" ]; then
             echo "No new source covers."
             exit 0
           fi
