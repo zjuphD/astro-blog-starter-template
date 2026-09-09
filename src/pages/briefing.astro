@@ -11,9 +11,54 @@ const categories = [
   "AI for Science",
 ];
 
-const sorted = [...briefings].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt) || b.score - a.score);
-const latestDate = sorted[0]?.publishedAt ?? "";
-const dateLabel = latestDate ? new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(`${latestDate}T00:00:00+08:00`)) : "";
+const archiveDateOf = (item) => item.briefingDate ?? item.publishedAt;
+const sorted = [...briefings].sort((a, b) =>
+  archiveDateOf(b).localeCompare(archiveDateOf(a)) ||
+  b.publishedAt.localeCompare(a.publishedAt) ||
+  b.score - a.score
+);
+const latestDate = sorted[0] ? archiveDateOf(sorted[0]) : "";
+const formatDate = (value) => value
+  ? new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(`${value}T00:00:00+08:00`))
+  : "";
+const shortDate = (value) => value
+  ? new Intl.DateTimeFormat("zh-CN", { month: "long", day: "numeric" }).format(new Date(`${value}T00:00:00+08:00`))
+  : "";
+const dateLabel = formatDate(latestDate);
+const todayShanghai = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Shanghai",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(new Date());
+const yesterdayShanghai = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Shanghai",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(new Date(Date.now() - 24 * 60 * 60 * 1000));
+
+const groupMap = new Map();
+for (const item of sorted) {
+  const archiveDate = archiveDateOf(item);
+  if (!groupMap.has(archiveDate)) groupMap.set(archiveDate, []);
+  groupMap.get(archiveDate).push(item);
+}
+const groups = [...groupMap.entries()].map(([archiveDate, items], index) => ({
+  archiveDate,
+  items,
+  title:
+    archiveDate === todayShanghai
+      ? "今日精选"
+      : archiveDate === yesterdayShanghai
+        ? "昨日"
+        : index === 0
+          ? "最新一期"
+          : index === 1
+            ? "上一期"
+            : shortDate(archiveDate),
+}));
+const featuredId = sorted[0]?.id ?? "";
 ---
 <!doctype html>
 <html lang="zh-CN">
@@ -30,19 +75,20 @@ const dateLabel = latestDate ? new Intl.DateTimeFormat("zh-CN", { year: "numeric
     body:before,body:after{content:"";position:fixed;z-index:-2;border-radius:50%;filter:blur(100px);pointer-events:none}body:before{width:52vw;height:52vw;left:-12vw;top:-16vw;background:rgba(110,143,124,.34)}body:after{width:44vw;height:44vw;right:-14vw;top:34vh;background:rgba(192,138,45,.20)}
     .wrap{width:min(1160px,calc(100% - 36px));margin:auto}.glass{background:var(--glass);backdrop-filter:blur(18px) saturate(1.3);border:1px solid var(--line);box-shadow:0 10px 34px var(--shadow);border-radius:20px}
     .nav{position:sticky;top:14px;z-index:20;margin-top:14px;padding:10px 12px 10px 18px;display:flex;align-items:center;gap:16px;background:var(--glass2);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:16px}.brand{display:flex;align-items:center;gap:10px;margin-right:auto}.brand img{width:38px}.brand b{letter-spacing:.18em}.brand small{color:var(--soft);font-size:.68rem}.nav a:not(.brand){font-size:.88rem;color:var(--soft)}.nav .cta{padding:8px 14px;border-radius:999px;background:var(--ink);color:var(--bg)!important;font-weight:600}
-    .hero{padding:8rem 0 3.6rem}.eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:var(--soft);font-size:.72rem}.hero h1{font-size:clamp(2.5rem,6vw,4.7rem);line-height:1.08;letter-spacing:-.04em;margin:.7rem 0 1rem}.hero h1 em{font-style:normal;color:var(--sage2)}.lede{max-width:760px;color:var(--soft);font-size:1.08rem}.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:1.4rem}.pill{padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--glass);font-size:.76rem;color:var(--soft)}
-    .filters{display:flex;gap:8px;flex-wrap:wrap;margin:1.4rem 0 2rem}.filter{border:1px solid var(--line);background:var(--glass);color:var(--soft);padding:8px 13px;border-radius:999px;cursor:pointer;font:inherit;font-size:.82rem;transition:transform .2s ease,background .2s ease,color .2s ease}.filter:hover{transform:translateY(-1px)}.filter.active{background:var(--ink);color:var(--bg)}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px;padding-bottom:5rem;perspective:1400px}
+    .hero{padding:8rem 0 3.2rem}.eyebrow{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;color:var(--soft);font-size:.72rem}.hero h1{font-size:clamp(2.5rem,6vw,4.7rem);line-height:1.08;letter-spacing:-.04em;margin:.7rem 0 1rem}.hero h1 em{font-style:normal;color:var(--sage2)}.lede{max-width:760px;color:var(--soft);font-size:1.08rem}.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:1.4rem}.pill{padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:var(--glass);font-size:.76rem;color:var(--soft)}
+    .filter-panel{padding:1rem 1.05rem;margin:0 0 2.7rem}.filter-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.filter-row+.filter-row{margin-top:.8rem;padding-top:.8rem;border-top:1px solid var(--line)}.filter-label{min-width:48px;font-size:.72rem;letter-spacing:.08em;color:var(--soft);font-weight:700}.filter{border:1px solid var(--line);background:rgba(255,255,255,.16);color:var(--soft);padding:7px 12px;border-radius:999px;cursor:pointer;font:inherit;font-size:.8rem;transition:transform .2s ease,background .2s ease,color .2s ease}.filter:hover{transform:translateY(-1px)}.filter.active{background:var(--ink);color:var(--bg)}
+    .date-group{margin-bottom:4.2rem}.date-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:0 0 1.2rem;padding:0 2px}.date-kicker{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.68rem;letter-spacing:.12em;color:var(--sage2);margin-bottom:.16rem}.date-heading h2{font-size:clamp(1.65rem,3vw,2.35rem);line-height:1.15;letter-spacing:-.03em;margin:0}.date-count{color:var(--soft);font-size:.78rem;white-space:nowrap}.date-rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);margin-top:.75rem}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px;perspective:1400px}
     .brief{--rx:0deg;--ry:0deg;--mx:50%;--my:50%;grid-column:span 6;position:relative;overflow:hidden;display:flex;flex-direction:column;min-height:540px;transform:perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(0);transform-style:preserve-3d;transition:transform .18s ease,box-shadow .3s ease,border-color .3s ease}.brief:hover{box-shadow:0 24px 58px var(--shadow);border-color:color-mix(in srgb,var(--sage) 42%,var(--line))}.brief:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(420px circle at var(--mx) var(--my),rgba(255,255,255,.26),transparent 45%);transition:opacity .25s ease;z-index:4}.brief:hover:after{opacity:1}.brief.featured{grid-column:span 12;display:grid;grid-template-columns:1.08fr .92fr;min-height:430px}.brief.featured .cover-shot{height:100%;min-height:430px;border-radius:20px 0 0 20px}.brief.featured .brief-body{padding:1.8rem 1.8rem 1.7rem 1.5rem}.brief-body{padding:1.35rem 1.45rem 1.45rem;display:flex;flex-direction:column;flex:1;position:relative;z-index:2;transform:translateZ(18px)}
     .cover-shot{position:relative;height:238px;overflow:hidden;background:linear-gradient(135deg,color-mix(in srgb,var(--sage) 18%,var(--bg)),color-mix(in srgb,var(--ochre) 12%,var(--bg)));border-bottom:1px solid var(--line);isolation:isolate}.cover-shot img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.86) contrast(.96);transform:scale(1.02);transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .4s ease}.brief:hover .cover-shot img{transform:scale(1.075);filter:saturate(1) contrast(1)}.cover-shot:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.04) 45%,rgba(0,0,0,.48));z-index:1;pointer-events:none}.browser-bar{position:absolute;left:12px;right:12px;top:12px;z-index:3;display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:10px;background:rgba(245,247,243,.82);backdrop-filter:blur(12px);box-shadow:0 5px 20px rgba(0,0,0,.14);color:#344039;font-size:.66rem}.browser-dots{display:flex;gap:4px}.browser-dots i{display:block;width:6px;height:6px;border-radius:50%;background:#9EA9A2}.browser-url{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.78}.cover-label{position:absolute;z-index:3;left:16px;bottom:14px;right:16px;display:flex;align-items:end;justify-content:space-between;gap:12px;color:white;text-shadow:0 2px 14px rgba(0,0,0,.3)}.cover-label strong{font-size:.86rem}.cover-label span{font-size:.66rem;opacity:.8;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.cover-fallback{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:56px 18px 18px;z-index:0}.cover-fallback b{font-size:1.4rem;line-height:1.3;max-width:18ch;color:var(--ink)}.cover-fallback span{margin-top:8px;color:var(--soft);font-size:.72rem}.cover-shot.has-error img{display:none}
     .topline{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:.9rem}.cat{font-size:.7rem;letter-spacing:.08em;color:var(--sage2);font-weight:700}.type{font-size:.68rem;color:var(--soft)}.score{margin-left:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.72rem;color:var(--ochre)}.brief h2{font-size:clamp(1.25rem,2.4vw,1.72rem);line-height:1.38;margin:.2rem 0 .7rem}.brief.featured h2{font-size:clamp(1.8rem,3.2vw,2.55rem)}.source{font-size:.78rem;color:var(--soft);margin-bottom:1rem}.summary{color:var(--soft);margin:0 0 1rem}.why{padding:12px 14px;border-radius:14px;background:rgba(110,143,124,.09);border:1px solid var(--line);font-size:.9rem}.why b{display:block;color:var(--ink);margin-bottom:3px}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:1rem}.tag{font-size:.68rem;color:var(--soft);border:1px solid var(--line);border-radius:999px;padding:4px 9px}.read{display:inline-flex;margin-top:1rem;font-size:.86rem;font-weight:700;color:var(--sage2);transition:gap .2s ease,transform .2s ease}.read:hover{transform:translateX(3px)}
-    .empty{display:none;grid-column:1/-1;text-align:center;padding:4rem 1rem;color:var(--soft)}footer{padding:2rem 0 4rem;color:var(--soft);font-size:.78rem;text-align:center}
-    @media(max-width:800px){.nav small,.nav a:not(.brand):not(.cta){display:none}.hero{padding-top:6rem}.brief,.brief.featured{grid-column:span 12;display:flex;min-height:auto;transform:none!important}.brief.featured .cover-shot,.cover-shot{height:220px;min-height:0;border-radius:20px 20px 0 0}.brief.featured .brief-body{padding:1.35rem 1.45rem 1.45rem}.brief.featured h2{font-size:1.7rem}.brief:after{display:none}}
+    .empty{display:none;text-align:center;padding:4rem 1rem 6rem;color:var(--soft)}footer{padding:1rem 0 4rem;color:var(--soft);font-size:.78rem;text-align:center}
+    @media(max-width:800px){.nav small,.nav a:not(.brand):not(.cta){display:none}.hero{padding-top:6rem}.filter-panel{padding:.9rem}.filter-label{width:100%;min-width:0}.date-heading{align-items:flex-start}.brief,.brief.featured{grid-column:span 12;display:flex;min-height:auto;transform:none!important}.brief.featured .cover-shot,.cover-shot{height:220px;min-height:0;border-radius:20px 20px 0 0}.brief.featured .brief-body{padding:1.35rem 1.45rem 1.45rem}.brief.featured h2{font-size:1.7rem}.brief:after{display:none}}
     @media(prefers-reduced-motion:reduce){.brief,.brief:hover{transform:none!important;transition:none}.cover-shot img,.brief:hover .cover-shot img{transform:none;transition:none}.brief:after{display:none}.filter{transition:none}}
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="wrap" id="briefingRoot" data-latest-date={latestDate}>
     <nav class="nav">
       <a class="brand" href="/"><img src="/aiseeki-redesign-assets/logo-mark.png" alt="" /><b>AISEEKI</b><small>AI FOR SCIENCE DAILY</small></a>
       <a href="/">首页</a><a href="/briefing">前沿快讯</a><a href="https://github.com/zjuphD/GeneCode" target="_blank" rel="noopener">GitHub</a>
@@ -52,39 +98,69 @@ const dateLabel = latestDate ? new Intl.DateTimeFormat("zh-CN", { year: "numeric
     <header class="hero">
       <p class="eyebrow">AISEEKI INTELLIGENCE · DAILY SIGNAL</p>
       <h1>每天过滤噪音，留下<em>值得科研人员看的进展</em>。</h1>
-      <p class="lede">聚焦精准医疗、肿瘤生物学、AI 药物发现、组学、结构生物学与 AI for Science。优先原始论文、临床研究和官方来源，区分论文、临床试验与产业动态。</p>
-      <div class="hero-meta"><span class="pill">最近更新 · {dateLabel}</span><span class="pill">{sorted.length} 条精选</span><span class="pill">来源快照 · 原文可追溯</span></div>
+      <p class="lede">聚焦精准医疗、肿瘤生物学、AI 药物发现、组学、结构生物学与 AI for Science。每一期独立归档，昨天和更早的内容不会被今天覆盖。</p>
+      <div class="hero-meta"><span class="pill">最近更新 · {dateLabel}</span><span class="pill">{sorted.length} 条历史精选</span><span class="pill">自动快讯保留 21 天</span><span class="pill">来源快照 · 原文可追溯</span></div>
     </header>
 
-    <div class="filters" aria-label="快讯分类筛选">
-      {categories.map((category, index) => <button class:list={["filter", { active: index === 0 }]} data-filter={category}>{category}</button>)}
+    <div class="filter-panel glass" aria-label="快讯筛选">
+      <div class="filter-row">
+        <span class="filter-label">时间</span>
+        <button class="filter active" data-time-filter="latest">最新一期</button>
+        <button class="filter" data-time-filter="previous">上一期</button>
+        <button class="filter" data-time-filter="week">近 7 天</button>
+        <button class="filter" data-time-filter="all">全部</button>
+      </div>
+      <div class="filter-row">
+        <span class="filter-label">领域</span>
+        {categories.map((category, index) => <button class:list={["filter", { active: index === 0 }]} data-category-filter={category}>{category}</button>)}
+      </div>
     </div>
 
-    <main class="grid" id="briefingGrid">
-      {sorted.map((item, index) => {
-        const host = new URL(item.originalUrl).hostname.replace(/^www\./, "");
-        const cover = `/briefing-covers/${item.id}.png`;
-        return (
-          <article class:list={["glass", "brief", { featured: index === 0 }]} data-category={item.category} data-tilt>
-            <div class="cover-shot">
-              <div class="cover-fallback"><b>{item.source}</b><span>{host}</span></div>
-              <img src={cover} alt={`${item.source} 来源页面预览`} loading={index < 2 ? "eager" : "lazy"} data-cover />
-              <div class="browser-bar"><span class="browser-dots"><i></i><i></i><i></i></span><span class="browser-url">{host}</span></div>
-              <div class="cover-label"><strong>{item.source}</strong><span>SOURCE SNAPSHOT</span></div>
+    <main id="briefingArchive">
+      {groups.map((group) => (
+        <section class="date-group" data-date-group={group.archiveDate}>
+          <div class="date-heading">
+            <div>
+              <span class="date-kicker">{formatDate(group.archiveDate)}</span>
+              <h2>{group.title}</h2>
+              <div class="date-rule"></div>
             </div>
-            <div class="brief-body">
-              <div class="topline"><span class="cat">{item.category}</span><span class="type">· {item.sourceType}</span><span class="score">AISK / {item.score}</span></div>
-              <h2>{item.titleZh}</h2>
-              <p class="source">{item.source} · {item.publishedAt}</p>
-              <p class="summary">{item.summary}</p>
-              <div class="why"><b>为什么值得关注</b>{item.whyItMatters}</div>
-              <div class="tags">{item.tags.map(tag => <span class="tag">{tag}</span>)}</div>
-              <a class="read" href={item.originalUrl} target="_blank" rel="noopener noreferrer">查看原始来源 ↗</a>
-            </div>
-          </article>
-        );
-      })}
-      <div class="empty" id="emptyState">这个分类暂时没有快讯。</div>
+            <span class="date-count" data-visible-count>{group.items.length} 条</span>
+          </div>
+          <div class="grid">
+            {group.items.map((item) => {
+              const host = new URL(item.originalUrl).hostname.replace(/^www\./, "");
+              const cover = `/briefing-covers/${item.id}.png`;
+              const isFeatured = item.id === featuredId;
+              return (
+                <article
+                  class:list={["glass", "brief", { featured: isFeatured }]}
+                  data-category={item.category}
+                  data-archive-date={group.archiveDate}
+                  data-tilt
+                >
+                  <div class="cover-shot">
+                    <div class="cover-fallback"><b>{item.source}</b><span>{host}</span></div>
+                    <img src={cover} alt={`${item.source} 来源页面预览`} loading={isFeatured ? "eager" : "lazy"} data-cover />
+                    <div class="browser-bar"><span class="browser-dots"><i></i><i></i><i></i></span><span class="browser-url">{host}</span></div>
+                    <div class="cover-label"><strong>{item.source}</strong><span>SOURCE SNAPSHOT</span></div>
+                  </div>
+                  <div class="brief-body">
+                    <div class="topline"><span class="cat">{item.category}</span><span class="type">· {item.sourceType}</span><span class="score">AISK / {item.score}</span></div>
+                    <h2>{item.titleZh}</h2>
+                    <p class="source">{item.source} · 论文发布 {item.publishedAt}</p>
+                    <p class="summary">{item.summary}</p>
+                    <div class="why"><b>为什么值得关注</b>{item.whyItMatters}</div>
+                    <div class="tags">{item.tags.map(tag => <span class="tag">{tag}</span>)}</div>
+                    <a class="read" href={item.originalUrl} target="_blank" rel="noopener noreferrer">查看原始来源 ↗</a>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+      <div class="empty" id="emptyState">当前筛选条件下暂时没有快讯。</div>
     </main>
 
     <footer>© 2026 AISEEKI · AI for Research · 快讯仅用于科研信息整理，不替代原始论文与专业判断。</footer>
@@ -92,21 +168,67 @@ const dateLabel = latestDate ? new Intl.DateTimeFormat("zh-CN", { year: "numeric
 
   <script is:inline>
     (function(){
-      var buttons = document.querySelectorAll('[data-filter]');
-      var cards = document.querySelectorAll('[data-category]');
+      var timeButtons = document.querySelectorAll('[data-time-filter]');
+      var categoryButtons = document.querySelectorAll('[data-category-filter]');
+      var groups = Array.from(document.querySelectorAll('[data-date-group]'));
+      var cards = Array.from(document.querySelectorAll('[data-archive-date]'));
       var empty = document.getElementById('emptyState');
-      buttons.forEach(function(btn){
-        btn.addEventListener('click', function(){
-          buttons.forEach(function(b){ b.classList.remove('active'); });
-          btn.classList.add('active');
-          var filter = btn.getAttribute('data-filter');
-          var visible = 0;
-          cards.forEach(function(card){
-            var show = filter === '全部' || card.getAttribute('data-category') === filter;
+      var dates = groups.map(function(group){ return group.getAttribute('data-date-group'); });
+      var activeTime = 'latest';
+      var activeCategory = '全部';
+
+      function dayDiff(fromDate, toDate){
+        if(!fromDate || !toDate) return 999;
+        var from = new Date(fromDate + 'T00:00:00+08:00');
+        var to = new Date(toDate + 'T00:00:00+08:00');
+        return Math.round((from - to) / 86400000);
+      }
+
+      function timeMatches(date){
+        if(activeTime === 'all') return true;
+        if(activeTime === 'latest') return date === dates[0];
+        if(activeTime === 'previous') return date === dates[1];
+        if(activeTime === 'week') {
+          var diff = dayDiff(dates[0], date);
+          return diff >= 0 && diff <= 6;
+        }
+        return true;
+      }
+
+      function applyFilters(){
+        var totalVisible = 0;
+        groups.forEach(function(group){
+          var visibleInGroup = 0;
+          group.querySelectorAll('[data-archive-date]').forEach(function(card){
+            var categoryMatch = activeCategory === '全部' || card.getAttribute('data-category') === activeCategory;
+            var dateMatch = timeMatches(card.getAttribute('data-archive-date'));
+            var show = categoryMatch && dateMatch;
             card.style.display = show ? '' : 'none';
-            if(show) visible++;
+            if(show) visibleInGroup++;
           });
-          empty.style.display = visible ? 'none' : 'block';
+          group.style.display = visibleInGroup ? '' : 'none';
+          var count = group.querySelector('[data-visible-count]');
+          if(count) count.textContent = visibleInGroup + ' 条';
+          totalVisible += visibleInGroup;
+        });
+        empty.style.display = totalVisible ? 'none' : 'block';
+      }
+
+      timeButtons.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          timeButtons.forEach(function(b){ b.classList.remove('active'); });
+          btn.classList.add('active');
+          activeTime = btn.getAttribute('data-time-filter');
+          applyFilters();
+        });
+      });
+
+      categoryButtons.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          categoryButtons.forEach(function(b){ b.classList.remove('active'); });
+          btn.classList.add('active');
+          activeCategory = btn.getAttribute('data-category-filter');
+          applyFilters();
         });
       });
 
@@ -138,6 +260,8 @@ const dateLabel = latestDate ? new Intl.DateTimeFormat("zh-CN", { year: "numeric
           });
         });
       }
+
+      applyFilters();
     })();
   </script>
 </body>
