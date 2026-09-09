@@ -11,10 +11,21 @@ const categories = [
   "AI for Science",
 ];
 
-const sorted = [...briefings].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt) || b.score - a.score);
-const latestDate = sorted[0]?.publishedAt ?? "";
+const archiveDateOf = (item) => item.briefingDate ?? item.publishedAt;
+const sorted = [...briefings].sort((a, b) =>
+  archiveDateOf(b).localeCompare(archiveDateOf(a)) ||
+  b.publishedAt.localeCompare(a.publishedAt) ||
+  b.score - a.score
+);
+const latestDate = sorted[0] ? archiveDateOf(sorted[0]) : "";
 const dateLabel = latestDate ? new Intl.DateTimeFormat("zh-CN", { year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(`${latestDate}T00:00:00+08:00`)) : "";
 const latestMs = latestDate ? new Date(`${latestDate}T00:00:00+08:00`).getTime() : Date.now();
+const todayShanghai = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Asia/Shanghai",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+}).format(new Date());
 
 function bucketFor(date) {
   const diff = Math.round((latestMs - new Date(`${date}T00:00:00+08:00`).getTime()) / 86400000);
@@ -25,15 +36,15 @@ function bucketFor(date) {
 }
 
 function bucketLabel(bucket) {
-  if (bucket === "today") return "今日精选";
-  if (bucket === "yesterday") return "昨日";
+  if (bucket === "today") return latestDate === todayShanghai ? "今日精选" : "最新一期";
+  if (bucket === "yesterday") return latestDate === todayShanghai ? "昨日" : "上一期";
   if (bucket === "week") return "本周";
   return "历史快讯";
 }
 
 const bucketOrder = ["today", "yesterday", "week", "history"];
 const groups = bucketOrder
-  .map(bucket => ({ bucket, label: bucketLabel(bucket), items: sorted.filter(item => bucketFor(item.publishedAt) === bucket) }))
+  .map(bucket => ({ bucket, label: bucketLabel(bucket), items: sorted.filter(item => bucketFor(archiveDateOf(item)) === bucket) }))
   .filter(group => group.items.length > 0);
 ---
 <!doctype html>
@@ -73,8 +84,8 @@ const groups = bucketOrder
     <header class="hero">
       <p class="eyebrow">AISEEKI INTELLIGENCE · DAILY SIGNAL</p>
       <h1>每天过滤噪音，留下<em>值得科研人员看的进展</em>。</h1>
-      <p class="lede">聚焦精准医疗、肿瘤生物学、AI 药物发现、组学、结构生物学与 AI for Science。优先原始论文、临床研究和官方来源，区分论文、临床试验与产业动态。</p>
-      <div class="hero-meta"><span class="pill">最近更新 · {dateLabel}</span><span class="pill">{sorted.length} 条精选</span><span class="pill">自动快讯保留 21 天</span></div>
+      <p class="lede">聚焦精准医疗、肿瘤生物学、AI 药物发现、组学、结构生物学与 AI for Science。每一天的入选结果独立归档，论文发表日期和快讯入选日期分开记录。</p>
+      <div class="hero-meta"><span class="pill">最近一期 · {dateLabel}</span><span class="pill">{sorted.length} 条精选</span><span class="pill">自动快讯保留 21 天</span></div>
     </header>
 
     <div class="control-row">
@@ -101,7 +112,7 @@ const groups = bucketOrder
         <section class="period" data-period={group.bucket}>
           <div class="period-head">
             <h2 class="period-title">{group.label}</h2>
-            <div class="period-meta"><span data-visible-count>{group.items.length}</span> 条 · {group.items[0]?.publishedAt}{group.items.length > 1 && group.items.at(-1)?.publishedAt !== group.items[0]?.publishedAt ? ` — ${group.items.at(-1)?.publishedAt}` : ""}</div>
+            <div class="period-meta"><span data-visible-count>{group.items.length}</span> 条 · {archiveDateOf(group.items[0])}{group.items.length > 1 && archiveDateOf(group.items.at(-1)) !== archiveDateOf(group.items[0]) ? ` — ${archiveDateOf(group.items.at(-1))}` : ""}</div>
           </div>
           <div class="grid">
             {group.items.map((item, index) => {
@@ -119,7 +130,7 @@ const groups = bucketOrder
                   <div class="brief-body">
                     <div class="topline"><span class="cat">{item.category}</span><span class="type">· {item.sourceType}</span><span class="score">AISK / {item.score}</span></div>
                     <h2>{item.titleZh}</h2>
-                    <p class="source">{item.source} · {item.publishedAt}</p>
+                    <p class="source">{item.source} · 论文发布 {item.publishedAt}</p>
                     <p class="summary">{item.summary}</p>
                     <div class="why"><b>为什么值得关注</b>{item.whyItMatters}</div>
                     <div class="tags">{item.tags.map(tag => <span class="tag">{tag}</span>)}</div>
