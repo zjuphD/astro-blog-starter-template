@@ -7,8 +7,6 @@ on:
       - "src/data/briefings.json"
       - "scripts/capture-briefing-covers.mjs"
       - ".github/workflows/briefing-covers.yml"
-  schedule:
-    - cron: "10 0 * * *"
   workflow_dispatch:
 
 permissions:
@@ -39,9 +37,9 @@ jobs:
           npm install --no-save --package-lock=false playwright@1.55.0
           npx playwright install --with-deps chromium
 
-      - name: Capture source pages
+      - name: Capture only missing source pages
         env:
-          REFRESH_EXISTING: "1"
+          REFRESH_EXISTING: "0"
         run: node scripts/capture-briefing-covers.mjs
 
       - name: Commit new covers
@@ -54,6 +52,6 @@ jobs:
           git config user.name "aiseeki-briefing-bot"
           git config user.email "actions@users.noreply.github.com"
           git add public/briefing-covers
-          git commit -m "assets: refresh briefing source covers"
+          git commit -m "assets: add briefing source covers"
           git pull --rebase origin main
           git push origin HEAD:main
