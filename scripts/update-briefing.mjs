@@ -14,6 +14,17 @@ const MAX_DAILY = 8;
 const MIN_RULE_SCORE = 74;
 const from = new Date(now.getTime() - LOOKBACK_DAYS * DAY);
 const iso = (d) => d.toISOString().slice(0, 10);
+const isoShanghai = (d) =>
+  new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Shanghai",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(d);
+const briefingDate = isoShanghai(now);
+const existingUrls = new Set(
+  existing.map((item) => String(item.originalUrl || "").trim()).filter(Boolean),
+);
 
 const aiConfigured = Boolean(
   process.env.BRIEFING_AI_URL &&
@@ -30,7 +41,7 @@ endpoint.searchParams.set("pageSize", "100");
 endpoint.searchParams.set("sort_date", "y");
 
 const response = await fetch(endpoint, {
-  headers: { "User-Agent": "Aiseeki-Briefing/2.0" },
+  headers: { "User-Agent": "Aiseeki-Briefing/2.1" },
 });
 if (!response.ok) throw new Error(`Europe PMC request failed: ${response.status}`);
 const payload = await response.json();
@@ -166,6 +177,13 @@ const pool = papers
     seen.add(key);
     if (hardReject(title, abstract, text)) return null;
 
+    const originalUrl = doi
+      ? `https://doi.org/${doi}`
+      : pmid
+        ? `https://europepmc.org/article/MED/${pmid}`
+        : "https://europepmc.org/";
+    if (existingUrls.has(originalUrl)) return null;
+
     const sourceType = detectSourceType(paper, text);
     const ruleScore = scorePaper(paper, title, abstract, text, sourceType);
     if (ruleScore < MIN_RULE_SCORE) return null;
@@ -181,11 +199,7 @@ const pool = papers
       category: classify(text),
       sourceType,
       ruleScore,
-      originalUrl: doi
-        ? `https://doi.org/${doi}`
-        : pmid
-          ? `https://europepmc.org/article/MED/${pmid}`
-          : "https://europepmc.org/",
+      originalUrl,
       tags: [
         aiRx.test(text) ? "AI" : null,
         /immunotherapy/i.test(text) ? "免疫治疗" : null,
@@ -215,6 +229,7 @@ for (const item of pool) {
   edited.push({
     id: `${item.publishedAt}-${item.key.replace(/[^a-zA-Z0-9]+/g, "-").slice(0, 48)}`,
     manual: false,
+    briefingDate,
     publishedAt: item.publishedAt,
     category: item.category,
     source: item.source,
@@ -262,24 +277,30 @@ function selectDiverse(items) {
 
 const generated = selectDiverse(edited);
 
-const keepManualAfter = new Date(now.getTime() - 120 * DAY).toISOString().slice(0, 10);
-const keepAutoAfter = new Date(now.getTime() - HISTORY_DAYS * DAY).toISOString().slice(0, 10);
+const keepManualAfter = isoShanghai(new Date(now.getTime() - 120 * DAY));
+const keepAutoAfter = isoShanghai(new Date(now.getTime() - HISTORY_DAYS * DAY));
 const preservedManual = existing.filter(
   (item) => item.manual && item.publishedAt >= keepManualAfter,
 );
 const preservedAuto = existing.filter(
-  (item) => !item.manual && item.publishedAt >= keepAutoAfter,
+  (item) =>
+    !item.manual &&
+    String(item.briefingDate || item.publishedAt || "") >= keepAutoAfter,
 );
 
 const merged = [...generated, ...preservedAuto, ...preservedManual];
 const deduped = [];
 const ids = new Set();
 const urls = new Set();
-for (const item of merged.sort(
-  (a, b) =>
-    b.publishedAt.localeCompare(a.publishedAt) ||
-    Number(b.score ?? 0) - Number(a.score ?? 0),
-)) {
+for (const item of merged.sort((a, b) => {
+  const aArchive = String(a.briefingDate || a.publishedAt || "");
+  const bArchive = String(b.briefingDate || b.publishedAt || "");
+  return (
+    bArchive.localeCompare(aArchive) ||
+    String(b.publishedAt || "").localeCompare(String(a.publishedAt || "")) ||
+    Number(b.score ?? 0) - Number(a.score ?? 0)
+  );
+})) {
   if (ids.has(item.id) || urls.has(item.originalUrl)) continue;
   ids.add(item.id);
   urls.add(item.originalUrl);
@@ -288,10 +309,10 @@ for (const item of merged.sort(
 
 await fs.writeFile(
   outputPath,
-  `${JSON.stringify(deduped.slice(0, 60), null, 2)}\n`,
+  `${JSON.stringify(deduped.slice(0, 180), null, 2)}\n`,
   "utf8",
 );
 
 console.log(
-  `Aiseeki Daily V2: ${papers.length} fetched -> ${pool.length} rule-qualified -> ${generated.length} selected; AI editor ${aiConfigured ? "enabled" : "disabled"}.`,
+  `Aiseeki Daily V2.1 (${briefingDate}): ${papers.length} fetched -> ${pool.length} new rule-qualified -> ${generated.length} selected; AI editor ${aiConfigured ? "enabled" : "disabled"}.`,
 );
