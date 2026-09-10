@@ -28,6 +28,8 @@ const acceptPatterns = [
   /拒绝非必要/,
 ];
 
+const blockedPagePattern = /(security verification|verify you are human|verification required|checking your browser|just a moment|cloudflare ray id|cf-chl-|captcha|access denied|temporarily blocked|enable javascript and cookies to continue|unusual traffic|robot check|bot detection)/i;
+
 async function clickConsentButtons(page) {
   // Consent managers are often rendered inside an iframe, so inspect every frame.
   for (let pass = 0; pass < 3; pass += 1) {
@@ -93,6 +95,18 @@ async function removeConsentOverlays(page) {
   }).catch(() => {});
 }
 
+async function pageLooksBlocked(page) {
+  try {
+    const title = await page.title();
+    const bodyText = await page.locator('body').innerText({ timeout: 1500 }).catch(() => '');
+    const html = await page.content().catch(() => '');
+    const sample = `${title}\n${bodyText.slice(0, 7000)}\n${html.slice(0, 5000)}`;
+    return blockedPagePattern.test(sample);
+  } catch {
+    return false;
+  }
+}
+
 async function capture(item) {
   if (!item?.id || !item?.originalUrl) return;
 
@@ -119,10 +133,23 @@ async function capture(item) {
       timeout: 25000,
     });
     await page.waitForTimeout(1800);
+
+    if (await pageLooksBlocked(page)) {
+      console.log(`blocked/challenge page skipped: ${safeId}`);
+      if (refreshExisting && fs.existsSync(target)) fs.rmSync(target, { force: true });
+      return;
+    }
+
     await clickConsentButtons(page);
     await removeConsentOverlays(page);
     await page.waitForTimeout(650);
     await removeConsentOverlays(page);
+
+    if (await pageLooksBlocked(page)) {
+      console.log(`blocked/challenge page skipped after cleanup: ${safeId}`);
+      if (refreshExisting && fs.existsSync(target)) fs.rmSync(target, { force: true });
+      return;
+    }
 
     await page.screenshot({
       path: target,
