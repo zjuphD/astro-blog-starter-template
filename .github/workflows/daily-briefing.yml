@@ -41,6 +41,31 @@ jobs:
             echo "### AI editor: disabled — V2 rule-based filtering is active" >> "$GITHUB_STEP_SUMMARY"
           fi
 
+      - name: Keep fallback copy public-facing
+        shell: bash
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const file = 'src/data/briefings.json';
+          const items = JSON.parse(fs.readFileSync(file, 'utf8'));
+          const fallback = {
+            '精准医疗': '关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。',
+            'AI 药物发现': '关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。',
+            '肿瘤生物学': '关注点在于 AI 是否帮助发现新的肿瘤机制、分型或治疗线索，并能在独立样本或实验体系中得到验证。',
+            '基因组与单细胞': '关注点在于 AI 是否能从高维组学数据中提取可解释、可复现的生物学信号，并在独立数据集上保持稳定。',
+            '蛋白质与结构生物学': '关注点在于 AI 是否提升结构解析、功能预测或蛋白设计能力，以及预测结果能否经实验验证。',
+            'AI for Science': '关注点在于该方法是否把 AI 从辅助分析推进到可验证的科研工作流，并带来可重复的效率或发现增益。',
+          };
+          let changed = false;
+          for (const item of items) {
+            if (item.editorialMode === 'rules' && (!item.whyItMatters || /未启用\s*AI\s*编辑|保留原始摘要片段/.test(item.whyItMatters))) {
+              item.whyItMatters = fallback[item.category] || fallback['AI for Science'];
+              changed = true;
+            }
+          }
+          if (changed) fs.writeFileSync(file, JSON.stringify(items, null, 2) + '\n');
+          NODE
+
       - name: Detect briefing changes
         id: changes
         shell: bash
