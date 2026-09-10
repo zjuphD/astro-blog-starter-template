@@ -10,7 +10,7 @@
     "titleZh": "Comparison of physician-authored and artificial intelligence-generated after-visit summaries: A blinded comparative study.",
     "titleOriginal": "Comparison of physician-authored and artificial intelligence-generated after-visit summaries: A blinded comparative study.",
     "summary": "Background After-visit summaries (AVSs) are essential for a safe hospital discharge, yet are often written above literacy levels, omit key information, and are produced under substantial clinical time pressure. Large language models (LLMs) …",
-    "whyItMatters": "这是一项与精准医疗直接相关的新近研究。当前未启用 AI 编辑，因此保留原始摘要片段；正式引用或据此设计实验前请核对原文。",
+    "whyItMatters": "该研究直接比较医生撰写与 AI 生成的出院后访视摘要，可用于评估大语言模型在临床沟通、信息完整性与可读性方面的实际应用价值。",
     "score": 88,
     "tags": [
       "AI"
@@ -30,7 +30,7 @@
     "titleZh": "From Invisible to Enrolled: How Artificial Intelligence Is Reshaping Clinical Trial Recruitment.",
     "titleOriginal": "From Invisible to Enrolled: How Artificial Intelligence Is Reshaping Clinical Trial Recruitment.",
     "summary": "Clinical trial recruitment continues to fail at scale, with eligible patients often invisible to routine screening despite being present in electronic health records. Disease stage, treatment response, biomarker results, and clinical reason…",
-    "whyItMatters": "这是一项与AI 药物发现直接相关的新近研究。当前未启用 AI 编辑，因此保留原始摘要片段；正式引用或据此设计实验前请核对原文。",
+    "whyItMatters": "该研究聚焦 AI 辅助临床试验招募，核心价值在于利用电子健康记录更高效地识别潜在受试者，并改善传统人工筛选流程的效率与覆盖范围。",
     "score": 88,
     "tags": [
       "AI",
