@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 concurrency:
   group: daily-ai-for-science-briefing
@@ -16,9 +15,9 @@ concurrency:
 jobs:
   update-briefing:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
-      - name: Checkout main
+      - name: Checkout latest main
         uses: actions/checkout@v4
         with:
           ref: main
@@ -28,11 +27,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-
-      - name: Prepare bot branch from latest main
-        run: |
-          git fetch origin main
-          git checkout -B bot/daily-briefing origin/main
 
       - name: Collect, filter and rank research
         env:
@@ -45,42 +39,47 @@ jobs:
             echo "### AI editor: enabled" >> "$GITHUB_STEP_SUMMARY"
           else
             echo "### AI editor: disabled — V2 rule-based filtering is active" >> "$GITHUB_STEP_SUMMARY"
-            echo "Configure BRIEFING_AI_URL / BRIEFING_AI_KEY / BRIEFING_AI_MODEL to enable Chinese editorial summaries." >> "$GITHUB_STEP_SUMMARY"
           fi
 
-      - name: Commit update
-        id: commit
+      - name: Detect briefing changes
+        id: changes
         shell: bash
         run: |
           if git diff --quiet -- src/data/briefings.json; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
-            echo "No briefing changes." >> "$GITHUB_STEP_SUMMARY"
-            exit 0
+            echo "No new briefing items today." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
-          git config user.name "aiseeki-briefing-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add src/data/briefings.json
-          git commit -m "content: update Aiseeki Daily V2"
-          echo "changed=true" >> "$GITHUB_OUTPUT"
 
-      - name: Push bot branch
-        if: steps.commit.outputs.changed == 'true'
-        run: git push --force origin HEAD:bot/daily-briefing
+      - name: Install site dependencies
+        if: steps.changes.outputs.changed == 'true'
+        run: npm ci
 
-      - name: Open or refresh review PR
-        if: steps.commit.outputs.changed == 'true'
+      - name: Install Playwright + Chromium
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          npm install --no-save --package-lock=false playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Capture missing source covers
+        if: steps.changes.outputs.changed == 'true'
         env:
-          GH_TOKEN: ${{ github.token }}
+          REFRESH_EXISTING: "0"
+        run: node scripts/capture-briefing-covers.mjs
+
+      - name: Build site before publishing
+        if: steps.changes.outputs.changed == 'true'
+        run: npm run build
+
+      - name: Publish directly to main
+        if: steps.changes.outputs.changed == 'true'
         shell: bash
         run: |
-          PR=$(gh pr list --head bot/daily-briefing --base main --state open --json number --jq '.[0].number // empty')
-          BODY=$'Aiseeki Daily V2 自动筛选了近期生命科学 × AI 研究。\n\nV2 会先做强相关性过滤、多维评分和类别去重；若配置 AI 编辑器，还会进行二次入选判断并生成中文标题、摘要与科研意义。\n\n请重点检查：\n- 是否确实与生命科学和 AI/计算方法强相关\n- 标题和摘要是否忠于原文\n- preprint、综述、动物/体外研究是否被正确标记且没有夸大\n- 分类和 AISK 分数是否合理\n- 原始来源链接是否正确\n\n确认后 Merge 即可发布；合并后只会为新增条目生成来源截图。'
-          if [ -z "$PR" ]; then
-            gh pr create \
-              --base main \
-              --head bot/daily-briefing \
-              --title "每日前沿快讯更新 · V2" \
-              --body "$BODY"
-          else
-            gh pr edit "$PR" --title "每日前沿快讯更新 · V2" --body "$BODY"
-          fi
+          git config user.name "aiseeki-briefing-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add src/data/briefings.json public/briefing-covers
+          git commit -m "content: publish Aiseeki Daily $(date -u +%F)"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "### Published automatically to main" >> "$GITHUB_STEP_SUMMARY"
