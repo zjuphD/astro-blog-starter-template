@@ -1,5 +1,46 @@
 [
   {
+    "id": "2026-09-07-10-1002-jhm-70435",
+    "manual": false,
+    "briefingDate": "2026-09-10",
+    "publishedAt": "2026-09-07",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Comparison of physician-authored and artificial intelligence-generated after-visit summaries: A blinded comparative study.",
+    "titleOriginal": "Comparison of physician-authored and artificial intelligence-generated after-visit summaries: A blinded comparative study.",
+    "summary": "Background After-visit summaries (AVSs) are essential for a safe hospital discharge, yet are often written above literacy levels, omit key information, and are produced under substantial clinical time pressure. Large language models (LLMs) …",
+    "whyItMatters": "这是一项与精准医疗直接相关的新近研究。当前未启用 AI 编辑，因此保留原始摘要片段；正式引用或据此设计实验前请核对原文。",
+    "score": 88,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1002/jhm.70435",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-06-10-1007-s40290-026-00635-9",
+    "manual": false,
+    "briefingDate": "2026-09-10",
+    "publishedAt": "2026-09-06",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "临床研究",
+    "titleZh": "From Invisible to Enrolled: How Artificial Intelligence Is Reshaping Clinical Trial Recruitment.",
+    "titleOriginal": "From Invisible to Enrolled: How Artificial Intelligence Is Reshaping Clinical Trial Recruitment.",
+    "summary": "Clinical trial recruitment continues to fail at scale, with eligible patients often invisible to routine screening despite being present in electronic health records. Disease stage, treatment response, biomarker results, and clinical reason…",
+    "whyItMatters": "这是一项与AI 药物发现直接相关的新近研究。当前未启用 AI 编辑，因此保留原始摘要片段；正式引用或据此设计实验前请核对原文。",
+    "score": 88,
+    "tags": [
+      "AI",
+      "蛋白/结构"
+    ],
+    "originalUrl": "https://doi.org/10.1007/s40290-026-00635-9",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-03-ai-biodesign",
     "manual": true,
     "publishedAt": "2026-09-03",
@@ -11,7 +52,12 @@
     "summary": "Allen Institute、Fred Hutch Cancer Center 与华盛顿大学启动 AI BioDesign 项目，计划把生成式 AI、合成生物学与湿实验验证连接起来，设计新的蛋白、基因与生物系统，并通过实验反馈持续改进模型。",
     "whyItMatters": "它代表 AI for Science 正从“预测已有生物学”走向“主动设计新的生物学”。对蛋白设计、精准治疗和合成生物学而言，真正重要的是计算设计与实验验证形成闭环。",
     "score": 94,
-    "tags": ["AI BioDesign", "蛋白设计", "合成生物学", "湿实验闭环"],
+    "tags": [
+      "AI BioDesign",
+      "蛋白设计",
+      "合成生物学",
+      "湿实验闭环"
+    ],
     "originalUrl": "https://alleninstitute.org/news/ai-biodesign-video"
   },
   {
@@ -26,7 +72,12 @@
     "summary": "Owkin 与勃林格殷格翰达成许可合作，后者将使用 K Pro AI Scientist 及肿瘤和免疫领域的多模态患者数据，用于靶点研究和药物发现。合作建立在双方 2025 年试点项目基础上。",
     "whyItMatters": "AI 药物发现的竞争正在从单纯的分子生成模型，转向“模型 + 高质量患者数据 + 可复现分析环境”的组合。真实临床多模态数据正在成为药企采用 AI 平台的重要壁垒。",
     "score": 91,
-    "tags": ["药物发现", "多模态数据", "AI Scientist", "肿瘤"],
+    "tags": [
+      "药物发现",
+      "多模态数据",
+      "AI Scientist",
+      "肿瘤"
+    ],
     "originalUrl": "https://www.owkin.com/newsfeed/owkin-to-license-k-pro-ai-scientist-and-multimodal-oncology-and-immunology-data-to-boehringer-ingelheim"
   },
   {
@@ -41,7 +92,12 @@
     "summary": "研究关注紫杉醇处理后逃逸凋亡的癌细胞状态，并将 ZEB1 与这些存活细胞的铁死亡敏感性联系起来，为理解化疗后的残存细胞状态提供了新的机制线索。",
     "whyItMatters": "化疗后残存细胞往往决定复发和耐药。若这些细胞同时获得可利用的铁死亡脆弱性，就可能为序贯治疗或联合治疗提供新的机制依据。",
     "score": 86,
-    "tags": ["ZEB1", "铁死亡", "紫杉醇", "耐药"],
+    "tags": [
+      "ZEB1",
+      "铁死亡",
+      "紫杉醇",
+      "耐药"
+    ],
     "originalUrl": "https://www.nature.com/articles/s41419-026-09242-7"
   },
   {
@@ -56,7 +112,12 @@
     "summary": "在超过 1,500 名 II–III 期三阴性乳腺癌患者中，阿替利珠单抗联合新辅助化疗未达到事件无生存期主要终点。预设和探索性分析提示，淋巴结受累以及 basal-like immune-activated 等免疫相关亚型可能存在差异化获益。",
     "whyItMatters": "这类阴性总结果仍然对精准治疗非常重要：它提示免疫治疗不能只按肿瘤名称使用，分子亚型和肿瘤免疫微环境可能决定真正的获益人群。",
     "score": 93,
-    "tags": ["TNBC", "免疫治疗", "生物标志物", "临床分层"],
+    "tags": [
+      "TNBC",
+      "免疫治疗",
+      "生物标志物",
+      "临床分层"
+    ],
     "originalUrl": "https://www.nature.com/articles/s41591-026-04565-6"
   },
   {
@@ -71,7 +132,12 @@
     "summary": "COMPASS 以 10,184 个肿瘤样本进行泛癌预训练，将 15,672 个蛋白编码基因映射到 44 个具有生物学意义的免疫概念，并在多个独立临床队列中预测免疫检查点抑制剂疗效。",
     "whyItMatters": "它展示了一个更适合精准肿瘤学的方向：不只追求预测准确率，而是把大模型中间表示约束到可解释的免疫和微环境概念，同时考察跨癌种、跨药物泛化能力。",
     "score": 92,
-    "tags": ["转录组", "基础模型", "免疫治疗", "泛癌"],
+    "tags": [
+      "转录组",
+      "基础模型",
+      "免疫治疗",
+      "泛癌"
+    ],
     "originalUrl": "https://www.nature.com/articles/s41591-026-04502-7"
   },
   {
@@ -86,7 +152,12 @@
     "summary": "Isomorphic Labs 完成 21 亿美元 B 轮融资，计划扩大其 AI 药物设计引擎。Nature Biotechnology 报道称，其新一代 Drug Design Engine 在结构预测、结合亲和力与配体口袋识别等任务上强调相较 AlphaFold 3 的进一步提升。",
     "whyItMatters": "结构预测正在快速变成药物设计系统中的一个模块，而不是终点。行业竞争正转向从结构、结合、生成到实验验证的一体化设计引擎。",
     "score": 88,
-    "tags": ["结构预测", "蛋白-配体", "AI 药物设计", "Isomorphic Labs"],
+    "tags": [
+      "结构预测",
+      "蛋白-配体",
+      "AI 药物设计",
+      "Isomorphic Labs"
+    ],
     "originalUrl": "https://www.nature.com/articles/s41587-026-03189-y"
   }
 ]
