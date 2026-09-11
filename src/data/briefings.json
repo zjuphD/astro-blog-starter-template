@@ -1,5 +1,45 @@
 [
   {
+    "id": "2026-09-09-10-1007-s40615-026-03151-3",
+    "manual": false,
+    "briefingDate": "2026-09-11",
+    "publishedAt": "2026-09-09",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Cross-Modal Demographic Bias in Generative AI Representations of Physicians: A Comparative Audit of Large Language Models and Text-to-Image Models.",
+    "titleOriginal": "Cross-Modal Demographic Bias in Generative AI Representations of Physicians: A Comparative Audit of Large Language Models and Text-to-Image Models.",
+    "summary": "With the rapid expansion of generative artificial intelligence (AI) in text generation and image synthesis, algorithmic bias has become an increasingly important concern in medicine, where professional authority, public trust, and represent…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 88,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1007/s40615-026-03151-3",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-09-10-1177-15533506261488588",
+    "manual": false,
+    "briefingDate": "2026-09-11",
+    "publishedAt": "2026-09-09",
+    "category": "肿瘤生物学",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Large Language Models for Breast Cancer Education: A Comparative Analysis of Quality, Reliability and Readability.",
+    "titleOriginal": "Large Language Models for Breast Cancer Education: A Comparative Analysis of Quality, Reliability and Readability.",
+    "summary": "BackgroundPatients increasingly consult artificial intelligence (AI) tools for breast cancer information. While Large Language Models (LLMs) enhance information accessibility, their accuracy, reliability, and alignment with patient health l…",
+    "whyItMatters": "关注点在于 AI 是否帮助发现新的肿瘤机制、分型或治疗线索，并能在独立样本或实验体系中得到验证。",
+    "score": 88,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1177/15533506261488588",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-07-10-1002-jhm-70435",
     "manual": false,
     "briefingDate": "2026-09-10",
