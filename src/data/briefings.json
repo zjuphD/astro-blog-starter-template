@@ -1,5 +1,47 @@
 [
   {
+    "id": "2026-09-10-10-1177-10781552261485826",
+    "manual": false,
+    "briefingDate": "2026-09-12",
+    "publishedAt": "2026-09-10",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "AI adoption among French oncology pharmacists: A national survey.",
+    "titleOriginal": "AI adoption among French oncology pharmacists: A national survey.",
+    "summary": "BackgroundLarge language model (LLM)-based generative artificial intelligence (AI) tools have rapidly entered clinical practice. In oncology pharmacy, a specialty marked by high technical complexity, strict regulatory constraints, and an ex…",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 82,
+    "tags": [
+      "AI",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1177/10781552261485826",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-07-10-64898-2026-09-03-749176",
+    "manual": false,
+    "briefingDate": "2026-09-12",
+    "publishedAt": "2026-09-07",
+    "category": "蛋白质与结构生物学",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Real Science Is Harder Than Benchmarks: Evaluating Advanced AI Frameworks on Published Studies. II. Antibody Properties, Lipid-RNA Interactions",
+    "titleOriginal": "Real Science Is Harder Than Benchmarks: Evaluating Advanced AI Frameworks on Published Studies. II. Antibody Properties, Lipid-RNA Interactions",
+    "summary": "Artificial Intelligence (AI) frameworks for automating scientific research have shown strong performance on benchmarks, but their utility for real-world industrial research remains insufficiently characterized. Extending the analysis presen…",
+    "whyItMatters": "关注点在于 AI 是否提升结构解析、功能预测或蛋白设计能力，以及预测结果能否经实验验证。",
+    "score": 82,
+    "tags": [
+      "AI",
+      "蛋白/结构"
+    ],
+    "originalUrl": "https://doi.org/10.64898/2026.09.03.749176",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-09-10-1007-s40615-026-03151-3",
     "manual": false,
     "briefingDate": "2026-09-11",
