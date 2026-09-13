@@ -1,5 +1,46 @@
 [
   {
+    "id": "2026-09-11-10-1016-j-jacr-2026-09-006",
+    "manual": false,
+    "briefingDate": "2026-09-13",
+    "publishedAt": "2026-09-11",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Human Judgment and the Limits of Artificial Intelligence for Automated Rank Order Lists in Diagnostic Radiology Residency Selection.",
+    "titleOriginal": "Human Judgment and the Limits of Artificial Intelligence for Automated Rank Order Lists in Diagnostic Radiology Residency Selection.",
+    "summary": "To evaluate whether large language models (LLMs) can reliably reproduce a residency program's rank order list (ROL) from pre-interview application data alone versus with human interviews included, and to determine whether automated ranking …",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 83,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1016/j.jacr.2026.09.006",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-08-10-1007-s43390-026-01534-4",
+    "manual": false,
+    "briefingDate": "2026-09-13",
+    "publishedAt": "2026-09-08",
+    "category": "基因组与单细胞",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Research priorities in Spine Deformity: a machine learning-based topic analysis of the journal's first decade (2013-2026).",
+    "titleOriginal": "Research priorities in Spine Deformity: a machine learning-based topic analysis of the journal's first decade (2013-2026).",
+    "summary": "Purpose Spine Deformity is the official journal of the Scoliosis Research Society (SRS) and the leading publication dedicated to scoliosis, deformity, and surgical correction. We applied BERTopic, a transformer-based machine learning topic-…",
+    "whyItMatters": "关注点在于 AI 是否能从高维组学数据中提取可解释、可复现的生物学信号，并在独立数据集上保持稳定。",
+    "score": 78,
+    "tags": [
+      "AI",
+      "单细胞/空间组学"
+    ],
+    "originalUrl": "https://doi.org/10.1007/s43390-026-01534-4",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-10-10-1177-10781552261485826",
     "manual": false,
     "briefingDate": "2026-09-12",
