@@ -1,5 +1,47 @@
 [
   {
+    "id": "2026-09-09-10-1002-ca-70210",
+    "manual": false,
+    "briefingDate": "2026-09-14",
+    "publishedAt": "2026-09-09",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "How Well Do AI Chatbots Understand Abnormal Anatomy: A Comparative Study Using Congenital Anomalies and Tumor Cases.",
+    "titleOriginal": "How Well Do AI Chatbots Understand Abnormal Anatomy: A Comparative Study Using Congenital Anomalies and Tumor Cases.",
+    "summary": "Artificial Intelligence (AI) chatbots are becoming an efficient option to understand medical data and also help with clinical reasoning. There has been a recent progression in research of large language models and their ability to be used i…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 77,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1002/ca.70210",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-09-10-1093-jtm-taag082",
+    "manual": false,
+    "briefingDate": "2026-09-14",
+    "publishedAt": "2026-09-09",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "Artificial Intelligence and Complementary Digital Health Technologies Across the Travel Medicine Continuum: A Narrative Review.",
+    "titleOriginal": "Artificial Intelligence and Complementary Digital Health Technologies Across the Travel Medicine Continuum: A Narrative Review.",
+    "summary": "Background Artificial intelligence (AI) and complementary digital health technologies are increasingly being applied to improve prevention, diagnosis and surveillance in travel medicine. This narrative review evaluates current applications …",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 76,
+    "tags": [
+      "AI",
+      "蛋白/结构",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1093/jtm/taag082",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-11-10-1016-j-jacr-2026-09-006",
     "manual": false,
     "briefingDate": "2026-09-13",
