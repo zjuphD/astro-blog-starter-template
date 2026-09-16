@@ -1,5 +1,27 @@
 [
   {
+    "id": "2026-09-14-10-1007-s10544-026-00852-8",
+    "manual": false,
+    "briefingDate": "2026-09-16",
+    "publishedAt": "2026-09-14",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "Microwell platform for single-cell applications and future integration with artificial intelligence (AI).",
+    "titleOriginal": "Microwell platform for single-cell applications and future integration with artificial intelligence (AI).",
+    "summary": "Single-cell analysis has become an essential approach for understanding cellular heterogeneity and its implications in biological function, disease progression and therapeutic response. Microwell platforms provide a versatile approach for s…",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 81,
+    "tags": [
+      "AI",
+      "单细胞/空间组学",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1007/s10544-026-00852-8",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-09-10-1002-ca-70210",
     "manual": false,
     "briefingDate": "2026-09-14",
