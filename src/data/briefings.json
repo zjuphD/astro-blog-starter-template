@@ -1,5 +1,47 @@
 [
   {
+    "id": "2026-09-15-10-1007-s10439-026-04376-3",
+    "manual": false,
+    "briefingDate": "2026-09-17",
+    "publishedAt": "2026-09-15",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Prompt Injection in Clinical Artificial Intelligence Systems: The Emerging Security Challenge of Large Language Models and Agentic AI.",
+    "titleOriginal": "Prompt Injection in Clinical Artificial Intelligence Systems: The Emerging Security Challenge of Large Language Models and Agentic AI.",
+    "summary": "Clinical discussion of artificial intelligence safety has concentrated on accuracy, bias, and hallucination, each of which describes a model failing at its assigned task. Prompt injection describes the opposite condition: a model performing…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 83,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1007/s10439-026-04376-3",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-15-10-1021-acs-jcim-6c02102",
+    "manual": false,
+    "briefingDate": "2026-09-17",
+    "publishedAt": "2026-09-15",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "An AI-Driven Chemogenomics Knowledgebase for Human-Transmissible Pathogens: A Platform for Antimicrobial Drug Discovery.",
+    "titleOriginal": "An AI-Driven Chemogenomics Knowledgebase for Human-Transmissible Pathogens: A Platform for Antimicrobial Drug Discovery.",
+    "summary": "Emerging infectious diseases (EIDs) pose a critical threat to global biosecurity. Integrating bio/chemical information and artificial intelligence would bring new strategies for antimicrobial drug discovery. Herein, the Human Pathogenic Mic…",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 82,
+    "tags": [
+      "AI",
+      "蛋白/结构",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1021/acs.jcim.6c02102",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-14-10-1007-s10544-026-00852-8",
     "manual": false,
     "briefingDate": "2026-09-16",
