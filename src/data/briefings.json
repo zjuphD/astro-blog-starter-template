@@ -1,5 +1,47 @@
 [
   {
+    "id": "2026-09-16-10-31234-osf-io-jtfxk-v3",
+    "manual": false,
+    "briefingDate": "2026-09-18",
+    "publishedAt": "2026-09-16",
+    "category": "基因组与单细胞",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Selective reproduction of spatial–emotional mappings in large language models",
+    "titleOriginal": "Selective reproduction of spatial–emotional mappings in large language models",
+    "summary": "The vertical-valence metaphor refers to the association between emotional valence and vertical space, whereby positive and negative emotions are linked to upward and downward directions, respectively. While this mapping has been robustly ob…",
+    "whyItMatters": "关注点在于 AI 是否能从高维组学数据中提取可解释、可复现的生物学信号，并在独立数据集上保持稳定。",
+    "score": 82,
+    "tags": [
+      "AI",
+      "单细胞/空间组学"
+    ],
+    "originalUrl": "https://doi.org/10.31234/osf.io/jtfxk_v3",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-15-10-1002-ca-70208",
+    "manual": false,
+    "briefingDate": "2026-09-18",
+    "publishedAt": "2026-09-15",
+    "category": "基因组与单细胞",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "From \"Who Knows Anatomy Best?\" to \"What Does 'Best' Mean?\": Strengthening Validation Standards for Large Language Models in Anatomy Education.",
+    "titleOriginal": "From \"Who Knows Anatomy Best?\" to \"What Does 'Best' Mean?\": Strengthening Validation Standards for Large Language Models in Anatomy Education.",
+    "summary": "Large language models (LLMs) are increasingly benchmarked against professional examination questions and interpreted as indicators of educational competence. A recent study comparing four LLMs on publicly available anatomy multiple-choice q…",
+    "whyItMatters": "关注点在于 AI 是否能从高维组学数据中提取可解释、可复现的生物学信号，并在独立数据集上保持稳定。",
+    "score": 77,
+    "tags": [
+      "AI",
+      "单细胞/空间组学"
+    ],
+    "originalUrl": "https://doi.org/10.1002/ca.70208",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-15-10-1007-s10439-026-04376-3",
     "manual": false,
     "briefingDate": "2026-09-17",
