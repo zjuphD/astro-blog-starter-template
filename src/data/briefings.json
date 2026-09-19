@@ -1,5 +1,47 @@
 [
   {
+    "id": "2026-09-17-10-1111-os-70429",
+    "manual": false,
+    "briefingDate": "2026-09-19",
+    "publishedAt": "2026-09-17",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Artificial Intelligence-Driven Precision Bisphosphonate Therapy in Osteoporosis: Mechanisms, Clinical Applications, Risks, and Future Directions.",
+    "titleOriginal": "Artificial Intelligence-Driven Precision Bisphosphonate Therapy in Osteoporosis: Mechanisms, Clinical Applications, Risks, and Future Directions.",
+    "summary": "Bisphosphonates remain the pharmacological standard of care for osteoporosis; however, their clinical efficacy is limited by significant diagnostic gaps, heterogeneous therapeutic responses, and persistent concerns regarding long-term safet…",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 88,
+    "tags": [
+      "AI",
+      "蛋白/结构",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1111/os.70429",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-17-10-1007-s00345-026-06761-y",
+    "manual": false,
+    "briefingDate": "2026-09-19",
+    "publishedAt": "2026-09-17",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Multimodal large language models for bladder tumor detection in cystoscopy: a retrospective benchmarking study.",
+    "titleOriginal": "Multimodal large language models for bladder tumor detection in cystoscopy: a retrospective benchmarking study.",
+    "summary": "Purpose Cystoscopic assessment is central to bladder cancer diagnosis, yet visual interpretation remains variable. Existing artificial intelligence approaches often depend on data-intensive models that are often difficult to deploy in routi…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 88,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1007/s00345-026-06761-y",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-16-10-31234-osf-io-jtfxk-v3",
     "manual": false,
     "briefingDate": "2026-09-18",
