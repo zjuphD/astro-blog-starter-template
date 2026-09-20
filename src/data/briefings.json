@@ -1,5 +1,47 @@
 [
   {
+    "id": "2026-09-18-10-1016-j-jpainsymman-2026-09-019",
+    "manual": false,
+    "briefingDate": "2026-09-20",
+    "publishedAt": "2026-09-18",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Clinicians vs. Artificial Intelligence in Predicting 28-Day ICU Mortality: A Vignette Study.",
+    "titleOriginal": "Clinicians vs. Artificial Intelligence in Predicting 28-Day ICU Mortality: A Vignette Study.",
+    "summary": "The surprise question (SQ) is an intuition-based tool for identifying patients who may benefit from palliative care, but its short-term prognostic performance in critical illness remains uncertain. Large language models may offer standardiz…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 78,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1016/j.jpainsymman.2026.09.019",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-16-10-1007-s00405-026-10560-x",
+    "manual": false,
+    "briefingDate": "2026-09-20",
+    "publishedAt": "2026-09-16",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "Artificial intelligence in otolaryngology: current applications, limitations, and future perspectives.",
+    "titleOriginal": "Artificial intelligence in otolaryngology: current applications, limitations, and future perspectives.",
+    "summary": "Purpose Artificial intelligence (AI) is increasingly integrated into modern otolaryngology practice and has emerged as one of the most rapidly evolving technologies in contemporary medicine. Recent advances in machine learning, deep learnin…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 76,
+    "tags": [
+      "AI",
+      "蛋白/结构",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1007/s00405-026-10560-x",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-17-10-1111-os-70429",
     "manual": false,
     "briefingDate": "2026-09-19",
