@@ -1,5 +1,47 @@
 [
   {
+    "id": "2026-09-18-10-1093-postmj-qgag133",
+    "manual": false,
+    "briefingDate": "2026-09-21",
+    "publishedAt": "2026-09-18",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Potential clinical utility of a KDIGO 2021-based clinical decision support system for glomerular diseases: a retrospective two-center pilot study.",
+    "titleOriginal": "Potential clinical utility of a KDIGO 2021-based clinical decision support system for glomerular diseases: a retrospective two-center pilot study.",
+    "summary": "Purpose Glomerulopathies are a heterogeneous group of diseases characterized by complex immunopathogenesis and wide clinical variability. A wide range of laboratory and histopathological tests is used to assess glomerular diseases. However,…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 74,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1093/postmj/qgag133",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-17-10-1007-s00204-026-04551-4",
+    "manual": false,
+    "briefingDate": "2026-09-21",
+    "publishedAt": "2026-09-17",
+    "category": "蛋白质与结构生物学",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "Artificial intelligence in toxicology: current advances, challenges and future directions.",
+    "titleOriginal": "Artificial intelligence in toxicology: current advances, challenges and future directions.",
+    "summary": "Toxicology has traditionally relied on in vivo animal studies and in vitro assays to assess the safety of drugs, chemicals and environmental contaminants. These approaches are constrained by cost, duration, ethical concerns and difficulties…",
+    "whyItMatters": "关注点在于 AI 是否提升结构解析、功能预测或蛋白设计能力，以及预测结果能否经实验验证。",
+    "score": 76,
+    "tags": [
+      "AI",
+      "蛋白/结构",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1007/s00204-026-04551-4",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-18-10-1016-j-jpainsymman-2026-09-019",
     "manual": false,
     "briefingDate": "2026-09-20",
