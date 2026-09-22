@@ -1,5 +1,48 @@
 [
   {
+    "id": "2026-09-21-10-4274-tjh-galenos-2026-82621",
+    "manual": false,
+    "briefingDate": "2026-09-22",
+    "publishedAt": "2026-09-21",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "From Answers to Agents: What Must Change Before Generative and Agentic AI Become Clinical Infrastructure in Hematology.",
+    "titleOriginal": "From Answers to Agents: What Must Change Before Generative and Agentic AI Become Clinical Infrastructure in Hematology.",
+    "summary": "Generative artificial intelligence in hematology is entering a new phase. The dominant question, whether large language models are accurate enough for clinical decision support, is being overtaken by a harder one, as systems shift from answ…",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 82,
+    "tags": [
+      "AI",
+      "蛋白/结构"
+    ],
+    "originalUrl": "https://doi.org/10.4274/tjh.galenos.2026.82621",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-21-10-20944-preprints202609-1742-v1",
+    "manual": false,
+    "briefingDate": "2026-09-22",
+    "publishedAt": "2026-09-21",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "预印本",
+    "titleZh": "AF-RECAL: Multi-Modal Structural Recalibration of AlphaFold 3 Hallucinations in Intrinsically Disordered Human Disease Targets",
+    "titleOriginal": "AF-RECAL: Multi-Modal Structural Recalibration of AlphaFold 3 Hallucinations in Intrinsically Disordered Human Disease Targets",
+    "summary": "AlphaFold 3 (AF3) has transformed structural bioinformatics through generative diffusion modeling of biomolecular assemblies. However, intrinsically disordered regions (IDRs)—which comprise over 30% of the human proteome and mediate essenti…",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 78,
+    "tags": [
+      "AI",
+      "单细胞/空间组学",
+      "蛋白/结构"
+    ],
+    "originalUrl": "https://doi.org/10.20944/preprints202609.1742.v1",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-18-10-1093-postmj-qgag133",
     "manual": false,
     "briefingDate": "2026-09-21",
