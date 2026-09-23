@@ -1,5 +1,46 @@
 [
   {
+    "id": "2026-09-21-10-1016-j-clindermatol-2026-09-012",
+    "manual": false,
+    "briefingDate": "2026-09-23",
+    "publishedAt": "2026-09-21",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "Practical Considerations for Adopting AI Clinical Decision Support Tools and Large Language Models in Dermatology.",
+    "titleOriginal": "Practical Considerations for Adopting AI Clinical Decision Support Tools and Large Language Models in Dermatology.",
+    "summary": "Artificial Intelligence (AI) in dermatology is a rapidly evolving field, offering promising advancements in the diagnosis and management of skin cancers. As global skin cancer incidence rises, tools like machine-learning based systems and l…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 81,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1016/j.clindermatol.2026.09.012",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-20-10-1002-ece3-74365",
+    "manual": false,
+    "briefingDate": "2026-09-23",
+    "publishedAt": "2026-09-20",
+    "category": "蛋白质与结构生物学",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Evaluating Artificial Intelligence, Peer, and Instructor Feedback Across Scientific Communication Assignments in Undergraduate Biology.",
+    "titleOriginal": "Evaluating Artificial Intelligence, Peer, and Instructor Feedback Across Scientific Communication Assignments in Undergraduate Biology.",
+    "summary": "Generative artificial intelligence (AI) has emerged as a potential source of formative feedback for student writing. However, relatively little is known about how AI-generated feedback compares with instructor and peer feedback across diffe…",
+    "whyItMatters": "关注点在于 AI 是否提升结构解析、功能预测或蛋白设计能力，以及预测结果能否经实验验证。",
+    "score": 78,
+    "tags": [
+      "AI",
+      "蛋白/结构"
+    ],
+    "originalUrl": "https://doi.org/10.1002/ece3.74365",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-21-10-4274-tjh-galenos-2026-82621",
     "manual": false,
     "briefingDate": "2026-09-22",
