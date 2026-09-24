@@ -1,5 +1,26 @@
 [
   {
+    "id": "2026-09-23-10-1007-s00520-026-11254-0",
+    "manual": false,
+    "briefingDate": "2026-09-24",
+    "publishedAt": "2026-09-23",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "Exploring young adult cancer survivors' perspectives on generative AI chatbots for symptom support.",
+    "titleOriginal": "Exploring young adult cancer survivors' perspectives on generative AI chatbots for symptom support.",
+    "summary": "Young adult cancer survivors (ages 18-39) often experience persistent treatment-related symptoms that negatively affect daily functioning, psychosocial well-being, and quality of life, yet report unmet educational needs for symptom manageme…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 76,
+    "tags": [
+      "AI",
+      "蛋白/结构"
+    ],
+    "originalUrl": "https://doi.org/10.1007/s00520-026-11254-0",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-21-10-1016-j-clindermatol-2026-09-012",
     "manual": false,
     "briefingDate": "2026-09-23",
