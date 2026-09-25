@@ -1,5 +1,13 @@
 ---
+import fs from "node:fs";
+import path from "node:path";
 import briefings from "../data/briefings.json";
+// 封面优先用 WebP；若当天自动抓图仍是 PNG，自动回退，保证流水线不中断。
+const coversDir = path.resolve("public/briefing-covers");
+function coverFor(id) {
+  if (fs.existsSync(path.join(coversDir, `${id}.webp`))) return `/briefing-covers/${id}.webp`;
+  return `/briefing-covers/${id}.png`;
+}
 
 const categories = [
   "全部",
@@ -117,7 +125,7 @@ const groups = bucketOrder
           <div class="grid">
             {group.items.map((item, index) => {
               const host = new URL(item.originalUrl).hostname.replace(/^www\./, "");
-              const cover = `/briefing-covers/${item.id}.png`;
+              const cover = coverFor(item.id);
               const featured = group.bucket === "today" && index === 0;
               return (
                 <article class:list={["glass", "brief", { featured }]} data-category={item.category} data-period-card={group.bucket} data-tilt>

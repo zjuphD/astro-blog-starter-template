@@ -111,7 +111,7 @@ async function capture(item) {
   if (!item?.id || !item?.originalUrl) return;
 
   const safeId = String(item.id).replace(/[^a-zA-Z0-9._-]/g, '-');
-  const target = path.join(outDir, `${safeId}.png`);
+  const target = path.join(outDir, `${safeId}.webp`);
   if (!refreshExisting && fs.existsSync(target) && fs.statSync(target).size > 0) {
     console.log(`cover exists: ${safeId}`);
     return;
@@ -153,7 +153,8 @@ async function capture(item) {
 
     await page.screenshot({
       path: target,
-      type: 'png',
+      type: 'webp',
+      quality: 80,
       fullPage: false,
       animations: 'disabled',
     });

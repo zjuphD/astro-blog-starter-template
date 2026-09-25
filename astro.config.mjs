@@ -9,7 +9,7 @@ import briefingFallback from "./src/integrations/briefing-fallback.mjs";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://example.com",
+	site: "https://bioseeki.com",
 	integrations: [mdx(), sitemap(), briefingHome(), briefingFallback()],
 	adapter: cloudflare({
 		platformProxy: {
