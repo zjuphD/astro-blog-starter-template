@@ -366,7 +366,7 @@ section{ padding:clamp(4.5rem,9vh,7.5rem) 0; }
 .road h3{ font-family:var(--font-display); font-weight:600; font-size:1.3rem; letter-spacing:-.01em; margin-bottom:.3rem; }
 .road p{ font-size:.88rem; color:var(--ink-soft); }
 .road-line{ height:1px; background:linear-gradient(90deg, var(--ochre), var(--line) 30%); margin:-1.1rem 1.5rem 2.2rem; }
-.center-cta{ display:flex; justify-content:center; }
+.center-cta{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
 
 /* ============ FOOTER ============ */
 footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
@@ -553,11 +553,11 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
 <div class="glass demo-glass reveal"><div class="demo-bar"><span class="panel-title">BIOSEEKI / PRODUCT DEMO</span><span class="badge-live">45 SEC · MAC BETA</span></div><video controls playsinline preload="none" poster="/bioseeki/demo-poster.jpg" aria-label="BioSeeki 45 秒 Mac Beta 真机演示"><source src="/bioseeki/demo.mp4" type="video/mp4"><track kind="captions" src="/bioseeki/captions.zh.vtt" srclang="zh" label="中文字幕">你的浏览器不支持视频播放。<a href="/bioseeki/demo.mp4">下载视频</a></video><div class="demo-foot"><span>画面经过剪辑并隐藏私人信息。操作展示不代表完整研究任务的验收结果。</span><a href="/bioseeki/demo.mp4" download>下载视频 ↓</a></div></div>
 </div></section>
 
-<section id="start"><div class="wrap"><div class="section-head reveal"><p class="eyebrow"><span class="section-num">05</span> · 申请试用</p><h2 class="section-title">从你的下一个科研问题开始。</h2><p class="section-lede">BioSeeki 正在邀请研究者试用桌面版。请告诉我们研究方向、操作系统和希望解决的问题。安装包与支持方式以回复为准。</p></div><div class="road">
-  <article class="glass card road-node live reveal"><p class="road-phase"><span class="road-dot"></span>01 · 描述需求</p><h3>告诉我们你的课题</h3><p>简单说明研究方向、遇到的问题和常用数据类型。</p></article>
-  <article class="glass card road-node reveal" style="--d:.12s"><p class="road-phase"><span class="road-dot"></span>02 · 确认环境</p><h3>匹配试用方式</h3><p>提供电脑系统及希望使用的模型或科研工具信息。</p></article>
-  <article class="glass card road-node reveal" style="--d:.24s"><p class="road-phase"><span class="road-dot"></span>03 · 逐步体验</p><h3>从真实任务开始</h3><p>先用一个具体科研任务，检查材料、过程和产物。</p></article>
-</div><div class="road-line" aria-hidden="true"></div><div class="center-cta reveal"><a class="btn btn-primary" href="mailto:aiseeki@agent.qq.com?subject=BioSeeki%20%E8%AF%95%E7%94%A8%E7%94%B3%E8%AF%B7&amp;body=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E8%AF%95%E7%94%A8%20BioSeeki%E3%80%82%0A%0A%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91%EF%BC%9A%0A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%9A%0A%E5%B8%8C%E6%9C%9B%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A">邮件申请试用 ↗</a></div>
+<section id="start"><div class="wrap"><div class="section-head reveal"><p class="eyebrow"><span class="section-num">05</span> · 开始使用</p><h2 class="section-title">从你的下一个科研问题开始。</h2><p class="section-lede">账号已开放自助注册，不必等待邀请。注册后即可在后台创建密钥、查看额度与用量；桌面客户端目前为 Mac Beta，安装包通过邮件获取。</p></div><div class="road">
+  <article class="glass card road-node live reveal"><p class="road-phase"><span class="road-dot"></span>01 · 注册账号</p><h3>自助注册，无需邀请码</h3><p>用邮箱注册 BioSeeki 账号，登录后进入自己的后台。</p></article>
+  <article class="glass card road-node reveal" style="--d:.12s"><p class="road-phase"><span class="road-dot"></span>02 · 创建密钥</p><h3>生成你的 API 令牌</h3><p>在后台一键创建密钥，用于桌面客户端连接与调用。</p></article>
+  <article class="glass card road-node reveal" style="--d:.24s"><p class="road-phase"><span class="road-dot"></span>03 · 接入客户端</p><h3>Mac Beta 安装包</h3><p>安装包通过邮件获取，填入密钥即可开始使用。</p></article>
+</div><div class="road-line" aria-hidden="true"></div><div class="center-cta reveal"><a class="btn btn-primary" href="https://api.bioseeki.com/sign-up">立即注册 ↗</a><a class="btn btn-ghost" href="mailto:aiseeki@agent.qq.com?subject=BioSeeki%20%E8%AF%95%E7%94%A8%E7%94%B3%E8%AF%B7&amp;body=%E4%BD%A0%E5%A5%BD%EF%BC%8C%E6%88%91%E6%83%B3%E8%AF%95%E7%94%A8%20BioSeeki%E3%80%82%0A%0A%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91%EF%BC%9A%0A%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%EF%BC%9A%0A%E5%B8%8C%E6%9C%9B%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%9A">邮件获取安装包 ✉</a></div>
 </div></section>
 
 <footer><div class="wrap"><div class="glass foot-card reveal">
