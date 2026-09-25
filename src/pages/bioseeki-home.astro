@@ -163,6 +163,12 @@ a{ color:inherit; text-decoration:none; }
   transition:color .2s, background .2s;
 }
 .nav-links a:hover{ color:var(--ink); background:var(--glass); }
+.nav-actions{ display:flex; align-items:center; gap:8px; }
+.nav-login{
+  font-size:.86rem; color:var(--ink-soft); padding:7px 12px; border-radius:10px;
+  transition:color .2s, background .2s; white-space:nowrap;
+}
+.nav-login:hover{ color:var(--ink); background:var(--glass); }
 .btn{
   display:inline-flex; align-items:center; gap:8px;
   font-weight:600; font-size:.9rem;
@@ -393,6 +399,10 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
 }
 @media (max-width:560px){
   .brand-sub{ display:none; }
+  .nav{ gap:10px; padding:8px 10px 8px 14px; }
+  .brand-name{ font-size:.82rem; letter-spacing:.14em; }
+  .nav-login{ padding:6px 8px; font-size:.82rem; }
+  .nav .btn-sm{ padding:7px 13px; font-size:.78rem; }
   .stack .card{ flex-direction:column; align-items:flex-start; }
 }
 
@@ -452,8 +462,12 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
     <a href="#workflow">工作方式</a>
     <a href="#demo">真机演示</a>
     <a href="/briefing">前沿快讯</a>
+    <a href="#start">申请试用</a>
   </div>
-  <a class="btn btn-primary btn-sm" href="#start">申请试用 ↗</a>
+  <div class="nav-actions">
+    <a class="nav-login" href="https://api.bioseeki.com/sign-in">登录</a>
+    <a class="btn btn-primary btn-sm" href="https://api.bioseeki.com/sign-up">注册 ↗</a>
+  </div>
 </nav>
 
 <header class="hero" id="top">
@@ -549,7 +563,7 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
 <footer><div class="wrap"><div class="glass foot-card reveal">
   <div class="foot-brand"><img src="/bioseeki/mark.webp" alt="" width="42" height="52"><span>BioSeeki</span></div>
   <p class="foot-tag">把时间，<em>留给发现。</em></p>
-  <div class="foot-links"><a href="/briefing">前沿快讯 ↗</a><a href="/privacy">隐私政策 ↗</a><a href="https://genecode-agent.pages.dev" target="_blank" rel="noopener noreferrer">GENECODE ↗</a><a href="mailto:aiseeki@agent.qq.com">联系我们 ↗</a><a href="#top">返回顶部 ↑</a></div>
+  <div class="foot-links"><a href="/briefing">前沿快讯 ↗</a><a href="https://api.bioseeki.com/sign-in">登录 ↗</a><a href="https://api.bioseeki.com/sign-up">注册 ↗</a><a href="/privacy">隐私政策 ↗</a><a href="https://genecode-agent.pages.dev" target="_blank" rel="noopener noreferrer">GENECODE ↗</a><a href="mailto:aiseeki@agent.qq.com">联系我们 ↗</a><a href="#top">返回顶部 ↑</a></div>
   <p class="copy">© 2026 BIOSEEKI · AI FOR RESEARCH</p>
 </div></div></footer>
 
