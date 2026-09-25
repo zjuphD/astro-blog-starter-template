@@ -8,6 +8,7 @@ export default function briefingHome() {
           `
 (function(){
   if (location.pathname !== "/" && location.pathname !== "/index.html") return;
+  if (document.querySelector(".brand-name")?.textContent?.includes("BIOSEEKI")) return;
   function esc(s){return String(s ?? "").replace(/[&<>]/g,function(c){return c==="&"?"&amp;":c==="<"?"&lt;":"&gt;";});}
   function hostOf(url){try{return new URL(url).hostname.replace(/^www\\./,'');}catch(e){return '';}}
   function init(){
