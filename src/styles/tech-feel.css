@@ -1,0 +1,187 @@
+/* ============================================================
+   TECH-FEEL LAYER — shared by aiseeki-home and bioseeki-home.
+   Pure visual/interaction enhancement on top of each page's
+   inline tokens (--mist, --ink, --sage, --ochre, --line …).
+   No new colours: everything is derived from existing tokens.
+   Mobile first; hover-only effects are gated behind (hover:hover).
+
+   Astro emits this bundle BEFORE each page's inline <style>, so every
+   selector is scoped under `html` to win on specificity, not order.
+   ============================================================ */
+
+html{ -webkit-tap-highlight-color:transparent; }
+html :focus-visible{ outline-color:var(--sage-deep); }
+
+/* ---------- BACKGROUND: grid + halo for depth ---------- */
+/* .orbs is fixed at z-index:-2; its pseudo-elements add layers without new markup. */
+html .orbs::before{
+  content:""; position:absolute; inset:0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:40px 40px;
+  background-position:center top;
+  opacity:.55;
+  -webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 0%, #000 20%, transparent 75%);
+  mask-image:radial-gradient(ellipse 90% 60% at 50% 0%, #000 20%, transparent 75%);
+}
+html .orbs::after{
+  content:""; position:absolute; left:50%; top:-30vh;
+  width:min(1100px,140vw); height:70vh; transform:translateX(-50%);
+  background:radial-gradient(closest-side, color-mix(in srgb, var(--sage) 22%, transparent), transparent);
+}
+@media (min-width:768px){
+  html .orbs::before{ background-size:56px 56px; }
+}
+
+/* ---------- NAV: animated underline + scroll progress ---------- */
+html .nav-links a,html .nav-login{ position:relative; }
+html .nav-links a::after,html .nav-login::after{
+  content:""; position:absolute; left:12px; right:12px; bottom:3px; height:1.5px;
+  border-radius:2px; background:var(--sage-deep);
+  transform:scaleX(0); transform-origin:left center;
+  transition:transform .3s cubic-bezier(.22,.8,.32,1);
+}
+html .nav-links a:hover::after,html .nav-links a:focus-visible::after,
+html .nav-login:hover::after,html .nav-login:focus-visible::after{ transform:scaleX(1); }
+
+@supports (animation-timeline: scroll()){
+  html .nav::after{
+    content:""; position:absolute; left:18px; right:18px; bottom:-1px; height:1.5px;
+    border-radius:2px; pointer-events:none;
+    background:linear-gradient(90deg, var(--sage), var(--ochre));
+    transform:scaleX(0); transform-origin:left center;
+    animation:tf-progress linear both; animation-timeline:scroll(root);
+  }
+  @keyframes tf-progress{ to{ transform:scaleX(1); } }
+}
+
+/* ---------- BUTTONS: sheen, glow ring, press state ---------- */
+html .btn{ position:relative; overflow:hidden; isolation:isolate; }
+html .btn::after{
+  content:""; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  background:linear-gradient(110deg, transparent 30%, color-mix(in srgb, var(--mist) 28%, transparent) 50%, transparent 70%);
+  transform:translateX(-120%);
+}
+html .btn-ghost{ transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease; }
+
+/* ---------- HERO ---------- */
+html .hero{ position:relative; }
+html .hero::before{
+  content:""; position:absolute; z-index:-1; pointer-events:none;
+  left:50%; top:0; width:min(1200px,100%); height:100%; transform:translateX(-50%);
+  background:
+    radial-gradient(40% 50% at 22% 42%, color-mix(in srgb, var(--sage) 14%, transparent), transparent 70%),
+    radial-gradient(30% 40% at 80% 50%, color-mix(in srgb, var(--ochre) 9%, transparent), transparent 70%);
+}
+html .hero .eyebrow{ display:flex; align-items:center; gap:10px; }
+html .hero .eyebrow::before{
+  content:""; width:22px; height:1px; flex:none;
+  background:linear-gradient(90deg, var(--ochre), var(--sage));
+}
+html .hero h1 em{
+  background:linear-gradient(100deg, var(--sage-deep) 0%, var(--sage-deep) 55%, var(--ochre-deep) 100%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:var(--sage-deep);
+}
+
+/* instrument panel: gradient hairline border + slow scan line */
+html .hero .panel{ position:relative; overflow:hidden; }
+html .hero .panel::before{
+  content:""; position:absolute; inset:0; border-radius:inherit; padding:1px; pointer-events:none;
+  background:linear-gradient(135deg, color-mix(in srgb, var(--sage) 70%, transparent), transparent 40%, transparent 60%, color-mix(in srgb, var(--ochre) 60%, transparent));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+html .hero .panel::after{
+  content:""; position:absolute; left:0; right:0; top:0; height:30%; pointer-events:none;
+  background:linear-gradient(180deg, transparent, color-mix(in srgb, var(--sage) 10%, transparent) 85%, color-mix(in srgb, var(--sage) 35%, transparent));
+  transform:translateY(-100%);
+  animation:tf-scan 7s cubic-bezier(.45,0,.55,1) infinite;
+}
+@keyframes tf-scan{ 0%{ transform:translateY(-100%);} 60%,100%{ transform:translateY(340%);} }
+
+/* ---------- SECTION HEADS ---------- */
+html .section-head .eyebrow{ display:flex; align-items:center; gap:10px; }
+html .section-head .eyebrow::before{
+  content:""; width:18px; height:1px; flex:none; background:var(--ochre);
+}
+
+/* ---------- TICKER: soft edge fade ---------- */
+html .ticker{
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* ---------- CARDS: top-edge light line + glow ---------- */
+html .card::after{
+  content:""; position:absolute; left:10%; right:10%; top:-1px; height:1px; pointer-events:none;
+  background:linear-gradient(90deg, transparent, var(--sage), var(--ochre), transparent);
+  opacity:0; transform:scaleX(.4);
+  transition:opacity .35s ease, transform .5s cubic-bezier(.22,.8,.32,1);
+}
+html .card:focus-within{
+  border-color:color-mix(in srgb, var(--sage) 40%, var(--line));
+  box-shadow:0 18px 44px var(--shadow), 0 0 0 3px color-mix(in srgb, var(--sage) 14%, transparent), inset 0 1px 0 var(--edge);
+}
+html .card:focus-within::after{ opacity:1; transform:scaleX(1); }
+html .principle-icon{ transition:box-shadow .3s ease, transform .3s ease; }
+html .real-screen img{ transition:transform .6s cubic-bezier(.22,.8,.32,1); }
+
+/* ---------- INLINE LINKS: growing underline ---------- */
+html .card-link,html .evidence-preview a,html .demo-foot a{
+  background:linear-gradient(currentColor,currentColor) 0 100% / 0 1px no-repeat;
+  transition:background-size .3s cubic-bezier(.22,.8,.32,1);
+  padding-bottom:1px;
+}
+html .card-link:hover{ text-decoration:none; }
+html .card-link:hover,html .card-link:focus-visible,
+html .evidence-preview a:hover,html .evidence-preview a:focus-visible,
+html .demo-foot a:hover,html .demo-foot a:focus-visible{ background-size:100% 1px; }
+
+/* ---------- PANEL ROWS ---------- */
+html .module-row{ transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+
+/* ---------- REVEAL: slightly richer entrance ---------- */
+html .reveal{ transform:translateY(26px) scale(.985); }
+html .reveal.in{ transform:none; }
+
+/* ---------- HOVER-CAPABLE DEVICES ONLY ---------- */
+@media (hover:hover) and (pointer:fine){
+  html .btn:hover::after{ transform:translateX(120%); transition:transform .7s ease; }
+  html .btn-primary:hover{ box-shadow:0 12px 28px var(--shadow), 0 0 0 4px color-mix(in srgb, var(--sage) 22%, transparent); }
+  html .btn-ghost:hover{ border-color:color-mix(in srgb, var(--sage) 55%, var(--line)); box-shadow:0 8px 22px var(--shadow); }
+
+  html .card:hover{ box-shadow:0 18px 44px var(--shadow), 0 0 0 3px color-mix(in srgb, var(--sage) 14%, transparent), inset 0 1px 0 var(--edge); }
+  html .card:hover::after{ opacity:1; transform:scaleX(1); }
+  html .card:hover .principle-icon{ transform:translateY(-2px); box-shadow:0 0 0 5px color-mix(in srgb, var(--sage) 12%, transparent), 0 6px 18px color-mix(in srgb, var(--sage) 28%, transparent); }
+  html .card:hover .real-screen img{ transform:scale(1.02); }
+
+  html .module-row:hover{ box-shadow:0 6px 18px var(--shadow); }
+  html .tag{ transition:border-color .25s ease, color .25s ease; }
+  html .tag:hover{ border-color:color-mix(in srgb, var(--sage) 50%, var(--line)); color:var(--ink); }
+}
+/* Touch screens: avoid "sticky" hover lifts after a tap. */
+@media (hover:none){
+  html .card:hover,html .btn:hover,html .foot-links a:hover,html .module-row:hover{ transform:none; }
+}
+/* Press states come last so they win over the hover rules above. */
+html .btn:active{ transform:translateY(0) scale(.97); transition-duration:.08s; }
+html .foot-links a:active{ transform:scale(.96); transition-duration:.08s; }
+
+/* ---------- ACCESSIBILITY ---------- */
+@media (forced-colors: active){
+  html .hero h1 em{ -webkit-text-fill-color:currentColor; background:none; }
+  html .orbs::before,html .orbs::after,html .hero::before,html .hero .panel::before,html .hero .panel::after,
+  html .card::after,html .btn::after,html .nav::after{ display:none; }
+}
+@media (prefers-reduced-motion: reduce){
+  html .hero .panel::after,html .nav::after,html .btn::after{ display:none; animation:none !important; }
+  html .nav-links a::after,html .nav-login::after,html .card::after,html .card-link,html .evidence-preview a,html .demo-foot a,
+  html .principle-icon,html .real-screen img,html .module-row,html .tag,
+  html .btn,html .card,html .foot-links a{ transition:none !important; }
+  html .btn:hover,html .btn:active,html .card:hover,html .foot-links a:hover,html .foot-links a:active,html .module-row:hover,
+  html .card:hover .principle-icon,html .card:hover .real-screen img{ transform:none !important; }
+  html .reveal,html .reveal.in{ opacity:1; transform:none; transition:none; }
+}
