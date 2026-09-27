@@ -3,5 +3,6 @@ export const prerender = false;
 // These domains share one Worker. Keep Aiseeki's existing landing page intact.
 const host = Astro.url.hostname.toLowerCase();
 const isAiseeki = host === 'aiseeki.com' || host === 'www.aiseeki.com';
-return Astro.rewrite(isAiseeki ? '/aiseeki-home' : '/bioseeki-home');
+// Keep the query string: bioseeki-home reads ?lang= to switch language.
+return Astro.rewrite((isAiseeki ? '/aiseeki-home' : '/bioseeki-home') + Astro.url.search);
 ---
