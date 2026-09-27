@@ -368,7 +368,6 @@ section{ padding:clamp(4.5rem,9vh,7.5rem) 0; }
 @keyframes marquee{ to{ transform:translateX(-50%); } }
 
 /* ============ CAPABILITIES ============ */
-.tools-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:20px; }
 .card{ padding:clamp(1.4rem,3vw,2rem); position:relative; transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
 .card:hover{ transform:translateY(-5px); box-shadow:0 18px 44px var(--shadow), inset 0 1px 0 var(--edge); border-color:color-mix(in srgb, var(--sage) 40%, var(--line)); }
 .card-top{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:1.1rem; }
@@ -385,13 +384,90 @@ section{ padding:clamp(4.5rem,9vh,7.5rem) 0; }
   font-size:.88rem; font-weight:600; color:var(--sage-deep);
 }
 .card-link:hover{ text-decoration:underline; text-underline-offset:4px; }
-.real-screen{ margin-top:1.5rem; padding:0; aspect-ratio:2.14; display:block; overflow:hidden; border-radius:14px; background:var(--code-bg); border:1px solid var(--line); }
-.real-screen img{ width:100%; height:100%; object-fit:cover; object-position:center center; display:block; }
+.feature-head{ display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:1rem 2.5rem; }
+.feature-text{ flex:1 1 460px; }
+.feature-side{ flex:0 1 380px; display:flex; flex-direction:column; align-items:flex-start; gap:.9rem; }
+.feature-side .chip-row,.feature-side .card-link{ margin-top:0; }
+.feature .shot{ margin-top:1.5rem; }
 
-.modes{ display:grid; grid-auto-rows:1fr; gap:16px; }
-.mode{ padding:1.2rem 1.4rem; display:flex; align-items:center; gap:16px; }
-.mode h3{ font-size:1.14rem; margin:0 0 .2rem; }
+.modes{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:20px; }
+.mode{ padding:1.35rem 1.4rem 1.45rem; display:flex; flex-direction:column; gap:1rem; }
+.mode h3{ font-size:1.14rem; margin:0 0 .3rem; }
 .mode p{ font-size:.86rem; line-height:1.65; }
+
+/* ============ SCREENSHOTS + ZOOM ============ */
+.shot{ display:block; position:relative; width:100%; padding:0; margin:0; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--code-bg); color:inherit; font:inherit; text-align:left; cursor:zoom-in; }
+.shot img{ display:block; width:100%; height:auto; transition:transform .6s cubic-bezier(.22,.8,.32,1); }
+.shot:focus-visible{ outline:2px solid var(--sage-deep); outline-offset:3px; }
+.shot-hint{
+  position:absolute; right:12px; bottom:12px; z-index:2;
+  font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.64rem; letter-spacing:.06em;
+  padding:6px 11px; border-radius:999px; color:#F4F6F1; background:rgba(28,38,33,.78);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  opacity:0; transform:translateY(4px); transition:opacity .25s ease, transform .25s ease;
+}
+.shot:hover .shot-hint,.shot:focus-visible .shot-hint{ opacity:1; transform:none; }
+@media (hover:none){ .shot-hint{ opacity:.92; transform:none; } }
+@media (hover:hover) and (pointer:fine){ .shot:hover img{ transform:scale(1.012); } }
+
+.screen-card{ margin:0; overflow:hidden; position:relative; }
+.screen-bar,.screen-foot{ display:flex; align-items:center; justify-content:space-between; gap:10px 16px; padding:14px 20px; }
+.screen-bar{ border-bottom:1px solid var(--line); }
+.screen-foot{ border-top:1px solid var(--line); flex-wrap:wrap; font-size:.82rem; color:var(--ink-soft); line-height:1.6; }
+.screen-foot a{ color:var(--sage-deep); font-weight:600; white-space:nowrap; }
+.screen-foot a:hover{ text-decoration:underline; text-underline-offset:4px; }
+.shot-stage{ border:0; border-radius:0; padding:clamp(12px,2.4vw,28px); background:color-mix(in srgb, var(--mist-2) 55%, transparent); }
+.shot-stage img{ max-width:1000px; margin:0 auto; border-radius:10px; border:1px solid var(--line); box-shadow:0 12px 34px var(--shadow); }
+.shot-stage .shot-hint{ right:clamp(20px,3vw,40px); bottom:clamp(20px,3vw,40px); }
+
+.zoom{ position:fixed; inset:0; width:100vw; height:100dvh; max-width:none; max-height:none; margin:0; padding:0; border:0; background:transparent; color:#F4F6F1; }
+.zoom[open]{ display:flex; flex-direction:column; }
+.zoom::backdrop{ background:rgba(8,12,10,.8); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
+.zoom-top{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 18px 10px 22px; }
+.zoom-cap{ font-size:.88rem; color:rgba(244,246,241,.88); }
+.zoom-close{ flex:none; width:40px; height:40px; border-radius:50%; border:1px solid rgba(244,246,241,.28); background:rgba(244,246,241,.08); color:inherit; font-size:1rem; cursor:pointer; }
+.zoom-close:hover{ background:rgba(244,246,241,.18); }
+.zoom-close:focus-visible{ outline:2px solid #A9CBB8; outline-offset:2px; }
+.zoom-stage{ flex:1; min-height:0; overflow:auto; display:grid; place-items:center; padding:4px 22px; overscroll-behavior:contain; }
+.zoom-stage img{ display:block; max-width:100%; max-height:100%; width:auto; height:auto; border-radius:10px; box-shadow:0 24px 70px rgba(0,0,0,.5); }
+@media (hover:hover) and (pointer:fine){ .zoom-stage img{ cursor:zoom-out; } }
+.zoom-tip{ text-align:center; font-size:.72rem; color:rgba(244,246,241,.6); padding:8px 0 14px; }
+.zoom-tip .t-touch{ display:none; }
+html:has(.zoom[open]){ overflow:hidden; }
+@media (max-width:720px){
+  .zoom-stage{ place-items:start; padding:4px 14px; }
+  .zoom-stage img{ max-width:none; max-height:none; width:min(1720px,230vw); }
+  .zoom-tip .t-fine{ display:none; }
+  .zoom-tip .t-touch{ display:inline; }
+}
+
+/* ============ CURSOR FX (fine pointers only; switched on by JS) ============ */
+.cfx{ position:fixed; left:0; top:0; z-index:-1; pointer-events:none; opacity:0; transition:opacity .6s ease; will-change:transform; }
+.fx-on .cfx{ opacity:1; }
+.fx-on.fx-away .cfx{ opacity:0; }
+.cfx-glow{ width:680px; height:680px; margin:-340px 0 0 -340px; border-radius:50%; background:radial-gradient(closest-side, color-mix(in srgb, var(--sage) 32%, transparent), transparent); }
+.cfx-glow-2{ width:360px; height:360px; margin:-180px 0 0 -180px; background:radial-gradient(closest-side, color-mix(in srgb, var(--ochre) 22%, transparent), transparent); }
+.cfx-grid{
+  width:460px; height:460px; margin:-230px 0 0 -230px; --gs:40px;
+  background-image:linear-gradient(color-mix(in srgb, var(--sage) 55%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--sage) 55%, transparent) 1px, transparent 1px);
+  background-size:var(--gs) var(--gs);
+  -webkit-mask-image:radial-gradient(closest-side, #000, transparent); mask-image:radial-gradient(closest-side, #000, transparent);
+}
+@media (min-width:768px){ .cfx-grid{ --gs:56px; } }
+/* spotlight inside cards + a lit edge that follows the pointer */
+.fx-on .spot:hover{ background-image:radial-gradient(560px circle at var(--sx,50%) var(--sy,50%), color-mix(in srgb, var(--sage) 11%, transparent), transparent 45%); }
+.spot-edge{ position:relative; }
+.spot-edge::before{
+  content:""; position:absolute; inset:0; z-index:3; border-radius:inherit; padding:1px; pointer-events:none;
+  background:radial-gradient(240px circle at var(--sx,50%) var(--sy,50%), color-mix(in srgb, var(--sage) 85%, transparent), color-mix(in srgb, var(--ochre) 35%, transparent) 45%, transparent 75%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor;
+  mask:linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity:0; transition:opacity .3s ease;
+}
+.fx-on .spot-edge:hover::before{ opacity:1; }
+/* hero panel leans toward the pointer (overrides the reveal's transform:none once revealed) */
+.hero .panel.in{ transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)); }
+.fx-on .hero .panel.in{ transition:opacity .8s ease, transform .2s ease-out; }
 
 .catalog{ margin-top:20px; padding:clamp(1.4rem,3vw,1.9rem); }
 .catalog-head{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:1.3rem; }
@@ -437,19 +513,12 @@ section{ padding:clamp(4.5rem,9vh,7.5rem) 0; }
 .principle-icon{ width:38px; height:38px; border-radius:11px; display:grid; place-items:center; background:color-mix(in srgb, var(--sage) 16%, transparent); border:1px solid color-mix(in srgb, var(--sage) 30%, transparent); margin-bottom:1.1rem; }
 .principles-grid h3{ font-family:var(--font-display); font-weight:600; font-size:1.35rem; letter-spacing:-.01em; margin-bottom:.5rem; }
 .principles-grid p{ color:var(--ink-soft); font-size:.93rem; }
-.evidence-preview{ margin-top:24px; overflow:hidden; display:grid; grid-template-columns:1.25fr .75fr; align-items:center; }
-.evidence-preview>img{ display:block; width:100%; height:auto; min-width:0; }
-.evidence-preview>div{ padding:clamp(1.5rem,3vw,3rem); }
-.evidence-preview p{ font-size:1.06rem; line-height:1.7; margin:1rem 0; color:var(--ink); }
-.evidence-preview a{ font-size:.85rem; font-weight:600; color:var(--sage-deep); }
+#principles .screen-card{ margin-top:24px; }
 
 /* ============ WORKFLOW & BOUNDARIES ============ */
-.flow-grid{ display:grid; grid-template-columns:.9fr 1.1fr; gap:clamp(2rem,4vw,3.5rem); align-items:center; }
-.steps{ display:grid; gap:0; margin-top:1.6rem; }
-.step{ display:flex; gap:16px; position:relative; padding-bottom:1.7rem; }
-.step:last-child{ padding-bottom:0; }
-.step::before{ content:""; position:absolute; left:13px; top:30px; bottom:2px; width:1px; background:var(--line); }
-.step:last-child::before{ display:none; }
+.flow{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-bottom:24px; position:relative; }
+.flow::before{ content:""; position:absolute; left:14px; right:14px; top:13px; height:1px; background:linear-gradient(90deg, var(--sage), var(--line)); }
+.flow-step{ display:grid; gap:.55rem; justify-items:start; position:relative; }
 .step-dot{
   width:27px; height:27px; border-radius:50%; flex:none; z-index:1;
   display:grid; place-items:center;
@@ -457,15 +526,11 @@ section{ padding:clamp(4.5rem,9vh,7.5rem) 0; }
   box-shadow:0 0 0 5px color-mix(in srgb, var(--sage) 18%, transparent);
   font-family:"IBM Plex Mono",monospace; font-size:.6rem;
 }
-.step-name{ font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.72rem; letter-spacing:.1em; color:var(--sage-deep); padding-top:4px; }
+.step-name{ font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.72rem; letter-spacing:.1em; color:var(--sage-deep); padding-top:6px; }
 .step-desc{ font-size:.88rem; color:var(--ink-soft); }
-.trace{ padding:0; overflow:hidden; }
-.trace-bar{ display:flex; align-items:center; justify-content:space-between; gap:8px; padding:13px 18px; border-bottom:1px solid var(--line); }
-.trace>img{ display:block; width:100%; height:auto; }
-.trace-foot{ display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 12px; padding:13px 18px; border-top:1px solid var(--line); font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.62rem; letter-spacing:.08em; color:var(--ink-soft); }
 
 .bounds{ margin-top:clamp(2.2rem,5vh,3.2rem); display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
-.bound{ padding:1.25rem 1.3rem; display:flex; gap:14px; align-items:flex-start; }
+.bound{ padding:1.25rem 1.3rem; display:flex; gap:14px; align-items:flex-start; position:relative; }
 .bound h3{ font-size:.98rem; font-weight:600; margin-bottom:.25rem; line-height:1.4; }
 .bound p{ font-size:.82rem; color:var(--ink-soft); line-height:1.6; }
 
@@ -528,18 +593,18 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
 /* ============ RESPONSIVE ============ */
 @media (max-width:1080px){
   .catalog-grid{ grid-template-columns:repeat(3,1fr); }
-  .bounds{ grid-template-columns:1fr 1fr; }
+  .bounds,.modes{ grid-template-columns:1fr 1fr; }
   .nav-links a{ padding:7px 8px; font-size:.82rem; }
 }
 @media (max-width:920px){
-  .hero-grid,.tools-grid,.flow-grid,.verify-grid,.faq-grid{ grid-template-columns:1fr; }
+  .hero-grid,.verify-grid,.faq-grid{ grid-template-columns:1fr; }
   .hero-grid{ gap:2rem; }
   .principles-grid,.road{ grid-template-columns:1fr; }
   .road-line{ display:none; }
   .nav-links{ display:none; }
   .panel{ max-width:600px; }
-  .evidence-preview{ grid-template-columns:1fr; }
-  .evidence-preview>img{ max-height:500px; object-fit:cover; }
+  .flow{ grid-template-columns:1fr 1fr; row-gap:1.4rem; }
+  .flow::before{ display:none; }
   .catalog-grid{ grid-template-columns:1fr 1fr; }
 }
 @media (max-width:560px){
@@ -555,7 +620,8 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
   .panel{ padding:16px; }
   .ht-row{ grid-template-columns:18px 1fr; }
   .ht-state{ grid-column:2; justify-self:start; }
-  .modes,.verify-cards,.catalog-grid,.bounds{ grid-template-columns:1fr; }
+  .modes,.verify-cards,.catalog-grid,.bounds,.flow{ grid-template-columns:1fr; }
+  .screen-bar,.screen-foot{ padding:12px 16px; }
   .demo-foot{ align-items:flex-start; flex-direction:column; }
   .rrow{ grid-template-columns:1fr; gap:6px; }
   .verdict{ justify-self:start; }
@@ -573,6 +639,9 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
   .orb,.ticker-track,.live-dot,.scroll-hint::after{ animation:none !important; }
   .reveal{ opacity:1; transform:none; transition:none; }
   .ht-row,.ht-state{ transition:none; }
+  .cfx{ display:none; }
+  .hero .panel.in{ transform:none; }
+  .shot img,.shot-hint{ transition:none; }
   .faq summary::after{ transition:none; }
 }
 </style>
@@ -584,6 +653,9 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
 </div>
+<div class="cfx cfx-grid" aria-hidden="true"></div>
+<div class="cfx cfx-glow" aria-hidden="true"></div>
+<div class="cfx cfx-glow cfx-glow-2" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -674,19 +746,24 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
 
 <section id="tools"><div class="wrap">
   <div class="section-head reveal"><p class="eyebrow"><span class="section-num">01</span> · 科研能力</p><h2 class="section-title">一个入口，接住研究的日常。</h2><p class="section-lede">从检索文献到设计克隆，常用任务都在同一个项目里完成。三十余项专业技能和公共数据库连接器收在能力目录里，按需调用。</p></div>
-  <div class="tools-grid">
-    <article class="glass card reveal"><div class="card-top"><span class="card-id">GC / MOLECULAR DESIGN</span><span class="status status-live">● 已接入</span></div>
-      <h3>GeneCode · 分子克隆</h3><p>在同一个工作区查看序列、质粒图谱与注释，围绕引物、片段和克隆方案继续设计。AI 提出的修改先以补丁呈现，你确认后才写入。</p>
-      <div class="chip-row"><span class="chip">序列视图</span><span class="chip">质粒图谱</span><span class="chip">引物与酶切位点</span><span class="chip">修改需确认</span></div>
-      <div class="real-screen"><img src="/bioseeki/genecode.webp" alt="GeneCode Mac Beta 真实序列与质粒双视图" width="1920" height="1080" loading="lazy"></div>
-      <a class="card-link" href="https://genecode-agent.pages.dev" target="_blank" rel="noopener noreferrer">打开 GeneCode 网页工作台 ↗</a>
-    </article>
-    <div class="modes">
-      <article class="glass card mode reveal" style="--d:.08s"><div class="ico-box" aria-hidden="true"><svg class="ico"><use href="#i-search"/></svg></div><div><h3>深度研究</h3><p>检索 PubMed、Europe PMC 与你的知识库，比对证据后写成综述；预印本单独标注。</p></div></article>
-      <article class="glass card mode reveal" style="--d:.14s"><div class="ico-box" aria-hidden="true"><svg class="ico"><use href="#i-chart"/></svg></div><div><h3>数据分析</h3><p>整理实验数据，做统计检验与组学分析；每次运行都留下代码、环境和产物记录。</p></div></article>
-      <article class="glass card mode reveal" style="--d:.2s"><div class="ico-box" aria-hidden="true"><svg class="ico"><use href="#i-doc"/></svg></div><div><h3>论文写作</h3><p>起草、润色与审稿回复，统计写法一并审校；每条论断都要对得上证据。</p></div></article>
-      <article class="glass card mode reveal" style="--d:.26s"><div class="ico-box" aria-hidden="true"><svg class="ico"><use href="#i-figure"/></svg></div><div><h3>科研绘图</h3><p>多面板排版、配色与字号按投稿规范处理，导出 SVG、PDF 或 TIFF。</p></div></article>
+  <article class="glass card feature reveal">
+    <div class="card-top"><span class="card-id">GC / MOLECULAR DESIGN</span><span class="status status-live">● 已接入</span></div>
+    <div class="feature-head">
+      <div class="feature-text">
+        <h3>GeneCode · 分子克隆</h3><p>在同一个工作区查看序列、质粒图谱与注释，围绕引物、片段和克隆方案继续设计。AI 提出的修改先以补丁呈现，你确认后才写入。</p>
+      </div>
+      <div class="feature-side">
+        <div class="chip-row"><span class="chip">序列视图</span><span class="chip">质粒图谱</span><span class="chip">引物与酶切位点</span><span class="chip">修改需确认</span></div>
+        <a class="card-link" href="https://genecode-agent.pages.dev" target="_blank" rel="noopener noreferrer">打开 GeneCode 网页工作台 ↗</a>
+      </div>
     </div>
+    <button type="button" class="shot" data-caption="GeneCode：序列视图与质粒图谱 · Mac Beta 真机画面"><img src="/bioseeki/genecode-ui.webp" alt="GeneCode Mac Beta 真实序列与质粒双视图" width="1720" height="678" loading="lazy"><span class="shot-hint">⤢ 点击放大</span></button>
+  </article>
+  <div class="modes">
+    <article class="glass card mode reveal" style="--d:.08s"><div class="ico-box" aria-hidden="true"><svg class="ico"><use href="#i-search"/></svg></div><div><h3>深度研究</h3><p>检索 PubMed、Europe PMC 与你的知识库，比对证据后写成综述；预印本单独标注。</p></div></article>
+    <article class="glass card mode reveal" style="--d:.14s"><div class="ico-box" aria-hidden="true"><svg class="ico"><use href="#i-chart"/></svg></div><div><h3>数据分析</h3><p>整理实验数据，做统计检验与组学分析；每次运行都留下代码、环境和产物记录。</p></div></article>
+    <article class="glass card mode reveal" style="--d:.2s"><div class="ico-box" aria-hidden="true"><svg class="ico"><use href="#i-doc"/></svg></div><div><h3>论文写作</h3><p>起草、润色与审稿回复，统计写法一并审校；每条论断都要对得上证据。</p></div></article>
+    <article class="glass card mode reveal" style="--d:.26s"><div class="ico-box" aria-hidden="true"><svg class="ico"><use href="#i-figure"/></svg></div><div><h3>科研绘图</h3><p>多面板排版、配色与字号按投稿规范处理，导出 SVG、PDF 或 TIFF。</p></div></article>
   </div>
   <div class="glass catalog reveal">
     <div class="catalog-head"><h3>能力目录 · 节选</h3><p>每项能力都标明是否就绪、依赖什么；在客户端「浏览科研能力」里查看完整清单。</p></div>
@@ -731,21 +808,26 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
     <article class="glass card reveal" style="--d:.12s"><span class="principle-num">P·02 / READING</span><div class="principle-icon" aria-hidden="true"><svg class="ico"><use href="#i-lang"/></svg></div><h3>双语对照精读</h3><p>外文论文的译文放在原文 PDF 旁边，一边读一边对照；引用依旧指回原文。</p></article>
     <article class="glass card reveal" style="--d:.24s"><span class="principle-num">P·03 / MEMORY</span><div class="principle-icon" aria-hidden="true"><svg class="ico"><use href="#i-memory"/></svg></div><h3>记忆由你管理</h3><p>长期偏好放全局记忆，课题进展放项目记忆；跨项目检索需要授权，随时查看、修改或撤回。</p></article>
   </div>
-  <div class="evidence-preview glass reveal"><img src="/bioseeki/knowledge.webp" alt="BioSeeki Mac Beta 真实知识库检索界面，显示原文片段和页码" width="1920" height="1080" loading="lazy"><div><span class="eyebrow">ACTUAL INTERFACE / MAC BETA</span><p>真实检索画面：公开论文片段、页码与修订。私人内容和本地路径已隐藏。</p><a href="/privacy">了解数据处理方式 ↗</a></div></div>
+  <figure class="glass screen-card reveal">
+    <div class="screen-bar"><span class="panel-title">KNOWLEDGE BASE / MAC BETA</span><span class="badge-live">真实界面</span></div>
+    <button type="button" class="shot shot-stage" data-caption="知识库检索：原文片段、页码与稳定引用 · Mac Beta 真机画面"><img src="/bioseeki/knowledge-ui.webp" alt="BioSeeki Mac Beta 真实知识库检索界面，显示原文片段、页码和稳定引用" width="1328" height="808" loading="lazy"><span class="shot-hint">⤢ 点击放大</span></button>
+    <figcaption class="screen-foot"><span>真实检索画面：公开论文片段、页码与修订。私人内容和本地路径已隐藏。</span><a href="/privacy">了解数据处理方式 ↗</a></figcaption>
+  </figure>
 </div></section>
 
 <section id="workflow"><div class="wrap">
-  <div class="flow-grid">
-    <div><div class="section-head reveal" style="margin-bottom:0"><p class="eyebrow"><span class="section-num">04</span> · 工作方式</p><h2 class="section-title">沿着问题推进，边界清清楚楚。</h2><p class="section-lede">从研究意图到核查结果，过程与资料都留在同一个项目里。</p></div>
-      <div class="steps reveal" style="--d:.15s">
-        <div class="step"><span class="step-dot">01</span><div><p class="step-name">提出问题</p><p class="step-desc">选一个项目目录，描述要完成的科研任务</p></div></div>
-        <div class="step"><span class="step-dot">02</span><div><p class="step-name">读取资料</p><p class="step-desc">按需读取项目文件、文献与知识库，不整目录打包</p></div></div>
-        <div class="step"><span class="step-dot">03</span><div><p class="step-name">调用工具</p><p class="step-desc">选择合适的技能、数据库或分析环境</p></div></div>
-        <div class="step"><span class="step-dot">04</span><div><p class="step-name">检查产物</p><p class="step-desc">对照来源、复算数字，由你决定是否采纳</p></div></div>
-      </div>
-    </div>
-    <div class="glass trace reveal" style="--d:.2s"><div class="trace-bar"><span class="panel-title">BIOSEEKI / MAC BETA</span><span class="badge-live">真实界面</span></div><img src="/bioseeki/home.webp" alt="BioSeeki Mac Beta 实际科研工作台首页和科研能力入口" width="1920" height="1080" loading="lazy"><div class="trace-foot"><span>从一个科研问题开始</span><span>深度研究 · 数据分析 · 论文写作 · 分子克隆</span></div></div>
-  </div>
+  <div class="section-head reveal"><p class="eyebrow"><span class="section-num">04</span> · 工作方式</p><h2 class="section-title">沿着问题推进，边界清清楚楚。</h2><p class="section-lede">从研究意图到核查结果，过程与资料都留在同一个项目里。</p></div>
+  <ol class="flow reveal">
+    <li class="flow-step"><span class="step-dot">01</span><p class="step-name">提出问题</p><p class="step-desc">选一个项目目录，描述要完成的科研任务</p></li>
+    <li class="flow-step"><span class="step-dot">02</span><p class="step-name">读取资料</p><p class="step-desc">按需读取项目文件、文献与知识库，不整目录打包</p></li>
+    <li class="flow-step"><span class="step-dot">03</span><p class="step-name">调用工具</p><p class="step-desc">选择合适的技能、数据库或分析环境</p></li>
+    <li class="flow-step"><span class="step-dot">04</span><p class="step-name">检查产物</p><p class="step-desc">对照来源、复算数字，由你决定是否采纳</p></li>
+  </ol>
+  <figure class="glass screen-card reveal" style="--d:.1s">
+    <div class="screen-bar"><span class="panel-title">BIOSEEKI / MAC BETA</span><span class="badge-live">真实界面</span></div>
+    <button type="button" class="shot shot-stage" data-caption="科研工作台首页：从一个问题开始 · Mac Beta 真机画面"><img src="/bioseeki/home-ui.webp" alt="BioSeeki Mac Beta 实际科研工作台首页和科研能力入口" width="1720" height="666" loading="lazy"><span class="shot-hint">⤢ 点击放大</span></button>
+    <figcaption class="screen-foot"><span>从一个科研问题开始，常用能力集中在同一个入口。</span><span>深度研究 · 数据分析 · 论文写作 · 分子克隆</span></figcaption>
+  </figure>
   <div class="bounds">
     <article class="glass bound reveal"><div class="ico-box" aria-hidden="true"><svg class="ico"><use href="#i-hand"/></svg></div><div><h3>高影响操作先确认</h3><p>写入实验记录、修改序列这类操作，要你批准才会执行。</p></div></article>
     <article class="glass bound reveal" style="--d:.08s"><div class="ico-box" aria-hidden="true"><svg class="ico"><use href="#i-lock"/></svg></div><div><h3>项目之间相互隔离</h3><p>检索与记忆以项目为界，跨项目调用需要授权。</p></div></article>
@@ -785,6 +867,12 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
   <p class="copy">© 2026 BIOSEEKI · AI FOR RESEARCH</p>
 </div></div></footer>
 
+<dialog class="zoom" id="zoom" aria-label="放大查看截图">
+  <div class="zoom-top"><p class="zoom-cap" id="zoom-cap"></p><button type="button" class="zoom-close" id="zoom-close" aria-label="关闭">✕</button></div>
+  <div class="zoom-stage" id="zoom-stage"><img id="zoom-img" alt=""></div>
+  <p class="zoom-tip"><span class="t-fine">按 Esc 或点击空白处关闭</span><span class="t-touch">左右滑动查看细节，点右上角 ✕ 关闭</span></p>
+</dialog>
+
 <script is:inline>
 (function(){
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -823,6 +911,82 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
   }
   window.addEventListener("scroll", function(){ if (!spyQueued){ spyQueued = true; requestAnimationFrame(spy); } }, { passive:true });
   spy();
+
+  /* screenshots: click to see them full size */
+  var finePointer = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+  var dlg = document.getElementById("zoom");
+  var zImg = document.getElementById("zoom-img"), zCap = document.getElementById("zoom-cap"), zStage = document.getElementById("zoom-stage");
+  document.querySelectorAll(".shot").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var img = btn.querySelector("img"), src = img.currentSrc || img.src;
+      if (!dlg || typeof dlg.showModal !== "function"){ window.open(src, "_blank", "noopener"); return; }
+      zImg.src = src; zImg.alt = img.alt;
+      zCap.textContent = btn.getAttribute("data-caption") || img.alt;
+      dlg.showModal();
+      zStage.scrollTo(0, 0);
+    });
+  });
+  if (dlg){
+    document.getElementById("zoom-close").addEventListener("click", function(){ dlg.close(); });
+    dlg.addEventListener("click", function(e){
+      if (e.target === dlg || e.target === zStage || (finePointer && e.target === zImg)) dlg.close();
+    });
+  }
+
+  /* cursor effects: a glow and a patch of lit grid trail the pointer, cards get a
+     spotlight and a lit edge under it, and the hero panel leans toward it.
+     Mouse/trackpad only, never with reduced motion. */
+  if (finePointer && !reduced){
+    var root = document.documentElement;
+    var glow = document.querySelector(".cfx-glow:not(.cfx-glow-2)"), glow2 = document.querySelector(".cfx-glow-2"), grid = document.querySelector(".cfx-grid");
+    var heroPanel = document.getElementById("hero-panel"), hero = document.getElementById("top");
+    document.querySelectorAll(".glass").forEach(function(el){ el.classList.add("spot"); });
+    document.querySelectorAll(".card, .bound, .report, .catalog, .screen-card, .demo-glass, .foot-card").forEach(function(el){ el.classList.add("spot-edge"); });
+    var tx = 0, ty = 0, g1 = { x:0, y:0 }, g2 = { x:0, y:0 }, tilt = { x:0, y:0 }, tiltT = { x:0, y:0 };
+    var running = false;
+    var mod = function(a, n){ return ((a % n) + n) % n; };
+    var kick = function(){ if (!running){ running = true; requestAnimationFrame(frame); } };
+    var frame = function(){
+      g1.x += (tx - g1.x) * .16; g1.y += (ty - g1.y) * .16;
+      g2.x += (tx - g2.x) * .07; g2.y += (ty - g2.y) * .07;
+      tilt.x += (tiltT.x - tilt.x) * .12; tilt.y += (tiltT.y - tilt.y) * .12;
+      glow.style.transform = "translate3d(" + g1.x + "px," + g1.y + "px,0)";
+      glow2.style.transform = "translate3d(" + g2.x + "px," + g2.y + "px,0)";
+      /* the lit grid sits on the pointer; offset its pattern so the lines match the
+         background grid (tech-feel.css: centred horizontally, anchored at the top) */
+      var vw = root.clientWidth, gs = vw >= 768 ? 56 : 40;
+      grid.style.transform = "translate3d(" + tx + "px," + ty + "px,0)";
+      grid.style.backgroundPosition = mod((vw - gs) / 2 - (tx - 230), gs) + "px " + mod(-(ty - 230), gs) + "px";
+      if (heroPanel){
+        heroPanel.style.setProperty("--rx", tilt.x.toFixed(2) + "deg");
+        heroPanel.style.setProperty("--ry", tilt.y.toFixed(2) + "deg");
+      }
+      var busy = Math.abs(tx - g2.x) + Math.abs(ty - g2.y) > .5 || Math.abs(tiltT.x - tilt.x) + Math.abs(tiltT.y - tilt.y) > .01;
+      if (busy) requestAnimationFrame(frame); else running = false;
+    };
+    window.addEventListener("pointermove", function(e){
+      if (e.pointerType === "touch") return;
+      tx = e.clientX; ty = e.clientY;
+      if (!root.classList.contains("fx-on")){ g1.x = g2.x = tx; g1.y = g2.y = ty; root.classList.add("fx-on"); }
+      root.classList.remove("fx-away");
+      var card = e.target.closest ? e.target.closest(".spot") : null;
+      if (card){
+        var r = card.getBoundingClientRect();
+        card.style.setProperty("--sx", (tx - r.left) + "px");
+        card.style.setProperty("--sy", (ty - r.top) + "px");
+      }
+      if (heroPanel && hero.getBoundingClientRect().bottom > ty){
+        var pr = heroPanel.getBoundingClientRect();
+        var dx = (tx - (pr.left + pr.width / 2)) / (window.innerWidth / 2);
+        var dy = (ty - (pr.top + pr.height / 2)) / (window.innerHeight / 2);
+        tiltT.y = Math.max(-1, Math.min(1, dx)) * 5;
+        tiltT.x = Math.max(-1, Math.min(1, dy)) * -4;
+      } else { tiltT.x = tiltT.y = 0; }
+      kick();
+    }, { passive:true });
+    document.addEventListener("mouseleave", function(){ root.classList.add("fx-away"); tiltT.x = tiltT.y = 0; kick(); });
+    window.addEventListener("blur", function(){ root.classList.add("fx-away"); });
+  }
 
   /* hero session: light the steps one by one, replay while visible */
   var rows = document.querySelectorAll("#hero-panel .ht-row");
