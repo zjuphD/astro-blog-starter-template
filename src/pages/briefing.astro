@@ -1,13 +1,18 @@
 ---
-import fs from "node:fs";
-import path from "node:path";
+// Rendered per request so the brand follows the domain (bioseeki.com and aiseeki.com
+// share this Worker), and "today" is computed at request time rather than build time.
+export const prerender = false;
 import briefings from "../data/briefings.json";
-// 封面优先用 WebP；若当天自动抓图仍是 PNG，自动回退，保证流水线不中断。
-const coversDir = path.resolve("public/briefing-covers");
-function coverFor(id) {
-  if (fs.existsSync(path.join(coversDir, `${id}.webp`))) return `/briefing-covers/${id}.webp`;
-  return `/briefing-covers/${id}.png`;
-}
+
+const host = Astro.url.hostname.toLowerCase();
+const isAiseeki = host === "aiseeki.com" || host === "www.aiseeki.com";
+const brand = isAiseeki
+  ? { name: "Aiseeki", upper: "AISEEKI", origin: "https://aiseeki.com", logo: "/aiseeki-redesign-assets/logo-mark.png", icon: "/aiseeki-redesign-assets/favicon-64.png", invertDark: false }
+  : { name: "BioSeeki", upper: "BIOSEEKI", origin: "https://bioseeki.com", logo: "/bioseeki/mark.webp", icon: "/bioseeki/mark.webp", invertDark: true };
+
+// scripts/capture-briefing-covers.mjs writes WebP only; a missing cover falls back to
+// the styled placeholder (integrations/briefing-fallback.mjs), same as before.
+const coverFor = (id) => `/briefing-covers/${id}.webp`;
 
 const categories = [
   "全部",
@@ -60,9 +65,10 @@ const groups = bucketOrder
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Aiseeki 前沿快讯｜AI for Science Daily</title>
+  <title>{brand.name} 前沿快讯｜AI for Science Daily</title>
   <meta name="description" content="每日筛选精准医疗、肿瘤生物学、AI 药物发现、组学、结构生物学与 AI for Science 的重要新进展。" />
-  <link rel="icon" type="image/png" href="/aiseeki-redesign-assets/favicon-64.png" />
+  <link rel="icon" type="image/png" href={brand.icon} />
+  <link rel="canonical" href={`${brand.origin}/briefing`} />
   <style is:global>
     :root{--bg:#EEF0EA;--ink:#24312B;--soft:#5A6A62;--sage:#6E8F7C;--sage2:#54745F;--ochre:#C08A2D;--line:rgba(36,49,43,.13);--glass:rgba(255,255,255,.58);--glass2:rgba(255,255,255,.78);--shadow:rgba(36,49,43,.10)}
     @media(prefers-color-scheme:dark){:root{--bg:#141A17;--ink:#E9ECE5;--soft:#A7B4AB;--sage:#8FB49F;--sage2:#A9CBB8;--ochre:#D9A94E;--line:rgba(233,236,229,.13);--glass:rgba(30,38,34,.55);--glass2:rgba(34,43,38,.78);--shadow:rgba(0,0,0,.42)}}
@@ -76,6 +82,7 @@ const groups = bucketOrder
     .brief{--rx:0deg;--ry:0deg;--mx:50%;--my:50%;grid-column:span 6;position:relative;overflow:hidden;display:flex;flex-direction:column;min-height:540px;transform:perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry));transform-style:preserve-3d;transition:transform .18s ease,box-shadow .3s ease,border-color .3s ease}.brief:hover{box-shadow:0 24px 58px var(--shadow);border-color:color-mix(in srgb,var(--sage) 42%,var(--line))}.brief:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(420px circle at var(--mx) var(--my),rgba(255,255,255,.26),transparent 45%);transition:opacity .25s ease;z-index:4}.brief:hover:after{opacity:1}.brief.featured{grid-column:span 12;display:grid;grid-template-columns:1.08fr .92fr;min-height:430px}.brief.featured .cover-shot{height:100%;min-height:430px;border-radius:20px 0 0 20px}.brief.featured .brief-body{padding:1.8rem 1.8rem 1.7rem 1.5rem}.brief-body{padding:1.35rem 1.45rem 1.45rem;display:flex;flex-direction:column;flex:1;position:relative;z-index:2;transform:translateZ(18px)}
     .cover-shot{position:relative;height:238px;overflow:hidden;background:linear-gradient(135deg,color-mix(in srgb,var(--sage) 18%,var(--bg)),color-mix(in srgb,var(--ochre) 12%,var(--bg)));border-bottom:1px solid var(--line);isolation:isolate}.cover-shot img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.86) contrast(.96);transform:scale(1.02);transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .4s ease}.brief:hover .cover-shot img{transform:scale(1.075);filter:saturate(1) contrast(1)}.cover-shot:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.04) 45%,rgba(0,0,0,.48));z-index:1;pointer-events:none}.browser-bar{position:absolute;left:12px;right:12px;top:12px;z-index:3;display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:10px;background:rgba(245,247,243,.82);backdrop-filter:blur(12px);box-shadow:0 5px 20px rgba(0,0,0,.14);color:#344039;font-size:.66rem}.browser-dots{display:flex;gap:4px}.browser-dots i{display:block;width:6px;height:6px;border-radius:50%;background:#9EA9A2}.browser-url{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.78}.cover-label{position:absolute;z-index:3;left:16px;bottom:14px;right:16px;display:flex;align-items:end;justify-content:space-between;gap:12px;color:white;text-shadow:0 2px 14px rgba(0,0,0,.3)}.cover-label strong{font-size:.86rem}.cover-label span{font-size:.66rem;opacity:.8;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.cover-fallback{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:56px 18px 18px;z-index:0}.cover-fallback b{font-size:1.4rem;line-height:1.3;max-width:18ch;color:var(--ink)}.cover-fallback span{margin-top:8px;color:var(--soft);font-size:.72rem}.cover-shot.has-error img{display:none}
     .topline{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:.9rem}.cat{font-size:.7rem;letter-spacing:.08em;color:var(--sage2);font-weight:700}.type{font-size:.68rem;color:var(--soft)}.score{margin-left:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.72rem;color:var(--ochre)}.brief h2{font-size:clamp(1.25rem,2.4vw,1.72rem);line-height:1.38;margin:.2rem 0 .7rem}.brief.featured h2{font-size:clamp(1.8rem,3.2vw,2.55rem)}.source{font-size:.78rem;color:var(--soft);margin-bottom:1rem}.summary{color:var(--soft);margin:0 0 1rem}.why{padding:12px 14px;border-radius:14px;background:rgba(110,143,124,.09);border:1px solid var(--line);font-size:.9rem}.why b{display:block;color:var(--ink);margin-bottom:3px}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:1rem}.tag{font-size:.68rem;color:var(--soft);border:1px solid var(--line);border-radius:999px;padding:4px 9px}.read{display:inline-flex;margin-top:1rem;font-size:.86rem;font-weight:700;color:var(--sage2);transition:transform .2s ease}.read:hover{transform:translateX(3px)}
+    @media(prefers-color-scheme:dark){.brand img.invert-dark{filter:invert(1)}}
     .empty{display:none;text-align:center;padding:4rem 1rem 6rem;color:var(--soft)}footer{padding:1rem 0 4rem;color:var(--soft);font-size:.78rem;text-align:center}
     @media(max-width:800px){.nav small,.nav a:not(.brand):not(.cta){display:none}.hero{padding-top:6rem}.control-row{align-items:stretch}.brief,.brief.featured{grid-column:span 12;display:flex;min-height:auto;transform:none!important}.brief.featured .cover-shot,.cover-shot{height:220px;min-height:0;border-radius:20px 20px 0 0}.brief.featured .brief-body{padding:1.35rem 1.45rem 1.45rem}.brief.featured h2{font-size:1.7rem}.brief:after{display:none}.period-head{align-items:flex-start;flex-direction:column;gap:2px}}
     @media(prefers-reduced-motion:reduce){.brief,.brief:hover{transform:none!important;transition:none}.cover-shot img,.brief:hover .cover-shot img{transform:none;transition:none}.brief:after{display:none}.filter,.time-filter{transition:none}}
@@ -84,13 +91,13 @@ const groups = bucketOrder
 <body>
   <div class="wrap">
     <nav class="nav">
-      <a class="brand" href="/"><img src="/aiseeki-redesign-assets/logo-mark.png" alt="" /><b>AISEEKI</b><small>AI FOR SCIENCE DAILY</small></a>
+      <a class="brand" href="/"><img class={brand.invertDark ? "invert-dark" : undefined} src={brand.logo} alt="" /><b>{brand.upper}</b><small>AI FOR SCIENCE DAILY</small></a>
       <a href="/">首页</a><a href="/briefing">前沿快讯</a><a href="https://github.com/zjuphD/GeneCode" target="_blank" rel="noopener">GitHub</a>
       <a class="cta" href="https://genecode-agent.pages.dev" target="_blank" rel="noopener">GeneCode ↗</a>
     </nav>
 
     <header class="hero">
-      <p class="eyebrow">AISEEKI INTELLIGENCE · DAILY SIGNAL</p>
+      <p class="eyebrow">{brand.upper} INTELLIGENCE · DAILY SIGNAL</p>
       <h1>每天过滤噪音，留下<em>值得科研人员看的进展</em>。</h1>
       <p class="lede">聚焦精准医疗、肿瘤生物学、AI 药物发现、组学、结构生物学与 AI for Science。每一天的入选结果独立归档，论文发表日期和快讯入选日期分开记录。</p>
       <div class="hero-meta"><span class="pill">最近一期 · {dateLabel}</span><span class="pill">{sorted.length} 条精选</span><span class="pill">自动快讯保留 21 天</span></div>
@@ -153,7 +160,7 @@ const groups = bucketOrder
       <div class="empty" id="emptyState">当前筛选条件下没有快讯。</div>
     </main>
 
-    <footer>© 2026 AISEEKI · AI for Research · 快讯仅用于科研信息整理，不替代原始论文与专业判断。</footer>
+    <footer>© 2026 {brand.upper} · AI for Research · 快讯仅用于科研信息整理，不替代原始论文与专业判断。</footer>
   </div>
 
   <script is:inline>
