@@ -1,0 +1,10 @@
+---
+export const prerender = false;
+import Home from "../components/bioseeki/Home.astro";
+
+// English BioSeeki homepage. aiseeki.com shares this Worker and has no English page.
+const host = Astro.url.hostname.toLowerCase();
+if (host === "aiseeki.com" || host === "www.aiseeki.com") return Astro.redirect("/");
+Astro.cookies.set("lang", "en", { path: "/", maxAge: 60 * 60 * 24 * 365, sameSite: "lax" });
+---
+<Home lang="en" />
