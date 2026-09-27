@@ -1,0 +1,22 @@
+# BioSeeki
+
+> BioSeeki is an AI research workspace for individual scientists (life sciences and biomedicine). It combines deep literature research, data analysis, paper writing, publication figures and GeneCode molecular cloning in one project, with an emphasis on verifiability: citations trace back to the exact page and paragraph of the source, analyses keep a recomputable run record, and claims without evidence are left as marked gaps instead of being filled in. Desktop app: Mac Beta (macOS 11+, Apple silicon); self sign-up is open.
+
+BioSeeki（中文名同）是面向研究者个人的 AI 科研工作台：深度研究、数据分析、论文写作、科研绘图与 GeneCode 分子克隆在同一个项目里完成。引用可回到原文的页与段，分析留下可复算的运行记录，缺证据的论断标为「待补」而不编造。桌面客户端目前为 Mac Beta（macOS 11 及以上、Apple 芯片），账号开放自助注册。
+
+## Product
+- [BioSeeki homepage (中文)](https://bioseeki.com/): capabilities, verifiability, knowledge base and memory, a worked project, demo, FAQ
+- [BioSeeki homepage (English)](https://bioseeki.com/en): the same content in English
+- [Sign up](https://api.bioseeki.com/sign-up): self sign-up, no invitation code
+
+## Key facts
+- Capabilities: deep research (PubMed, Europe PMC, knowledge base, literature radar), data analysis (e.g. PyDESeq2, Scanpy, GO/KEGG enrichment), writing and reviewer responses, journal-ready figures (SVG/PDF/TIFF), GeneCode molecular cloning; 30+ research skills in total
+- Verifiability: page/paragraph citations with stable reference IDs; citation check (DOI resolves, matches the cited paper, retractions/corrections, published versions of preprints); run records with code, command, environment and output hashes
+- Boundaries: high-impact actions (e.g. writing to a lab notebook, editing a sequence) require the user's approval; projects are isolated; literature only via open channels (PubMed, Europe PMC, Crossref, institutional access); private research content is not used to train BioSeeki's models
+- Platform: Mac Beta (macOS 11+, Apple silicon); Windows version in testing
+- Not to be confused with other products with similar names (e.g. "BioSeek")
+
+## Optional
+- [Privacy policy (中文)](https://bioseeki.com/privacy)
+- [AI for Science daily briefing (中文)](https://bioseeki.com/briefing)
+- [GeneCode web workspace](https://genecode-agent.pages.dev)

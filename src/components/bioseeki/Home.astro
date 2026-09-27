@@ -9,6 +9,7 @@ import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "../../styles/tech-feel.css";
 import { COPY, type Lang } from "../../i18n/bioseeki";
+import { SAME_AS, VERIFY } from "../../seo";
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -17,10 +18,31 @@ const t = COPY[lang];
 const heroVideo = true;
 const mailto = `mailto:${t.links.mail}?subject=${encodeURIComponent(t.start.mailSubject)}&body=${encodeURIComponent(t.start.mailBody)}`;
 
+const ORG = "https://bioseeki.com/#organization";
 const jsonLd = [
   {
     "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": ORG,
+    name: "BioSeeki",
+    url: "https://bioseeki.com/",
+    logo: "https://bioseeki.com/bioseeki/mark.webp",
+    email: t.links.mail,
+    ...(SAME_AS.length ? { sameAs: SAME_AS } : {}),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://bioseeki.com/#website",
+    name: "BioSeeki",
+    url: "https://bioseeki.com/",
+    inLanguage: ["zh-CN", "en"],
+    publisher: { "@id": ORG },
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "SoftwareApplication",
+    publisher: { "@id": ORG },
     name: "BioSeeki",
     applicationCategory: "ScienceApplication",
     operatingSystem: "macOS 11+ (Apple silicon)",
@@ -62,6 +84,10 @@ const jsonLd = [
 <link rel="alternate" hreflang="en" href="https://bioseeki.com/en">
 <link rel="alternate" hreflang="x-default" href="https://bioseeki.com/">
 <link rel="icon" type="image/png" href="/bioseeki/mark.webp">
+<meta name="robots" content="index,follow,max-image-preview:large">
+{VERIFY.google && <meta name="google-site-verification" content={VERIFY.google}>}
+{VERIFY.bing && <meta name="msvalidate.01" content={VERIFY.bing}>}
+{VERIFY.baidu && <meta name="baidu-site-verification" content={VERIFY.baidu}>}
 <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 <style is:global>
 /* ============ TOKENS ============ */
