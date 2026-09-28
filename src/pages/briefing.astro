@@ -7,8 +7,8 @@ import briefings from "../data/briefings.json";
 const host = Astro.url.hostname.toLowerCase();
 const isAiseeki = host === "aiseeki.com" || host === "www.aiseeki.com";
 const brand = isAiseeki
-  ? { name: "Aiseeki", upper: "AISEEKI", origin: "https://aiseeki.com", logo: "/aiseeki-redesign-assets/logo-mark.png", icon: "/aiseeki-redesign-assets/favicon-64.png", invertDark: false }
-  : { name: "BioSeeki", upper: "BIOSEEKI", origin: "https://bioseeki.com", logo: "/bioseeki/mark.webp", icon: "/bioseeki/mark.webp", invertDark: true };
+  ? { name: "Aiseeki", upper: "AISEEKI", origin: "https://aiseeki.com", logo: "/aiseeki-redesign-assets/logo-mark.png", icon: "/aiseeki-redesign-assets/favicon-192.png", invertDark: false }
+  : { name: "BioSeeki", upper: "BIOSEEKI", origin: "https://bioseeki.com", logo: "/bioseeki/mark.webp", icon: "/favicon-192.png", invertDark: true };
 
 // scripts/capture-briefing-covers.mjs writes WebP only; a missing cover falls back to
 // the styled placeholder (integrations/briefing-fallback.mjs), same as before.
