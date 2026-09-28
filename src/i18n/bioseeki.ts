@@ -23,7 +23,7 @@ export function detectLang(Astro: AstroGlobal): Lang {
 
 const SIGN_UP = "https://api.bioseeki.com/sign-up";
 const SIGN_IN = "https://api.bioseeki.com/sign-in";
-const MAIL = "aiseeki@agent.qq.com";
+const MAIL = "support@bioseeki.com";
 
 const zh = {
   htmlLang: "zh-CN",
@@ -204,7 +204,7 @@ const zh = {
   footer: {
     tagA: "把时间，", tagB: "留给发现。", slogan: "有据，而非猜测",
     links: [["/briefing", "前沿快讯 ↗"], [SIGN_IN, "登录 ↗"], [SIGN_UP, "注册 ↗"], ["#faq", "常见问题"], ["/privacy", "隐私政策 ↗"], ["/terms", "服务条款 ↗"]],
-    genecode: "GENECODE ↗", contact: "联系我们 ↗", top: "返回顶部 ↑", copy: "© 2026 BIOSEEKI · AI FOR RESEARCH",
+    genecode: "GENECODE ↗", contact: "联系客服 support@bioseeki.com", top: "返回顶部 ↑", copy: "© 2026 BIOSEEKI · AI FOR RESEARCH",
   },
   zoom: { aria: "放大查看截图", close: "关闭", hint: "⤢ 点击放大", fine: "按 Esc 或点击空白处关闭", touch: "左右滑动查看细节，点右上角 ✕ 关闭" },
   heroVideo: "背景动画",
@@ -392,7 +392,7 @@ const en: Copy = {
   footer: {
     tagA: "Leave the time ", tagB: "for discovery.", slogan: "Evidence, not guesswork",
     links: [["/briefing", "Briefing (中文) ↗"], [SIGN_IN, "Sign in ↗"], [SIGN_UP, "Sign up ↗"], ["#faq", "FAQ"], ["/privacy", "Privacy (中文) ↗"], ["/terms", "Terms ↗"]],
-    genecode: "GENECODE ↗", contact: "Contact ↗", top: "Back to top ↑", copy: "© 2026 BIOSEEKI · AI FOR RESEARCH",
+    genecode: "GENECODE ↗", contact: "Support support@bioseeki.com", top: "Back to top ↑", copy: "© 2026 BIOSEEKI · AI FOR RESEARCH",
   },
   zoom: { aria: "Enlarged screenshot", close: "Close", hint: "⤢ Click to enlarge", fine: "Press Esc or click outside to close", touch: "Swipe to see details · tap ✕ to close" },
   heroVideo: "Background animation",
