@@ -322,54 +322,22 @@ section{ padding:clamp(4.5rem,9vh,7.5rem) 0; }
 .ico-box{ width:38px; height:38px; border-radius:11px; display:grid; place-items:center; flex:none; background:color-mix(in srgb, var(--sage) 16%, transparent); border:1px solid color-mix(in srgb, var(--sage) 30%, transparent); }
 
 /* ============ HERO ============ */
-.hero{ padding:clamp(8.5rem,18vh,11.5rem) 0 clamp(3.5rem,7vh,5.5rem); }
-.hero-grid{ display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(2rem,4vw,3.5rem); align-items:center; }
-.hero-logo{ width:76px; height:auto; display:block; margin-bottom:1.3rem; object-fit:contain; }
+/* first screen: one column — headline, one sentence, two buttons. The helix video fills the right. */
+.hero{ padding:clamp(7rem,14vh,9rem) 0 clamp(3rem,6vh,4.5rem); min-height:min(100svh,860px); display:flex; align-items:center; }
+.hero-grid{ max-width:46rem; }
 .hero h1{
   font-family:var(--font-display); font-weight:600;
-  font-size:clamp(2.2rem,4.1vw,3.05rem); line-height:1.22; letter-spacing:-.025em;
-  margin:.9rem 0 1.3rem;
+  font-size:clamp(2.3rem,5vw,3.6rem); line-height:1.2; letter-spacing:-.028em;
+  margin:1rem 0 1.5rem;
 }
 .hero h1 .line{ display:block; text-wrap:balance; }
 .hero h1 em{ font-style:normal; color:var(--sage-deep); }
-.hero-sub{ color:var(--ink-soft); font-size:1.08rem; max-width:52ch; margin-bottom:1.9rem; }
+.hero-sub{ color:var(--ink-soft); font-size:1.12rem; max-width:33em; margin-bottom:2.2rem; }
 .hero-sub strong{ color:var(--ink); font-weight:500; }
 .hero-ctas{ display:flex; gap:12px; flex-wrap:wrap; margin-bottom:1.1rem; }
 .hero-meta{ display:flex; flex-wrap:wrap; align-items:center; gap:.35rem 1.4rem; font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.66rem; letter-spacing:.08em; color:var(--ink-soft); margin-bottom:1.5rem; }
 .hero-demo{ color:var(--sage-deep); font-weight:600; border-bottom:1px solid color-mix(in srgb, var(--sage-deep) 40%, transparent); padding-bottom:1px; transition:color .2s; }
 .hero-demo:hover{ color:var(--ink); }
-.tag-row{ display:flex; gap:8px; flex-wrap:wrap; }
-.tag{
-  font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.64rem; letter-spacing:.08em;
-  padding:6px 12px; border-radius:999px; color:var(--ink-soft);
-  background:var(--glass-soft); border:1px solid var(--line);
-  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
-}
-
-/* hero panel: an illustrative research session */
-.panel{ padding:22px; }
-.panel-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:14px; border-bottom:1px solid var(--line); }
-.ask{ display:flex; gap:12px; align-items:flex-start; margin:16px 0 14px; padding:13px 15px; border-radius:14px; background:var(--code-bg); border:1px solid var(--line); }
-.ask-who{ font-family:"IBM Plex Mono",monospace; font-size:.6rem; letter-spacing:.1em; color:var(--mist); background:var(--ink-soft); border-radius:6px; padding:3px 7px; margin-top:3px; flex:none; }
-.ask-text{ font-size:.92rem; line-height:1.6; }
-.ht{ display:grid; gap:7px; }
-.ht-row{
-  display:grid; grid-template-columns:22px 1fr auto; align-items:center; gap:12px;
-  padding:10px 13px; border-radius:12px; border:1px solid transparent;
-  opacity:.35; transform:translateY(3px);
-  transition:opacity .5s ease, transform .5s ease, background .5s ease, border-color .5s ease;
-}
-.ht-row.on{ opacity:1; transform:none; background:var(--code-bg); border-color:var(--line); }
-.ht-n{ font-family:"IBM Plex Mono",monospace; font-size:.6rem; color:var(--ink-soft); }
-.ht-main{ min-width:0; }
-.ht-tool{ display:block; font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.04em; color:var(--sage-deep); }
-.ht-msg{ display:block; font-size:.84rem; color:var(--ink); line-height:1.5; }
-.ht-state{ font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.62rem; letter-spacing:.06em; padding:3px 9px; border-radius:999px; white-space:nowrap; opacity:0; transition:opacity .4s ease .2s; }
-.ht-row.on .ht-state{ opacity:1; }
-.st-ok{ color:var(--ok); background:color-mix(in srgb, var(--ok) 12%, transparent); }
-.st-warn{ color:var(--ochre-deep); background:color-mix(in srgb, var(--ochre) 15%, transparent); }
-.panel-foot{ display:flex; justify-content:space-between; gap:12px; margin-top:14px; padding-top:13px; border-top:1px solid var(--line); font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.62rem; letter-spacing:.06em; color:var(--ink-soft); }
-.panel-foot b{ color:var(--ochre-deep); font-weight:500; }
 .scroll-hint{ display:flex; align-items:center; gap:10px; margin-top:clamp(2.5rem,6vh,4rem); font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.64rem; letter-spacing:.12em; color:var(--ink-soft); }
 .scroll-hint::after{ content:""; width:1px; height:34px; background:linear-gradient(var(--ink-soft),transparent); animation:drip 2s ease-in-out infinite; }
 @keyframes drip{ 0%{ transform:scaleY(0); transform-origin:top;} 45%{ transform:scaleY(1); transform-origin:top;} 55%{ transform:scaleY(1); transform-origin:bottom;} 100%{ transform:scaleY(0); transform-origin:bottom;} }
@@ -487,9 +455,6 @@ html:has(.zoom[open]){ overflow:hidden; }
   opacity:0; transition:opacity .3s ease;
 }
 .fx-on .spot-edge:hover::before{ opacity:1; }
-/* hero panel leans toward the pointer (overrides the reveal's transform:none once revealed) */
-.hero .panel.in{ transform:perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)); }
-.fx-on .hero .panel.in{ transition:opacity .8s ease, transform .2s ease-out; }
 
 .catalog{ margin-top:20px; padding:clamp(1.4rem,3vw,1.9rem); }
 .catalog-head{ display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:1.3rem; }
@@ -663,12 +628,10 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
   .nav-links a{ padding:7px 8px; font-size:.82rem; }
 }
 @media (max-width:920px){
-  .hero-grid,.verify-grid,.faq-grid{ grid-template-columns:1fr; }
-  .hero-grid{ gap:2rem; }
+  .verify-grid,.faq-grid{ grid-template-columns:1fr; }
   .principles-grid,.plans,.get{ grid-template-columns:1fr; }
   .get{ gap:2.4rem; }
   .nav-links{ display:none; }
-  .panel{ max-width:600px; }
       .catalog-grid{ grid-template-columns:1fr 1fr; }
 }
 @media (max-width:640px){
@@ -681,13 +644,9 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
   .brand-name{ font-size:.82rem; letter-spacing:.11em; }
   .nav-login{ padding:6px 8px; font-size:.82rem; }
   .nav .btn-sm{ padding:8px 11px; font-size:.73rem; }
-  .hero{ padding-top:8.5rem; }
-  .hero-logo{ width:60px; }
+  .hero{ padding-top:7.5rem; min-height:0; }
   .hero h1{ font-size:clamp(2.2rem,9.4vw,3rem); }
   .hero-sub{ font-size:1rem; }
-  .panel{ padding:16px; }
-  .ht-row{ grid-template-columns:18px 1fr; }
-  .ht-state{ grid-column:2; justify-self:start; }
   .modes,.verify-cards,.catalog-grid,.bounds{ grid-template-columns:1fr; }
   .screen-bar,.screen-foot{ padding:12px 16px; }
   .demo-foot{ align-items:flex-start; flex-direction:column; }
@@ -706,9 +665,7 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
   html{ scroll-behavior:auto; }
   .orb,.ticker-track,.live-dot,.scroll-hint::after{ animation:none !important; }
   .reveal{ opacity:1; transform:none; transition:none; }
-  .ht-row,.ht-state{ transition:none; }
   .cfx{ display:none; }
-  .hero .panel.in{ transform:none; }
   .shot img,.shot-hint{ transition:none; }
   .faq summary::after{ transition:none; }
 }
@@ -899,7 +856,6 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <img class="hero-logo logo-img reveal" src="/bioseeki/mark.webp" alt="" style="--d:0s">
         <p class="eyebrow reveal" style="--d:.04s">{t.hero.eyebrow}</p>
         <h1 class="reveal" style="--d:.08s"><span class="line">{t.hero.h1a}</span><span class="line"><em>{t.hero.h1b}</em>{lang === "zh" ? "。" : "."}</span></h1>
         <p class="hero-sub reveal" style="--d:.16s" set:html={t.hero.sub} />
@@ -908,25 +864,8 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
           <a class="btn btn-ghost" href={t.links.signUp}>{t.hero.cta}</a>
         </div>
         <p class="hero-meta reveal" style="--d:.28s"><span>{t.hero.meta}</span><a class="hero-demo" href="#demo">{t.hero.demo}</a></p>
-        <div class="tag-row reveal" style="--d:.32s">
-          {t.hero.tags.map((tag) => <span class="tag">{tag}</span>)}
-        </div>
       </div>
-      <aside class="glass panel reveal" id="hero-panel" style="--d:.2s" aria-label={t.hero.panelAria}>
-        <div class="panel-head">
-          <span class="panel-title">{t.hero.panelTitle}</span>
-          <span class="badge-live"><span class="live-dot"></span>{t.hero.panelBadge}</span>
-        </div>
-        <div class="ask"><span class="ask-who">{t.hero.ask}</span><p class="ask-text">{t.hero.question}</p></div>
-        <ol class="ht">
-          {t.hero.rows.map(([tool, msg, state, tone], i) => (
-            <li class="ht-row"><span class="ht-n">{String(i + 1).padStart(2, "0")}</span><span class="ht-main"><span class="ht-tool">{tool}</span><span class="ht-msg">{msg}</span></span><span class={`ht-state st-${tone}`}>{state}</span></li>
-          ))}
-        </ol>
-        <div class="panel-foot"><span>{t.hero.panelFootL}</span><span set:html={t.hero.panelFootR} /></div>
-      </aside>
     </div>
-    <p class="scroll-hint reveal" style="--d:.4s">{t.hero.scroll}</p>
   </div>
 </header>
 
@@ -1241,17 +1180,15 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
   if (finePointer && !reduced){
     var root = document.documentElement;
     var glow = document.querySelector(".cfx-glow:not(.cfx-glow-2)"), glow2 = document.querySelector(".cfx-glow-2"), grid = document.querySelector(".cfx-grid");
-    var heroPanel = document.getElementById("hero-panel"), hero = document.getElementById("top");
     document.querySelectorAll(".glass").forEach(function(el){ el.classList.add("spot"); });
     document.querySelectorAll(".card, .bound, .report, .catalog, .screen-card, .demo-glass, .foot-card").forEach(function(el){ el.classList.add("spot-edge"); });
-    var tx = 0, ty = 0, g1 = { x:0, y:0 }, g2 = { x:0, y:0 }, tilt = { x:0, y:0 }, tiltT = { x:0, y:0 };
+    var tx = 0, ty = 0, g1 = { x:0, y:0 }, g2 = { x:0, y:0 };
     var running = false;
     var mod = function(a, n){ return ((a % n) + n) % n; };
     var kick = function(){ if (!running){ running = true; requestAnimationFrame(frame); } };
     var frame = function(){
       g1.x += (tx - g1.x) * .16; g1.y += (ty - g1.y) * .16;
       g2.x += (tx - g2.x) * .07; g2.y += (ty - g2.y) * .07;
-      tilt.x += (tiltT.x - tilt.x) * .12; tilt.y += (tiltT.y - tilt.y) * .12;
       glow.style.transform = "translate3d(" + g1.x + "px," + g1.y + "px,0)";
       glow2.style.transform = "translate3d(" + g2.x + "px," + g2.y + "px,0)";
       /* the lit grid sits on the pointer; offset its pattern so the lines match the
@@ -1259,11 +1196,7 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
       var vw = root.clientWidth, gs = vw >= 768 ? 56 : 40;
       grid.style.transform = "translate3d(" + tx + "px," + ty + "px,0)";
       grid.style.backgroundPosition = mod((vw - gs) / 2 - (tx - 230), gs) + "px " + mod(-(ty - 230), gs) + "px";
-      if (heroPanel){
-        heroPanel.style.setProperty("--rx", tilt.x.toFixed(2) + "deg");
-        heroPanel.style.setProperty("--ry", tilt.y.toFixed(2) + "deg");
-      }
-      var busy = Math.abs(tx - g2.x) + Math.abs(ty - g2.y) > .5 || Math.abs(tiltT.x - tilt.x) + Math.abs(tiltT.y - tilt.y) > .01;
+      var busy = Math.abs(tx - g2.x) + Math.abs(ty - g2.y) > .5;
       if (busy) requestAnimationFrame(frame); else running = false;
     };
     window.addEventListener("pointermove", function(e){
@@ -1277,16 +1210,9 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
         card.style.setProperty("--sx", (tx - r.left) + "px");
         card.style.setProperty("--sy", (ty - r.top) + "px");
       }
-      if (heroPanel && hero.getBoundingClientRect().bottom > ty){
-        var pr = heroPanel.getBoundingClientRect();
-        var dx = (tx - (pr.left + pr.width / 2)) / (window.innerWidth / 2);
-        var dy = (ty - (pr.top + pr.height / 2)) / (window.innerHeight / 2);
-        tiltT.y = Math.max(-1, Math.min(1, dx)) * 5;
-        tiltT.x = Math.max(-1, Math.min(1, dy)) * -4;
-      } else { tiltT.x = tiltT.y = 0; }
       kick();
     }, { passive:true });
-    document.addEventListener("mouseleave", function(){ root.classList.add("fx-away"); tiltT.x = tiltT.y = 0; kick(); });
+    document.addEventListener("mouseleave", function(){ root.classList.add("fx-away"); });
     window.addEventListener("blur", function(){ root.classList.add("fx-away"); });
   }
 
@@ -1349,32 +1275,6 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
     pickVideo();
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", pickVideo);
   }
-
-  /* hero session: light the steps one by one, replay while visible */
-  var rows = document.querySelectorAll("#hero-panel .ht-row");
-  if (reduced || !rows.length){
-    rows.forEach(function(r){ r.classList.add("on"); });
-    return;
-  }
-  var panel = document.getElementById("hero-panel");
-  var visible = true, timer = null;
-  function play(){
-    clearTimeout(timer);
-    rows.forEach(function(r){ r.classList.remove("on"); });
-    var i = 0;
-    (function next(){
-      if (i < rows.length){ rows[i++].classList.add("on"); timer = setTimeout(next, 900); }
-      else { timer = setTimeout(function(){ if (visible && !document.hidden) play(); }, 6000); }
-    })();
-  }
-  if ("IntersectionObserver" in window){
-    new IntersectionObserver(function(entries){
-      var was = visible; visible = entries[0].isIntersecting;
-      if (visible && !was) play();
-    }, { threshold:.3 }).observe(panel);
-  }
-  document.addEventListener("visibilitychange", function(){ if (!document.hidden && visible) play(); });
-  setTimeout(play, 700);
 })();
 </script>
 </body>
