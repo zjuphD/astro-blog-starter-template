@@ -24,6 +24,7 @@ export function detectLang(Astro: AstroGlobal): Lang {
 const SIGN_UP = "https://api.bioseeki.com/sign-up";
 const SIGN_IN = "https://api.bioseeki.com/sign-in";
 const MAIL = "support@bioseeki.com";
+const SIGN_PLANS = "https://api.bioseeki.com/subscriptions";
 
 const zh = {
   htmlLang: "zh-CN",
@@ -34,11 +35,11 @@ const zh = {
   ogTitle: "BioSeeki｜读文献、跑数据、写论文，每一步都有据可查",
   ogDescription: "面向研究者个人的 AI 科研工作台。引用回到原文，分析可以复算，结论由你把关。",
   twitterDescription: "读文献、跑数据、写论文，每一步都有据可查。",
-  links: { signUp: SIGN_UP, signIn: SIGN_IN, mail: MAIL },
+  links: { signUp: SIGN_UP, signIn: SIGN_IN, mail: MAIL, plans: SIGN_PLANS },
   switchTo: { label: "EN", href: "/en", title: "Switch to English" },
   nav: {
     aria: "主导航", home: "BioSeeki 首页",
-    items: [["#tools", "科研能力"], ["#verify", "可复核"], ["#principles", "知识与记忆"], ["#workflow", "一个课题"], ["/briefing", "前沿快讯"], ["#faq", "常见问题"]],
+    items: [["#tools", "科研能力"], ["#verify", "可复核"], ["#principles", "知识与记忆"], ["#workflow", "一个课题"], ["#pricing", "定价"], ["/briefing", "前沿快讯"], ["#faq", "常见问题"]],
     signIn: "登录", signUp: "注册 ↗",
   },
   hero: {
@@ -176,6 +177,18 @@ const zh = {
     captionsLabel: "中文字幕", fallback: "你的浏览器不支持视频播放。", download: "下载视频 ↓",
     foot: "画面经过剪辑并隐藏私人信息。操作展示不代表完整研究任务的验收结果。",
   },
+  pricing: {
+    eyebrow: "定价", title: "选一个档位，开始你的研究。",
+    lede: "月付，以人民币结算，按 credits 计费。注册即送 2,000 credits 试用；额度一次性到账、不按月重置，用完随时续订。",
+    per: "/ 月",
+    plans: [
+      { name: "Plus", price: "69", credits: "2,000", sub: "日常问答与轻量检索", tag: "" },
+      { name: "Pro", price: "149", credits: "5,000", sub: "常规科研分析与长文写作", tag: "多数人选择" },
+      { name: "Heavy", price: "299", credits: "12,500", sub: "高强度长任务与深度推理", tag: "" },
+    ],
+    cta: "立即订阅 ↗",
+    note: "三档可用的模型能力相同，区别只在额度大小；余额与用量在控制台随时可查。",
+  },
   start: {
     eyebrow: "开始使用", title: "从下一个科研问题开始。",
     lede: "账号开放自助注册，不需要邀请码。注册后在后台创建密钥、查看额度与用量；桌面客户端目前为 Mac Beta，安装包通过邮件获取。",
@@ -222,11 +235,11 @@ const en: Copy = {
   ogTitle: "BioSeeki · Read, analyze, write — every step backed by evidence",
   ogDescription: "An AI research workspace for individual scientists. Citations trace to the source, analyses can be recomputed, and you make the call.",
   twitterDescription: "Read, analyze, write — every step backed by evidence.",
-  links: { signUp: SIGN_UP, signIn: SIGN_IN, mail: MAIL },
+  links: { signUp: SIGN_UP, signIn: SIGN_IN, mail: MAIL, plans: SIGN_PLANS },
   switchTo: { label: "中文", href: "/?lang=zh", title: "切换到中文" },
   nav: {
     aria: "Main", home: "BioSeeki home",
-    items: [["#tools", "Capabilities"], ["#verify", "Verifiable"], ["#principles", "Knowledge"], ["#workflow", "A project"], ["/briefing", "Briefing (中文)"], ["#faq", "FAQ"]],
+    items: [["#tools", "Capabilities"], ["#verify", "Verifiable"], ["#principles", "Knowledge"], ["#workflow", "A project"], ["#pricing", "Pricing"], ["/briefing", "Briefing (中文)"], ["#faq", "FAQ"]],
     signIn: "Sign in", signUp: "Sign up ↗",
   },
   hero: {
@@ -363,6 +376,18 @@ const en: Copy = {
     aria: "BioSeeki 45-second Mac Beta demo", badge: "45 SEC · MAC BETA",
     captionsLabel: "中文字幕 (Chinese captions)", fallback: "Your browser can't play this video.", download: "Download video ↓",
     foot: "Edited, with private information hidden. What's shown is not an acceptance test of a complete research task.",
+  },
+  pricing: {
+    eyebrow: "Pricing", title: "Pick a plan and start your research.",
+    lede: "Monthly, billed in CNY, metered in credits. New accounts get 2,000 credits to try; credits land in one go and don't reset each month - top up whenever you run out.",
+    per: "/ month",
+    plans: [
+      { name: "Plus", price: "69", credits: "2,000", sub: "Everyday Q&A and light literature search", tag: "" },
+      { name: "Pro", price: "149", credits: "5,000", sub: "Regular analysis and long-form writing", tag: "Most popular" },
+      { name: "Heavy", price: "299", credits: "12,500", sub: "Heavy long-running tasks and deep reasoning", tag: "" },
+    ],
+    cta: "Subscribe ↗",
+    note: "All three plans reach the same models; only the credit allowance differs. Balance and usage are always visible in your dashboard.",
   },
   start: {
     eyebrow: "Get started", title: "Start with your next research question.",
