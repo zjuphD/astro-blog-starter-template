@@ -8,6 +8,8 @@ import "@fontsource/instrument-sans/600.css";
 import "@fontsource/ibm-plex-mono/400.css";
 import "@fontsource/ibm-plex-mono/500.css";
 import "../../styles/tech-feel.css";
+import Label from "./Label.astro";
+import { glyphHtml } from "./glyphs";
 import { COPY, type Lang } from "../../i18n/bioseeki";
 import { SAME_AS, VERIFY } from "../../seo";
 
@@ -279,6 +281,15 @@ ul,ol{ list-style:none; }
 }
 .btn-sm{ padding:8px 16px; font-size:.82rem; }
 .btn-ico{ width:17px; height:17px; flex:none; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; margin-left:-3px; }
+.ai,.gi{ display:inline-block; flex:none; fill:none; stroke:currentColor; stroke-linecap:round; stroke-linejoin:round; }
+.ai{ width:1em; height:1em; margin-left:.3em; vertical-align:-.14em; stroke-width:2.1; }
+.ai-mid{ margin:0 .45em; }
+.gi{ width:1em; height:1em; margin-right:.32em; vertical-align:-.16em; stroke-width:2.2; }
+.dot-i{ display:inline-block; width:6px; height:6px; margin-right:.55em; border-radius:50%; background:currentColor; vertical-align:.1em; }
+.btn .ai{ margin-left:-2px; }
+.ticker span i svg{ width:9px; height:9px; fill:currentColor; vertical-align:-.05em; }
+.bi{ width:16px; height:16px; flex:none; fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+.btn-ico-fill{ fill:currentColor; stroke:none; width:16px; height:16px; margin-left:-2px; }
 .nav-links a:focus-visible,.btn:focus-visible,.foot-cols a:focus-visible{ outline:2px solid var(--sage-deep); outline-offset:3px; }
 
 /* ============ LAYOUT ============ */
@@ -318,8 +329,12 @@ section{ padding:clamp(4.5rem,9vh,7.5rem) 0; }
 .panel-title{ font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.68rem; letter-spacing:.12em; color:var(--ink-soft); }
 .chip{ font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.62rem; letter-spacing:.04em; color:var(--ink-soft); padding:4px 10px; border-radius:999px; border:1px solid var(--line); background:var(--code-bg); white-space:nowrap; }
 .chip-row{ display:flex; gap:7px; flex-wrap:wrap; margin-top:1.2rem; }
-.ico{ width:19px; height:19px; fill:none; stroke:var(--sage-deep); stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; flex:none; }
-.ico-box{ width:38px; height:38px; border-radius:11px; display:grid; place-items:center; flex:none; background:color-mix(in srgb, var(--sage) 16%, transparent); border:1px solid color-mix(in srgb, var(--sage) 30%, transparent); }
+.ico{ width:26px; height:26px; fill:none; stroke:var(--sage-deep); stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; flex:none; }
+/* the sprite's symbols are not descendants of .ico, so these match the originals by class alone */
+symbol .ic-f{ fill:var(--sage); fill-opacity:.2; stroke:none; }
+symbol .ic-fa{ fill:var(--ochre); fill-opacity:.32; stroke:none; }
+symbol .ic-a{ stroke:var(--ochre-deep); }
+.ico-box{ width:48px; height:48px; border-radius:14px; display:grid; place-items:center; flex:none; background:linear-gradient(150deg, color-mix(in srgb, var(--sage) 22%, transparent), color-mix(in srgb, var(--sage) 7%, transparent)); border:1px solid color-mix(in srgb, var(--sage) 32%, transparent); box-shadow:inset 0 1px 0 var(--edge), 0 6px 14px -8px var(--shadow); }
 
 /* ============ HERO ============ */
 /* first screen: one column — headline, one sentence, two buttons. The helix video fills the right. */
@@ -415,7 +430,7 @@ section{ padding:clamp(4.5rem,9vh,7.5rem) 0; }
 .zoom::backdrop{ background:rgba(8,12,10,.8); -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px); }
 .zoom-top{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 18px 10px 22px; }
 .zoom-cap{ font-size:.88rem; color:rgba(244,246,241,.88); }
-.zoom-close{ flex:none; width:40px; height:40px; border-radius:50%; border:1px solid rgba(244,246,241,.28); background:rgba(244,246,241,.08); color:inherit; font-size:1rem; cursor:pointer; }
+.zoom-close{ flex:none; width:40px; height:40px; border-radius:50%; border:1px solid rgba(244,246,241,.28); background:rgba(244,246,241,.08); color:inherit; font-size:1rem; cursor:pointer; display:grid; place-items:center; }
 .zoom-close:hover{ background:rgba(244,246,241,.18); }
 .zoom-close:focus-visible{ outline:2px solid #A9CBB8; outline-offset:2px; }
 .zoom-stage{ flex:1; min-height:0; overflow:auto; display:grid; place-items:center; padding:4px 22px; overscroll-behavior:contain; }
@@ -497,7 +512,7 @@ html:has(.zoom[open]){ overflow:hidden; }
   font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.16em;
   color:var(--ochre-deep); display:block; margin-bottom:1rem;
 }
-.principle-icon{ width:38px; height:38px; border-radius:11px; display:grid; place-items:center; background:color-mix(in srgb, var(--sage) 16%, transparent); border:1px solid color-mix(in srgb, var(--sage) 30%, transparent); margin-bottom:1.1rem; }
+.principle-icon{ width:48px; height:48px; border-radius:14px; display:grid; place-items:center; background:linear-gradient(150deg, color-mix(in srgb, var(--sage) 22%, transparent), color-mix(in srgb, var(--sage) 7%, transparent)); border:1px solid color-mix(in srgb, var(--sage) 32%, transparent); box-shadow:inset 0 1px 0 var(--edge), 0 6px 14px -8px var(--shadow); margin-bottom:1.1rem; }
 .principles-grid h3{ font-family:var(--font-display); font-weight:600; font-size:1.35rem; letter-spacing:-.01em; margin-bottom:.5rem; }
 .principles-grid p{ color:var(--ink-soft); font-size:.93rem; }
 #principles .screen-card{ margin-top:24px; }
@@ -809,21 +824,34 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
-    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M7 16v-5"/><path d="M12 16V7"/><path d="M17 16v-8"/></symbol>
-    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></symbol>
-    <symbol id="i-figure" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="17" height="7" rx="1.5"/><path d="m6.5 18.5 3-2.5 3 1.5 4-3"/></symbol>
-    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4z"/><path d="M9 9.5h6M9 12h3.5"/></symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 3 8.4 7 10 4-1.6 7-5.5 7-10V6z"/><path d="m9 12 2.2 2.2L15.5 10"/></symbol>
-    <symbol id="i-redo" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.35-5.65"/><path d="M20 4v5h-5"/></symbol>
-    <symbol id="i-gap" viewBox="0 0 24 24"><path d="M4 7h9M4 12h5M4 17h9"/><rect x="14" y="10" width="6" height="4" rx="1" stroke-dasharray="2 2"/></symbol>
-    <symbol id="i-book" viewBox="0 0 24 24"><path d="M3.5 5.5c3-1 6-1 8.5 1 2.5-2 5.5-2 8.5-1v13c-3-1-6-1-8.5 1-2.5-2-5.5-2-8.5-1z"/><path d="M12 6.5v13"/></symbol>
-    <symbol id="i-lang" viewBox="0 0 24 24"><path d="M4 5h8M8 3v2M5.5 5c.8 3 2.8 5.3 5.5 6.5M10.5 5c-.7 3.3-2.8 6-6 7.5"/><path d="m13 21 4-9 4 9M14.5 17.5h5"/></symbol>
-    <symbol id="i-memory" viewBox="0 0 24 24"><path d="M12 4a7 7 0 0 0-7 7c0 2.2 1 3.6 2 4.6V19h10v-3.4c1-1 2-2.4 2-4.6a7 7 0 0 0-7-7z"/><path d="M9.5 11.5 11.5 13.5l3-3.5"/></symbol>
-    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M12 3v9M12 12l-3.5-3.5M12 12l3.5-3.5"/><rect x="4" y="14" width="16" height="7" rx="2"/></symbol>
-    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
-    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.6 3.5 5.4 3.5 8.5s-1.1 5.9-3.5 8.5c-2.4-2.6-3.5-5.4-3.5-8.5s1.1-5.9 3.5-8.5z"/></symbol>
-    <symbol id="i-nodata" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="2.5"/><path d="M5 6v6c0 1.4 3.1 2.5 7 2.5M19 6v4"/><path d="m15 15 5 5M20 15l-5 5"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle class="ic-f" cx="10.5" cy="10.5" r="6.2"/><circle cx="10.5" cy="10.5" r="6.2"/><path class="ic-a" d="m15.2 15.2 5 5"/><path d="M7.6 9.6h5.8M7.6 12.2h3.6"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4.5 4v15.5H20"/><path class="ic-f" d="M7 16l3.6-4.4 2.9 2.3L17.8 7.4V16z"/><path d="M7 16l3.6-4.4 2.9 2.3 4.3-6.5"/><circle class="ic-a" cx="17.8" cy="7.4" r="1.4"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path class="ic-f" d="M7.5 3.5H14L18 7.5V19a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 19V5a1.5 1.5 0 0 1 1.5-1.5z"/><path d="M14 3.5v4h4"/><path d="M9 12h6M9 15.2h3"/><path class="ic-a" d="m14.8 19 4.9-4.9 1.6 1.6-4.9 4.9-2.3.7z"/></symbol>
+    <symbol id="i-figure" viewBox="0 0 24 24"><rect class="ic-f" x="4" y="4" width="7.2" height="7.2" rx="1.6"/><rect x="4" y="4" width="7.2" height="7.2" rx="1.6"/><rect x="12.8" y="4" width="7.2" height="7.2" rx="1.6"/><rect x="4" y="12.8" width="16" height="7.2" rx="1.6"/><path class="ic-a" d="m6.6 17.6 3-2.4 3 1.6 4.2-3.2"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path class="ic-f" d="M7 3.5h7l4 4V19a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 19V5A1.5 1.5 0 0 1 7 3.5z"/><path d="M7 3.5h7l4 4V19a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 19V5A1.5 1.5 0 0 1 7 3.5zM14 3.5v4h4"/><path d="M8.5 10.5h4M8.5 18h5"/><rect class="ic-fa" x="8" y="12.5" width="8" height="3.2" rx="1"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path class="ic-f" d="M12 3.2 5 6v5.2c0 4.3 2.9 8.1 7 9.6 4.1-1.5 7-5.3 7-9.6V6z"/><path d="M12 3.2 5 6v5.2c0 4.3 2.9 8.1 7 9.6 4.1-1.5 7-5.3 7-9.6V6z"/><path class="ic-a" d="m8.8 12 2.3 2.3 4.2-4.6"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.6 4.4v4.3h-4.3"/><path class="ic-fa" d="M10.4 8.9v6.2l5-3.1z"/><path class="ic-a" d="M10.4 8.9v6.2l5-3.1z"/></symbol>
+    <symbol id="i-gap" viewBox="0 0 24 24"><path d="M4.5 7h9M4.5 12h5M4.5 17h9"/><rect class="ic-f" x="13.5" y="9.5" width="6.5" height="5" rx="1.2"/><rect class="ic-a" x="13.5" y="9.5" width="6.5" height="5" rx="1.2" stroke-dasharray="2 2"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path class="ic-f" d="M12 6.6c-1.8-1.6-4.6-2.2-7.5-1.6v12.6c2.9-.6 5.7 0 7.5 1.6 1.8-1.6 4.6-2.2 7.5-1.6V5c-2.9-.6-5.7 0-7.5 1.6z"/><path d="M12 6.6c-1.8-1.6-4.6-2.2-7.5-1.6v12.6c2.9-.6 5.7 0 7.5 1.6 1.8-1.6 4.6-2.2 7.5-1.6V5c-2.9-.6-5.7 0-7.5 1.6zM12 6.6v12.6"/><path class="ic-a" d="M14.6 9.6c.9-.5 2-.7 3.1-.6"/></symbol>
+    <symbol id="i-lang" viewBox="0 0 24 24"><path class="ic-f" d="M4.5 4.5h9A1.5 1.5 0 0 1 15 6v5.5a1.5 1.5 0 0 1-1.5 1.5H9.2L6 15.6V13H4.5A1.5 1.5 0 0 1 3 11.5V6a1.5 1.5 0 0 1 1.5-1.5z"/><path d="M4.5 4.5h9A1.5 1.5 0 0 1 15 6v5.5a1.5 1.5 0 0 1-1.5 1.5H9.2L6 15.6V13H4.5A1.5 1.5 0 0 1 3 11.5V6a1.5 1.5 0 0 1 1.5-1.5zM6 8.1h6M6 10.6h3.6"/><path class="ic-a" d="M12.5 16.2v1.3a1.5 1.5 0 0 0 1.5 1.5h2.6l2.9 2.3V19h.5a1.5 1.5 0 0 0 1.5-1.5V11.7a1.5 1.5 0 0 0-1.5-1.5H17"/></symbol>
+    <symbol id="i-memory" viewBox="0 0 24 24"><path class="ic-f" d="M12 4 3.5 8.2 12 12.4l8.5-4.2z"/><path d="M12 4 3.5 8.2 12 12.4l8.5-4.2z"/><path class="ic-a" d="m3.5 12 8.5 4.2 8.5-4.2"/><path d="m3.5 15.8 8.5 4.2 8.5-4.2"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><circle class="ic-f" cx="9.8" cy="8" r="3.4"/><circle cx="9.8" cy="8" r="3.4"/><path d="M3.6 19.6a6.2 6.2 0 0 1 12.4-.2"/><path class="ic-a" d="m15 13.2 2 2 3.6-3.8"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><path class="ic-f" d="M3.5 7.5A1.5 1.5 0 0 1 5 6h4l2 2.2h8a1.5 1.5 0 0 1 1.5 1.5V17a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 17z"/><path d="M3.5 7.5A1.5 1.5 0 0 1 5 6h4l2 2.2h8a1.5 1.5 0 0 1 1.5 1.5V17a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 17z"/><rect class="ic-a" x="9.7" y="12.7" width="4.6" height="3.7" rx=".9"/><path class="ic-a" d="M10.7 12.7v-1a1.3 1.3 0 0 1 2.6 0v1"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle class="ic-f" cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="8.5"/><path d="M3.7 12h16.6"/><path class="ic-a" d="M12 3.5c2.3 2.4 3.4 5.2 3.4 8.5s-1.1 6.1-3.4 8.5c-2.3-2.4-3.4-5.2-3.4-8.5S9.7 5.9 12 3.5z"/></symbol>
+    <symbol id="a-ext" viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5"/></symbol>
+    <symbol id="a-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6"/></symbol>
+    <symbol id="a-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+    <symbol id="a-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="a-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="1.5"/><path d="m4 7 8 6 8-6"/></symbol>
+    <symbol id="g-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="g-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+    <symbol id="g-alert" viewBox="0 0 24 24"><path d="M12 5v9"/><circle cx="12" cy="18.6" r=".6"/></symbol>
+    <symbol id="g-q" viewBox="0 0 24 24"><path d="M9 9.2a3 3 0 1 1 4.2 2.7c-.8.4-1.2 1-1.2 1.9"/><circle cx="12" cy="18.6" r=".6"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <!-- Apple logo, Simple Icons (CC0). Marks the Mac download buttons. -->
+    <symbol id="i-apple" viewBox="0 0 24 24"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></symbol>
+    <symbol id="i-nodata" viewBox="0 0 24 24"><path class="ic-f" d="M5.5 6v11c0 1.4 2.9 2.5 6.5 2.5V8.5z"/><ellipse cx="12" cy="6" rx="6.5" ry="2.5"/><path d="M5.5 6v5.5c0 1.4 2.9 2.5 6.5 2.5M18.5 6v3.5M5.5 11.5V17c0 1.4 2.9 2.5 6.5 2.5"/><circle class="ic-a" cx="17.6" cy="17.4" r="3.7"/><path class="ic-a" d="m15 20 5.2-5.2"/></symbol>
   </defs>
 </svg>
 
@@ -839,8 +867,8 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
   <div class="nav-actions">
     <a class="lang-switch" href={t.switchTo.href} hreflang={lang === "zh" ? "en" : "zh-CN"} title={t.switchTo.title} lang={lang === "zh" ? "en" : "zh-CN"}>{t.switchTo.label}</a>
     <a class="nav-login" href={t.links.signIn}>{t.nav.signIn}</a>
-    <a class="btn btn-ghost btn-sm nav-signup" href={t.links.signUp}>{t.nav.signUp}</a>
-    <a class="btn btn-primary btn-sm nav-dl" href={dlHref} download={dlAttr}><svg class="btn-ico" aria-hidden="true"><use href="#i-hand"/></svg>{t.nav.download}</a>
+    <a class="btn btn-ghost btn-sm nav-signup" href={t.links.signUp}><Label text={t.nav.signUp} /></a>
+    <a class="btn btn-primary btn-sm nav-dl" href={dlHref} download={dlAttr}><svg class="btn-ico btn-ico-fill" aria-hidden="true"><use href="#i-apple"/></svg>{t.nav.download}</a>
   </div>
 </nav>
 
@@ -860,33 +888,33 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
         <h1 class="reveal" style="--d:.08s"><span class="line">{t.hero.h1a}</span><span class="line"><em>{t.hero.h1b}</em>{lang === "zh" ? "。" : "."}</span></h1>
         <p class="hero-sub reveal" style="--d:.16s" set:html={t.hero.sub} />
         <div class="hero-ctas reveal" style="--d:.24s">
-          <a class="btn btn-primary" href={dlHref} download={dlAttr}><svg class="btn-ico" aria-hidden="true"><use href="#i-hand"/></svg>{t.hero.download}</a>
-          <a class="btn btn-ghost" href={t.links.signUp}>{t.hero.cta}</a>
+          <a class="btn btn-primary" href={dlHref} download={dlAttr}><svg class="btn-ico btn-ico-fill" aria-hidden="true"><use href="#i-apple"/></svg>{t.hero.download}</a>
+          <a class="btn btn-ghost" href={t.links.signUp}><Label text={t.hero.cta} /></a>
         </div>
-        <p class="hero-meta reveal" style="--d:.28s"><span>{t.hero.meta}</span><a class="hero-demo" href="#demo">{t.hero.demo}</a></p>
+        <p class="hero-meta reveal" style="--d:.28s"><span>{t.hero.meta}</span><a class="hero-demo" href="#demo"><Label text={t.hero.demo} /></a></p>
       </div>
     </div>
   </div>
 </header>
 
 <div class="ticker" aria-hidden="true"><div class="ticker-track">
-  {[0, 1].map(() => t.ticker.map((w) => <span>{w} <i>✦</i></span>))}
+  {[0, 1].map(() => t.ticker.map((w) => <span>{w} <i><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 0c.4 3.4 2.6 5.6 6 6-3.4.4-5.6 2.6-6 6-.4-3.4-2.6-5.6-6-6 3.4-.4 5.6-2.6 6-6z"/></svg></i></span>))}
 </div></div>
 
 <section id="tools"><div class="wrap">
   <div class="section-head reveal"><p class="eyebrow"><span class="section-num">01</span> · {t.tools.eyebrow}</p><h2 class="section-title">{t.tools.title}</h2><p class="section-lede">{t.tools.lede}</p></div>
   <article class="glass card feature reveal">
-    <div class="card-top"><span class="card-id">GC / MOLECULAR DESIGN</span><span class="status status-live">{t.tools.gc.status}</span></div>
+    <div class="card-top"><span class="card-id">GC / MOLECULAR DESIGN</span><span class="status status-live"><Label text={t.tools.gc.status} /></span></div>
     <div class="feature-head">
       <div class="feature-text">
         <h3>{t.tools.gc.h}</h3><p>{t.tools.gc.p}</p>
       </div>
       <div class="feature-side">
         <div class="chip-row">{t.tools.gc.chips.map((c) => <span class="chip">{c}</span>)}</div>
-        <a class="card-link" href="https://genecode-agent.pages.dev" target="_blank" rel="noopener noreferrer">{t.tools.gc.link}</a>
+        <a class="card-link" href="https://genecode-agent.pages.dev" target="_blank" rel="noopener noreferrer"><Label text={t.tools.gc.link} /></a>
       </div>
     </div>
-    <button type="button" class="shot" data-caption={t.tools.gc.caption}><img src="/bioseeki/genecode-ui.webp" alt={t.tools.gc.alt} width="2400" height="989" loading="lazy"><span class="shot-hint">{t.zoom.hint}</span></button>
+    <button type="button" class="shot" data-caption={t.tools.gc.caption}><img src="/bioseeki/genecode-ui.webp" alt={t.tools.gc.alt} width="2400" height="989" loading="lazy"><span class="shot-hint"><Label text={t.zoom.hint} /></span></button>
   </article>
   <div class="modes">
     {t.tools.modes.map((m, i) => (
@@ -928,10 +956,10 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
       <div class="report-bar"><span class="report-cmd">citecheck --bib refs.bib</span><span class="badge-quiet">{t.verify.illustrative}</span></div>
       <div class="report-body">
         {t.verify.report.map(([cls, verdict, text], i) => (
-          <div class="rrow"><span class={`verdict ${cls}`}>{verdict}</span><p class="rtext"><small>[{i + 1}]</small>{text}</p></div>
+          <div class="rrow"><span class={`verdict ${cls}`}><Label text={verdict} verdict /></span><p class="rtext"><small>[{i + 1}]</small>{text}</p></div>
         ))}
       </div>
-      <div class="report-foot"><span>{t.verify.reportFootL}</span><span>{t.verify.reportFootR}</span></div>
+      <div class="report-foot"><span>{t.verify.reportFootL}</span><span><Label text={t.verify.reportFootR} /></span></div>
     </aside>
   </div>
 </div></section>
@@ -939,7 +967,7 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
 <section id="principles"><div class="wrap">
   <div class="section-head reveal"><p class="eyebrow"><span class="section-num">03</span> · {t.principles.eyebrow}</p><h2 class="section-title">{t.principles.title}</h2><p class="section-lede">{t.principles.lede}</p></div>
   <figure class="glass chain reveal" aria-label={t.principles.chain.aria} data-chain>
-    <div class="chain-bar"><span class="panel-title">{t.principles.chain.title}</span><span class="chain-legend"><i></i>{t.principles.chain.cols.join(" → ")}</span></div>
+    <div class="chain-bar"><span class="panel-title">{t.principles.chain.title}</span><span class="chain-legend"><i></i><Fragment set:html={glyphHtml(t.principles.chain.cols.join(" → "))} /></span></div>
     <div class="chain-grid">
       <svg class="chain-wires" aria-hidden="true"></svg>
       <div class="chain-col">
@@ -974,8 +1002,8 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
   </div>
   <figure class="glass screen-card reveal">
     <div class="screen-bar"><span class="panel-title">{t.principles.screen.bar}</span><span class="badge-live">{t.principles.screen.badge}</span></div>
-    <button type="button" class="shot shot-stage" data-caption={t.principles.screen.caption}><img src="/bioseeki/knowledge-ui.webp" alt={t.principles.screen.alt} width="1328" height="808" loading="lazy"><span class="shot-hint">{t.zoom.hint}</span></button>
-    <figcaption class="screen-foot"><span>{t.principles.screen.foot}</span><a href="/privacy">{t.principles.screen.link}</a></figcaption>
+    <button type="button" class="shot shot-stage" data-caption={t.principles.screen.caption}><img src="/bioseeki/knowledge-ui.webp" alt={t.principles.screen.alt} width="1328" height="808" loading="lazy"><span class="shot-hint"><Label text={t.zoom.hint} /></span></button>
+    <figcaption class="screen-foot"><span>{t.principles.screen.foot}</span><a href="/privacy"><Label text={t.principles.screen.link} /></a></figcaption>
   </figure>
 </div></section>
 
@@ -1006,7 +1034,7 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
   </div>
   <figure class="glass screen-card reveal" style="--d:.1s">
     <div class="screen-bar"><span class="panel-title">{t.workflow.screen.bar}</span><span class="badge-live">{t.workflow.screen.badge}</span></div>
-    <button type="button" class="shot shot-stage" data-caption={t.workflow.screen.caption}><img src="/bioseeki/home-ui.webp" alt={t.workflow.screen.alt} width="1720" height="666" loading="lazy"><span class="shot-hint">{t.zoom.hint}</span></button>
+    <button type="button" class="shot shot-stage" data-caption={t.workflow.screen.caption}><img src="/bioseeki/home-ui.webp" alt={t.workflow.screen.alt} width="1720" height="666" loading="lazy"><span class="shot-hint"><Label text={t.zoom.hint} /></span></button>
     <figcaption class="screen-foot"><span>{t.workflow.screen.footL}</span><span>{t.workflow.screen.footR}</span></figcaption>
   </figure>
   <div class="bounds">
@@ -1017,7 +1045,7 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
 </div></section>
 
 <section id="demo"><div class="wrap"><div class="section-head reveal"><p class="eyebrow"><span class="section-num">05</span> · {t.demo.eyebrow}</p><h2 class="section-title">{t.demo.title}</h2><p class="section-lede">{t.demo.lede}</p></div>
-<div class="glass demo-glass reveal"><div class="demo-bar"><span class="panel-title">BIOSEEKI / PRODUCT DEMO</span><span class="badge-live">{t.demo.badge}</span></div><video controls playsinline preload="none" poster="/bioseeki/demo-poster.jpg" aria-label={t.demo.aria}><source src="/bioseeki/demo.mp4" type="video/mp4"><track kind="captions" src="/bioseeki/captions.zh.vtt" srclang="zh" label={t.demo.captionsLabel}>{t.demo.fallback}<a href="/bioseeki/demo.mp4">{t.demo.download}</a></video><div class="demo-foot"><span>{t.demo.foot}</span><a href="/bioseeki/demo.mp4" download>{t.demo.download}</a></div></div>
+<div class="glass demo-glass reveal"><div class="demo-bar"><span class="panel-title">BIOSEEKI / PRODUCT DEMO</span><span class="badge-live">{t.demo.badge}</span></div><video controls playsinline preload="none" poster="/bioseeki/demo-poster.jpg" aria-label={t.demo.aria}><source src="/bioseeki/demo.mp4" type="video/mp4"><track kind="captions" src="/bioseeki/captions.zh.vtt" srclang="zh" label={t.demo.captionsLabel}>{t.demo.fallback}<a href="/bioseeki/demo.mp4">{t.demo.download}</a></video><div class="demo-foot"><span>{t.demo.foot}</span><a href="/bioseeki/demo.mp4" download><Label text={t.demo.download} /></a></div></div>
 </div></section>
 
 <section id="download"><div class="wrap"><div class="section-head reveal"><p class="eyebrow"><span class="section-num">06</span> · {t.download.eyebrow}</p><h2 class="section-title">{t.download.title}</h2><p class="section-lede">{t.download.lede}</p></div>
@@ -1034,10 +1062,10 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
     <p class="dl-note">{t.download.note}</p>
     <div class="dl-actions">
       {MAC_DMG_URL
-        ? <a class="btn btn-primary dl-btn" href={MAC_DMG_URL} download><svg class="btn-ico" aria-hidden="true"><use href="#i-hand"/></svg>{t.download.cta}</a>
+        ? <a class="btn btn-primary dl-btn" href={MAC_DMG_URL} download><svg class="btn-ico btn-ico-fill" aria-hidden="true"><use href="#i-apple"/></svg>{t.download.cta}</a>
         : <>
             <p class="dl-soon"><span class="live-dot" aria-hidden="true"></span>{t.download.soon}</p>
-            <a class="btn btn-primary dl-btn" href={mailto}>{t.download.mailCta}</a>
+            <a class="btn btn-primary dl-btn" href={mailto}><Label text={t.download.mailCta} /></a>
           </>}
     </div>
     <p class="dl-legal" set:html={t.download.legal} />
@@ -1048,7 +1076,7 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
       {t.download.steps.map(([n, h, d], i) => (
         <li class={`step3${i === 0 ? " live" : ""}`}>
           <span class="step3-n">{n}</span>
-          <div><h3>{h}</h3><p>{d}</p>{i === 0 ? <a class="btn btn-ghost btn-sm" href={t.links.signUp}>{t.download.signUp}</a> : null}</div>
+          <div><h3>{h}</h3><p>{d}</p>{i === 0 ? <a class="btn btn-ghost btn-sm" href={t.links.signUp}><Label text={t.download.signUp} /></a> : null}</div>
         </li>
       ))}
     </ol>
@@ -1065,14 +1093,14 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
       <p class="plan-credits"><b>{p.credits}</b> credits</p>
       <span class="plan-meter" aria-hidden="true"><i style={`width:${Math.round((creditsOf(p.credits) / maxCredits) * 100)}%`}></i></span>
       <p class="plan-sub">{p.sub}</p>
-      <a class={`btn plan-cta ${p.tag ? "btn-primary" : "btn-ghost"}`} href={t.links.plans}>{t.pricing.cta}</a>
+      <a class={`btn plan-cta ${p.tag ? "btn-primary" : "btn-ghost"}`} href={t.links.plans}><Label text={t.pricing.cta} /></a>
     </article>
   ))}
 </div>
 </div></section>
 
 <section id="faq"><div class="wrap"><div class="faq-grid">
-  <div class="section-head reveal" style="margin-bottom:0"><p class="eyebrow"><span class="section-num">08</span> · {t.faq.eyebrow}</p><h2 class="section-title">{t.faq.title}</h2><p class="section-lede" set:html={t.faq.lede} /></div>
+  <div class="section-head reveal" style="margin-bottom:0"><p class="eyebrow"><span class="section-num">08</span> · {t.faq.eyebrow}</p><h2 class="section-title">{t.faq.title}</h2><p class="section-lede" set:html={glyphHtml(t.faq.lede, { html: true })} /></div>
   <div class="faq-list">
     {t.faq.items.map((f, i) => (
       <details class="glass faq reveal" style={`--d:${(i * 0.05).toFixed(2)}s`} open={i === 0}>
@@ -1093,7 +1121,7 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
         <p class="foot-col-title">{g.title}</p>
         <ul>
           {g.links.map(([href, label, flag]) => (
-            <li><a href={href} target={flag === "ext" ? "_blank" : undefined} rel={flag === "ext" ? "noopener noreferrer" : undefined}>{label}</a></li>
+            <li><a href={href} target={flag === "ext" ? "_blank" : undefined} rel={flag === "ext" ? "noopener noreferrer" : undefined}><Label text={label} /></a></li>
           ))}
         </ul>
       </div>
@@ -1103,13 +1131,13 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
     <p class="copy">{t.footer.copy}</p>
     <div class="foot-bar-r">
       <a class="lang-switch" href={t.switchTo.href} hreflang={lang === "zh" ? "en" : "zh-CN"}>{t.switchTo.label}</a>
-      <a class="foot-top" href="#top">{t.footer.top}</a>
+      <a class="foot-top" href="#top"><Label text={t.footer.top} /></a>
     </div>
   </div>
 </div></div></footer>
 
 <dialog class="zoom" id="zoom" aria-label={t.zoom.aria}>
-  <div class="zoom-top"><p class="zoom-cap" id="zoom-cap"></p><button type="button" class="zoom-close" id="zoom-close" aria-label={t.zoom.close}>✕</button></div>
+  <div class="zoom-top"><p class="zoom-cap" id="zoom-cap"></p><button type="button" class="zoom-close" id="zoom-close" aria-label={t.zoom.close}><svg class="bi" aria-hidden="true"><use href="#i-close"/></svg></button></div>
   <div class="zoom-stage" id="zoom-stage"><img id="zoom-img" alt=""></div>
   <p class="zoom-tip"><span class="t-fine">{t.zoom.fine}</span><span class="t-touch">{t.zoom.touch}</span></p>
 </dialog>

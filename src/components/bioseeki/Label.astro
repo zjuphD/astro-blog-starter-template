@@ -1,0 +1,7 @@
+---
+// A copy label whose glyphs (↗ ↓ ↑ → ✉ ✓ ✗ ⤢ ●) are drawn as SVG icons. See glyphs.ts.
+import { glyphHtml } from "./glyphs";
+interface Props { text: string; verdict?: boolean }
+const { text, verdict } = Astro.props;
+---
+<Fragment set:html={glyphHtml(text, { verdict })} />
