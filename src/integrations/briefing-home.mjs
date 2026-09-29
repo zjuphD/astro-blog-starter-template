@@ -8,7 +8,8 @@ export default function briefingHome() {
           `
 (function(){
   if (location.pathname !== "/" && location.pathname !== "/index.html") return;
-  if (document.querySelector(".brand-name")?.textContent?.includes("BIOSEEKI")) return;
+  // aiseeki.com only: the BioSeeki homepage (same "/" path, other host) marks itself with data-site.
+  if (document.body?.dataset.site === "bioseeki" || /bioseeki/i.test(document.querySelector(".brand-name")?.textContent || "")) return;
   function esc(s){return String(s ?? "").replace(/[&<>]/g,function(c){return c==="&"?"&amp;":c==="<"?"&lt;":"&gt;";});}
   function hostOf(url){try{return new URL(url).hostname.replace(/^www\\./,'');}catch(e){return '';}}
   function init(){

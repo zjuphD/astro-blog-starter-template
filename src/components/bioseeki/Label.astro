@@ -1,0 +1,9 @@
+---
+// A copy label whose trailing arrow / envelope glyph (↗ ↓ ↑ → ✉) is drawn as an icon from the
+// sprite in Home.astro, so every arrow on the page has the same weight and baseline in any font.
+interface Props { text: string }
+const { text } = Astro.props;
+const ICON: Record<string, string> = { "↗": "a-ext", "↓": "a-down", "↑": "a-up", "→": "a-right", "✉": "a-mail" };
+const m = /^(.*?)\s*([↗↓↑→✉])$/u.exec(text);
+---
+{m ? <Fragment>{m[1]}<svg class="ai" aria-hidden="true"><use href={`#${ICON[m[2]]}`} /></svg></Fragment> : text}

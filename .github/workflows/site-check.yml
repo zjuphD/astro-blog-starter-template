@@ -20,4 +20,6 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # headline face is a subset of the display copy; fails if a headline gained a character it lacks
+      - run: npm run check:font
       - run: npm run build

@@ -44,7 +44,7 @@ const zh = {
   },
   hero: {
     eyebrow: "BIOSEEKI · 有据，而非猜测",
-    h1a: "读文献、跑数据、写论文，", h1b: "每一步都有据可查",
+    h1a: "读文献、跑数据、写论文，", h1b: "每一步都有据可查", h1mark: "有据可查",
     sub: "BioSeeki 是为研究者个人打造的 AI 科研协作者。引用能回到<strong>原文的页与段</strong>，分析留下<strong>可复算的记录</strong>，写作时缺证据的地方如实留空——结论始终由你把关。",
     download: "下载 Mac 版", cta: "注册账号 ↗", demo: "观看 45 秒演示 ↓",
     meta: "Mac Beta · macOS 11+ · Apple 芯片",
@@ -59,14 +59,12 @@ const zh = {
       ["成稿 · 证据台账", "3 条论断有出处，1 条缺证据，留作待补", "可审阅", "ok"],
     ],
     panelFootL: "每条结论附来源定位", panelFootR: "论断 <b>3 / 4</b> 已绑定证据",
-    scroll: "向下探索",
   },
-  ticker: ["深度研究", "数据分析", "论文写作", "科研绘图", "分子克隆", "公共数据库", "引用检验", "文献雷达", "知识库与记忆"],
   tools: {
     eyebrow: "科研能力", title: "一个入口，接住研究的日常。",
     lede: "从检索文献到设计克隆，常用任务都在同一个项目里完成。三十余项专业技能和公共数据库连接器收在能力目录里，按需调用。",
     gc: {
-      h: "GeneCode · 分子克隆", status: "● 已接入",
+      h: "GeneCode · 分子克隆", status: "已接入",
       p: "在同一个工作区查看序列、质粒图谱与注释，围绕引物、片段和克隆方案继续设计。AI 提出的修改先以补丁呈现，你确认后才写入。",
       chips: ["序列视图", "质粒图谱", "引物与酶切位点", "修改需确认"],
       link: "打开 GeneCode 网页工作台 ↗",
@@ -210,7 +208,7 @@ const zh = {
   },
   faq: {
     eyebrow: "常见问题", title: "你可能想知道的事。",
-    lede: `没找到答案？<a href="mailto:${MAIL}" style="color:var(--sage-deep);font-weight:600">写信给我们 ✉</a>`,
+    lede: `没找到答案？<a href="mailto:${MAIL}">写信给我们</a>`,
     items: [
       { q: "BioSeeki 和通用聊天 AI 有什么不同？", a: "BioSeeki 围绕你的项目目录工作：读你的文献与数据，调用科研技能和公共数据库，并把依据、运行记录和产物留在项目里。引用可以回到原文，数字可以复算，缺证据的地方会如实标出。" },
       { q: "我的文件会被上传吗？", a: "项目文件保存在你的电脑上。发给模型的只有你输入的内容、你主动引用的文件，以及完成当前任务实际读取的片段，按需读取，不会整目录打包。私有科研内容不会用于训练 BioSeeki 的模型。" },
@@ -230,8 +228,8 @@ const zh = {
     ],
     top: "返回顶部 ↑", copy: "© 2026 BIOSEEKI · AI FOR RESEARCH",
   },
-  zoom: { aria: "放大查看截图", close: "关闭", hint: "⤢ 点击放大", fine: "按 Esc 或点击空白处关闭", touch: "左右滑动查看细节，点右上角 ✕ 关闭" },
-  heroVideo: "背景动画",
+  zoom: { aria: "放大查看截图", close: "关闭", hint: "点击放大", fine: "按 Esc 或点击空白处关闭", touch: "左右滑动查看细节，点右上角 ✕ 关闭" },
+  figLabel: "图",
   jsonLdDescription: "面向研究者个人的 AI 科研工作台：深度研究、数据分析、论文写作、科研绘图与 GeneCode 分子克隆，引用可回到原文，分析可复算。",
 };
 
@@ -255,7 +253,7 @@ const en: Copy = {
   },
   hero: {
     eyebrow: "BIOSEEKI · EVIDENCE, NOT GUESSWORK",
-    h1a: "Read, analyze, write.", h1b: "Every step backed by evidence",
+    h1a: "Read, analyze, write.", h1b: "Every step backed by evidence", h1mark: "backed by evidence",
     sub: "BioSeeki is an AI research partner built for individual scientists. Citations lead back to <strong>the exact page and paragraph</strong>, analyses leave <strong>a record you can recompute</strong>, and where evidence is missing, the draft says so — you always make the call.",
     download: "Download for Mac", cta: "Create account ↗", demo: "Watch the 45-second demo ↓",
     meta: "Mac Beta · macOS 11+ · Apple silicon",
@@ -270,14 +268,12 @@ const en: Copy = {
       ["Draft · Evidence ledger", "3 claims sourced, 1 unsupported and left as a gap", "Ready", "ok"],
     ],
     panelFootL: "Every conclusion carries its source", panelFootR: "Claims backed <b>3 / 4</b>",
-    scroll: "Scroll to explore",
   },
-  ticker: ["Deep research", "Data analysis", "Writing", "Figures", "Molecular cloning", "Public databases", "Citation check", "Literature radar", "Knowledge & memory"],
   tools: {
     eyebrow: "Capabilities", title: "One place for the everyday work of research.",
     lede: "From searching the literature to designing a clone, the common tasks happen inside one project. Thirty-plus research skills and public-database connectors sit in the capability catalog, ready when you need them.",
     gc: {
-      h: "GeneCode · Molecular cloning", status: "● Integrated",
+      h: "GeneCode · Molecular cloning", status: "Integrated",
       p: "View sequences, plasmid maps and annotations in the same workspace, and keep designing primers, fragments and cloning plans. Edits the AI proposes arrive as patches and are written only after you approve them.",
       chips: ["Sequence view", "Plasmid map", "Primers & restriction sites", "Edits need approval"],
       link: "Open GeneCode on the web ↗",
@@ -421,7 +417,7 @@ const en: Copy = {
   },
   faq: {
     eyebrow: "FAQ", title: "Things you might want to know.",
-    lede: `Didn't find your answer? <a href="mailto:${MAIL}" style="color:var(--sage-deep);font-weight:600">Write to us ✉</a>`,
+    lede: `Didn't find your answer? <a href="mailto:${MAIL}">Write to us</a>`,
     items: [
       { q: "How is BioSeeki different from a general AI chatbot?", a: "BioSeeki works around your project folder: it reads your papers and data, calls research skills and public databases, and keeps sources, run records and outputs in the project. Citations trace back to the original, numbers can be recomputed, and missing evidence is flagged rather than filled in." },
       { q: "Are my files uploaded?", a: "Project files stay on your computer. What goes to the model is only what you type, files you explicitly reference, and the fragments actually read to complete the current task — read on demand, never a whole folder. Private research content is not used to train BioSeeki's models." },
@@ -441,8 +437,8 @@ const en: Copy = {
     ],
     top: "Back to top ↑", copy: "© 2026 BIOSEEKI · AI FOR RESEARCH",
   },
-  zoom: { aria: "Enlarged screenshot", close: "Close", hint: "⤢ Click to enlarge", fine: "Press Esc or click outside to close", touch: "Swipe to see details · tap ✕ to close" },
-  heroVideo: "Background animation",
+  zoom: { aria: "Enlarged screenshot", close: "Close", hint: "Click to enlarge", fine: "Press Esc or click outside to close", touch: "Swipe to see details · tap ✕ to close" },
+  figLabel: "Fig.",
   jsonLdDescription: "An AI research workspace for individual scientists: deep research, data analysis, writing, figures and GeneCode molecular cloning, with citations traceable to the source and recomputable analyses.",
 };
 
