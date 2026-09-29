@@ -21,8 +21,8 @@ export function detectLang(Astro: AstroGlobal): Lang {
   return first.startsWith("zh") ? "zh" : "en";
 }
 
-const SIGN_UP = "https://api.bioseeki.com/sign-up";
-const SIGN_IN = "https://api.bioseeki.com/sign-in";
+const SIGN_UP = "https://api.bioseeki.com/sign-up?redirect=/login-ok";
+const SIGN_IN = "https://api.bioseeki.com/sign-in?redirect=/login-ok";
 const MAIL = "support@bioseeki.com";
 const SIGN_PLANS = "https://api.bioseeki.com/subscriptions";
 
