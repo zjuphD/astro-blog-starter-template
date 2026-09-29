@@ -16,6 +16,10 @@ const { lang } = Astro.props;
 const t = COPY[lang];
 // Flip on once public/bioseeki/hero-loop-{light,dark}.{webm,mp4,jpg} are committed.
 const heroVideo = true;
+// 下载按钮指向的安装包地址。留空 = 按钮显示「即将上线」且不可点（安装包还没上传）；
+// 等签名 + 公证好的 DMG 传到 R2 后，把地址填在这里即可（例：
+// https://dl.bioseeki.com/mac/Bioseeki-0.1.0-arm64.dmg），其它地方都不用改。
+const MAC_DMG_URL = "";
 const mailto = `mailto:${t.links.mail}?subject=${encodeURIComponent(t.start.mailSubject)}&body=${encodeURIComponent(t.start.mailBody)}`;
 
 const ORG = "https://bioseeki.com/#organization";
@@ -574,6 +578,18 @@ html:has(.zoom[open]){ overflow:hidden; }
 .center-cta{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
 .sysreq{ text-align:center; margin-top:1.3rem; font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.66rem; letter-spacing:.06em; color:var(--ink-soft); }
 
+/* ============ 下载 ============ */
+.dl-card{ display:flex; align-items:center; justify-content:space-between; gap:clamp(1.2rem,3vw,2.8rem); padding:1.7rem 1.9rem; flex-wrap:wrap; }
+.dl-app{ font-family:var(--font-display); font-weight:600; font-size:1.3rem; letter-spacing:-.01em; }
+.dl-meta{ font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.68rem; letter-spacing:.06em; color:var(--ink-soft); margin-top:.55rem; }
+.dl-side{ display:flex; flex-direction:column; align-items:flex-start; gap:.7rem; }
+.dl-btn{ font-size:.98rem; padding:13px 26px; }
+.dl-btn.is-soon{ opacity:.5; cursor:not-allowed; box-shadow:none; }
+.dl-btn.is-soon:hover{ transform:none; }
+.dl-note{ font-size:.82rem; color:var(--ink-soft); max-width:36ch; }
+.dl-mail{ font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.68rem; letter-spacing:.05em; color:var(--sage-deep); border-bottom:1px solid color-mix(in srgb, var(--sage-deep) 35%, transparent); padding-bottom:2px; }
+@media (max-width:760px){ .dl-card{ align-items:flex-start; flex-direction:column; } }
+
 /* ============ FAQ ============ */
 .faq-grid{ display:grid; grid-template-columns:.8fr 1.2fr; gap:clamp(2rem,4vw,3.5rem); align-items:start; }
 .faq-list{ display:grid; gap:12px; }
@@ -1039,7 +1055,24 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
 </div>
 </div></section>
 
-<section id="start"><div class="wrap"><div class="section-head reveal"><p class="eyebrow"><span class="section-num">07</span> · {t.start.eyebrow}</p><h2 class="section-title">{t.start.title}</h2><p class="section-lede">{t.start.lede}</p></div><div class="road">
+<section id="download"><div class="wrap"><div class="section-head reveal"><p class="eyebrow"><span class="section-num">07</span> · {t.download.eyebrow}</p><h2 class="section-title">{t.download.title}</h2><p class="section-lede">{t.download.lede}</p></div>
+<div class="glass dl-card reveal">
+  <div>
+    <p class="dl-app">{t.download.app}</p>
+    <p class="dl-meta">{t.download.meta}</p>
+  </div>
+  <div class="dl-side">
+    {MAC_DMG_URL
+      ? <a class="btn btn-primary dl-btn" href={MAC_DMG_URL} download>{t.download.cta}</a>
+      : <span class="btn btn-primary dl-btn is-soon" aria-disabled="true" title={t.download.soonTitle}>{t.download.soon}</span>}
+    <p class="dl-note">{t.download.note}</p>
+    <a class="dl-mail" href={mailto}>{t.download.mailCta}</a>
+  </div>
+</div>
+<p class="sysreq reveal">{t.download.sysreq}</p>
+</div></section>
+
+<section id="start"><div class="wrap"><div class="section-head reveal"><p class="eyebrow"><span class="section-num">08</span> · {t.start.eyebrow}</p><h2 class="section-title">{t.start.title}</h2><p class="section-lede">{t.start.lede}</p></div><div class="road">
   {t.start.steps.map(([phase, h, p], i) => (
     <article class={`glass card road-node reveal${i === 0 ? " live" : ""}`} style={`--d:${(i * 0.12).toFixed(2)}s`}><p class="road-phase"><span class="road-dot"></span>{phase}</p><h3>{h}</h3><p>{p}</p></article>
   ))}
@@ -1048,7 +1081,7 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
 </div></section>
 
 <section id="faq"><div class="wrap"><div class="faq-grid">
-  <div class="section-head reveal" style="margin-bottom:0"><p class="eyebrow"><span class="section-num">08</span> · {t.faq.eyebrow}</p><h2 class="section-title">{t.faq.title}</h2><p class="section-lede" set:html={t.faq.lede} /></div>
+  <div class="section-head reveal" style="margin-bottom:0"><p class="eyebrow"><span class="section-num">09</span> · {t.faq.eyebrow}</p><h2 class="section-title">{t.faq.title}</h2><p class="section-lede" set:html={t.faq.lede} /></div>
   <div class="faq-list">
     {t.faq.items.map((f, i) => (
       <details class="glass faq reveal" style={`--d:${(i * 0.05).toFixed(2)}s`} open={i === 0}>

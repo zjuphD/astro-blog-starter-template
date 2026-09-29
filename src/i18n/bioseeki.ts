@@ -39,7 +39,7 @@ const zh = {
   switchTo: { label: "EN", href: "/en", title: "Switch to English" },
   nav: {
     aria: "主导航", home: "BioSeeki 首页",
-    items: [["#tools", "科研能力"], ["#verify", "可复核"], ["#principles", "知识与记忆"], ["#workflow", "一个课题"], ["#pricing", "定价"], ["/briefing", "前沿快讯"], ["#faq", "常见问题"]],
+    items: [["#tools", "科研能力"], ["#verify", "可复核"], ["#principles", "知识与记忆"], ["#workflow", "一个课题"], ["#pricing", "定价"], ["#download", "下载"], ["/briefing", "前沿快讯"], ["#faq", "常见问题"]],
     signIn: "登录", signUp: "注册 ↗",
   },
   hero: {
@@ -188,13 +188,25 @@ const zh = {
     ],
     cta: "立即订阅 ↗",
   },
+  download: {
+    eyebrow: "下载", title: "下载 BioSeeki 桌面客户端。",
+    lede: "装好就能用：不需要自己准备模型 API，填入注册后在后台创建的密钥即可开始。",
+    app: "BioSeeki for macOS",
+    meta: "Apple 芯片（M1 / M2 / M3 / M4）· macOS 11 及以上",
+    cta: "下载 Mac 版 ↓",
+    soon: "即将上线",
+    soonTitle: "安装包正在签名与公证，很快开放下载",
+    note: "只支持 Apple 芯片的 Mac；Intel 芯片的 Mac 暂不支持，Windows 版在做。",
+    mailCta: "等不及？先邮件索取 ✉",
+    sysreq: "下载并使用即表示同意服务条款与隐私政策；使用中若遇到问题，写信到 support@bioseeki.com。",
+  },
   start: {
     eyebrow: "开始使用", title: "从下一个科研问题开始。",
-    lede: "账号开放自助注册，不需要邀请码。注册后在后台创建密钥、查看额度与用量；桌面客户端目前为 Mac Beta，安装包通过邮件获取。",
+    lede: "账号开放自助注册，不需要邀请码。注册后在后台创建密钥、查看额度与用量；桌面客户端目前为 Mac Beta，可在上一节直接下载（仅 Apple 芯片）。",
     steps: [
       ["01 · 注册账号", "自助注册，无需邀请码", "用邮箱注册 BioSeeki 账号，登录后进入自己的后台。"],
       ["02 · 创建密钥", "生成你的 API 密钥", "在后台一键创建密钥，客户端靠它连接模型与账户额度。"],
-      ["03 · 接入客户端", "安装 Mac Beta", "安装包通过邮件获取，填入密钥、选一个项目目录，就可以开始了。"],
+      ["03 · 安装客户端", "下载 Mac 版安装包", "在上面的下载区拿到安装包，填入密钥、选一个项目目录，就可以开始了。"],
     ],
     signUp: "立即注册 ↗", mailCta: "邮件获取安装包 ✉",
     mailSubject: "BioSeeki 安装包申请",
@@ -238,7 +250,7 @@ const en: Copy = {
   switchTo: { label: "中文", href: "/?lang=zh", title: "切换到中文" },
   nav: {
     aria: "Main", home: "BioSeeki home",
-    items: [["#tools", "Capabilities"], ["#verify", "Verifiable"], ["#principles", "Knowledge"], ["#workflow", "A project"], ["#pricing", "Pricing"], ["/briefing", "Briefing (中文)"], ["#faq", "FAQ"]],
+    items: [["#tools", "Capabilities"], ["#verify", "Verifiable"], ["#principles", "Knowledge"], ["#workflow", "A project"], ["#pricing", "Pricing"], ["#download", "Download"], ["/briefing", "Briefing (中文)"], ["#faq", "FAQ"]],
     signIn: "Sign in", signUp: "Sign up ↗",
   },
   hero: {
@@ -387,13 +399,25 @@ const en: Copy = {
     ],
     cta: "Subscribe ↗",
   },
+  download: {
+    eyebrow: "Download", title: "Download the BioSeeki desktop app.",
+    lede: "Install and go: no model API required - paste the key you create in your dashboard and start.",
+    app: "BioSeeki for macOS",
+    meta: "Apple silicon (M1 / M2 / M3 / M4) · macOS 11 or later",
+    cta: "Download for Mac ↓",
+    soon: "Coming soon",
+    soonTitle: "The installer is being signed and notarized; the download opens shortly",
+    note: "Apple silicon Macs only. Intel Macs are not supported yet; a Windows build is in progress.",
+    mailCta: "Need it now? Request by email ✉",
+    sysreq: "Downloading and using it means you accept the Terms and Privacy Policy. Questions: support@bioseeki.com.",
+  },
   start: {
     eyebrow: "Get started", title: "Start with your next research question.",
-    lede: "Sign-up is open — no invitation needed. After signing up you create a key and see your balance and usage in the dashboard. The desktop app is a Mac Beta; the installer is sent by email.",
+    lede: "Sign-up is open — no invitation needed. After signing up you create a key and see your balance and usage in the dashboard. The desktop app is a Mac Beta - download it from the section above (Apple silicon only).",
     steps: [
       ["01 · Create an account", "Self sign-up, no invite code", "Register with your email and sign in to your dashboard."],
       ["02 · Create a key", "Generate your API key", "One click in the dashboard. The app uses it to reach the models and your balance."],
-      ["03 · Connect the app", "Install the Mac Beta", "We email you the installer. Paste your key, pick a project folder, and you're ready."],
+      ["03 · Connect the app", "Install the Mac Beta", "Grab the installer from the download section above, paste your key, pick a project folder, and you're ready."],
     ],
     signUp: "Sign up now ↗", mailCta: "Get the installer by email ✉",
     mailSubject: "BioSeeki installer request",
