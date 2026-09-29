@@ -570,7 +570,6 @@ html:has(.zoom[open]){ overflow:hidden; }
 .plan-cta{ width:100%; justify-content:center; margin-top:auto; }
 .plan.hot{ border-color:color-mix(in srgb, var(--ochre) 42%, transparent); box-shadow:0 14px 34px color-mix(in srgb, var(--ochre) 16%, transparent), inset 0 1px 0 var(--edge); }
 .plan-tag{ position:absolute; top:-10px; right:14px; font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.58rem; letter-spacing:.08em; color:var(--ochre-deep); background:var(--glass-strong); border:1px solid color-mix(in srgb, var(--ochre) 38%, transparent); padding:3px 9px; border-radius:99px; }
-.plan-note{ font-size:.78rem; color:var(--ink-soft); text-align:center; }
 
 .center-cta{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
 .sysreq{ text-align:center; margin-top:1.3rem; font-family:"IBM Plex Mono","PingFang SC",monospace; font-size:.66rem; letter-spacing:.06em; color:var(--ink-soft); }
@@ -1037,7 +1036,7 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
       <a class="btn btn-primary plan-cta" href={t.links.plans}>{t.pricing.cta}</a>
     </article>
   ))}
-</div><p class="plan-note reveal">{t.pricing.note}</p>
+</div>
 </div></section>
 
 <section id="start"><div class="wrap"><div class="section-head reveal"><p class="eyebrow"><span class="section-num">07</span> · {t.start.eyebrow}</p><h2 class="section-title">{t.start.title}</h2><p class="section-lede">{t.start.lede}</p></div><div class="road">

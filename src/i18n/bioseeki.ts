@@ -187,7 +187,6 @@ const zh = {
       { name: "Heavy", price: "299", credits: "12,500", sub: "高强度长任务与深度推理", tag: "" },
     ],
     cta: "立即订阅 ↗",
-    note: "三档可用的模型能力相同，区别只在额度大小；余额与用量在控制台随时可查。",
   },
   start: {
     eyebrow: "开始使用", title: "从下一个科研问题开始。",
@@ -387,7 +386,6 @@ const en: Copy = {
       { name: "Heavy", price: "299", credits: "12,500", sub: "Heavy long-running tasks and deep reasoning", tag: "" },
     ],
     cta: "Subscribe ↗",
-    note: "All three plans reach the same models; only the credit allowance differs. Balance and usage are always visible in your dashboard.",
   },
   start: {
     eyebrow: "Get started", title: "Start with your next research question.",
