@@ -279,6 +279,7 @@ ul,ol{ list-style:none; }
 }
 .btn-sm{ padding:8px 16px; font-size:.82rem; }
 .btn-ico{ width:17px; height:17px; flex:none; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; margin-left:-3px; }
+.btn-ico-fill{ fill:currentColor; stroke:none; width:16px; height:16px; margin-left:-2px; }
 .nav-links a:focus-visible,.btn:focus-visible,.foot-cols a:focus-visible{ outline:2px solid var(--sage-deep); outline-offset:3px; }
 
 /* ============ LAYOUT ============ */
@@ -823,6 +824,8 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
     <symbol id="i-hand" viewBox="0 0 24 24"><path d="M12 3v9M12 12l-3.5-3.5M12 12l3.5-3.5"/><rect x="4" y="14" width="16" height="7" rx="2"/></symbol>
     <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></symbol>
     <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.6 3.5 5.4 3.5 8.5s-1.1 5.9-3.5 8.5c-2.4-2.6-3.5-5.4-3.5-8.5s1.1-5.9 3.5-8.5z"/></symbol>
+    <!-- Apple logo, Simple Icons (CC0). Marks the Mac download buttons. -->
+    <symbol id="i-apple" viewBox="0 0 24 24"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></symbol>
     <symbol id="i-nodata" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="2.5"/><path d="M5 6v6c0 1.4 3.1 2.5 7 2.5M19 6v4"/><path d="m15 15 5 5M20 15l-5 5"/></symbol>
   </defs>
 </svg>
@@ -840,7 +843,7 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
     <a class="lang-switch" href={t.switchTo.href} hreflang={lang === "zh" ? "en" : "zh-CN"} title={t.switchTo.title} lang={lang === "zh" ? "en" : "zh-CN"}>{t.switchTo.label}</a>
     <a class="nav-login" href={t.links.signIn}>{t.nav.signIn}</a>
     <a class="btn btn-ghost btn-sm nav-signup" href={t.links.signUp}>{t.nav.signUp}</a>
-    <a class="btn btn-primary btn-sm nav-dl" href={dlHref} download={dlAttr}><svg class="btn-ico" aria-hidden="true"><use href="#i-hand"/></svg>{t.nav.download}</a>
+    <a class="btn btn-primary btn-sm nav-dl" href={dlHref} download={dlAttr}><svg class="btn-ico btn-ico-fill" aria-hidden="true"><use href="#i-apple"/></svg>{t.nav.download}</a>
   </div>
 </nav>
 
@@ -860,7 +863,7 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
         <h1 class="reveal" style="--d:.08s"><span class="line">{t.hero.h1a}</span><span class="line"><em>{t.hero.h1b}</em>{lang === "zh" ? "。" : "."}</span></h1>
         <p class="hero-sub reveal" style="--d:.16s" set:html={t.hero.sub} />
         <div class="hero-ctas reveal" style="--d:.24s">
-          <a class="btn btn-primary" href={dlHref} download={dlAttr}><svg class="btn-ico" aria-hidden="true"><use href="#i-hand"/></svg>{t.hero.download}</a>
+          <a class="btn btn-primary" href={dlHref} download={dlAttr}><svg class="btn-ico btn-ico-fill" aria-hidden="true"><use href="#i-apple"/></svg>{t.hero.download}</a>
           <a class="btn btn-ghost" href={t.links.signUp}>{t.hero.cta}</a>
         </div>
         <p class="hero-meta reveal" style="--d:.28s"><span>{t.hero.meta}</span><a class="hero-demo" href="#demo">{t.hero.demo}</a></p>
@@ -1034,7 +1037,7 @@ body[data-lang="en"] .log-row{ grid-template-columns:5.4em 1fr; }
     <p class="dl-note">{t.download.note}</p>
     <div class="dl-actions">
       {MAC_DMG_URL
-        ? <a class="btn btn-primary dl-btn" href={MAC_DMG_URL} download><svg class="btn-ico" aria-hidden="true"><use href="#i-hand"/></svg>{t.download.cta}</a>
+        ? <a class="btn btn-primary dl-btn" href={MAC_DMG_URL} download><svg class="btn-ico btn-ico-fill" aria-hidden="true"><use href="#i-apple"/></svg>{t.download.cta}</a>
         : <>
             <p class="dl-soon"><span class="live-dot" aria-hidden="true"></span>{t.download.soon}</p>
             <a class="btn btn-primary dl-btn" href={mailto}>{t.download.mailCta}</a>
