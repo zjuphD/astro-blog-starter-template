@@ -1,5 +1,27 @@
 [
   {
+    "id": "2026-09-25-10-64898-2026-09-20-752967",
+    "manual": false,
+    "briefingDate": "2026-09-30",
+    "publishedAt": "2026-09-25",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "AnewDDE: An Agentic Drug Discovery Engine for Biomolecular Interaction Modelling and Closed-Loop Design",
+    "titleOriginal": "AnewDDE: An Agentic Drug Discovery Engine for Biomolecular Interaction Modelling and Closed-Loop Design",
+    "summary": "Accurate modelling of biomolecular interactions is fundamental to drug discovery, yet current artificial intelligence (AI) workflows remain fragmented across structure prediction, affinity estimation, molecular design, and experimental deci…",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 82,
+    "tags": [
+      "AI",
+      "蛋白/结构",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.64898/2026.09.20.752967",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-23-10-64898-2026-09-22-753604",
     "manual": false,
     "briefingDate": "2026-09-26",
