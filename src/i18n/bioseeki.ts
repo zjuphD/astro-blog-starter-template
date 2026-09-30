@@ -40,7 +40,7 @@ const zh = {
   nav: {
     aria: "主导航", home: "BioSeeki 首页",
     items: [["#tools", "科研能力"], ["#verify", "可复核"], ["#principles", "知识与记忆"], ["#workflow", "一个课题"], ["#pricing", "定价"], ["/briefing", "前沿快讯"], ["#faq", "常见问题"]],
-    signIn: "登录", signUp: "注册 ↗", download: "下载",
+    signIn: "登录", signUp: "注册 ↗", download: "下载", personal: "个人中心",
   },
   hero: {
     eyebrow: "BIOSEEKI · 有据，而非猜测",
@@ -215,7 +215,7 @@ const en: Copy = {
   nav: {
     aria: "Main", home: "BioSeeki home",
     items: [["#tools", "Capabilities"], ["#verify", "Verifiable"], ["#principles", "Knowledge"], ["#workflow", "A project"], ["#pricing", "Pricing"], ["/briefing", "Briefing (中文)"], ["#faq", "FAQ"]],
-    signIn: "Sign in", signUp: "Sign up ↗", download: "Download",
+    signIn: "Sign in", signUp: "Sign up ↗", download: "Download", personal: "Account",
   },
   hero: {
     eyebrow: "BIOSEEKI · EVIDENCE, NOT GUESSWORK",
