@@ -149,7 +149,7 @@ const zh = {
     plans: [
       { name: "Plus", price: "69", credits: "2,000", sub: "日常问答与轻量检索", tag: "" },
       { name: "Pro", price: "149", credits: "5,000", sub: "常规科研分析与长文写作", tag: "多数人选择" },
-      { name: "Heavy", price: "299", credits: "12,500", sub: "高强度长任务与深度推理", tag: "" },
+      { name: "Heavy", price: "299", credits: "12,000", sub: "高强度长任务与深度推理", tag: "" },
     ],
     cta: "立即订阅 ↗",
   },
@@ -324,7 +324,7 @@ const en: Copy = {
     plans: [
       { name: "Plus", price: "69", credits: "2,000", sub: "Everyday Q&A and light literature search", tag: "" },
       { name: "Pro", price: "149", credits: "5,000", sub: "Regular analysis and long-form writing", tag: "Most popular" },
-      { name: "Heavy", price: "299", credits: "12,500", sub: "Heavy long-running tasks and deep reasoning", tag: "" },
+      { name: "Heavy", price: "299", credits: "12,000", sub: "Heavy long-running tasks and deep reasoning", tag: "" },
     ],
     cta: "Subscribe ↗",
   },
