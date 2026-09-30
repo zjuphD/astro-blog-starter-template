@@ -144,7 +144,7 @@ const zh = {
   },
   pricing: {
     eyebrow: "定价", title: "选一个档位，开始你的研究。",
-    lede: "月付，人民币结算，按 credits 计费。注册即送 1,000 credits；额度一次性到账，不按月重置。",
+    lede: "月付订阅，人民币结算。每份套餐包含固定 credits，套餐额度到期失效；注册即送 1,000 credits。",
     per: "/ 月",
     plans: [
       { name: "Plus", price: "69", credits: "2,000", sub: "日常问答与轻量检索", tag: "" },
@@ -180,7 +180,7 @@ const zh = {
       { q: "BioSeeki 和通用聊天 AI 有什么不同？", a: "BioSeeki 围绕你的项目目录工作：读你的文献与数据，调用科研技能和公共数据库，并把依据、运行记录和产物留在项目里。引用可以回到原文，数字可以复算，缺证据的地方会如实标出。" },
       { q: "我的文件会被上传吗？", a: "项目文件保存在你的电脑上。发给模型的只有你输入的内容、你主动引用的文件，以及完成当前任务实际读取的片段，按需读取，不会整目录打包。私有科研内容不会用于训练 BioSeeki 的模型。" },
       { q: "支持哪些系统？", a: "目前提供 Mac Beta，需要 macOS 11 及以上、Apple 芯片（M 系列）。Intel Mac 暂不支持；Windows 版本正在测试中。" },
-      { q: "需要自己准备模型 API 吗？", a: "不需要。注册后在后台创建一条密钥，填进客户端即可开始使用；用量以 credits 计，余额与套餐都在账户后台查看。" },
+      { q: "需要自己准备模型 API 吗？", a: "不需要。注册后在后台创建一条密钥，填进客户端即可开始使用；用量以 credits 计，额度与订阅可在个人中心查看。" },
       { q: "它会编造引用或数据吗？", a: "流程上尽量杜绝：引用要能回读到原文页段；投稿前可以用引用检验核对 DOI、撤稿与版本；写作时没有证据支撑的论断不会写进正文，而是留下「待补」标记。AI 仍可能出错，科学判断请由你复核。" },
       { q: "GeneCode 是什么？", a: "GeneCode 是分子生物学序列编辑工作台，支持特征注释、引物与酶切位点。它在 BioSeeki 里以「分子克隆」面板出现，AI 提出的序列修改需要你确认后才写入；也可以单独打开网页版使用。" },
     ],
@@ -319,7 +319,7 @@ const en: Copy = {
   },
   pricing: {
     eyebrow: "Pricing", title: "Pick a plan and start your research.",
-    lede: "Monthly, billed in CNY, metered in credits. New accounts get 1,000 credits; credits land in one go and don't reset monthly.",
+    lede: "Monthly subscriptions, billed in CNY. Each plan includes a fixed credit allowance that expires with the plan. New accounts get 1,000 credits.",
     per: "/ month",
     plans: [
       { name: "Plus", price: "69", credits: "2,000", sub: "Everyday Q&A and light literature search", tag: "" },
@@ -355,7 +355,7 @@ const en: Copy = {
       { q: "How is BioSeeki different from a general AI chatbot?", a: "BioSeeki works around your project folder: it reads your papers and data, calls research skills and public databases, and keeps sources, run records and outputs in the project. Citations trace back to the original, numbers can be recomputed, and missing evidence is flagged rather than filled in." },
       { q: "Are my files uploaded?", a: "Project files stay on your computer. What goes to the model is only what you type, files you explicitly reference, and the fragments actually read to complete the current task — read on demand, never a whole folder. Private research content is not used to train BioSeeki's models." },
       { q: "Which systems are supported?", a: "The Mac Beta needs macOS 11 or later on Apple silicon (M series). Intel Macs aren't supported yet; a Windows version is in testing." },
-      { q: "Do I need my own model API?", a: "No. After signing up, create a key in the dashboard and paste it into the app. Usage is counted in credits; balance and plans are in your dashboard." },
+      { q: "Do I need my own model API?", a: "No. After signing up, create a key in the dashboard and paste it into the app. Usage is counted in credits; view your allowance and subscriptions in your account." },
       { q: "Will it make up citations or data?", a: "The workflow is built to prevent it: citations must read back to a page and paragraph; before submission you can check DOIs, retractions and versions; and claims without evidence stay out of the text as marked gaps. AI can still make mistakes, so scientific judgement stays with you." },
       { q: "What is GeneCode?", a: "GeneCode is a molecular-biology sequence workbench with feature annotation, primers and restriction sites. Inside BioSeeki it appears as the cloning panel, and sequence edits proposed by the AI are written only after you approve them. It also works on its own in the browser." },
     ],
