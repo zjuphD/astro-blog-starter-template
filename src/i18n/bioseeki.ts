@@ -144,7 +144,7 @@ const zh = {
   },
   pricing: {
     eyebrow: "定价", title: "选一个档位，开始你的研究。",
-    lede: "月付，人民币结算，按 credits 计费。注册即送 2,000 credits；额度一次性到账，不按月重置。",
+    lede: "月付，人民币结算，按 credits 计费。注册即送 1,000 credits；额度一次性到账，不按月重置。",
     per: "/ 月",
     plans: [
       { name: "Plus", price: "69", credits: "2,000", sub: "日常问答与轻量检索", tag: "" },
@@ -319,7 +319,7 @@ const en: Copy = {
   },
   pricing: {
     eyebrow: "Pricing", title: "Pick a plan and start your research.",
-    lede: "Monthly, billed in CNY, metered in credits. New accounts get 2,000 credits; credits land in one go and don't reset monthly.",
+    lede: "Monthly, billed in CNY, metered in credits. New accounts get 1,000 credits; credits land in one go and don't reset monthly.",
     per: "/ month",
     plans: [
       { name: "Plus", price: "69", credits: "2,000", sub: "Everyday Q&A and light literature search", tag: "" },
