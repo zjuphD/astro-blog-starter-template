@@ -7,6 +7,7 @@ import { defineMiddleware } from "astro:middleware";
 // 只在"确实是后台路径"时跳：官网自己的页面（/、/en、/terms、/privacy、/briefing 等）不受影响。
 const CONSOLE_PATHS = [
   "/login-ok",
+  "/me",
   "/sign-in",
   "/sign-up",
   "/dashboard",
