@@ -4,6 +4,7 @@ export const VERIFY = {
   google: "",   // Google Search Console  → <meta name="google-site-verification">
   bing: "",     // Bing Webmaster Tools    → <meta name="msvalidate.01">
   baidu: "codeva-vYV4bQvsdr",    // 百度搜索资源平台           → <meta name="baidu-site-verification">
+  sogou: "x6PXYRo4wI",    // 搜狗站长平台              → <meta name="sogou_site_verification">
 };
 
 // Profiles that are the same entity as BioSeeki (official accounts only). Feeds
