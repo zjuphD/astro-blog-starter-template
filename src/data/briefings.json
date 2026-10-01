@@ -1,5 +1,46 @@
 [
   {
+    "id": "2026-10-01-10-1111-1742-6723-70341",
+    "manual": false,
+    "briefingDate": "2026-10-01",
+    "publishedAt": "2026-10-01",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Using Sydney Triage to Admission Risk Tool With Artificial Intelligence (START-AI) to Predict Inpatient Admitting Specialty for Emergency Department Patients: Single Centre Deep Learning Analysis.",
+    "titleOriginal": "Using Sydney Triage to Admission Risk Tool With Artificial Intelligence (START-AI) to Predict Inpatient Admitting Specialty for Emergency Department Patients: Single Centre Deep Learning Analysis.",
+    "summary": "Objective To investigate whether the Sydney Triage to Admission Risk Tool with Artificial Intelligence (START-AI) model could be used to predict specific inpatient admitting teams based on clinical notes. Methods This was a pre-trained lang…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 80,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1111/1742-6723.70341",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-10-01-10-1002-pds-70452",
+    "manual": false,
+    "briefingDate": "2026-10-01",
+    "publishedAt": "2026-10-01",
+    "category": "AI for Science",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "Introduction to Concepts in Artificial Intelligence and Machine Learning for Pharmacoepidemiologists: Large Language Models.",
+    "titleOriginal": "Introduction to Concepts in Artificial Intelligence and Machine Learning for Pharmacoepidemiologists: Large Language Models.",
+    "summary": "Large language models (LLMs) represent a type of generative artificial intelligence (GenAI) that generate and interpret text, with some LLMs able to process multimodal content (e.g., images, audio, video), and can be deployed as part of age…",
+    "whyItMatters": "关注点在于该方法是否把 AI 从辅助分析推进到可验证的科研工作流，并带来可重复的效率或发现增益。",
+    "score": 77,
+    "tags": [
+      "AI",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1002/pds.70452",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-25-10-64898-2026-09-20-752967",
     "manual": false,
     "briefingDate": "2026-09-30",
