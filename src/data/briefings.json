@@ -1,5 +1,47 @@
 [
   {
+    "id": "2026-09-30-10-1080-00029157-2026-2736088",
+    "manual": false,
+    "briefingDate": "2026-10-02",
+    "publishedAt": "2026-09-30",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Augmenting the hypnotic imagination: practical applications of artificial intelligence for clinical hypnosis.",
+    "titleOriginal": "Augmenting the hypnotic imagination: practical applications of artificial intelligence for clinical hypnosis.",
+    "summary": "Artificial intelligence (AI), particularly large language models (LLMs), offers clinical hypnotists a powerful and immediately accessible set of tools for enhancing practice. Despite growing interest at the intersection of AI and mental hea…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 83,
+    "tags": [
+      "AI",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1080/00029157.2026.2736088",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-28-10-1093-milmed-usag452",
+    "manual": false,
+    "briefingDate": "2026-10-02",
+    "publishedAt": "2026-09-28",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Critical Thinking, Human Judgment, and Artificial Intelligence in Combat Casualty Care: Implications for Military Medical Education and Practice.",
+    "titleOriginal": "Critical Thinking, Human Judgment, and Artificial Intelligence in Combat Casualty Care: Implications for Military Medical Education and Practice.",
+    "summary": "Artificial intelligence (AI) is rapidly transforming healthcare through advances in machine learning, predictive analytics, and large language models. These technologies offer substantial opportunities to improve diagnostic support, informa…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 78,
+    "tags": [
+      "AI",
+      "蛋白/结构"
+    ],
+    "originalUrl": "https://doi.org/10.1093/milmed/usag452",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-10-01-10-1111-1742-6723-70341",
     "manual": false,
     "briefingDate": "2026-10-01",
@@ -582,47 +624,6 @@
       "AI"
     ],
     "originalUrl": "https://doi.org/10.1177/15533506261488588",
-    "editorialMode": "rules",
-    "editorialReason": "通过 V2 规则筛选与多维评分。"
-  },
-  {
-    "id": "2026-09-07-10-1002-jhm-70435",
-    "manual": false,
-    "briefingDate": "2026-09-10",
-    "publishedAt": "2026-09-07",
-    "category": "精准医疗",
-    "source": "Europe PMC",
-    "sourceType": "方法/模型",
-    "titleZh": "Comparison of physician-authored and artificial intelligence-generated after-visit summaries: A blinded comparative study.",
-    "titleOriginal": "Comparison of physician-authored and artificial intelligence-generated after-visit summaries: A blinded comparative study.",
-    "summary": "Background After-visit summaries (AVSs) are essential for a safe hospital discharge, yet are often written above literacy levels, omit key information, and are produced under substantial clinical time pressure. Large language models (LLMs) …",
-    "whyItMatters": "该研究直接比较医生撰写与 AI 生成的出院后访视摘要，可用于评估大语言模型在临床沟通、信息完整性与可读性方面的实际应用价值。",
-    "score": 88,
-    "tags": [
-      "AI"
-    ],
-    "originalUrl": "https://doi.org/10.1002/jhm.70435",
-    "editorialMode": "rules",
-    "editorialReason": "通过 V2 规则筛选与多维评分。"
-  },
-  {
-    "id": "2026-09-06-10-1007-s40290-026-00635-9",
-    "manual": false,
-    "briefingDate": "2026-09-10",
-    "publishedAt": "2026-09-06",
-    "category": "AI 药物发现",
-    "source": "Europe PMC",
-    "sourceType": "临床研究",
-    "titleZh": "From Invisible to Enrolled: How Artificial Intelligence Is Reshaping Clinical Trial Recruitment.",
-    "titleOriginal": "From Invisible to Enrolled: How Artificial Intelligence Is Reshaping Clinical Trial Recruitment.",
-    "summary": "Clinical trial recruitment continues to fail at scale, with eligible patients often invisible to routine screening despite being present in electronic health records. Disease stage, treatment response, biomarker results, and clinical reason…",
-    "whyItMatters": "该研究聚焦 AI 辅助临床试验招募，核心价值在于利用电子健康记录更高效地识别潜在受试者，并改善传统人工筛选流程的效率与覆盖范围。",
-    "score": 88,
-    "tags": [
-      "AI",
-      "蛋白/结构"
-    ],
-    "originalUrl": "https://doi.org/10.1007/s40290-026-00635-9",
     "editorialMode": "rules",
     "editorialReason": "通过 V2 规则筛选与多维评分。"
   },
