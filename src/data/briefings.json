@@ -1,5 +1,47 @@
 [
   {
+    "id": "2026-10-02-10-20944-preprints202610-0130-v1",
+    "manual": false,
+    "briefingDate": "2026-10-03",
+    "publishedAt": "2026-10-02",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "预印本",
+    "titleZh": "The Next Language of Biology May Not Be Human",
+    "titleOriginal": "The Next Language of Biology May Not Be Human",
+    "summary": "Artificial intelligence is changing how cancer biology is read, searched, modeled, and turned into hypotheses. But scientific AI does not meet biology directly. Much of what it learns has already passed through English, abstracts, pathway l…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 78,
+    "tags": [
+      "AI",
+      "单细胞/空间组学",
+      "蛋白/结构"
+    ],
+    "originalUrl": "https://doi.org/10.20944/preprints202610.0130.v1",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-30-10-21203-rs-3-rs-10627241-v1",
+    "manual": false,
+    "briefingDate": "2026-10-03",
+    "publishedAt": "2026-09-30",
+    "category": "基因组与单细胞",
+    "source": "Europe PMC",
+    "sourceType": "预印本",
+    "titleZh": "Feasibility of an AI-Simulated Patient Encounter Delivered in Group and Individual Learning Formats for First-Year Medical Students: A Two-Cohort Pilot Study",
+    "titleOriginal": "Feasibility of an AI-Simulated Patient Encounter Delivered in Group and Individual Learning Formats for First-Year Medical Students: A Two-Cohort Pilot Study",
+    "summary": "Abstract Background Generative artificial intelligence (AI) and large language model (LLM)–based simulated patients are being evaluated for problem-based learning and case-based learning in undergraduate medical education, but delivery form…",
+    "whyItMatters": "关注点在于 AI 是否能从高维组学数据中提取可解释、可复现的生物学信号，并在独立数据集上保持稳定。",
+    "score": 78,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.21203/rs.3.rs-10627241/v1",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-09-30-10-1080-00029157-2026-2736088",
     "manual": false,
     "briefingDate": "2026-10-02",
@@ -584,46 +626,6 @@
       "蛋白/结构"
     ],
     "originalUrl": "https://doi.org/10.64898/2026.09.03.749176",
-    "editorialMode": "rules",
-    "editorialReason": "通过 V2 规则筛选与多维评分。"
-  },
-  {
-    "id": "2026-09-09-10-1007-s40615-026-03151-3",
-    "manual": false,
-    "briefingDate": "2026-09-11",
-    "publishedAt": "2026-09-09",
-    "category": "精准医疗",
-    "source": "Europe PMC",
-    "sourceType": "方法/模型",
-    "titleZh": "Cross-Modal Demographic Bias in Generative AI Representations of Physicians: A Comparative Audit of Large Language Models and Text-to-Image Models.",
-    "titleOriginal": "Cross-Modal Demographic Bias in Generative AI Representations of Physicians: A Comparative Audit of Large Language Models and Text-to-Image Models.",
-    "summary": "With the rapid expansion of generative artificial intelligence (AI) in text generation and image synthesis, algorithmic bias has become an increasingly important concern in medicine, where professional authority, public trust, and represent…",
-    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
-    "score": 88,
-    "tags": [
-      "AI"
-    ],
-    "originalUrl": "https://doi.org/10.1007/s40615-026-03151-3",
-    "editorialMode": "rules",
-    "editorialReason": "通过 V2 规则筛选与多维评分。"
-  },
-  {
-    "id": "2026-09-09-10-1177-15533506261488588",
-    "manual": false,
-    "briefingDate": "2026-09-11",
-    "publishedAt": "2026-09-09",
-    "category": "肿瘤生物学",
-    "source": "Europe PMC",
-    "sourceType": "方法/模型",
-    "titleZh": "Large Language Models for Breast Cancer Education: A Comparative Analysis of Quality, Reliability and Readability.",
-    "titleOriginal": "Large Language Models for Breast Cancer Education: A Comparative Analysis of Quality, Reliability and Readability.",
-    "summary": "BackgroundPatients increasingly consult artificial intelligence (AI) tools for breast cancer information. While Large Language Models (LLMs) enhance information accessibility, their accuracy, reliability, and alignment with patient health l…",
-    "whyItMatters": "关注点在于 AI 是否帮助发现新的肿瘤机制、分型或治疗线索，并能在独立样本或实验体系中得到验证。",
-    "score": 88,
-    "tags": [
-      "AI"
-    ],
-    "originalUrl": "https://doi.org/10.1177/15533506261488588",
     "editorialMode": "rules",
     "editorialReason": "通过 V2 规则筛选与多维评分。"
   },
