@@ -1,5 +1,47 @@
 [
   {
+    "id": "2026-09-30-10-1177-10519815261491758",
+    "manual": false,
+    "briefingDate": "2026-10-04",
+    "publishedAt": "2026-09-30",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Reliability, quality, and readability levels of ChatGPT-5.2 responses regarding office ergonomics: Analysis of content based on Google Trends.",
+    "titleOriginal": "Reliability, quality, and readability levels of ChatGPT-5.2 responses regarding office ergonomics: Analysis of content based on Google Trends.",
+    "summary": "BackgroundOffice ergonomics plays a critical role in preventing work-related musculoskeletal disorders and promoting employee well-being. As large language models such as ChatGPT are increasingly used to obtain health-related information, e…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 77,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1177/10519815261491758",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-09-29-10-2174-0115734099491620260915174557",
+    "manual": false,
+    "briefingDate": "2026-10-04",
+    "publishedAt": "2026-09-29",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "Revolution of Computer-assisted Drug Design: The Transformative Role of Artificial Intelligence.",
+    "titleOriginal": "Revolution of Computer-assisted Drug Design: The Transformative Role of Artificial Intelligence.",
+    "summary": "Artificial intelligence (AI) is transforming computer-aided drug design (CADD) by enabling more rapid, efficient, and data-driven approaches to drug discovery. This narrative review examines recent applications of AI, machine learning (ML),…",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 76,
+    "tags": [
+      "AI",
+      "蛋白/结构",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.2174/0115734099491620260915174557",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-10-02-10-20944-preprints202610-0130-v1",
     "manual": false,
     "briefingDate": "2026-10-03",
@@ -584,48 +626,6 @@
       "单细胞/空间组学"
     ],
     "originalUrl": "https://doi.org/10.1007/s43390-026-01534-4",
-    "editorialMode": "rules",
-    "editorialReason": "通过 V2 规则筛选与多维评分。"
-  },
-  {
-    "id": "2026-09-10-10-1177-10781552261485826",
-    "manual": false,
-    "briefingDate": "2026-09-12",
-    "publishedAt": "2026-09-10",
-    "category": "AI 药物发现",
-    "source": "Europe PMC",
-    "sourceType": "方法/模型",
-    "titleZh": "AI adoption among French oncology pharmacists: A national survey.",
-    "titleOriginal": "AI adoption among French oncology pharmacists: A national survey.",
-    "summary": "BackgroundLarge language model (LLM)-based generative artificial intelligence (AI) tools have rapidly entered clinical practice. In oncology pharmacy, a specialty marked by high technical complexity, strict regulatory constraints, and an ex…",
-    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
-    "score": 82,
-    "tags": [
-      "AI",
-      "药物发现"
-    ],
-    "originalUrl": "https://doi.org/10.1177/10781552261485826",
-    "editorialMode": "rules",
-    "editorialReason": "通过 V2 规则筛选与多维评分。"
-  },
-  {
-    "id": "2026-09-07-10-64898-2026-09-03-749176",
-    "manual": false,
-    "briefingDate": "2026-09-12",
-    "publishedAt": "2026-09-07",
-    "category": "蛋白质与结构生物学",
-    "source": "Europe PMC",
-    "sourceType": "方法/模型",
-    "titleZh": "Real Science Is Harder Than Benchmarks: Evaluating Advanced AI Frameworks on Published Studies. II. Antibody Properties, Lipid-RNA Interactions",
-    "titleOriginal": "Real Science Is Harder Than Benchmarks: Evaluating Advanced AI Frameworks on Published Studies. II. Antibody Properties, Lipid-RNA Interactions",
-    "summary": "Artificial Intelligence (AI) frameworks for automating scientific research have shown strong performance on benchmarks, but their utility for real-world industrial research remains insufficiently characterized. Extending the analysis presen…",
-    "whyItMatters": "关注点在于 AI 是否提升结构解析、功能预测或蛋白设计能力，以及预测结果能否经实验验证。",
-    "score": 82,
-    "tags": [
-      "AI",
-      "蛋白/结构"
-    ],
-    "originalUrl": "https://doi.org/10.64898/2026.09.03.749176",
     "editorialMode": "rules",
     "editorialReason": "通过 V2 规则筛选与多维评分。"
   },
