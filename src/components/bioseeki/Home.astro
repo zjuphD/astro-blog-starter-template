@@ -60,6 +60,8 @@ const plNums = [[0, "0"], [1000, "1,000"], [2000, "2,000"]].map(([bp, label]) =>
 });
 const plCuts = [233, 263, 284].map((bp) => { const [x1, y1] = plPt(bp, PL.r + 7), [x2, y2] = plPt(bp, PL.r + 15); return `M${x1} ${y1}L${x2} ${y2}`; });
 const plMcs = plPt(263, PL.r + 17);
+// reading head: a short highlighted stretch of ring (like GeneCode's selection) that circles the map
+const plHead = (() => { const [x1, y1] = plPt(-70, PL.r), [x2, y2] = plPt(70, PL.r); return `M${x1} ${y1}A${PL.r} ${PL.r} 0 0 1 ${x2} ${y2}`; })();
 const plLabels = [
   { text: "lacZα", at: plPt(378, PL.r + 22), anchor: "start", dx: 2 },
   { text: "AmpR", at: plPt(1315, PL.r + 22), anchor: "middle", dx: 0, dy: 8 },
@@ -144,6 +146,8 @@ const jsonLd = [
 {VERIFY.sogou && <meta name="sogou_site_verification" content={VERIFY.sogou}>}
 {VERIFY.shenma && <meta name="shenma-site-verification" content={VERIFY.shenma}>}
 <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+{/* Animations start from hidden states only when this script ran, so the page is fully visible without JS. */}
+<script is:inline>document.documentElement.classList.add("js")</script>
 <style is:global>
 /* ============ TOKENS ============ */
 :root{
@@ -418,8 +422,9 @@ section{ padding:clamp(4.5rem,10vh,8rem) 0; }
 .section-lede{ color:var(--ink-soft); font-size:1.14rem; max-width:56ch; }
 
 /* ============ REVEAL ============ */
-.reveal{ opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .9s var(--ease); transition-delay:var(--d,0s); }
-.reveal.in{ opacity:1; transform:none; }
+.reveal{ transition:opacity .8s ease, transform .9s var(--ease); transition-delay:var(--d,0s); }
+.js .reveal{ opacity:0; transform:translateY(18px); }
+.js .reveal.in{ opacity:1; transform:none; }
 
 /* ============ SHARED BITS ============ */
 .badge{
@@ -455,7 +460,7 @@ section{ padding:clamp(4.5rem,10vh,8rem) 0; }
   font-size:clamp(2.3rem,5vw,3.6rem); line-height:1.18; letter-spacing:-.03em;
   margin:1.1rem 0 1.5rem;
 }
-.hero h1 .line{ display:block; text-wrap:balance; }
+.hero h1 .line{ display:block; text-wrap:balance; overflow:hidden; padding-bottom:.1em; margin-bottom:-.1em; }
 .hero h1 em{ font-style:normal; color:var(--sage-deep); }
 .hero-sub{ color:var(--ink-soft); font-size:1.2rem; max-width:32em; margin-bottom:2.2rem; }
 .hero-sub strong{ color:var(--ink); font-weight:500; }
@@ -466,14 +471,15 @@ section{ padding:clamp(4.5rem,10vh,8rem) 0; }
 .hero-demo{ font:500 .9rem/1.4 "PingFang SC","Microsoft YaHei","Noto Sans SC","Instrument Sans",system-ui,sans-serif; letter-spacing:.01em; color:var(--sage-deep); }
 .hero-demo:hover{ color:var(--ink); }
 
-/* ============ CAPABILITY INDEX (static strip under the hero) ============ */
-.index{ border-block:1px solid var(--line); background:var(--glass-soft); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); }
-.index-row{ display:flex; justify-content:space-between; align-items:center; gap:.5rem 1rem; padding:15px 0; }
-.index-row span{ font-size:.92rem; color:var(--ink-soft); white-space:nowrap; letter-spacing:.02em; }
-.index-row i{ width:3px; height:3px; border-radius:50%; flex:none; background:color-mix(in srgb, var(--ochre) 70%, transparent); }
-/* when the nine labels don't fit one line (measured by the script; the media query is the no-JS fallback) */
-.index-row.is-wrap{ flex-wrap:wrap; justify-content:center; gap:.4rem 1.6rem; }
-.index-row.is-wrap i{ display:none; }
+/* ============ CAPABILITY STRIP: a slow marquee under the hero (pauses under the pointer) ============ */
+.index{ overflow:hidden; border-block:1px solid var(--line); background:var(--glass-soft); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee{ display:flex; width:max-content; animation:marquee 60s linear infinite; }
+.index:hover .marquee{ animation-play-state:paused; }
+.marquee-group{ display:flex; align-items:center; flex:none; padding:15px 0; }
+.marquee-group span{ padding:0 1.9rem; font-size:.92rem; letter-spacing:.02em; color:var(--ink-soft); white-space:nowrap; }
+.marquee-group i{ width:4px; height:4px; border-radius:50%; flex:none; background:color-mix(in srgb, var(--ochre) 75%, transparent); }
+@keyframes marquee{ to{ transform:translateX(-50%); } }
 
 /* ============ CAPABILITIES: one sheet — GeneCode on top, the four modes as its bottom row ============ */
 .suite{ overflow:hidden; }
@@ -787,6 +793,132 @@ body[data-lang="en"] .brand-sub{ display:none; }
 }
 :root[data-theme="dark"] .logo-img{ filter:invert(1); }
 
+
+/* ============ MOTION ============ */
+/* Everything here starts from a hidden or empty state only under .js (set in <head>), and the
+   reduced-motion block at the end of this sheet returns every element to its finished state. */
+
+/* masked rise: headline text slides up out of its own line box */
+.mask{ display:block; overflow:hidden; padding-bottom:.12em; margin-bottom:-.12em; }
+.rise{ display:block; }
+.js .rise{ transform:translateY(108%); transition:transform 1.1s var(--ease); transition-delay:calc(var(--d,0s) + var(--rd,.08s)); }
+.js .in .rise{ transform:none; }
+.js h1.reveal{ opacity:1; transform:none; }
+
+/* section heads: the rule draws, the title rises, the label and lede fade up behind it */
+.js .section-head.reveal{ opacity:1; transform:none; }
+.js .section-head :is(.eyebrow,.section-lede){ opacity:0; transform:translateY(10px); transition:opacity .7s ease, transform .9s var(--ease); }
+.js .section-head .section-lede{ transition-delay:.28s; }
+.js .section-head.in :is(.eyebrow,.section-lede){ opacity:1; transform:none; }
+.js :is(.section-head,.hero) .eyebrow::before{ transform:scaleX(0); transform-origin:left center; transition:transform .9s var(--ease) .12s; }
+.js .section-head.in .eyebrow::before,.js .hero .eyebrow.in::before{ transform:none; }
+
+/* rows inside a panel arrive one after another once the panel is in view */
+.js :is(.suite .mode,.bounds .bound,.faq-list .faq,.steps3-wrap .step3){ opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .8s var(--ease); transition-delay:calc(.3s + var(--i,0) * .08s); }
+.js .steps3-wrap .step3{ transition-delay:calc(.2s + var(--i,0) * .16s); }
+.js :is(.suite.in .mode,.bounds.in .bound,.faq-list.in .faq,.steps3-wrap.in .step3){ opacity:1; transform:none; }
+
+/* raised icon keys lift a little under the pointer */
+.ico-box{ transition:transform .35s var(--ease), box-shadow .35s ease; }
+@media (hover:hover) and (pointer:fine){
+  :is(.mode,.bound,.verify-card,.principle):hover .ico-box{ transform:translateY(-2px); box-shadow:var(--key), 0 8px 14px -8px var(--shadow); }
+}
+
+/* arrows nudge the way they point */
+.ai{ transition:transform .3s var(--ease), opacity .2s; }
+:is(a,.btn):is(:hover,:focus-visible) > .a-ext{ transform:translate(2px,-2px); }
+:is(a,.btn):is(:hover,:focus-visible) > .a-down{ transform:translateY(2px); }
+:is(a,.btn):is(:hover,:focus-visible) > .a-up{ transform:translateY(-2px); }
+:is(a,.btn):is(:hover,:focus-visible) > .a-right{ transform:translateX(3px); }
+
+/* status dots breathe */
+.badge:is(.is-ok,.is-live) .dot-i{ animation:ping 2.4s ease-out infinite; }
+@keyframes ping{ 0%{ box-shadow:0 0 0 0 color-mix(in srgb, var(--dot) 55%, transparent); } 70%,100%{ box-shadow:0 0 0 5px color-mix(in srgb, var(--dot) 0%, transparent); } }
+
+/* nav: one key-cap pill slides to the current section's link */
+.nav-links{ position:relative; }
+.nav-links a{ position:relative; z-index:1; }
+.nav-links a[aria-current="true"]{ background:none; box-shadow:none; }
+.nav-ind{ position:absolute; left:0; top:0; height:100%; width:0; border-radius:10px; pointer-events:none; opacity:0;
+  background:var(--key-bg); box-shadow:inset 0 0 0 1px var(--key-ring), 0 1px 2px var(--key-drop);
+  transition:transform .45s var(--ease), width .45s var(--ease), opacity .3s ease; }
+
+/* GeneCode map: the ring draws, the features sweep in, the labels settle, then a reading head circles it */
+.js .suite .pl-ring{ stroke-dasharray:1 1; stroke-dashoffset:1; transition:stroke-dashoffset 1.6s var(--ease) .25s; }
+.js .suite.in .pl-ring{ stroke-dashoffset:0; }
+.pl-feat,.pl-head{ transform-box:view-box; transform-origin:50% 50%; }
+.js .suite .pl-feat{ opacity:0; transform:rotate(-16deg); transition:opacity .6s ease, transform 1.3s var(--ease); transition-delay:calc(.8s + var(--i) * .2s); }
+.js .suite.in .pl-feat{ opacity:1; transform:none; }
+.js .suite :is(.pl-ticks,.pl-nums,.pl-cuts,.pl-labels,.pl-center){ opacity:0; transition:opacity .9s ease 1.4s; }
+.js .suite :is(.pl-center){ transition-delay:.5s; }
+.js .suite.in :is(.pl-ticks,.pl-nums,.pl-cuts,.pl-labels,.pl-center){ opacity:1; }
+.pl-head{ fill:none; stroke:var(--sage-deep); stroke-opacity:.16; stroke-width:20; stroke-linecap:round; opacity:0; }
+.js .suite.in .pl-head{ opacity:1; transition:opacity 1s ease 2.2s; animation:pl-spin 20s linear 2.2s infinite; }
+@keyframes pl-spin{ to{ transform:rotate(360deg); } }
+
+/* citation report: the command types itself, then each line resolves from "checking" to its verdict */
+.vslot{ display:grid; justify-items:start; align-self:start; }
+.vslot > *{ grid-area:1 / 1; }
+.verdict{ transition:opacity .3s ease, transform .5s cubic-bezier(.34,1.56,.64,1); }
+.v-pending{ --vc:var(--ink-soft); opacity:0; pointer-events:none; }
+.spin{ width:.8em; height:.8em; border-radius:50%; border:1.5px solid currentColor; border-right-color:transparent; animation:spin .8s linear infinite; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+.rtext{ transition:opacity .45s ease; }
+.report.armed .rrow:not(.done) .verdict:not(.v-pending){ opacity:0; transform:scale(.8); }
+.report.armed .rrow:not(.done) .v-pending{ opacity:1; }
+.report.armed .rrow:not(.done) .rtext{ opacity:.4; }
+.report-foot{ transition:opacity .6s ease; }
+.report.armed:not(.complete) .report-foot{ opacity:0; }
+.report.armed .typed{ display:inline-block; vertical-align:bottom; overflow:hidden; white-space:nowrap; width:0; }
+.report.typing .typed{ animation:type 1.1s steps(var(--n)) forwards; }
+.report.armed .report-cmd::after{ content:""; display:inline-block; width:.5em; height:1.05em; margin-left:2px; vertical-align:-.18em; background:currentColor; animation:caret 1s steps(1) infinite; }
+.report.complete .report-cmd::after{ animation:none; opacity:0; transition:opacity .4s; }
+@keyframes type{ to{ width:calc(var(--n) * 1ch); } }
+@keyframes caret{ 50%{ opacity:0; } }
+
+/* evidence chain: links draw in, then one source–fragment–claim path lights up at a time */
+.js .chain .wire{ stroke-dasharray:1 1; stroke-dashoffset:1; transition:stroke-dashoffset 1.1s var(--ease); transition-delay:var(--wd,0s); }
+.js .chain.in .wire{ stroke-dashoffset:0; }
+.js .chain .wire-flow{ opacity:0; transition:opacity .8s ease 1.8s; }
+.js .chain.in .wire-flow{ opacity:1; }
+.frag,.claim,.wire{ transition:border-color .35s ease, box-shadow .35s ease, background-color .35s ease, stroke .35s ease, stroke-width .35s ease; }
+.frag.is-hl{ border-color:color-mix(in srgb, var(--ochre) 55%, var(--line)); box-shadow:0 0 0 3px color-mix(in srgb, var(--ochre) 14%, transparent); }
+.claim.is-hl{ background:rgba(217,169,78,.12); border-left-color:#C08A2D; }
+.wire-out.is-hl .wire{ stroke:var(--ochre); stroke-width:1.8; }
+.wire-out.is-hl .wire-flow{ stroke:var(--ochre-deep); }
+
+/* project log: steps light up as you read down, and a rail fills alongside them */
+.log{ position:relative; }
+.log-n{ position:relative; z-index:1; transition:background-color .45s ease, color .45s ease, box-shadow .45s ease; }
+.log::before,.log::after{ content:""; position:absolute; left:var(--rail-x,0); top:var(--rail-top,0); width:1px; height:var(--rail-h,0); pointer-events:none; }
+.log::before{ background:var(--line-strong); }
+.log::after{ background:var(--sage); transform:scaleY(var(--rail-p,0)); transform-origin:top; transition:transform .6s var(--ease); }
+.log-step.done .log-n{ color:var(--key-bg); background:var(--sage-deep); box-shadow:inset 0 0 0 1px rgba(0,0,0,.12), inset 0 -2px 0 rgba(0,0,0,.14), 0 1px 2px var(--key-drop); }
+.log-step.ask.done .log-n{ background:var(--ochre-deep); }
+.log-confirm{ transition:box-shadow .5s ease; }
+.log-step.ask.done .log-confirm{ box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--ochre) 45%, transparent), 0 0 0 4px color-mix(in srgb, var(--ochre) 10%, transparent); }
+
+/* pricing: the credit bars fill when the plans arrive */
+.plan-meter i{ width:var(--w); }
+.js .plan .plan-meter i{ width:0; transition:width 1.2s var(--ease); transition-delay:calc(var(--d,0s) + .4s); }
+.js .plan.in .plan-meter i{ width:var(--w); }
+
+/* FAQ: answers open and close smoothly where the browser can animate <details> */
+:root{ interpolate-size:allow-keywords; }
+.faq::details-content{ block-size:0; overflow-y:clip; transition:block-size .45s var(--ease), content-visibility .45s allow-discrete; }
+.faq[open]::details-content{ block-size:auto; }
+
+/* demo: a slow ring invites the first click */
+.play-ico{ position:relative; }
+.play-ico::after{ content:""; position:absolute; inset:-5px; border-radius:50%; border:1.5px solid rgba(255,255,255,.6); animation:ring 2.6s var(--ease) infinite; pointer-events:none; }
+@keyframes ring{ 0%{ transform:scale(.86); opacity:.9; } 100%{ transform:scale(1.4); opacity:0; } }
+
+/* hero: the helix drifts down and fades as the page scrolls away from it */
+@supports (animation-timeline: scroll()){
+  .hero-video{ animation:helix-drift linear both; animation-timeline:scroll(root); animation-range:0 100vh; }
+  @keyframes helix-drift{ to{ transform:translateY(16vh); opacity:.35; } }
+}
+
 /* ============ RESPONSIVE ============ */
 /* nav: 7 links + language toggle + 3 actions. Measured with .tools/site-navcheck.mjs: links need ~1030px in zh
    and ~1240px in en; the breakpoints below leave ~60px for wider system fonts. The actions always stay. */
@@ -794,10 +926,6 @@ body[data-lang="en"] .brand-sub{ display:none; }
 @media (max-width:1240px){ .brand-sub{ display:none; } }
 @media (max-width:1080px){
   .nav-links a{ padding:7px 8px; font-size:.88rem; }
-}
-@media (max-width:1180px){
-  .index-row{ flex-wrap:wrap; justify-content:center; gap:.4rem 1.6rem; }
-  .index-row i{ display:none; }
 }
 @media (max-width:1100px){ .nav-links{ display:none; } }
 @media (max-width:980px){
@@ -841,8 +969,8 @@ body[data-lang="en"] .brand-sub{ display:none; }
   /* small enough that a 12-character Chinese clause fits one line, so 。 never wraps alone */
   .section-title{ font-size:clamp(1.55rem,7.2vw,1.9rem); }
   .hero-video{ display:none; }
-  .index-row{ gap:.3rem 1.2rem; padding:13px 0; }
-  .index-row span{ font-size:.86rem; }
+  .marquee-group{ padding:13px 0; }
+  .marquee-group span{ padding:0 1.3rem; font-size:.86rem; }
   /* phones: every ruled grid becomes a list — icon left, text right */
   .suite-modes,.bounds,.verify-cards{ grid-template-columns:1fr; }
   .mode,.bound{ grid-template-columns:auto 1fr; gap:0 16px; border-left:0 !important; }
@@ -882,7 +1010,25 @@ body[data-lang="en"] .brand-sub{ display:none; }
   html{ scroll-behavior:auto; }
   .orb,.live-dot{ animation:none !important; }
   .nav::after{ display:none; }
-  .reveal,.reveal.in{ opacity:1; transform:none; transition:none; }
+  .js .reveal,.js .reveal.in{ opacity:1; transform:none; transition:none; }
+  .js .rise{ transform:none; transition:none; }
+  .js .section-head :is(.eyebrow,.section-lede),.js :is(.suite .mode,.bounds .bound,.faq-list .faq,.steps3-wrap .step3){ opacity:1; transform:none; transition:none; }
+  .js :is(.section-head,.hero) .eyebrow::before{ transform:none; transition:none; }
+  .marquee{ animation:none; width:auto; flex-wrap:wrap; justify-content:center; }
+  .marquee-group{ flex-wrap:wrap; justify-content:center; row-gap:.3rem; }
+  .marquee-group + .marquee-group{ display:none; }
+  .marquee-group i{ display:none; }
+  .index{ -webkit-mask-image:none; mask-image:none; }
+  .js .suite .pl-ring{ stroke-dashoffset:0; transition:none; }
+  .js .suite :is(.pl-feat,.pl-ticks,.pl-nums,.pl-cuts,.pl-labels,.pl-center){ opacity:1; transform:none; transition:none; }
+  .pl-head{ display:none; }
+  .js .chain .wire{ stroke-dashoffset:0; transition:none; }
+  .js .chain .wire-flow{ opacity:.5; transition:none; }
+  .js .plan .plan-meter i{ width:var(--w); transition:none; }
+  .badge .dot-i,.play-ico::after,.spin{ animation:none !important; }
+  .nav-ind,.log::after,.log-n,.ai,.ico-box{ transition:none !important; }
+  .faq::details-content{ transition:none; }
+  .hero-video{ animation:none !important; }
   .cfx{ display:none; }
   .btn,.btn .ai,.faq-ic,.play-pill,.card-link,.demo-foot a,.hero-demo,.seg a{ transition:none !important; }
   .btn:hover,.btn:active{ transform:none !important; }
@@ -916,7 +1062,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
     <span class="brand-name">BIOSEEKI</span>
     <span class="brand-sub">RESEARCH WORKSPACE</span>
   </a>
-  <div class="nav-links">
+  <div class="nav-links"><span class="nav-ind" aria-hidden="true"></span>
     {t.nav.items.map(([href, label]) => <a href={href}>{label}</a>)}
   </div>
   <div class="nav-actions">
@@ -948,7 +1094,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
     <div class="hero-grid">
       <div>
         <p class="eyebrow reveal" style="--d:.04s">{t.hero.eyebrow}</p>
-        <h1 class="reveal" style="--d:.08s"><span class="line">{t.hero.h1a}</span><span class="line"><em>{t.hero.h1b}</em>{lang === "zh" ? "。" : "."}</span></h1>
+        <h1 class="reveal"><span class="line"><span class="rise" style="--rd:.1s">{t.hero.h1a}</span></span><span class="line"><span class="rise" style="--rd:.24s"><em>{t.hero.h1b}</em>{lang === "zh" ? "。" : "."}</span></span></h1>
         <p class="hero-sub reveal" style="--d:.16s" set:html={t.hero.sub} />
         <div class="hero-ctas reveal" style="--d:.24s">
           <a class="btn btn-primary" href={dlHref} download={dlAttr}><svg class="btn-ico btn-ico-fill" aria-hidden="true"><use href="#i-apple"/></svg>{t.hero.download}</a>
@@ -960,12 +1106,12 @@ body[data-lang="en"] .brand-sub{ display:none; }
   </div>
 </header>
 
-<div class="index" aria-hidden="true"><div class="wrap index-row">
-  {t.ticker.map((w, i) => <>{i > 0 && <i></i>}<span>{w}</span></>)}
+<div class="index" aria-hidden="true"><div class="marquee">
+  {[0, 1].map(() => <div class="marquee-group">{t.ticker.map((w) => <><span>{w}</span><i></i></>)}</div>)}
 </div></div>
 
 <section id="tools"><div class="wrap">
-  <div class="section-head reveal"><p class="eyebrow"><span class="section-num">01</span> · {t.tools.eyebrow}</p><h2 class="section-title">{t.tools.title}</h2><p class="section-lede">{t.tools.lede}</p></div>
+  <div class="section-head reveal"><p class="eyebrow"><span class="section-num">01</span> · {t.tools.eyebrow}</p><h2 class="section-title"><span class="mask"><span class="rise">{t.tools.title}</span></span></h2><p class="section-lede">{t.tools.lede}</p></div>
   <article class="glass suite reveal">
     <div class="suite-feature">
       <div class="feature-text">
@@ -974,21 +1120,26 @@ body[data-lang="en"] .brand-sub{ display:none; }
         <a class="card-link" href="https://genecode-agent.pages.dev" target="_blank" rel="noopener noreferrer"><Label text={t.tools.gc.link} /></a>
       </div>
       <svg class="plasmid" viewBox="0 0 320 300" role="img" aria-label={`${t.tools.gc.h} · pUC19 · 2,686 bp`}>
-        <circle cx={PL.cx} cy={PL.cy} r={PL.r} class="pl-ring"/>
-        {plTicks.map((k) => <path class={`pl-tick${k.major ? " major" : ""}`} d={k.d}/>)}
-        {plNums.map((n) => <text x={n.x} y={n.y + (n.anchor === "middle" ? 4 : 0)} class="pl-num" text-anchor={n.anchor}>{n.label}</text>)}
-        {plFeatures.map((f) => <path class={f.cls} d={f.d}/>)}
-        {plCuts.map((d) => <path class="pl-cut" d={d}/>)}
-        <path class="pl-lead" d={`M${plMcs[0]} ${plMcs[1]}V30`}/>
-        <text x={plMcs[0]} y="22" class="pl-lab" text-anchor="middle">HindIII · BamHI · EcoRI</text>
-        {plLabels.map((l) => <text x={l.at[0] + l.dx} y={l.at[1] + 4 + (l.dy ?? 0)} class="pl-lab" text-anchor={l.anchor}>{l.text}</text>)}
-        <text x={PL.cx} y={PL.cy + 2} class="pl-name" text-anchor="middle">pUC19</text>
-        <text x={PL.cx} y={PL.cy + 21} class="pl-sub" text-anchor="middle">2,686 bp</text>
+        <path class="pl-head" d={plHead}/>
+        <circle cx={PL.cx} cy={PL.cy} r={PL.r} class="pl-ring" pathLength="1" transform={`rotate(-90 ${PL.cx} ${PL.cy})`}/>
+        <g class="pl-ticks">{plTicks.map((k) => <path class={`pl-tick${k.major ? " major" : ""}`} d={k.d}/>)}</g>
+        <g class="pl-nums">{plNums.map((n) => <text x={n.x} y={n.y + (n.anchor === "middle" ? 4 : 0)} class="pl-num" text-anchor={n.anchor}>{n.label}</text>)}</g>
+        {plFeatures.map((f, i) => <path class={`pl-feat ${f.cls}`} style={`--i:${i}`} d={f.d}/>)}
+        <g class="pl-cuts">{plCuts.map((d) => <path class="pl-cut" d={d}/>)}</g>
+        <g class="pl-labels">
+          <path class="pl-lead" d={`M${plMcs[0]} ${plMcs[1]}V30`}/>
+          <text x={plMcs[0]} y="22" class="pl-lab" text-anchor="middle">HindIII · BamHI · EcoRI</text>
+          {plLabels.map((l) => <text x={l.at[0] + l.dx} y={l.at[1] + 4 + (l.dy ?? 0)} class="pl-lab" text-anchor={l.anchor}>{l.text}</text>)}
+        </g>
+        <g class="pl-center">
+          <text x={PL.cx} y={PL.cy + 2} class="pl-name" text-anchor="middle">pUC19</text>
+          <text x={PL.cx} y={PL.cy + 21} class="pl-sub" text-anchor="middle">2,686 bp</text>
+        </g>
       </svg>
     </div>
     <ul class="suite-modes">
-      {t.tools.modes.map((m) => (
-        <li class="mode">
+      {t.tools.modes.map((m, i) => (
+        <li class="mode" style={`--i:${i}`}>
           <div class="ico-box" aria-hidden="true"><svg class="ico"><use href={`#${m.icon}`}/></svg></div>
           <div><h3>{m.h}</h3><p>{m.p}</p></div>
         </li>
@@ -998,7 +1149,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
 </div></section>
 
 <section id="verify"><div class="wrap">
-  <div class="section-head reveal"><p class="eyebrow"><span class="section-num">02</span> · {t.verify.eyebrow}</p><h2 class="section-title">{t.verify.title}</h2><p class="section-lede">{t.verify.lede}</p></div>
+  <div class="section-head reveal"><p class="eyebrow"><span class="section-num">02</span> · {t.verify.eyebrow}</p><h2 class="section-title"><span class="mask"><span class="rise">{t.verify.title}</span></span></h2><p class="section-lede">{t.verify.lede}</p></div>
   <div class="verify-grid">
     <div class="verify-cards">
       {t.verify.cards.map((c, i) => (
@@ -1006,10 +1157,10 @@ body[data-lang="en"] .brand-sub{ display:none; }
       ))}
     </div>
     <aside class="glass report reveal" style="--d:.12s" aria-label={t.verify.reportAria}>
-      <div class="report-bar"><span class="report-cmd">citecheck --bib refs.bib</span><span class="badge">{t.verify.illustrative}</span></div>
+      <div class="report-bar"><span class="report-cmd"><span class="typed" style="--n:24">citecheck --bib refs.bib</span></span><span class="badge">{t.verify.illustrative}</span></div>
       <div class="report-body">
         {t.verify.report.map(([cls, verdict, text], i) => (
-          <div class="rrow"><span class={`verdict ${cls}`}><Label text={verdict} verdict /></span><p class="rtext"><small>[{i + 1}]</small>{text}</p></div>
+          <div class="rrow"><span class="vslot"><span class={`verdict ${cls}`}><Label text={verdict} verdict /></span><span class="verdict v-pending" aria-hidden="true"><i class="spin"></i>{t.verify.checking}</span></span><p class="rtext"><small>[{i + 1}]</small>{text}</p></div>
         ))}
       </div>
       <div class="report-foot"><span>{t.verify.reportFootL}</span><span><Label text={t.verify.reportFootR} /></span></div>
@@ -1018,7 +1169,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
 </div></section>
 
 <section id="principles"><div class="wrap">
-  <div class="section-head reveal"><p class="eyebrow"><span class="section-num">03</span> · {t.principles.eyebrow}</p><h2 class="section-title">{t.principles.title}</h2><p class="section-lede">{t.principles.lede}</p></div>
+  <div class="section-head reveal"><p class="eyebrow"><span class="section-num">03</span> · {t.principles.eyebrow}</p><h2 class="section-title"><span class="mask"><span class="rise">{t.principles.title}</span></span></h2><p class="section-lede">{t.principles.lede}</p></div>
   <figure class="glass chain reveal" aria-label={t.principles.chain.aria} data-chain>
     <div class="chain-bar"><span class="panel-title">{t.principles.chain.title}</span><span class="chain-legend"><i></i><Fragment set:html={glyphHtml(t.principles.chain.cols.join(" → "))} /></span></div>
     <div class="chain-grid">
@@ -1059,7 +1210,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
 </div></section>
 
 <section id="workflow"><div class="wrap">
-  <div class="section-head reveal"><p class="eyebrow"><span class="section-num">04</span> · {t.workflow.eyebrow}</p><h2 class="section-title">{t.workflow.title}</h2><p class="section-lede">{t.workflow.lede}</p></div>
+  <div class="section-head reveal"><p class="eyebrow"><span class="section-num">04</span> · {t.workflow.eyebrow}</p><h2 class="section-title"><span class="mask"><span class="rise">{t.workflow.title}</span></span></h2><p class="section-lede">{t.workflow.lede}</p></div>
   <div class="case">
     <aside class="glass case-card reveal">
       <p class="case-label">{t.workflow.case.label}</p>
@@ -1082,13 +1233,13 @@ body[data-lang="en"] .brand-sub{ display:none; }
     </ol>
   </div>
   <div class="glass bounds reveal">
-    {t.workflow.bounds.map((b) => (
-      <article class="bound"><div class="ico-box" aria-hidden="true"><svg class="ico"><use href={`#${b.icon}`}/></svg></div><div><h3>{b.h}</h3><p>{b.p}</p></div></article>
+    {t.workflow.bounds.map((b, i) => (
+      <article class="bound" style={`--i:${i}`}><div class="ico-box" aria-hidden="true"><svg class="ico"><use href={`#${b.icon}`}/></svg></div><div><h3>{b.h}</h3><p>{b.p}</p></div></article>
     ))}
   </div>
 </div></section>
 
-<section id="demo"><div class="wrap"><div class="section-head reveal"><p class="eyebrow"><span class="section-num">05</span> · {t.demo.eyebrow}</p><h2 class="section-title">{t.demo.title}</h2><p class="section-lede">{t.demo.lede}</p></div>
+<section id="demo"><div class="wrap"><div class="section-head reveal"><p class="eyebrow"><span class="section-num">05</span> · {t.demo.eyebrow}</p><h2 class="section-title"><span class="mask"><span class="rise">{t.demo.title}</span></span></h2><p class="section-lede">{t.demo.lede}</p></div>
 <div class="glass demo-glass reveal">
   <div class="demo-bar"><span class="panel-title">BIOSEEKI / PRODUCT DEMO</span><span class="badge mono is-live"><i class="dot-i" aria-hidden="true"></i>{t.demo.badge}</span></div>
   {/* Without JS the native controls stay; the script swaps them for the play button until the first play. */}
@@ -1100,7 +1251,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
 </div>
 </div></section>
 
-<section id="download"><div class="wrap"><div class="section-head reveal"><p class="eyebrow"><span class="section-num">06</span> · {t.download.eyebrow}</p><h2 class="section-title">{t.download.title}</h2><p class="section-lede">{t.download.lede}</p></div>
+<section id="download"><div class="wrap"><div class="section-head reveal"><p class="eyebrow"><span class="section-num">06</span> · {t.download.eyebrow}</p><h2 class="section-title"><span class="mask"><span class="rise">{t.download.title}</span></span></h2><p class="section-lede">{t.download.lede}</p></div>
 <div class="get">
   <article class="glass dl reveal">
     <div class="dl-top">
@@ -1126,7 +1277,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
     <p class="eyebrow steps3-label">{t.download.stepsLabel}</p>
     <ol class="steps3">
       {t.download.steps.map(([n, h, d], i) => (
-        <li class={`step3${i === 0 ? " live" : ""}`}>
+        <li class={`step3${i === 0 ? " live" : ""}`} style={`--i:${i}`}>
           <span class="step3-n">{n}</span>
           <div><h3>{h}</h3><p>{d}</p>{i === 0 ? <a class="btn btn-ghost btn-sm" href={t.links.signUp}><Label text={t.download.signUp} /></a> : null}</div>
         </li>
@@ -1136,14 +1287,14 @@ body[data-lang="en"] .brand-sub{ display:none; }
 </div>
 </div></section>
 
-<section id="pricing"><div class="wrap"><div class="section-head reveal"><p class="eyebrow"><span class="section-num">07</span> · {t.pricing.eyebrow}</p><h2 class="section-title">{t.pricing.title}</h2><p class="section-lede">{t.pricing.lede}</p></div>
+<section id="pricing"><div class="wrap"><div class="section-head reveal"><p class="eyebrow"><span class="section-num">07</span> · {t.pricing.eyebrow}</p><h2 class="section-title"><span class="mask"><span class="rise">{t.pricing.title}</span></span></h2><p class="section-lede">{t.pricing.lede}</p></div>
 <div class="plans">
   {t.pricing.plans.map((p, i) => (
     <article class={`glass plan reveal${p.tag ? " hot" : ""}`} style={`--d:${(i * 0.12).toFixed(2)}s`}>
       <div class="plan-head"><p class="plan-name">{p.name}</p>{p.tag ? <span class="badge is-live"><i class="dot-i" aria-hidden="true"></i>{p.tag}</span> : null}</div>
       <p class="plan-price"><span class="plan-cur">¥</span><b>{p.price}</b><span class="plan-per">{t.pricing.per}</span></p>
       <p class="plan-credits"><b>{p.credits}</b> credits</p>
-      <span class="plan-meter" aria-hidden="true"><i style={`width:${Math.round((creditsOf(p.credits) / maxCredits) * 100)}%`}></i></span>
+      <span class="plan-meter" aria-hidden="true"><i style={`--w:${Math.round((creditsOf(p.credits) / maxCredits) * 100)}%`}></i></span>
       <p class="plan-sub">{p.sub}</p>
       <a class={`btn plan-cta ${p.tag ? "btn-primary" : "btn-ghost"}`} href={t.links.plans}><Label text={t.pricing.cta} /></a>
     </article>
@@ -1152,10 +1303,10 @@ body[data-lang="en"] .brand-sub{ display:none; }
 </div></section>
 
 <section id="faq"><div class="wrap"><div class="faq-grid">
-  <div class="section-head reveal" style="margin-bottom:0"><p class="eyebrow"><span class="section-num">08</span> · {t.faq.eyebrow}</p><h2 class="section-title">{t.faq.title}</h2><p class="section-lede" set:html={glyphHtml(t.faq.lede, { html: true })} /></div>
+  <div class="section-head reveal" style="margin-bottom:0"><p class="eyebrow"><span class="section-num">08</span> · {t.faq.eyebrow}</p><h2 class="section-title"><span class="mask"><span class="rise">{t.faq.title}</span></span></h2><p class="section-lede" set:html={glyphHtml(t.faq.lede, { html: true })} /></div>
   <div class="glass faq-list reveal">
     {t.faq.items.map((f, i) => (
-      <details class="faq" open={i === 0}>
+      <details class="faq" open={i === 0} style={`--i:${i}`}>
         <summary><span>{f.q}</span><span class="faq-ic" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></summary>
         <p>{f.a}</p>
       </details>
@@ -1165,7 +1316,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
 
 <footer><div class="wrap"><div class="glass foot-card reveal">
   <div class="foot-brand"><img class="logo-img" src="/bioseeki/mark.webp" alt="" width="42" height="52"><span>BioSeeki</span></div>
-  <p class="foot-tag">{t.footer.tagA}<em>{t.footer.tagB}</em></p>
+  <p class="foot-tag"><span class="mask"><span class="rise">{t.footer.tagA}<em>{t.footer.tagB}</em></span></span></p>
   <p class="foot-slogan">{t.footer.slogan}</p>
   <nav class="foot-cols" aria-label={t.footer.aria}>
     {t.footer.groups.map((g) => (
@@ -1214,16 +1365,23 @@ body[data-lang="en"] .brand-sub{ display:none; }
   /* nav: mark the section that crosses the upper-middle of the viewport */
   var links = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
   var targets = links.map(function(a){ return document.getElementById(a.getAttribute("href").slice(1)); });
+  var ind = document.querySelector(".nav-ind");
   var spyQueued = false;
   function spy(){
     spyQueued = false;
-    var line = window.innerHeight * 0.45;
+    var line = window.innerHeight * 0.45, current = null;
     links.forEach(function(a, i){
       var t = targets[i], r = t && t.getBoundingClientRect();
-      if (r && r.top <= line && r.bottom > line) a.setAttribute("aria-current", "true");
+      if (r && r.top <= line && r.bottom > line){ a.setAttribute("aria-current", "true"); current = a; }
       else a.removeAttribute("aria-current");
     });
+    /* the pill slides to the current link (offsets are relative to .nav-links) */
+    if (ind){
+      if (current && current.offsetWidth){ ind.style.width = current.offsetWidth + "px"; ind.style.transform = "translateX(" + current.offsetLeft + "px)"; ind.style.opacity = "1"; }
+      else ind.style.opacity = "0";
+    }
   }
+  window.addEventListener("resize", function(){ if (!spyQueued){ spyQueued = true; requestAnimationFrame(spy); } });
   window.addEventListener("scroll", function(){ if (!spyQueued){ spyQueued = true; requestAnimationFrame(spy); } }, { passive:true });
   spy();
 
@@ -1236,7 +1394,8 @@ body[data-lang="en"] .brand-sub{ display:none; }
     var root = document.documentElement;
     var glow = document.querySelector(".cfx-glow"), grid = document.querySelector(".cfx-grid");
     document.querySelectorAll(".glass").forEach(function(el){ el.classList.add("spot"); });
-    document.querySelectorAll(".suite, .report, .chain, .case-card, .log, .bounds, .demo-glass, .dl, .plan, .faq-list, .foot-card").forEach(function(el){ el.classList.add("spot-edge"); });
+    /* not .log: its ::before/::after draw the progress rail */
+    document.querySelectorAll(".suite, .report, .chain, .case-card, .bounds, .demo-glass, .dl, .plan, .faq-list, .foot-card").forEach(function(el){ el.classList.add("spot-edge"); });
     var tx = 0, ty = 0, g1 = { x:0, y:0 };
     var running = false;
     var mod = function(a, n){ return ((a % n) + n) % n; };
@@ -1281,7 +1440,11 @@ body[data-lang="en"] .brand-sub{ display:none; }
       var core = chain.querySelector("[data-core]").getBoundingClientRect();
       var stacked = core.top > chain.querySelector("[data-src]").getBoundingClientRect().bottom;
       var html = "";
-      var wire = function(kind, d){ html += '<g class="wire-' + kind + '"><path class="wire" d="' + d + '"/><path class="wire-flow" d="' + d + '"/></g>'; };
+      var nIn = 0, nOut = 0;
+      var wire = function(kind, d, i){
+        var delay = kind === "in" ? nIn++ * 0.07 : 0.55 + nOut++ * 0.16;
+        html += '<g class="wire-' + kind + '"' + (i != null ? ' data-i="' + i + '"' : "") + '><path class="wire" pathLength="1" style="--wd:' + delay.toFixed(2) + 's" d="' + d + '"/><path class="wire-flow" d="' + d + '"/></g>';
+      };
       if (stacked){
         // phones: one clean vertical link between each stage instead of per-item wires
         var blocks = [chain.querySelector(".chain-sources"), chain.querySelector("[data-core]"), chain.querySelector(".chain-draft")].map(function(el){ return el.getBoundingClientRect(); });
@@ -1299,30 +1462,103 @@ body[data-lang="en"] .brand-sub{ display:none; }
           wire("in", "M" + sx + " " + sy + " C" + mx + " " + sy + "," + mx + " " + ey + "," + ex + " " + ey);
         });
         chain.querySelectorAll("[data-frag]").forEach(function(el){
-          var claim = chain.querySelector('[data-claim="' + el.getAttribute("data-frag") + '"]');
+          var i = el.getAttribute("data-frag"), claim = chain.querySelector('[data-claim="' + i + '"]');
           if (!claim) return;
           var a = el.getBoundingClientRect(), c = claim.getBoundingClientRect();
           var sx = a.right - g.left, sy = a.top + a.height / 2 - g.top, ex = c.left - g.left, ey = c.top + c.height / 2 - g.top, mx = (sx + ex) / 2;
-          wire("out", "M" + sx + " " + sy + " C" + mx + " " + sy + "," + mx + " " + ey + "," + ex + " " + ey);
+          wire("out", "M" + sx + " " + sy + " C" + mx + " " + sy + "," + mx + " " + ey + "," + ex + " " + ey, i);
         });
       }
       svg.setAttribute("viewBox", "0 0 " + g.width + " " + g.height);
       svg.innerHTML = html;
+      if (lit != null) light(lit);
     };
+    /* light one fragment, its claim and the link between them */
+    var lit = null;
+    var light = function(i){
+      lit = i;
+      chain.querySelectorAll(".is-hl").forEach(function(el){ el.classList.remove("is-hl"); });
+      if (i == null) return;
+      chain.querySelectorAll('[data-frag="' + i + '"], [data-claim="' + i + '"], .wire-out[data-i="' + i + '"]').forEach(function(el){ el.classList.add("is-hl"); });
+    };
+    var pairs = chain.querySelectorAll("[data-frag]").length, hovering = false, cycle = null, step = -1;
+    chain.querySelectorAll("[data-frag], [data-claim]").forEach(function(el){
+      var i = el.getAttribute("data-frag") || el.getAttribute("data-claim");
+      el.addEventListener("mouseenter", function(){ hovering = true; light(i); });
+      el.addEventListener("mouseleave", function(){ hovering = false; });
+    });
+    /* while the figure is on screen, walk through the pairs on its own */
+    if (!reduced && "IntersectionObserver" in window && pairs){
+      new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting && !cycle){
+            cycle = setInterval(function(){ if (!hovering){ step = (step + 1) % pairs; light(String(step)); } }, 2600);
+          } else if (!e.isIntersecting && cycle){ clearInterval(cycle); cycle = null; light(null); }
+        });
+      }, { threshold:.35 }).observe(chain);
+    }
     drawWires();
     var wireQueued = false;
     window.addEventListener("resize", function(){ if (!wireQueued){ wireQueued = true; requestAnimationFrame(function(){ wireQueued = false; drawWires(); }); } });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawWires);
   }
 
-  /* capability strip: one spread-out line when the labels fit, otherwise centred and wrapped */
-  var strip = document.querySelector(".index-row");
-  if (strip){
-    var fitStrip = function(){ strip.classList.remove("is-wrap"); strip.style.flexWrap = "nowrap"; var over = strip.scrollWidth > strip.clientWidth + 1; strip.style.flexWrap = ""; strip.classList.toggle("is-wrap", over); };
-    fitStrip();
-    var stripQueued = false;
-    window.addEventListener("resize", function(){ if (!stripQueued){ stripQueued = true; requestAnimationFrame(function(){ stripQueued = false; fitStrip(); }); } });
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitStrip);
+  var once = function(el, threshold, fn){
+    var io2 = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if (e.isIntersecting){ io2.disconnect(); fn(); } }); }, { threshold:threshold });
+    io2.observe(el);
+  };
+  var canAnimate = !reduced && "IntersectionObserver" in window;
+
+  /* citation report: type the command, then resolve each line from "checking" to its verdict */
+  var report = document.querySelector(".report");
+  if (report && canAnimate){
+    report.classList.add("armed");
+    once(report, .45, function(){
+      report.classList.add("typing");
+      var rows = report.querySelectorAll(".rrow");
+      rows.forEach(function(row, i){ setTimeout(function(){ row.classList.add("done"); }, 1300 + i * 650); });
+      setTimeout(function(){ report.classList.add("complete"); }, 1300 + rows.length * 650);
+    });
+  }
+
+  /* project card: the counts run up from zero */
+  var stats = document.querySelector(".case-stats");
+  if (stats && canAnimate){
+    var nums = Array.prototype.slice.call(stats.querySelectorAll("b")).map(function(b){ return { el:b, to:parseInt(b.textContent, 10) }; }).filter(function(n){ return n.to > 0; });
+    nums.forEach(function(n){ n.el.textContent = "0"; });
+    once(stats, .3, function(){
+      var t0 = performance.now(), dur = 900;
+      var tick = function(now){
+        var k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+        nums.forEach(function(n){ n.el.textContent = String(Math.round(n.to * e)); });
+        if (k < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }
+
+  /* project log: each step lights up once it reaches the lower third of the screen; the rail follows */
+  var log = document.querySelector(".log");
+  if (log && canAnimate){
+    var steps = Array.prototype.slice.call(log.querySelectorAll(".log-step"));
+    var marks = steps.map(function(st){ return st.querySelector(".log-n"); });
+    var placeRail = function(){
+      var L = log.getBoundingClientRect(), a = marks[0].getBoundingClientRect(), b = marks[marks.length - 1].getBoundingClientRect();
+      log.style.setProperty("--rail-x", (a.left - L.left + a.width / 2) + "px");
+      log.style.setProperty("--rail-top", (a.top - L.top + a.height / 2) + "px");
+      log.style.setProperty("--rail-h", (b.top - a.top) + "px");
+    };
+    var logQueued = false;
+    var progress = function(){
+      logQueued = false;
+      var line = window.innerHeight * 0.68, last = -1;
+      marks.forEach(function(mk, i){ var on = mk.getBoundingClientRect().top < line; steps[i].classList.toggle("done", on); if (on) last = i; });
+      log.style.setProperty("--rail-p", last <= 0 ? 0 : last / (marks.length - 1));
+    };
+    placeRail(); progress();
+    window.addEventListener("scroll", function(){ if (!logQueued){ logQueued = true; requestAnimationFrame(progress); } }, { passive:true });
+    window.addEventListener("resize", function(){ placeRail(); progress(); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeRail);
   }
 
   /* demo: our play button over the poster; the native controls take over from the first play */

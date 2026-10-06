@@ -74,7 +74,7 @@ const zh = {
       { icon: "i-redo", h: "分析可复算", p: "代码、环境与产物哈希都有记录。" },
       { icon: "i-gap", h: "缺证据就留空", p: "没有证据，就标「待补」，不写进正文。" },
     ],
-    reportAria: "示意：引用检验报告", illustrative: "示意",
+    reportAria: "示意：引用检验报告", illustrative: "示意", checking: "核验中",
     report: [
       ["v-pass", "✓ 通过", "DOI 可查，题目、作者与年份一致。"],
       ["v-warn", "! 待确认", "该文发布过更正声明，请确认引用的是更正后的说法。"],
@@ -250,7 +250,7 @@ const en: Copy = {
       { icon: "i-redo", h: "Recomputable analyses", p: "Code, environment and output hashes, all recorded." },
       { icon: "i-gap", h: "Gaps stay gaps", p: "No evidence, no claim: it stays a marked gap." },
     ],
-    reportAria: "Illustration: a citation check report", illustrative: "Illustrative",
+    reportAria: "Illustration: a citation check report", illustrative: "Illustrative", checking: "Checking",
     report: [
       ["v-pass", "✓ Pass", "DOI resolves; title, authors and year match."],
       ["v-warn", "! Review", "A correction was issued — make sure you cite the corrected statement."],

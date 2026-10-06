@@ -10,8 +10,8 @@ const LEADING: Record<string, string> = { "✓": "g-check", "✗": "g-x", "⤢":
 export function glyphHtml(raw: string, opts: { html?: boolean; verdict?: boolean } = {}): string {
   let s = opts.html ? raw : esc(raw);
   if (opts.verdict) s = s.replace(/^!\s/, `${svg("g-alert", "gi")}`).replace(/^\?\s/, `${svg("g-q", "gi")}`);
-  s = s.replace(/\s*([↗↓↑✉])/g, (_, g) => svg(TRAILING[g], "ai"));
-  s = s.replace(/\s*→\s*/g, () => svg("a-right", "ai ai-mid"));
+  s = s.replace(/\s*([↗↓↑✉])/g, (_, g) => svg(TRAILING[g], `ai ${TRAILING[g]}`));
+  s = s.replace(/\s*→\s*/g, () => svg("a-right", "ai ai-mid a-right"));
   s = s.replace(/([✓✗⤢])\s?/g, (_, g) => svg(LEADING[g], "gi"));
   s = s.replace(/●\s?/g, '<i class="dot-i" aria-hidden="true"></i>');
   return s;
