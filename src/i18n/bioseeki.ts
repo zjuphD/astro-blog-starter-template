@@ -74,7 +74,7 @@ const zh = {
       { icon: "i-redo", h: "分析可复算", p: "代码、环境与产物哈希都有记录。" },
       { icon: "i-gap", h: "缺证据就留空", p: "没有证据，就标「待补」，不写进正文。" },
     ],
-    reportAria: "示意：引用检验报告", illustrative: "示意",
+    reportAria: "示意：引用检验报告", illustrative: "示意", checking: "核验中",
     report: [
       ["v-pass", "✓ 通过", "DOI 可查，题目、作者与年份一致。"],
       ["v-warn", "! 待确认", "该文发布过更正声明，请确认引用的是更正后的说法。"],
@@ -140,6 +140,7 @@ const zh = {
     lede: "45 秒 Mac Beta 真机画面。",
     aria: "BioSeeki 45 秒 Mac Beta 真机演示", badge: "45 SEC · MAC BETA",
     captionsLabel: "中文字幕", fallback: "你的浏览器不支持视频播放。", download: "下载视频 ↓",
+    play: "播放演示",
     foot: "画面经过剪辑并隐藏私人信息。操作展示不代表完整研究任务的验收结果。",
   },
   pricing: {
@@ -249,7 +250,7 @@ const en: Copy = {
       { icon: "i-redo", h: "Recomputable analyses", p: "Code, environment and output hashes, all recorded." },
       { icon: "i-gap", h: "Gaps stay gaps", p: "No evidence, no claim: it stays a marked gap." },
     ],
-    reportAria: "Illustration: a citation check report", illustrative: "Illustrative",
+    reportAria: "Illustration: a citation check report", illustrative: "Illustrative", checking: "Checking",
     report: [
       ["v-pass", "✓ Pass", "DOI resolves; title, authors and year match."],
       ["v-warn", "! Review", "A correction was issued — make sure you cite the corrected statement."],
@@ -315,6 +316,7 @@ const en: Copy = {
     lede: "45 seconds of the Mac Beta on a real machine. The interface is in Chinese.",
     aria: "BioSeeki 45-second Mac Beta demo", badge: "45 SEC · MAC BETA",
     captionsLabel: "中文字幕 (Chinese captions)", fallback: "Your browser can't play this video.", download: "Download video ↓",
+    play: "Play the demo",
     foot: "Edited, with private information hidden. What's shown is not an acceptance test of a complete research task.",
   },
   pricing: {
