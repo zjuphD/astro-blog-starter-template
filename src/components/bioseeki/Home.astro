@@ -521,16 +521,16 @@ section{ padding:clamp(4.5rem,10vh,8rem) 0; }
   -webkit-mask-image:radial-gradient(closest-side, #000, transparent); mask-image:radial-gradient(closest-side, #000, transparent);
 }
 @media (min-width:768px){ .cfx-grid{ --gs:56px; } }
-/* bases: as the pointer moves, cells of the lit grid flash A / C / G / T, coloured the way genome
-   browsers colour nucleotides (A green, C blue, G amber, T red), and fade out again */
+/* base: as the pointer moves, one cell of the lit grid at a time shows A / C / G / T — just the letter,
+   coloured the way genome browsers colour nucleotides (A green, C blue, G amber, T red) — and fades out */
 .cfx-bases{ position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden; }
 .base{ position:absolute; left:0; top:0; display:grid; place-items:center; font-family:"IBM Plex Mono",ui-monospace,monospace; font-weight:500; line-height:1;
-  color:var(--bc); background:color-mix(in srgb, var(--bc) 13%, transparent); box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--bc) 32%, transparent);
-  opacity:0; animation:base-pop 2.1s var(--ease) forwards; }
+  color:var(--bc); opacity:0; }
+.base.on{ animation:base-pop 1.8s var(--ease) forwards; }
 .base-A{ --bc:#3F8A52; } .base-C{ --bc:#2F7AA6; } .base-G{ --bc:#B97F1F; } .base-T{ --bc:#B5492F; }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .base-A{ --bc:#7DCB92; } :root:not([data-theme="light"]) .base-C{ --bc:#7DB8E0; } :root:not([data-theme="light"]) .base-G{ --bc:#E2B25A; } :root:not([data-theme="light"]) .base-T{ --bc:#EE9A82; } }
 :root[data-theme="dark"] .base-A{ --bc:#7DCB92; } :root[data-theme="dark"] .base-C{ --bc:#7DB8E0; } :root[data-theme="dark"] .base-G{ --bc:#E2B25A; } :root[data-theme="dark"] .base-T{ --bc:#EE9A82; }
-@keyframes base-pop{ 0%{ opacity:0; scale:.5; } 12%{ opacity:1; scale:1; } 60%{ opacity:1; } 100%{ opacity:0; scale:1; } }
+@keyframes base-pop{ 0%{ opacity:0; scale:.6; } 15%{ opacity:1; scale:1; } 55%{ opacity:1; } 100%{ opacity:0; scale:1; } }
 /* soft light inside the glass panel under the pointer, and the nearest stretch of its edge lit */
 .fx-on .spot:hover{ background-image:radial-gradient(520px circle at var(--sx,50%) var(--sy,50%), color-mix(in srgb, var(--sage) 8%, transparent), transparent 45%); }
 .spot-edge{ position:relative; }
@@ -1422,26 +1422,30 @@ body[data-lang="en"] .brand-sub{ display:none; }
       var busy = Math.abs(tx - g1.x) + Math.abs(ty - g1.y) > .5;
       if (busy) requestAnimationFrame(frame); else running = false;
     };
-    /* bases: every ~half a cell of pointer travel, one cell near the pointer shows a random
-       nucleotide and fades out. Cells line up with the background grid; a cell already showing a
-       base is skipped, finished elements are reused, and nothing spawns over the glass panels
-       (they would hide it anyway). */
-    var basesLayer = document.querySelector(".cfx-bases");
-    var BASES = ["A", "C", "G", "T"], busyCells = {}, basePool = [], lastX = null, lastY = null, travel = 0;
+    /* base: one letter at a time. While the pointer keeps moving over open background, a random
+       nucleotide appears in a cell next to it, holds, fades — and only then can the next one appear.
+       Cells line up with the background grid; nothing appears over the glass panels. */
+    var basesLayer = document.querySelector(".cfx-bases"), baseEl = null, baseShowing = false;
+    var BASES = ["A", "C", "G", "T"], lastX = null, lastY = null, travel = 0;
+    var NEIGHBOURS = [[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]];
     var spawnBase = function(x, y){
-      if (!basesLayer || basesLayer.childElementCount > 48) return;
+      if (!basesLayer) return;
+      if (!baseEl){
+        baseEl = document.createElement("span");
+        baseEl.addEventListener("animationend", function(){ baseShowing = false; baseEl.classList.remove("on"); });
+        basesLayer.appendChild(baseEl);
+      }
       var vw = root.clientWidth, gs = vw >= 768 ? 56 : 40, x0 = mod((vw - gs) / 2, gs);
-      var i = Math.floor((x - x0) / gs) + Math.round((Math.random() - .5) * 2.6), j = Math.floor(y / gs) + Math.round((Math.random() - .5) * 2.6);
-      var key = i + "," + j, now = performance.now();
-      if (busyCells[key] > now) return;
-      busyCells[key] = now + 2200;
-      var b = BASES[Math.random() * 4 | 0], el = basePool.pop() || document.createElement("span");
-      el.className = "base base-" + b; el.textContent = b;
-      el.style.width = el.style.height = (gs - 1) + "px";
-      el.style.fontSize = Math.round(gs * .42) + "px";
-      el.style.transform = "translate3d(" + (x0 + i * gs + 1) + "px," + (j * gs + 1) + "px,0)";
-      el.addEventListener("animationend", function(){ el.remove(); basePool.push(el); }, { once:true });
-      basesLayer.appendChild(el);
+      var off = NEIGHBOURS[Math.random() * 8 | 0]; /* beside the pointer, never under it */
+      var i = Math.floor((x - x0) / gs) + off[0], j = Math.floor(y / gs) + off[1];
+      var b = BASES[Math.random() * 4 | 0];
+      baseEl.className = "base base-" + b; baseEl.textContent = b;
+      baseEl.style.width = baseEl.style.height = (gs - 1) + "px";
+      baseEl.style.fontSize = Math.round(gs * .42) + "px";
+      baseEl.style.transform = "translate3d(" + (x0 + i * gs + 1) + "px," + (j * gs + 1) + "px,0)";
+      void baseEl.offsetWidth; /* restart the animation */
+      baseEl.classList.add("on");
+      baseShowing = true;
     };
     window.addEventListener("pointermove", function(e){
       if (e.pointerType === "touch") return;
@@ -1449,10 +1453,8 @@ body[data-lang="en"] .brand-sub{ display:none; }
       if (lastX !== null) travel += Math.abs(tx - lastX) + Math.abs(ty - lastY);
       lastX = tx; lastY = ty;
       var overGlass = e.target.closest && e.target.closest(".glass, .nav");
-      var step = (root.clientWidth >= 768 ? 56 : 40) * .55;
       if (overGlass) travel = 0;
-      for (var n = 0; travel > step && n < 3; n++){ travel -= step; spawnBase(tx, ty); }
-      if (travel > step) travel = 0; /* a fast flick spawns three at most */
+      else if (!baseShowing && travel > (root.clientWidth >= 768 ? 56 : 40)){ travel = 0; spawnBase(tx, ty); }
       if (!root.classList.contains("fx-on")){ g1.x = tx; g1.y = ty; root.classList.add("fx-on"); }
       root.classList.remove("fx-away");
       var card = e.target.closest ? e.target.closest(".spot") : null;
