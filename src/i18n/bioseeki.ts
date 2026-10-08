@@ -228,7 +228,7 @@ const en: Copy = {
   switchTo: { label: "中文", href: "/?lang=zh", title: "切换到中文" },
   nav: {
     aria: "Main", home: "BioSeeki home",
-    items: [["#tools", "Capabilities"], ["#verify", "Check results"], ["#principles", "Project materials"], ["#workflow", "Example task"], ["#pricing", "Pricing"], ["/briefing", "Briefing (中文)"], ["#faq", "FAQ"]],
+    items: [["#tools", "Capabilities"], ["#verify", "Results"], ["#principles", "Materials"], ["#workflow", "Example"], ["#pricing", "Pricing"], ["/briefing", "Briefing (中文)"], ["#faq", "FAQ"]],
     signIn: "Sign in", signUp: "Sign up ↗", download: "Download", personal: "Account",
   },
   hero: {
