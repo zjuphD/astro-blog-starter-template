@@ -10,6 +10,7 @@ import "@fontsource/ibm-plex-mono/500.css";
 // The grid, nav progress line and link underlines that used to come from styles/tech-feel.css are
 // inlined below in a calmer form; that file now serves aiseeki.com only.
 import Label from "./Label.astro";
+import CapabilityShowcase from "./CapabilityShowcase.astro";
 import { glyphHtml } from "./glyphs";
 import { ICONS, ICON_VIEWBOX } from "./icons";
 import { COPY, type Lang } from "../../i18n/bioseeki";
@@ -31,42 +32,6 @@ const mailto = `mailto:${t.links.mail}?subject=${encodeURIComponent(t.download.m
 // 定价卡上的额度条按各档 credits 占最大档的比例画。
 const creditsOf = (c) => Number(String(c).replace(/,/g, ""));
 const maxCredits = Math.max(...t.pricing.plans.map((p) => creditsOf(p.credits)));
-
-// GeneCode card: a pUC19 map drawn to scale. Coordinates come from the GeneCode fixture
-// (GenBank M77789, 2,686 bp): lacZα 216–539, AmpR 885–1745 and ori 1916–2504 all run
-// clockwise in this numbering; HindIII 233, BamHI 263 and EcoRI 284 sit in the MCS.
-const PL = { cx: 160, cy: 150, r: 92, len: 2686 };
-const plAng = (bp) => (bp / PL.len) * 2 * Math.PI;
-const plPt = (bp, r) => [PL.cx + r * Math.sin(plAng(bp)), PL.cy - r * Math.cos(plAng(bp))].map((n) => +n.toFixed(1));
-// a feature band with an arrow tip at its 3' end
-const plBand = (a, b, w = 9, tip = 46) => {
-  const ro = PL.r + w / 2, ri = PL.r - w / 2, e = b - tip, large = (e - a) / PL.len > 0.5 ? 1 : 0;
-  const [x1, y1] = plPt(a, ro), [x2, y2] = plPt(e, ro), [tx, ty] = plPt(b, PL.r), [x3, y3] = plPt(e, ri), [x4, y4] = plPt(a, ri);
-  return `M${x1} ${y1}A${ro} ${ro} 0 ${large} 1 ${x2} ${y2}L${tx} ${ty}L${x3} ${y3}A${ri} ${ri} 0 ${large} 0 ${x4} ${y4}Z`;
-};
-const plFeatures = [
-  { cls: "pl-c", d: plBand(216, 539) },
-  { cls: "pl-a", d: plBand(885, 1745) },
-  { cls: "pl-b", d: plBand(1916, 2504) },
-];
-const plTicks = Array.from({ length: 27 }, (_, i) => {
-  const bp = i * 100, major = bp % 1000 === 0, [x1, y1] = plPt(bp, PL.r - 9), [x2, y2] = plPt(bp, PL.r - (major ? 15 : 12));
-  return { major, d: `M${x1} ${y1}L${x2} ${y2}` };
-});
-// scale numbers sit just inside the major ticks, anchored away from them
-const plNums = [[0, "0"], [1000, "1,000"], [2000, "2,000"]].map(([bp, label]) => {
-  const [x, y] = plPt(bp, PL.r - 20), s = Math.sin(plAng(bp));
-  return { x, y: +(y + 3).toFixed(1), label, anchor: s > 0.3 ? "end" : s < -0.3 ? "start" : "middle" };
-});
-const plCuts = [233, 263, 284].map((bp) => { const [x1, y1] = plPt(bp, PL.r + 7), [x2, y2] = plPt(bp, PL.r + 15); return `M${x1} ${y1}L${x2} ${y2}`; });
-const plMcs = plPt(263, PL.r + 17);
-// reading head: a short highlighted stretch of ring (like GeneCode's selection) that circles the map
-const plHead = (() => { const [x1, y1] = plPt(-70, PL.r), [x2, y2] = plPt(70, PL.r); return `M${x1} ${y1}A${PL.r} ${PL.r} 0 0 1 ${x2} ${y2}`; })();
-const plLabels = [
-  { text: "lacZα", at: plPt(378, PL.r + 22), anchor: "start", dx: 2 },
-  { text: "AmpR", at: plPt(1315, PL.r + 22), anchor: "middle", dx: 0, dy: 8 },
-  { text: "ori", at: plPt(2210, PL.r + 20), anchor: "end", dx: -2 },
-];
 
 const ORG = "https://bioseeki.com/#organization";
 const jsonLd = [
@@ -1138,47 +1103,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
   {[0, 1].map(() => <div class="marquee-group">{t.ticker.map((w) => <><span>{w}</span><i></i></>)}</div>)}
 </div></div>
 
-<section id="tools"><div class="wrap">
-  <div class="section-head reveal"><p class="eyebrow"><span class="section-num">01</span> · {t.tools.eyebrow}</p><h2 class="section-title"><span class="mask"><span class="rise">{t.tools.title}</span></span></h2><p class="section-lede">{t.tools.lede}</p></div>
-  <article class="glass suite reveal">
-    <ul class="suite-modes">
-      {t.tools.modes.map((m, i) => (
-        <li class="mode" id={m.id} style={`--i:${i}`}>
-          <div class="mode-heading"><div class="ico-box" aria-hidden="true"><svg class="ico"><use href={`#${m.icon}`}/></svg></div><h3>{m.h}</h3></div>
-          <dl class="mode-io"><div><dt>{t.tools.inputLabel}</dt><dd>{m.input}</dd></div><div><dt>{t.tools.outputLabel}</dt><dd>{m.output}</dd></div></dl>
-          <div class="mode-example"><span>{t.tools.exampleLabel}</span><p>“{m.example}”</p></div>
-        </li>
-      ))}
-    </ul>
-    <div class="suite-feature" id="genecode">
-      <div class="feature-text">
-        <div class="card-top"><span class="card-id">GC / MOLECULAR DESIGN</span><span class="badge is-ok"><Label text={t.tools.gc.status} /></span></div>
-        <h3>{t.tools.gc.h}</h3><p>{t.tools.gc.p}</p>
-        <dl class="mode-io"><div><dt>{t.tools.inputLabel}</dt><dd>{t.tools.gc.input}</dd></div><div><dt>{t.tools.outputLabel}</dt><dd>{t.tools.gc.output}</dd></div></dl>
-        <div class="mode-example"><span>{t.tools.exampleLabel}</span><p>“{t.tools.gc.example}”</p></div>
-        <a class="card-link" href="https://genecode-agent.pages.dev" target="_blank" rel="noopener noreferrer"><Label text={t.tools.gc.link} /></a>
-      </div>
-      <svg class="plasmid" viewBox="0 0 320 300" role="img" aria-label={`${t.tools.gc.h} · pUC19 · 2,686 bp`}>
-        <path class="pl-head" d={plHead}/>
-        <circle cx={PL.cx} cy={PL.cy} r={PL.r} class="pl-ring" pathLength="1" transform={`rotate(-90 ${PL.cx} ${PL.cy})`}/>
-        <g class="pl-ticks">{plTicks.map((k) => <path class={`pl-tick${k.major ? " major" : ""}`} d={k.d}/>)}</g>
-        <g class="pl-nums">{plNums.map((n) => <text x={n.x} y={n.y + (n.anchor === "middle" ? 4 : 0)} class="pl-num" text-anchor={n.anchor}>{n.label}</text>)}</g>
-        {plFeatures.map((f, i) => <path class={`pl-feat ${f.cls}`} style={`--i:${i}`} d={f.d}/>)}
-        <g class="pl-cuts">{plCuts.map((d) => <path class="pl-cut" d={d}/>)}</g>
-        <g class="pl-labels">
-          <path class="pl-lead" d={`M${plMcs[0]} ${plMcs[1]}V30`}/>
-          <text x={plMcs[0]} y="22" class="pl-lab" text-anchor="middle">HindIII · BamHI · EcoRI</text>
-          {plLabels.map((l) => <text x={l.at[0] + l.dx} y={l.at[1] + 4 + (l.dy ?? 0)} class="pl-lab" text-anchor={l.anchor}>{l.text}</text>)}
-        </g>
-        <g class="pl-center">
-          <text x={PL.cx} y={PL.cy + 2} class="pl-name" text-anchor="middle">pUC19</text>
-          <text x={PL.cx} y={PL.cy + 21} class="pl-sub" text-anchor="middle">2,686 bp</text>
-        </g>
-      </svg>
-    </div>
-  </article>
-  <p class="suite-note">{t.tools.note}</p>
-</div></section>
+<CapabilityShowcase lang={lang} />
 
 <section id="verify"><div class="wrap">
   <div class="section-head reveal"><p class="eyebrow"><span class="section-num">02</span> · {t.verify.eyebrow}</p><h2 class="section-title"><span class="mask"><span class="rise">{t.verify.title}</span></span></h2><p class="section-lede">{t.verify.lede}</p></div>

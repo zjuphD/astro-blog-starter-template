@@ -1,0 +1,173 @@
+---
+import type { Lang } from "../../i18n/bioseeki";
+import { SHOWCASE_COPY } from "../../i18n/capability-showcase";
+import CapabilityDiagram from "./CapabilityDiagram.astro";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = SHOWCASE_COPY[lang];
+const prefix = `capability-${lang}`;
+const defaultCapability = "analysis";
+---
+
+<section id="tools" class="wrap capability-section" aria-labelledby={`${prefix}-heading`}>
+  <div class="section-head reveal"><p class="eyebrow"><span class="section-num">01</span> · {t.eyebrow}</p><h2 class="section-title" id={`${prefix}-heading`}>{t.heading}</h2><p class="section-lede">{t.intro}</p></div>
+  <bioseeki-capability-showcase class="capability-showcase">
+    <div class="capability-tabs" role="tablist" aria-label={t.tablist} aria-orientation="horizontal">
+      {t.capabilities.map((capability) => <button type="button" role="tab" id={`${prefix}-tab-${capability.id}`} aria-controls={`${prefix}-panel-${capability.id}`} aria-selected={capability.id === defaultCapability} tabindex={capability.id === defaultCapability ? 0 : -1} data-capability-tab={capability.id}>
+        <svg aria-hidden="true"><use href={`#${capability.icon}`} /></svg><span>{capability.label}</span>
+      </button>)}
+    </div>
+
+    {t.capabilities.map((capability) => <div class="capability-panel" role="tabpanel" id={`${prefix}-panel-${capability.id}`} aria-labelledby={`${prefix}-tab-${capability.id}`} tabindex="0" data-capability-panel={capability.id} hidden={capability.id !== defaultCapability}>
+      <div class="capability-visual">
+        <div class="visual-toolbar">
+          <div class="preview-switches" role="group" aria-label={t.previewLabel}>
+            {capability.views.length > 1 ? capability.views.map((view, viewIndex) => <button type="button" class:list={["preview-switch", { "is-selected": viewIndex === 0 }]} data-preview-select={view.id} aria-pressed={viewIndex === 0}>{view.label}</button>) : <span class="preview-name">{capability.views[0].label}</span>}
+          </div>
+          <button class="preview-enlarge" type="button" data-preview-enlarge><svg aria-hidden="true"><use href="#a-ext" /></svg><span>{t.enlarge}</span></button>
+        </div>
+        {capability.views.map((view, viewIndex) => <figure class="preview-figure" data-preview-view={view.id} hidden={viewIndex !== 0}>
+          <div class="visual-content"><CapabilityDiagram kind={view.diagram} variant={view.variant} lang={lang} /></div>
+          <figcaption>{view.caption}</figcaption>
+        </figure>)}
+      </div>
+      <div class="capability-copy">
+        <h3>{capability.title}</h3>
+        <p class="capability-description">{capability.description}</p>
+        <ul class="output-tags" aria-label={t.outputLabel}>{capability.outputs.map((output) => <li>{output}</li>)}</ul>
+        <div class="input-example"><span class="copy-label">{t.inputLabel}</span><p>“{capability.input}”</p></div>
+        {capability.id === "cloning" && <a class="capability-action" href="https://genecode-agent.pages.dev" target="_blank" rel="noopener noreferrer">{lang === "zh" ? "打开 GeneCode 网页工作台 ↗" : "Open the GeneCode web workspace ↗"}</a>}
+      </div>
+    </div>)}
+    <dialog class="showcase-dialog" aria-label={t.imageDialog}>
+      <div class="showcase-dialog-head"><p data-dialog-caption></p><button type="button" data-dialog-close aria-label={t.close}><svg aria-hidden="true"><use href="#g-x" /></svg></button></div>
+      <div class="showcase-dialog-body" data-dialog-content></div>
+    </dialog>
+  </bioseeki-capability-showcase>
+</section>
+
+<script>
+  class BioseekiCapabilityShowcase extends HTMLElement {
+    connectedCallback() {
+      if (this.dataset.initialized) return;
+      this.dataset.initialized = "true";
+      const tabs = Array.from(this.querySelectorAll<HTMLButtonElement>("[data-capability-tab]"));
+      const panels = Array.from(this.querySelectorAll<HTMLElement>("[data-capability-panel]"));
+      const activate = (tab: HTMLButtonElement) => {
+        for (const other of tabs) {
+          const active = other === tab;
+          other.setAttribute("aria-selected", String(active));
+          other.tabIndex = active ? 0 : -1;
+        }
+        for (const panel of panels) panel.hidden = panel.dataset.capabilityPanel !== tab.dataset.capabilityTab;
+      };
+      for (const [index, tab] of tabs.entries()) {
+        tab.addEventListener("click", () => activate(tab));
+        tab.addEventListener("keydown", (event) => {
+          let next: number;
+          switch (event.key) {
+            case "ArrowRight": next = (index + 1) % tabs.length; break;
+            case "ArrowLeft": next = (index - 1 + tabs.length) % tabs.length; break;
+            case "Home": next = 0; break;
+            case "End": next = tabs.length - 1; break;
+            default: return;
+          }
+          event.preventDefault();
+          activate(tabs[next]);
+          tabs[next].focus({ preventScroll: true });
+          tabs[next].scrollIntoView({ block: "nearest", inline: "nearest", behavior: "instant" });
+        });
+      }
+      for (const panel of panels) {
+        const switches = Array.from(panel.querySelectorAll<HTMLButtonElement>("[data-preview-select]"));
+        const views = Array.from(panel.querySelectorAll<HTMLElement>("[data-preview-view]"));
+        for (const button of switches) {
+          button.addEventListener("click", () => {
+            for (const other of switches) {
+              const active = other === button;
+              other.setAttribute("aria-pressed", String(active));
+              other.classList.toggle("is-selected", active);
+            }
+            for (const view of views) view.hidden = view.dataset.previewView !== button.dataset.previewSelect;
+          });
+        }
+      }
+      const dialog = this.querySelector<HTMLDialogElement>(".showcase-dialog");
+      const dialogContent = this.querySelector<HTMLElement>("[data-dialog-content]");
+      const dialogCaption = this.querySelector<HTMLElement>("[data-dialog-caption]");
+      const close = this.querySelector<HTMLButtonElement>("[data-dialog-close]");
+      if (!dialog || !dialogContent || !dialogCaption || !close) return;
+      let opener: HTMLButtonElement | null = null;
+      for (const button of this.querySelectorAll<HTMLButtonElement>("[data-preview-enlarge]")) {
+        button.addEventListener("click", () => {
+          const panel = button.closest<HTMLElement>("[data-capability-panel]");
+          const view = panel?.querySelector<HTMLElement>("[data-preview-view]:not([hidden])");
+          const visual = view?.querySelector<HTMLElement>(".visual-content");
+          if (!visual) return;
+          opener = button;
+          dialogContent.replaceChildren(visual.cloneNode(true));
+          dialogCaption.textContent = view?.querySelector("figcaption")?.textContent ?? "";
+          dialog.showModal();
+          close.focus();
+        });
+      }
+      close.addEventListener("click", () => dialog.close());
+      dialog.addEventListener("click", (event) => { if (event.target === dialog) dialog.close(); });
+      dialog.addEventListener("close", () => {
+        dialogContent.replaceChildren();
+        opener?.focus({ preventScroll: true });
+        opener = null;
+      });
+    }
+  }
+  if (!customElements.get("bioseeki-capability-showcase")) customElements.define("bioseeki-capability-showcase", BioseekiCapabilityShowcase);
+</script>
+
+<style>
+  .capability-section{width:min(1140px,calc(100% - 32px));min-width:0;margin:0 auto;padding:clamp(4.5rem,10vh,8rem) 0;color:var(--ink);font-family:inherit}
+  .section-head{max-width:680px;margin-bottom:clamp(2.2rem,5vh,3.4rem)}
+  .eyebrow{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.12em;color:var(--ink-soft)}
+  .eyebrow:before{content:"";width:18px;height:1px;flex:none;background:var(--ochre)}
+  .section-num{color:var(--ochre-deep)}
+  .section-title{font-family:var(--font-display);font-weight:600;font-size:clamp(2rem,4vw,2.85rem);line-height:1.22;letter-spacing:-.022em;text-wrap:balance;margin:.6rem 0 .75rem}
+  .section-lede{color:var(--ink-soft);font-size:1.14rem;max-width:56ch;line-height:1.75;margin:0}
+  .capability-showcase{display:block;min-width:0}
+  .capability-showcase [hidden]{display:none!important}
+  .capability-showcase svg{fill:currentColor;flex:none}
+  .capability-tabs{display:flex;align-items:stretch;gap:8px;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--line-strong) transparent;margin:0 0 27px;padding:4px 3px 9px;max-width:100%;overscroll-behavior-x:contain}
+  .capability-tabs>button{appearance:none;display:flex;gap:9px;align-items:center;justify-content:center;flex:1 0 auto;min-height:48px;padding:12px 20px;border:1px solid var(--line);border-radius:999px;background:var(--glass-soft);color:var(--ink-soft);font-family:inherit;font-size:.85rem;line-height:1.4;font-weight:500;white-space:nowrap;cursor:pointer;transition:color .18s,border-color .18s,background-color .18s}
+  .capability-tabs>button svg{width:18px;height:18px}
+  .capability-tabs>button:hover{color:var(--ink);border-color:var(--sage);background:var(--glass)}
+  .capability-tabs>button[aria-selected="true"]{background:var(--ink);color:var(--mist);border-color:var(--ink)}
+  .capability-tabs>button:focus-visible,.preview-switch:focus-visible,.preview-enlarge:focus-visible,.showcase-dialog-head button:focus-visible{outline:2px solid var(--sage-deep);outline-offset:3px}
+  .capability-panel{display:grid;grid-template-columns:minmax(0,2.5fr) minmax(0,1fr);gap:42px;align-items:center;min-width:0;animation:showcase-appear .25s ease both}
+  .capability-panel:focus-visible{outline:2px solid var(--sage-deep);outline-offset:7px;border-radius:22px}
+  .capability-visual{min-width:0;border:1px solid var(--edge);border-radius:22px;background:var(--glass);overflow:hidden;box-shadow:var(--lift),inset 0 1px 0 var(--edge);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  .visual-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);min-height:48px;background:var(--glass-soft)}
+  .preview-switches{display:flex;align-items:center;gap:4px;min-width:0;flex-wrap:wrap}
+  .preview-name{font-size:.72rem;color:var(--ink-soft);font-weight:500;padding:6px 5px}
+  .preview-switch{appearance:none;border:1px solid transparent;border-radius:999px;background:transparent;color:var(--ink-soft);font:inherit;font-size:.7rem;line-height:1.4;cursor:pointer;padding:5px 11px;white-space:nowrap;transition:border-color .18s,background-color .18s,color .18s}
+  .preview-switch:hover{color:var(--ink);background:var(--glass)}
+  .preview-switch.is-selected{background:var(--glass-strong);border-color:var(--line);color:var(--ink);font-weight:500}
+  .preview-enlarge{appearance:none;display:flex;align-items:center;gap:5px;flex:none;cursor:pointer;padding:6px 5px;color:var(--ink-soft);border:0;background:transparent;font:inherit;font-size:.66rem;line-height:1.4}
+  .preview-enlarge svg{width:13px;height:13px}.preview-enlarge:hover{color:var(--ink)}
+  .preview-figure{margin:0;animation:showcase-appear .22s ease both}.visual-content{min-width:0;overflow:hidden}
+  .preview-figure figcaption{padding:13px 22px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:.64rem;line-height:1.65;background:var(--glass-soft)}
+  .capability-copy{min-width:0;padding:10px 0}.capability-copy h3{margin:0 0 14px;font-size:clamp(1.35rem,2.2vw,1.75rem);line-height:1.5;font-weight:600;letter-spacing:-.015em}
+  .capability-description{margin:0 0 24px;color:var(--ink-soft);font-size:.9rem;line-height:1.9}
+  .output-tags{list-style:none;display:flex;gap:8px;flex-wrap:wrap;margin:0 0 25px;padding:0}.output-tags li{font-size:.68rem;color:var(--ink-soft);line-height:1.55;padding:6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--glass-soft)}
+  .copy-label{display:block;color:var(--ink-soft);font-size:.68rem;line-height:1.5;margin:0 0 9px}.input-example{border-top:1px solid var(--line);padding:21px 0 0}.input-example p{margin:0;color:var(--ink-soft);font-size:.78rem;line-height:1.85}
+  .capability-action{display:inline-block;margin-top:22px;color:var(--sage-deep);font-size:.78rem;text-underline-offset:4px}.capability-action:hover{text-decoration:underline}.capability-action:focus-visible{outline:2px solid var(--sage-deep);outline-offset:4px}
+  .showcase-dialog{width:calc(100% - 48px);max-width:1400px;max-height:calc(100dvh - 48px);border:1px solid var(--edge);padding:0;border-radius:22px;background:var(--mist);color:var(--ink);box-shadow:0 20px 90px rgba(0,0,0,.2);overflow:hidden}
+  .showcase-dialog::backdrop{background:rgba(16,31,23,.48);backdrop-filter:blur(5px)}
+  .showcase-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:13px 20px;border-bottom:1px solid var(--line);background:var(--glass)}
+  .showcase-dialog-head p{margin:0;font-size:.75rem;color:var(--ink-soft);line-height:1.6}.showcase-dialog-head button{appearance:none;display:grid;place-items:center;width:35px;height:35px;border:1px solid var(--line);border-radius:50%;background:var(--glass-strong);color:var(--ink);cursor:pointer;flex:none}.showcase-dialog-head button:hover{border-color:var(--sage)}.showcase-dialog-head svg{width:15px;height:15px}
+  .showcase-dialog-body{overflow:auto;max-height:calc(100dvh - 122px);background:var(--glass-soft)}.showcase-dialog .visual-content{height:auto;min-height:0;overflow:visible;padding:20px}
+  .showcase-dialog .visual-content :global(.capability-diagram){max-width:1100px;margin:0 auto}
+  @keyframes showcase-appear{from{opacity:.7;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+  @media(max-width:1100px){.capability-panel{gap:28px;grid-template-columns:minmax(0,2.1fr) minmax(0,1fr)}.capability-tabs>button{padding:12px 15px;font-size:.8rem}.capability-copy h3{font-size:1.45rem}.capability-description{font-size:.84rem}}
+  @media(max-width:800px){.capability-tabs{gap:7px;margin-bottom:21px}.capability-tabs>button{flex:0 0 auto;min-height:45px;font-size:.8rem;padding:11px 16px}.capability-tabs>button svg{width:17px;height:17px}.capability-panel{grid-template-columns:minmax(0,1fr);gap:25px}.capability-copy{padding:0}.capability-copy h3{font-size:1.55rem;margin-bottom:12px}.capability-description{font-size:.88rem;margin-bottom:18px}.output-tags{margin-bottom:21px}.input-example{padding-top:17px}.showcase-dialog{width:calc(100% - 24px);max-height:calc(100dvh - 24px)}.showcase-dialog-body{max-height:calc(100dvh - 100px)}.showcase-dialog .visual-content{padding:10px}}
+  @media(max-width:560px){.section-title{font-size:clamp(1.55rem,7.2vw,1.9rem)}.section-lede{font-size:1rem}.capability-tabs>button{font-size:.75rem;padding:11px 14px;gap:7px}.visual-toolbar{padding:10px 13px;gap:7px}.preview-switch{font-size:.64rem;padding:5px 9px}.preview-enlarge{font-size:.6rem;gap:4px}.preview-name{font-size:.65rem}.preview-figure figcaption{font-size:.6rem;padding:11px 16px}.capability-copy h3{font-size:1.4rem;line-height:1.5}.capability-description{font-size:.84rem}.output-tags{gap:7px}.input-example p{font-size:.76rem}.showcase-dialog-head{padding:10px 12px;gap:12px}.showcase-dialog-head p{font-size:.64rem}.showcase-dialog-head button{width:31px;height:31px}.showcase-dialog .visual-content{padding:0}}
+  @media(prefers-reduced-motion:reduce){.capability-panel,.preview-figure{animation:none}.capability-tabs>button,.preview-switch{transition:none}}
+</style>

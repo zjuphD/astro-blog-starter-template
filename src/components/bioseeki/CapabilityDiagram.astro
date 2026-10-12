@@ -1,0 +1,142 @@
+---
+import type { Lang } from "../../i18n/bioseeki";
+import { CAPABILITY_DIAGRAM_COPY, type CapabilityDiagramKind } from "../../i18n/capability-showcase";
+
+interface Props {
+  kind: CapabilityDiagramKind;
+  lang: Lang;
+  variant?: string;
+  compact?: boolean;
+}
+const { kind, lang, variant = "", compact = false } = Astro.props;
+const t = CAPABILITY_DIAGRAM_COPY[lang];
+const c = t[kind];
+// These points illustrate chart geometry. They are not sampled research data.
+const volcanoPoints = Array.from({ length: 42 }, (_, i) => {
+  const side = i % 2 === 0 ? -1 : 1;
+  const spread = 22 + ((i * 31) % 141);
+  const x = 216 + side * spread;
+  const y = 219 - (spread * .89 + ((i * 13) % 59));
+  return { x, y: Math.max(37, y), tone: spread > 75 ? (side < 0 ? "sage" : "ochre") : "neutral" };
+});
+const pcaPoints = Array.from({ length: 20 }, (_, i) => ({
+  x: i < 10 ? 120 + ((i * 27) % 65) : 255 + ((i * 21) % 76),
+  y: i < 10 ? 98 + ((i * 13) % 66) : 60 + ((i * 17) % 68),
+  tone: i < 10 ? "sage" : "ochre",
+}));
+const heatCells = Array.from({ length: 48 }, (_, i) => ({ row: Math.floor(i / 6), col: i % 6, tone: ((i * 7 + Math.floor(i / 6)) % 5) - 2 }));
+const tableBars = [[45, 55, 79, 70], [75, 61, 30, 35], [52, 66, 54, 58], [26, 32, 72, 81]];
+---
+
+<div class:list={["capability-diagram", `diagram-${kind}`, { "is-compact": compact }]} data-variant={variant}>
+  <div class="diagram-journey"><span>{c.input}</span><span class="journey-arrow" aria-hidden="true">→</span><span>{c.output}</span><span class="diagram-label">{t.illustration}</span></div>
+
+  {kind === "literature" && <div class="diagram-stage literature-stage">
+    <div class="paper-source diagram-card">
+      <div class="source-icon" aria-hidden="true"><svg><use href="#i-book" /></svg></div>
+      <h4>{t.literature.paper}</h4><p class="muted-mini">{t.literature.section}</p>
+      <div class="paper-lines" aria-hidden="true"><i></i><i></i><i class="highlight"></i><i></i><i></i></div>
+      <div class="question-note"><span>{t.literature.ask}</span></div>
+    </div>
+    <div class="stage-arrow" aria-hidden="true"><span>→</span></div>
+    <div class="reading-output">
+      <div class="reading-pair">
+        <div class="reading-page diagram-card"><h4>{t.literature.original}</h4><div class="paper-lines" aria-hidden="true"><i></i><i></i></div><p class="reading-highlight">{t.literature.originalText}</p><div class="paper-lines" aria-hidden="true"><i></i><i></i></div></div>
+        <div class="reading-page diagram-card"><h4>{t.literature.translation}</h4><div class="paper-lines" aria-hidden="true"><i></i><i></i></div><p class="reading-highlight">{t.literature.translatedText}</p><div class="paper-lines" aria-hidden="true"><i></i><i></i></div></div>
+      </div>
+      <div class="source-link diagram-card"><svg aria-hidden="true"><use href="#i-quote" /></svg><div><strong>{t.literature.evidence}</strong><p>{t.literature.source}<span> · </span>{t.literature.location}</p></div><span class="reference-mark">[1]</span></div>
+    </div>
+  </div>}
+
+  {kind === "analysis" && <div class="diagram-stage analysis-stage">
+    <div class="data-source diagram-card">
+      <h4>{t.analysis.table}</h4>
+      <div class="mini-table" aria-label={t.analysis.table}><div class="table-head"><span></span>{t.analysis.samples.map((sample) => <span>{sample}</span>)}</div>{t.analysis.rows.map((row, i) => <div class="table-row"><span>{row}</span>{tableBars[i].map((width) => <span><i style={`--bar:${width}%`}></i></span>)}</div>)}</div>
+      <div class="grouping"><p>{t.analysis.grouping}</p><span><i class="group-dot sage"></i>{t.analysis.groups[0]}</span><span><i class="group-dot ochre"></i>{t.analysis.groups[1]}</span></div>
+    </div>
+    <div class="stage-arrow" aria-hidden="true"><span>→</span></div>
+    <div class="chart-output">
+      <div class="chart-canvas diagram-card">
+        <div class="chart-title"><h4>{variant === "heatmap" ? t.analysis.heatmap : variant === "pca" ? t.analysis.pca : t.analysis.volcano}</h4><span>{t.analysis.chartNote}</span></div>
+        {variant !== "heatmap" && variant !== "pca" && <svg class="vector-chart" viewBox="0 0 440 285" role="img" aria-label={`${t.analysis.volcano} · ${t.illustration}`}>
+          <g class="chart-grid">{[65, 115, 165, 215].map((y) => <path d={`M48 ${y}H414`} />)}{[96, 156, 216, 276, 336, 396].map((x) => <path d={`M${x} 30V239`} />)}</g>
+          <path class="chart-axis" d="M48 30V239H414"/><path class="chart-reference" d="M216 30V239M48 155H414"/>
+          {volcanoPoints.map((point) => <circle class={`chart-point tone-${point.tone}`} cx={point.x} cy={point.y} r="4.6" />)}
+          <text class="axis-label" x="228" y="272" text-anchor="middle">{t.analysis.axisX}</text><text class="axis-label" transform="translate(18 134) rotate(-90)" text-anchor="middle">{t.analysis.axisY}</text>
+        </svg>}
+        {variant === "heatmap" && <svg class="vector-chart" viewBox="0 0 440 285" role="img" aria-label={`${t.analysis.heatmap} · ${t.illustration}`}>
+          <g>{heatCells.map((cell) => <rect class={`heat-tone-${cell.tone + 2}`} x={78 + cell.col * 46} y={47 + cell.row * 24} width="42" height="20" rx="2" />)}</g>
+          {Array.from({ length: 6 }, (_, i) => <text class="axis-label" x={99 + i * 46} y="34" text-anchor="middle">{i < 3 ? `A${i + 1}` : `B${i - 2}`}</text>)}
+          <path class="heat-cluster" d="M40 57H62V81H70M40 105H56V129H70M40 153H62V177H70M40 201H56V225H70M32 69H40V117M32 165H40V213M24 93H32V189"/>
+          <text class="axis-label" x="216" y="272" text-anchor="middle">{t.analysis.groups.join(" / ")}</text>
+        </svg>}
+        {variant === "pca" && <svg class="vector-chart" viewBox="0 0 440 285" role="img" aria-label={`${t.analysis.pca} · ${t.illustration}`}>
+          <g class="chart-grid">{[65, 115, 165, 215].map((y) => <path d={`M48 ${y}H414`} />)}{[96, 156, 216, 276, 336, 396].map((x) => <path d={`M${x} 30V239`} />)}</g>
+          <path class="chart-axis" d="M48 30V239H414"/><path class="chart-reference" d="M225 30V239M48 139H414"/>
+          <ellipse class="pca-cloud tone-sage" cx="152" cy="132" rx="57" ry="51"/><ellipse class="pca-cloud tone-ochre" cx="293" cy="100" rx="59" ry="50"/>
+          {pcaPoints.map((point) => <circle class={`chart-point tone-${point.tone}`} cx={point.x} cy={point.y} r="5" />)}
+          <text class="axis-label" x="228" y="272" text-anchor="middle">PC1</text><text class="axis-label" transform="translate(18 134) rotate(-90)" text-anchor="middle">PC2</text>
+        </svg>}
+      </div>
+      <div class="output-file"><svg aria-hidden="true"><use href="#i-chart" /></svg><span>{t.analysis.export}</span></div>
+    </div>
+  </div>}
+
+  {kind === "writing" && <div class="diagram-stage writing-stage">
+    <div class="outline-source diagram-card"><h4>{t.writing.outline}</h4><ol>{t.writing.sections.map((section, i) => <li><span>{String(i + 1).padStart(2, "0")}</span><div><strong>{section}</strong><div class="paper-lines" aria-hidden="true"><i></i><i></i></div></div></li>)}</ol></div>
+    <div class="stage-arrow" aria-hidden="true"><span>→</span></div>
+    <div class="writing-output">
+      {variant !== "report" && <div class="slide-sheet diagram-card"><div class="sheet-kicker">{t.writing.slides}</div><h4>{t.writing.title}</h4><div class="slide-grid"><div class="slide-chart"><svg viewBox="0 0 190 130" aria-hidden="true"><path class="chart-axis" d="M20 10V112H180"/>{[34, 66, 98, 130].map((x, i) => <><rect class="tone-sage" x={x} y={42 - i * 5} width="13" height={70 + i * 5} rx="2"/><rect class="tone-ochre" x={x + 15} y={63 - i * 12} width="13" height={49 + i * 12} rx="2"/></>)}</svg><span>{t.writing.chart}</span></div><div class="slide-points"><strong>{t.writing.slidePoint}</strong><div class="paper-lines" aria-hidden="true"><i></i><i></i><i></i></div><span class="citation-tag">[1] [2]</span></div></div></div>}
+      {variant === "report" && <div class="manuscript-sheet diagram-card"><div class="sheet-kicker">{t.writing.report}</div><h4>{t.writing.title}</h4><div class="paper-lines" aria-hidden="true"><i></i><i></i></div><p class="manuscript-paragraph">{t.writing.paragraph}<span class="citation-tag"> [1]</span></p><div class="paper-lines" aria-hidden="true"><i></i><i></i></div></div>}
+      <div class="output-file"><svg aria-hidden="true"><use href={`#${variant === "report" ? "i-quote" : "i-doc"}`} /></svg><span>{variant === "report" ? t.writing.citations : t.writing.notes}</span><span class="file-lines" aria-hidden="true"></span></div>
+    </div>
+  </div>}
+
+  {kind === "cloning" && <div class="cloning-stage">
+    <div class:list={["plasmid-pane", { "is-secondary": variant === "sequence" }]}>
+      <svg class="plasmid-map" viewBox="0 0 350 330" role="img" aria-label={`${t.cloning.map} · ${t.cloning.vector} · ${t.illustration}`}>
+        <circle class="plasmid-ring" cx="175" cy="156" r="92"/><path class="plasmid-feature tone-sage" d="M175 64A92 92 0 0 1 262 126"/><path class="plasmid-feature tone-ochre" d="M246 214A92 92 0 0 1 115 226"/>
+        <path class="plasmid-tick" d="M80 119L62 112M257 103L276 91M136 245L128 264"/>
+        <text class="plasmid-label" x="47" y="107" text-anchor="middle">EcoRI</text><text class="plasmid-label" x="287" y="83" text-anchor="middle">{t.cloning.featureA}</text><text class="plasmid-label" x="117" y="287" text-anchor="middle">{t.cloning.featureB}</text>
+        <text class="plasmid-title" x="175" y="151" text-anchor="middle">{t.cloning.vector}</text><text class="plasmid-center-note" x="175" y="173" text-anchor="middle">{t.illustration}</text>
+        <path class="insert-connector" d="M62 300H103"/><rect class="insert-sequence" x="106" y="296" width="65" height="8" rx="4"/><path class="insert-connector" d="M174 300H215"/><text class="plasmid-label" x="252" y="305" text-anchor="middle">{t.cloning.insert}</text>
+      </svg>
+    </div>
+    <div class:list={["sequence-pane", { "is-primary": variant === "sequence" }]}>
+      <div class="sequence-card diagram-card"><h4>{t.cloning.sequence}</h4><p class="muted-mini">{t.cloning.frame}</p><div class="sequence-row"><span>{t.cloning.dna}</span><code>ATG GCC <em>GAA TTC</em> TAA</code></div><div class="sequence-row amino-row"><span>{t.cloning.amino}</span><code>M<span>A</span><em>E</em><em>F</em><span>*</span></code></div><div class="restriction-site"><span>{t.cloning.motif}</span><code>EcoRI · G<span class="cut-mark">↓</span>AATTC</code></div></div>
+      <ul class="design-checks">{t.cloning.checks.map((check) => <li><svg aria-hidden="true"><use href="#g-check" /></svg>{check}</li>)}</ul>
+    </div>
+  </div>}
+
+  {kind === "materials" && <div class="materials-stage">
+    <div class="material-files">{t.materials.files.map((file, i) => <div class="material-file diagram-card"><svg aria-hidden="true"><use href={`#${i === 0 ? "i-book" : "i-doc"}`} /></svg><span>{file}</span><div class="paper-lines" aria-hidden="true"><i></i><i></i></div></div>)}</div>
+    <div class="archive-hub"><div class="archive-connector" aria-hidden="true"></div><div class="archive-box diagram-card"><svg aria-hidden="true"><use href="#i-memory" /></svg><h4>{t.materials.archive}</h4><p>{t.materials.source}</p></div><div class="archive-connector" aria-hidden="true"></div></div>
+    <div class="followup-output"><div class="followup-card diagram-card"><h4>{t.materials.tasks}</h4><ul>{t.materials.taskItems.map((item) => <li><i class="task-square" aria-hidden="true"></i>{item}</li>)}</ul></div><div class="followup-card updates-card diagram-card"><h4>{t.materials.updates}</h4><ul>{t.materials.updateItems.map((item, i) => <li><span class="update-number">{i + 1}</span>{item}</li>)}</ul></div></div>
+  </div>}
+</div>
+
+<style>
+  .capability-diagram{width:100%;min-width:0;position:relative;padding:25px 28px 28px;color:var(--ink);font-family:inherit;--diagram-line:color-mix(in srgb,var(--ink) 12%,transparent);--diagram-sage:var(--sage-deep);--diagram-ochre:var(--ochre);--diagram-paper:var(--glass-strong);--diagram-soft:var(--glass-soft)}
+  .capability-diagram svg{display:block;flex:none;fill:currentColor}
+  .diagram-journey{display:flex;align-items:center;gap:10px;color:var(--ink-soft);font-size:12px;line-height:1.6;margin-bottom:25px}
+  .diagram-journey>span:first-child{color:var(--ink);font-weight:500}.journey-arrow{color:var(--diagram-sage)}.diagram-label{margin-left:auto;flex:none;color:var(--ink-soft);font-size:10px}
+  .diagram-stage{display:grid;grid-template-columns:minmax(0,1fr) 35px minmax(0,1.9fr);gap:12px;align-items:center;min-height:340px}
+  .diagram-card{background:var(--diagram-paper);border:1px solid var(--diagram-line);border-radius:13px;box-shadow:0 1px 0 var(--edge)}
+  .capability-diagram h4{font-size:13px;font-weight:600;line-height:1.5;margin:0 0 10px;letter-spacing:0}.muted-mini{font-size:10px;line-height:1.7;color:var(--ink-soft);margin:0 0 16px}
+  .stage-arrow{display:flex;align-items:center;justify-content:center;color:var(--diagram-sage);font-size:25px;font-weight:400}
+  .paper-lines{display:grid;gap:9px}.paper-lines i{display:block;height:5px;border-radius:3px;background:color-mix(in srgb,var(--ink-soft) 17%,transparent)}.paper-lines i:nth-child(2n){width:87%}.paper-lines i:last-child{width:64%}.paper-lines .highlight{height:17px;width:97%;background:color-mix(in srgb,var(--sage) 25%,transparent);box-shadow:inset 3px 0 0 var(--sage)}
+  .paper-source{padding:24px 19px}.source-icon{margin:0 0 19px;color:var(--diagram-sage)}.source-icon svg{width:31px;height:31px}.paper-source>.paper-lines{margin:21px 0}.question-note{border-top:1px solid var(--diagram-line);padding-top:15px;font-size:11px;line-height:1.6;color:var(--ink-soft)}
+  .reading-output{min-width:0}.reading-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}.reading-page{padding:18px 16px}.reading-page h4{margin-bottom:19px}.reading-highlight{font-size:12px;line-height:1.75;padding:9px 10px;margin:16px 0;background:color-mix(in srgb,var(--sage) 16%,transparent);border-radius:4px;border-left:2px solid var(--sage)}
+  .source-link{display:flex;align-items:center;gap:12px;padding:17px 15px;margin-top:13px}.source-link>svg{color:var(--diagram-ochre);width:21px;height:21px}.source-link>div{min-width:0}.source-link strong{font-size:12px;font-weight:500}.source-link p{font-size:10px;line-height:1.7;margin:5px 0 0;color:var(--ink-soft);overflow-wrap:anywhere}.reference-mark{font-family:var(--font-mono);font-size:11px;color:var(--diagram-ochre);margin-left:auto}
+  .data-source{padding:20px 14px}.data-source h4{padding:0 5px}.mini-table{border:1px solid var(--diagram-line);border-radius:6px;overflow:hidden;margin:16px 0}.table-head,.table-row{display:grid;grid-template-columns:1.6fr repeat(4,minmax(0,1fr));align-items:center;min-height:31px;gap:2px;font-size:8px}.table-head{background:var(--diagram-soft);color:var(--ink-soft);font-family:var(--font-mono)}.table-head>span{text-align:center}.table-row{border-top:1px solid var(--diagram-line)}.table-row>span:first-child{padding:0 6px;font-size:9px;white-space:nowrap}.table-row>span:not(:first-child){padding:0 3px}.table-row i{display:block;width:var(--bar);height:6px;background:color-mix(in srgb,var(--sage) 58%,transparent);border-radius:2px}.grouping{padding:0 5px}.grouping>p{font-size:10px;line-height:1.5;color:var(--ink-soft);margin:0 0 8px}.grouping>span{display:flex;align-items:center;gap:6px;font-size:10px;line-height:1.5;margin-top:6px}.group-dot{width:6px;height:6px;border-radius:50%;display:block}.group-dot.sage{background:var(--diagram-sage)}.group-dot.ochre{background:var(--diagram-ochre)}
+  .chart-output{min-width:0}.chart-canvas{padding:15px 17px 8px}.chart-title{display:flex;align-items:center;gap:10px;justify-content:space-between}.chart-title h4{margin:0}.chart-title>span{font-size:8px;line-height:1.5;color:var(--ink-soft)}.vector-chart{width:100%;height:auto;min-width:0;margin-top:8px;overflow:visible}.chart-grid{fill:none;stroke:var(--diagram-line);stroke-width:.6}.chart-axis{fill:none;stroke:var(--ink-soft);stroke-width:1.1}.chart-reference{fill:none;stroke:var(--diagram-line);stroke-width:1;stroke-dasharray:4 5}.chart-point{stroke:var(--diagram-paper);stroke-width:1}.tone-sage{fill:var(--diagram-sage)}.tone-ochre{fill:var(--diagram-ochre)}.tone-neutral{fill:color-mix(in srgb,var(--ink-soft) 45%,transparent)}.axis-label{fill:var(--ink-soft);font-family:inherit;font-size:13px}.pca-cloud{opacity:.08}.heat-cluster{fill:none;stroke:var(--ink-soft);stroke-width:1.5}.heat-tone-0{fill:color-mix(in srgb,var(--diagram-sage) 78%,var(--mist))}.heat-tone-1{fill:color-mix(in srgb,var(--sage) 45%,var(--mist))}.heat-tone-2{fill:var(--mist-2)}.heat-tone-3{fill:color-mix(in srgb,var(--diagram-ochre) 40%,var(--mist))}.heat-tone-4{fill:color-mix(in srgb,var(--diagram-ochre) 76%,var(--mist))}
+  .output-file{display:flex;align-items:center;gap:9px;border:1px solid var(--diagram-line);border-radius:9px;background:var(--diagram-soft);padding:11px 13px;margin-top:12px;font-size:11px;line-height:1.5;color:var(--ink-soft)}.output-file svg{width:17px;height:17px;color:var(--diagram-sage)}
+  .outline-source{padding:22px 18px}.outline-source h4{margin-bottom:20px}.outline-source ol{list-style:none;padding:0;margin:0;display:grid;gap:24px}.outline-source li{display:grid;grid-template-columns:19px minmax(0,1fr);gap:7px}.outline-source li>span{font-family:var(--font-mono);font-size:9px;color:var(--diagram-sage);margin-top:3px}.outline-source strong{display:block;font-size:11px;font-weight:500;line-height:1.6;margin-bottom:11px}.outline-source .paper-lines{gap:6px}.outline-source .paper-lines i{height:4px}
+  .writing-output{min-width:0}.slide-sheet,.manuscript-sheet{padding:21px 22px}.sheet-kicker{font-family:var(--font-mono);color:var(--diagram-sage);font-size:9px;line-height:1.7;margin-bottom:9px}.slide-sheet h4,.manuscript-sheet h4{font-size:19px;line-height:1.35;margin:0 0 20px}.slide-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:18px;align-items:center}.slide-chart svg{width:100%;height:auto}.slide-chart>span{display:block;text-align:center;font-size:8px;color:var(--ink-soft);line-height:1.6;margin:7px 0 0}.slide-points strong{font-size:10px;font-weight:500;line-height:1.6;display:block;margin-bottom:13px}.slide-points .paper-lines{gap:9px}.citation-tag{display:inline-block;font-family:var(--font-mono);font-size:9px;color:var(--diagram-ochre);margin-top:12px}.file-lines{margin-left:auto;width:48px;height:4px;background:color-mix(in srgb,var(--ink-soft) 18%,transparent);border-radius:3px}.manuscript-sheet{min-height:260px}.manuscript-sheet h4{font-size:19px}.manuscript-paragraph{font-size:12px;line-height:1.9;color:var(--ink-soft);margin:18px 0;border-left:2px solid var(--sage);padding-left:11px}
+  .cloning-stage{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:center;min-height:340px}.plasmid-map{width:100%;height:auto}.plasmid-ring{fill:none;stroke:var(--diagram-line);stroke-width:11}.plasmid-feature{fill:none;stroke-width:13;stroke-linecap:round}.plasmid-feature.tone-sage{stroke:var(--diagram-sage)}.plasmid-feature.tone-ochre{stroke:var(--diagram-ochre)}.plasmid-tick,.insert-connector{fill:none;stroke:var(--ink-soft);stroke-width:1.2}.plasmid-label{font-family:inherit;font-size:13px;fill:var(--ink-soft)}.plasmid-title{font-size:17px;font-weight:500;fill:var(--ink)}.plasmid-center-note{font-size:10px;fill:var(--ink-soft)}.insert-sequence{fill:var(--diagram-sage)}.sequence-card{padding:21px 19px}.sequence-row{margin:16px 0}.sequence-row>span{display:block;font-size:9px;line-height:1.6;color:var(--ink-soft);margin-bottom:5px}.sequence-row code{display:block;font-family:var(--font-mono);font-size:12px;line-height:1.8;letter-spacing:.02em;white-space:nowrap}.sequence-row em{font-style:normal;color:var(--diagram-sage);background:color-mix(in srgb,var(--sage) 13%,transparent);border-radius:3px}.amino-row code{display:flex;justify-content:space-between;max-width:183px}.restriction-site{border-top:1px solid var(--diagram-line);padding-top:13px;margin-top:17px}.restriction-site>span{display:block;font-size:9px;color:var(--ink-soft);margin-bottom:6px}.restriction-site code{font-family:var(--font-mono);font-size:12px;line-height:1.7}.cut-mark{color:var(--diagram-ochre);padding:0 2px}.design-checks{list-style:none;padding:0;margin:17px 0 0;display:flex;gap:9px 15px;flex-wrap:wrap}.design-checks li{display:flex;align-items:center;gap:5px;font-size:10px;line-height:1.5;color:var(--ink-soft)}.design-checks svg{width:11px;height:11px;color:var(--diagram-sage)}.plasmid-pane.is-secondary{opacity:.7}.sequence-pane.is-primary .sequence-card{border-color:color-mix(in srgb,var(--sage) 45%,transparent)}
+  .materials-stage{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr) minmax(0,1.3fr);gap:14px;align-items:center;min-height:340px}.material-files{display:grid;gap:12px}.material-file{padding:15px 14px}.material-file>svg{width:23px;height:23px;color:var(--diagram-sage);margin-bottom:9px}.material-file>span{font-size:11px;line-height:1.6;display:block;margin-bottom:12px}.material-file .paper-lines{gap:6px}.material-file .paper-lines i{height:4px}.archive-hub{display:flex;gap:8px;align-items:center}.archive-box{min-width:0;padding:22px 12px;text-align:center;flex:1}.archive-box>svg{width:31px;height:31px;color:var(--diagram-sage);margin:0 auto 16px}.archive-box h4{font-size:12px;margin-bottom:7px}.archive-box p{font-size:9px;color:var(--ink-soft);line-height:1.75;margin:0}.archive-connector{width:11px;flex:none;height:1px;background:var(--diagram-sage);position:relative}.archive-connector:after{content:"";position:absolute;right:-1px;top:-2px;width:4px;height:4px;border-top:1px solid var(--diagram-sage);border-right:1px solid var(--diagram-sage);transform:rotate(45deg)}.followup-output{display:grid;gap:13px}.followup-card{padding:18px 17px}.followup-card h4{margin-bottom:15px}.followup-card ul{padding:0;margin:0;list-style:none;display:grid;gap:10px}.followup-card li{display:flex;gap:8px;align-items:center;font-size:10px;line-height:1.6;color:var(--ink-soft)}.task-square{width:8px;height:8px;border:1px solid var(--sage);border-radius:2px;flex:none}.updates-card h4{color:var(--diagram-sage)}.update-number{font-family:var(--font-mono);font-size:9px;color:var(--diagram-ochre);flex:none}
+  .is-compact{padding:16px 18px 19px}.is-compact .diagram-journey{margin-bottom:18px;font-size:10px}.is-compact .diagram-label{font-size:8px}.is-compact .diagram-stage,.is-compact .cloning-stage,.is-compact .materials-stage{min-height:260px}.is-compact .diagram-stage{grid-template-columns:minmax(0,1fr) 25px minmax(0,1.9fr);gap:8px}.is-compact .chart-canvas{padding:12px 10px 4px}
+  @media(max-width:650px){.capability-diagram{padding:20px 18px 22px}.diagram-journey{font-size:11px;gap:8px;margin-bottom:21px;flex-wrap:wrap}.diagram-label{font-size:9px}.diagram-stage{grid-template-columns:minmax(0,1fr) 24px minmax(0,1.7fr);gap:8px;min-height:300px}.data-source{padding:18px 10px}.capability-diagram h4{font-size:12px}.table-row>span:first-child{font-size:8px;padding:0 4px}.table-head{font-size:7px}.table-head,.table-row{min-height:27px}.chart-canvas{padding:13px 11px 6px}.chart-title>span{display:none}.chart-title h4{font-size:12px}.output-file{padding:10px;font-size:10px}.paper-source{padding:20px 14px}.paper-source .muted-mini{font-size:9px}.reading-page{padding:16px 12px}.reading-highlight{font-size:10px;padding:8px;margin:13px 0}.reading-pair{gap:8px}.source-link{gap:9px;padding:13px 12px}.source-link strong{font-size:10px}.source-link p{font-size:9px}.source-link>svg{width:17px;height:17px}.outline-source{padding:19px 13px}.outline-source li{grid-template-columns:16px minmax(0,1fr);gap:4px}.outline-source strong{font-size:10px}.outline-source ol{gap:19px}.slide-sheet,.manuscript-sheet{padding:18px 16px}.slide-sheet h4,.manuscript-sheet h4{font-size:17px}.slide-grid{gap:11px}.slide-points strong{font-size:9px}.slide-chart>span{font-size:7px}.manuscript-paragraph{font-size:10px}.cloning-stage{gap:12px;min-height:300px}.sequence-card{padding:17px 13px}.sequence-row code{font-size:10px}.sequence-row>span,.restriction-site>span{font-size:8px}.restriction-site code{font-size:10px}.sequence-card .muted-mini{font-size:9px}.materials-stage{gap:10px;grid-template-columns:minmax(0,.85fr) minmax(0,1fr) minmax(0,1.2fr);min-height:300px}.material-file{padding:13px 11px}.material-file>span{font-size:10px}.archive-hub{gap:4px}.archive-box{padding:19px 9px}.archive-connector{width:7px}.archive-box h4{font-size:10px}.archive-box p{font-size:8px}.followup-card{padding:16px 13px}.followup-card h4{font-size:11px}.followup-card li{font-size:9px;gap:6px}}
+  @media(max-width:480px){.capability-diagram{padding:17px 14px 20px}.diagram-journey{font-size:10px;gap:7px}.diagram-label{font-size:8px}.diagram-stage{grid-template-columns:minmax(0,1fr);gap:13px;min-height:0}.stage-arrow{font-size:20px;transform:rotate(90deg);height:19px}.paper-source{display:grid;grid-template-columns:33px minmax(0,1fr);gap:0 12px;padding:16px}.paper-source .source-icon{grid-row:1 / span 2;margin:4px 0 0}.paper-source h4{margin-bottom:4px}.paper-source .muted-mini{margin:0}.paper-source>.paper-lines{grid-column:2;margin:12px 0}.paper-source>.paper-lines i:nth-child(n+4){display:none}.question-note{grid-column:1 / -1;margin-top:5px;padding-top:11px;font-size:10px}.reading-pair{gap:9px}.reading-page{padding:17px 12px}.reading-highlight{font-size:11px;line-height:1.7;min-height:76px}.reading-page h4{font-size:12px;margin-bottom:14px}.source-link strong{font-size:11px}.data-source{padding:15px 16px;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:0 18px;align-items:center}.data-source h4{grid-column:1;margin-bottom:0;padding:0}.mini-table{grid-column:1;margin:12px 0 0}.grouping{grid-column:2;grid-row:1 / span 2;padding:0}.chart-canvas{padding:17px 20px 6px}.chart-title>span{display:block;font-size:8px}.chart-title h4{font-size:13px}.output-file{font-size:11px}.outline-source{padding:16px}.outline-source h4{margin:0 0 13px}.outline-source ol{display:flex;gap:13px;flex-wrap:wrap}.outline-source li{flex:1 1 60px;grid-template-columns:15px minmax(0,1fr)}.outline-source .paper-lines{gap:5px}.outline-source strong{font-size:9px;margin-bottom:8px}.slide-sheet,.manuscript-sheet{padding:22px 20px}.slide-sheet h4,.manuscript-sheet h4{font-size:19px}.slide-grid{gap:18px}.slide-points strong{font-size:11px}.slide-chart>span{font-size:9px}.manuscript-paragraph{font-size:12px}.manuscript-sheet{min-height:240px}.cloning-stage{grid-template-columns:minmax(0,1fr);gap:9px;min-height:0}.plasmid-map{max-width:290px;margin:0 auto}.plasmid-pane.is-secondary{display:none}.sequence-card{padding:20px 19px}.sequence-row code,.restriction-site code{font-size:12px}.sequence-row>span,.restriction-site>span{font-size:9px}.design-checks li{font-size:10px}.materials-stage{grid-template-columns:minmax(0,1fr);gap:17px;min-height:0}.material-files{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.material-file{padding:14px 10px}.material-file>span{font-size:9px}.material-file>svg{width:20px;height:20px}.archive-hub{flex-direction:column;gap:12px}.archive-box{width:100%;padding:18px;display:grid;grid-template-columns:32px minmax(0,1fr);text-align:left;gap:0 13px}.archive-box>svg{margin:0;grid-row:1 / span 2}.archive-box h4{font-size:12px;margin-bottom:5px}.archive-box p{font-size:10px}.archive-connector{transform:rotate(90deg);width:13px}.followup-output{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px}.followup-card{padding:17px 13px}.followup-card h4{font-size:11px}.followup-card li{font-size:9px}.is-compact .diagram-stage{grid-template-columns:minmax(0,1fr)}.is-compact .diagram-stage,.is-compact .cloning-stage,.is-compact .materials-stage{min-height:0}}
+  @media(prefers-reduced-motion:reduce){.capability-diagram *{animation:none!important;transition:none!important}}
+</style>
