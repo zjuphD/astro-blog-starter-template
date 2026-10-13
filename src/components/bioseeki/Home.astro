@@ -131,9 +131,9 @@ const jsonLd = [
   --line:rgba(36,49,43,.12);
   --line-strong:rgba(36,49,43,.2);
   --shadow:rgba(36,49,43,.10);
-  --orb1:rgba(110,143,124,.30);
-  --orb2:rgba(192,138,45,.20);
-  --orb3:rgba(96,150,160,.22);
+  --orb1:rgba(110,143,124,.50);
+  --orb2:rgba(192,138,45,.32);
+  --orb3:rgba(96,150,160,.34);
   --code-bg:rgba(255,255,255,.5);
   --ok:#4E8A5A;
   --bad:#A8503A;             /* verdict: problem */
@@ -169,9 +169,9 @@ const jsonLd = [
     --line:rgba(233,236,229,.11);
     --line-strong:rgba(233,236,229,.2);
     --shadow:rgba(0,0,0,.5);
-    --orb1:rgba(110,143,124,.22);
-    --orb2:rgba(192,138,45,.13);
-    --orb3:rgba(96,150,160,.15);
+    --orb1:rgba(110,143,124,.28);
+    --orb2:rgba(192,138,45,.18);
+    --orb3:rgba(96,150,160,.20);
     --code-bg:rgba(20,26,23,.5);
     --ok:#7DBE8A;
     --bad:#E3927C;
@@ -201,9 +201,9 @@ const jsonLd = [
   --line:rgba(233,236,229,.11);
   --line-strong:rgba(233,236,229,.2);
   --shadow:rgba(0,0,0,.5);
-  --orb1:rgba(110,143,124,.22);
-  --orb2:rgba(192,138,45,.13);
-  --orb3:rgba(96,150,160,.15);
+  --orb1:rgba(110,143,124,.28);
+  --orb2:rgba(192,138,45,.18);
+  --orb3:rgba(96,150,160,.20);
   --code-bg:rgba(20,26,23,.5);
   --ok:#7DBE8A;
   --bad:#E3927C;
@@ -243,25 +243,30 @@ ul,ol{ list-style:none; }
 :lang(zh) :is(.eyebrow,.panel-title,.chain-h,.chain-legend,.frag-note,.case-label,.foot-col-title,.badge.mono,.report-foot,.hero-meta,.steps3-label,.claim-gap,.dl-specs dt,.copy,.foot-top,.seg a){ letter-spacing:.04em; }
 
 /* ============ AMBIENT BACKGROUND ============ */
-.orbs{ position:fixed; inset:0; z-index:-2; overflow:hidden; pointer-events:none; }
-.orb{ position:absolute; border-radius:50%; filter:blur(100px); will-change:transform; }
-.orb-1{ width:46vw; height:46vw; min-width:440px; min-height:440px; background:var(--orb1); top:-16vw; left:-14vw; animation:drift1 46s ease-in-out infinite alternate; }
-.orb-2{ width:40vw; height:40vw; min-width:380px; min-height:380px; background:var(--orb2); top:30vh; right:-16vw; animation:drift2 58s ease-in-out infinite alternate; }
-.orb-3{ width:36vw; height:36vw; min-width:340px; min-height:340px; background:var(--orb3); bottom:-18vw; left:24vw; animation:drift3 52s ease-in-out infinite alternate; }
-@keyframes drift1{ to{ transform:translate(8vw,6vh) scale(1.08); } }
-@keyframes drift2{ to{ transform:translate(-7vw,-8vh) scale(.94); } }
-@keyframes drift3{ to{ transform:translate(5vw,-5vh) scale(1.06); } }
+.orbs{ --ambient-grid-line:color-mix(in srgb, var(--ink) 13%, transparent); position:fixed; inset:0; z-index:-2; overflow:hidden; pointer-events:none; }
+.orb{ position:absolute; border-radius:50%; filter:blur(90px); will-change:transform; }
+.orb-1{ width:52vw; height:52vw; min-width:480px; min-height:480px; background:var(--orb1); top:-14vw; left:-10vw; animation:drift1 46s ease-in-out infinite alternate; }
+.orb-2{ width:44vw; height:44vw; min-width:400px; min-height:400px; background:var(--orb2); top:26vh; right:-14vw; animation:drift2 58s ease-in-out infinite alternate; }
+.orb-3{ width:40vw; height:40vw; min-width:360px; min-height:360px; background:var(--orb3); bottom:-16vw; left:22vw; animation:drift3 52s ease-in-out infinite alternate; }
+@keyframes drift1{ to{ transform:translate(9vw,7vh) scale(1.12); } }
+@keyframes drift2{ to{ transform:translate(-8vw,-9vh) scale(.92); } }
+@keyframes drift3{ to{ transform:translate(6vw,-6vh) scale(1.08); } }
 /* fine grid under the top of the viewport; the pointer lights a patch of it (see .cfx-grid) */
 .orbs::before{
   content:""; position:absolute; inset:0;
-  background-image:linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size:40px 40px; background-position:center top; opacity:.45;
-  -webkit-mask-image:radial-gradient(ellipse 80% 52% at 50% 0%, #000 15%, transparent 72%);
-  mask-image:radial-gradient(ellipse 80% 52% at 50% 0%, #000 15%, transparent 72%);
+  background-image:linear-gradient(var(--ambient-grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--ambient-grid-line) 1px, transparent 1px);
+  background-size:40px 40px; background-position:center top; opacity:.55;
+  -webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 0%, #000 20%, transparent 75%);
+  mask-image:radial-gradient(ellipse 90% 60% at 50% 0%, #000 20%, transparent 75%);
+}
+.orbs::after{
+  content:""; position:absolute; left:50%; top:-30vh;
+  width:min(1100px,140vw); height:70vh; transform:translateX(-50%);
+  background:radial-gradient(closest-side, color-mix(in srgb, var(--sage) 22%, transparent), transparent);
 }
 @media (min-width:768px){ .orbs::before{ background-size:56px 56px; } }
 .grain{
-  position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.045;
+  position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
 }
 
@@ -415,7 +420,9 @@ section{ padding:clamp(4.5rem,10vh,8rem) 0; }
 .hero::before{
   content:""; position:absolute; z-index:-1; pointer-events:none;
   left:50%; top:0; width:min(1200px,100%); height:100%; transform:translateX(-50%);
-  background:radial-gradient(40% 50% at 22% 42%, color-mix(in srgb, var(--sage) 12%, transparent), transparent 70%);
+  background:
+    radial-gradient(40% 50% at 22% 42%, color-mix(in srgb, var(--sage) 14%, transparent), transparent 70%),
+    radial-gradient(30% 40% at 80% 50%, color-mix(in srgb, var(--ochre) 9%, transparent), transparent 70%);
 }
 .hero-grid{ max-width:46rem; }
 .hero .eyebrow{ display:flex; align-items:center; gap:10px; }
@@ -996,7 +1003,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
 /* ============ TOUCH, FORCED COLOURS, REDUCED MOTION ============ */
 @media (hover:none){ .btn:hover{ transform:none; } }
 @media (forced-colors: active){
-  .orbs::before,.hero::before,.nav::after,.spot-edge::before,.cfx{ display:none; }
+  .orbs::before,.orbs::after,.hero::before,.nav::after,.spot-edge::before,.cfx{ display:none; }
 }
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
