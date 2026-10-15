@@ -292,47 +292,6 @@
     "editorialReason": "通过 V2 规则筛选与多维评分。"
   },
   {
-    "id": "2026-09-21-10-1016-j-clindermatol-2026-09-012",
-    "manual": false,
-    "briefingDate": "2026-09-23",
-    "publishedAt": "2026-09-21",
-    "category": "精准医疗",
-    "source": "Europe PMC",
-    "sourceType": "综述",
-    "titleZh": "Practical Considerations for Adopting AI Clinical Decision Support Tools and Large Language Models in Dermatology.",
-    "titleOriginal": "Practical Considerations for Adopting AI Clinical Decision Support Tools and Large Language Models in Dermatology.",
-    "summary": "Artificial Intelligence (AI) in dermatology is a rapidly evolving field, offering promising advancements in the diagnosis and management of skin cancers. As global skin cancer incidence rises, tools like machine-learning based systems and l…",
-    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
-    "score": 81,
-    "tags": [
-      "AI"
-    ],
-    "originalUrl": "https://doi.org/10.1016/j.clindermatol.2026.09.012",
-    "editorialMode": "rules",
-    "editorialReason": "通过 V2 规则筛选与多维评分。"
-  },
-  {
-    "id": "2026-09-20-10-1002-ece3-74365",
-    "manual": false,
-    "briefingDate": "2026-09-23",
-    "publishedAt": "2026-09-20",
-    "category": "蛋白质与结构生物学",
-    "source": "Europe PMC",
-    "sourceType": "方法/模型",
-    "titleZh": "Evaluating Artificial Intelligence, Peer, and Instructor Feedback Across Scientific Communication Assignments in Undergraduate Biology.",
-    "titleOriginal": "Evaluating Artificial Intelligence, Peer, and Instructor Feedback Across Scientific Communication Assignments in Undergraduate Biology.",
-    "summary": "Generative artificial intelligence (AI) has emerged as a potential source of formative feedback for student writing. However, relatively little is known about how AI-generated feedback compares with instructor and peer feedback across diffe…",
-    "whyItMatters": "关注点在于 AI 是否提升结构解析、功能预测或蛋白设计能力，以及预测结果能否经实验验证。",
-    "score": 78,
-    "tags": [
-      "AI",
-      "蛋白/结构"
-    ],
-    "originalUrl": "https://doi.org/10.1002/ece3.74365",
-    "editorialMode": "rules",
-    "editorialReason": "通过 V2 规则筛选与多维评分。"
-  },
-  {
     "id": "2026-09-03-ai-biodesign",
     "manual": true,
     "publishedAt": "2026-09-03",
@@ -431,25 +390,5 @@
       "泛癌"
     ],
     "originalUrl": "https://www.nature.com/articles/s41591-026-04502-7"
-  },
-  {
-    "id": "2026-06-isomorphic-series-b",
-    "manual": true,
-    "publishedAt": "2026-06-16",
-    "category": "蛋白质与结构生物学",
-    "source": "Nature Biotechnology",
-    "sourceType": "产业动态",
-    "titleZh": "Isomorphic Labs 获 21 亿美元融资，继续扩展 AI 驱动的药物设计平台",
-    "titleOriginal": "DeepMind spinout raises $2.1 billion",
-    "summary": "Isomorphic Labs 完成 21 亿美元 B 轮融资，计划扩大其 AI 药物设计引擎。Nature Biotechnology 报道称，其新一代 Drug Design Engine 在结构预测、结合亲和力与配体口袋识别等任务上强调相较 AlphaFold 3 的进一步提升。",
-    "whyItMatters": "结构预测正在快速变成药物设计系统中的一个模块，而不是终点。行业竞争正转向从结构、结合、生成到实验验证的一体化设计引擎。",
-    "score": 88,
-    "tags": [
-      "结构预测",
-      "蛋白-配体",
-      "AI 药物设计",
-      "Isomorphic Labs"
-    ],
-    "originalUrl": "https://www.nature.com/articles/s41587-026-03189-y"
   }
 ]
