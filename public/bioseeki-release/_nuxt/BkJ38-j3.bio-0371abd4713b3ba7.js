@@ -1,0 +1,1 @@
+import{Q as e}from"./D2iM4HuY.bio-0371abd4713b3ba7.js";function t(t){let n=t?.statusCode||503;return e({statusCode:n,statusMessage:n===404?`Page not found`:`The site is temporarily unavailable`,fatal:!0})}export{t};

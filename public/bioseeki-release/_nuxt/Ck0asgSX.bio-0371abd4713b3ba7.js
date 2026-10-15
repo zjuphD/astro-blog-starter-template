@@ -1,0 +1,1 @@
+function e(e,{query:t={},hash:n=``}={}){if(e.includes(`?`))return e;let r=e.indexOf(`#`);return r<0?{path:e,query:t,hash:n}:{path:e.slice(0,r),query:t,hash:e.slice(r)}}export{e as t};

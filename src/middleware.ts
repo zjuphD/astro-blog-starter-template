@@ -15,17 +15,44 @@ const CONSOLE_PATHS = [
   "/wallet",
   "/subscriptions",
   "/user",
+  "/forgot-password",
+  "/user/reset",
+  "/reset-password",
+  "/desktop-login",
+  "/otp",
 ];
 
 const CONSOLE_ORIGIN = "https://api.bioseeki.com";
 
-export const onRequest = defineMiddleware((context, next) => {
+export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname, search } = context.url;
   const isConsolePath = CONSOLE_PATHS.some(
     (p) => pathname === p || pathname.startsWith(`${p}/`)
   );
   if (isConsolePath) {
     return context.redirect(`${CONSOLE_ORIGIN}${pathname}${search}`, 302);
+  }
+  const isAiseeki = ["aiseeki.com", "www.aiseeki.com"].includes(context.url.hostname);
+  if (isAiseeki) return next();
+  if (pathname === "/" && context.url.searchParams.get("lang") === "en") {
+    return context.redirect("/en", 302);
+  }
+  const isHomepage = pathname === "/";
+  const isBrandAsset = ["/bioseeki-base.css", "/bioseeki-base.js", "/release-runtime.js", "/site.webmanifest", "/web-app-manifest-512x512.png"].includes(pathname)
+    || ["/_nuxt/", "/product-assets/", "/images/", "/fonts/"].some(prefix => pathname.startsWith(prefix));
+  if (isHomepage || isBrandAsset) {
+    const assets = context.locals.runtime?.env?.ASSETS;
+    if (assets) {
+      const url = new URL(context.url);
+      url.pathname = isHomepage ? "/bioseeki-release/" : `/bioseeki-release${pathname}`;
+      const response = await assets.fetch(new Request(url, context.request));
+      const headers = new Headers(response.headers);
+      headers.set("Cache-Control", isHomepage ? "no-cache, must-revalidate" : "public, max-age=3600");
+      if (isHomepage) {
+        headers.set("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self' https://api.bioseeki.com; worker-src 'self' blob:; frame-src 'self'; form-action 'none'; base-uri 'self'");
+      }
+      return new Response(response.body, {status: response.status, statusText: response.statusText, headers});
+    }
   }
   return next();
 });

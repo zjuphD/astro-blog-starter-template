@@ -1,0 +1,1 @@
+function e(e){return`content:${e===`/`?`/en`:e}`}export{e as t};

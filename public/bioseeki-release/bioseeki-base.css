@@ -1,0 +1,99 @@
+/* The adaptation is isolated from both the unmodified reference and the Astro website. */
+/* Win over the later public :root theme without changing the reference route. */
+html:root{--bio-body:'Medium LL','PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif;--bio-display:'Optima','Songti SC','STSong','Noto Serif CJK SC',serif;--font-sans:var(--bio-body);--font-display:var(--bio-display);--bio-ink:#173532;--bio-muted:#678276}
+:root body{font-family:var(--font-sans)}
+:root :is(main,footer) :is(h1,h2,h3,h4),:root .font-display{font-family:var(--font-display)}
+:root :is(main,footer) :is(h1,h2),:root .font-display{font-weight:400;letter-spacing:-.035em}
+.o-home-hero h1{font-size:clamp(4rem,8.5vw,8.5rem);line-height:1.12;width:max-content;max-width:100%;text-align:center}
+.bio-hero-copy{align-items:center;text-align:center}
+.bio-hero-copy .bio-hero-info{margin-inline:auto}
+/* Center the Chinese words optically; terminal punctuation hangs outside their measure. */
+.bio-title-body{display:inline-block;position:relative;white-space:nowrap;font:inherit;letter-spacing:inherit}
+.bio-title-end{position:absolute;inset-inline-start:100%;top:0;white-space:nowrap;font:inherit;letter-spacing:0}
+.o-home-hero h1>span:last-child .bio-title-body{translate:-.06em 0}
+.o-home-hero h1 >span:first-child .hero-line{color:#173532}.o-home-hero h1 >span:last-child .hero-line{color:#567e70}
+.bio-hero-returned .o-home-hero h1>span,.bio-hero-returned .o-home-hero .bio-hero-info{opacity:1!important;visibility:visible!important}
+.brand img{object-fit:contain;width:clamp(120px,11vw,168px);height:auto}
+.site-header .header-language{display:flex;align-items:center;gap:1.4rem}
+.bio-language,.bio-login{font-size:.9em;white-space:nowrap;transition:opacity .2s}
+.bio-language:hover,.bio-login:hover{opacity:.6}
+.site-header .nav-link{white-space:nowrap}
+.site-header .header-action{gap:1.1rem}
+.site-header .header-action::after{content:'↗';font-size:1.2em}
+#reference-note,.local-visual-label{display:none!important}
+.feature-slide .m-interface-image{max-width:94%}
+.o-feature-slider .m-interface-image{filter:drop-shadow(0 1.5rem 2rem #52694c18)}
+.m-water-image .s-picture{mix-blend-mode:normal!important;background-color:#e5e8dc!important}
+.m-water-image [style*='color: var(--haze)']{color:#e6eadb!important;background-image:linear-gradient(transparent 55%,#cfd8cb88)!important}
+.o-statement h2{line-height:1.17!important;text-wrap:balance}
+.m-statement-copy p:not(.a-ghost-text){text-wrap:pretty;line-height:1.65}
+.bio-personal-visual{position:relative;width:min(90%,62rem);margin:1.8rem auto -1rem;filter:drop-shadow(0 2rem 2rem #334b3410)}
+.bio-personal-visual img{display:block;width:100%;height:auto}
+.bio-pricing{position:relative;padding:clamp(5rem,9vw,10rem) clamp(1.5rem,5vw,6rem) clamp(5rem,8vw,8rem);max-width:94rem;margin:auto;color:var(--bio-ink);scroll-margin-top:7rem;font-size:16px}
+.bio-pricing-intro{display:grid;grid-template-columns:1.6fr 1fr;gap:3rem;align-items:end;margin:0 0 3.8rem}
+.bio-eyebrow{font-size:.9em;letter-spacing:.025em;margin:0 0 1.4rem;color:var(--bio-muted)}
+.bio-pricing h2{font:400 clamp(2.2rem,4.2vw,4rem)/1.17 var(--bio-display);letter-spacing:-.045em;text-wrap:balance;margin:0}
+.bio-pricing-intro>p{font-size:1em;line-height:1.7;color:var(--bio-muted);margin:0 0 .3rem}
+.bio-plan-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem;border-top:1px solid #62766b40;padding-top:1.2rem}
+.bio-plan{position:relative;padding:2.2rem 2rem 1.8rem;display:flex;flex-direction:column;min-width:0;border-radius:1.4rem}
+.bio-plan--recommended{background:#dee5d97a;border:1px solid #fbfff7bf;box-shadow:inset 0 1px 1px #ffffff90,0 .3rem 1rem #203f2604;backdrop-filter:blur(12px)}
+.bio-plan-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:2rem}
+.bio-plan-head h3{font:500 1.55em/1.2 var(--bio-display);margin:0}
+.bio-plan-head>span{font-size:.8em;color:#5a7367}
+.bio-plan-use{font-size:.9em;color:var(--bio-muted);margin:.7rem 0 2rem;line-height:1.5;min-height:1.5em}
+.bio-plan-price{display:flex;align-items:baseline;gap:.3rem;font-variant-numeric:tabular-nums;margin:0 0 1rem}
+.bio-plan-price strong{font:400 clamp(3rem,4.5vw,4.2rem)/1 var(--bio-display);letter-spacing:-.04em}
+.bio-plan-price>span:first-child{font-size:1.35rem}
+.bio-plan-price>span:last-child{color:var(--bio-muted);font-size:.85em;margin-left:.3rem}
+.bio-plan-credits{font-size:.9em;margin:0 0 2.5rem;line-height:1.5}
+.bio-plan-credits strong{font-weight:500}
+.bio-plan-action{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:auto;padding:.9rem 0;border-top:1px solid #64786940;font-size:.9em;transition:color .2s,padding .2s}
+.bio-plan-action:hover{color:#61816d;padding-inline:.25rem}
+.bio-plan-action span{font-size:1.2rem}
+.bio-pricing-foot{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:1.6rem 2rem 0;color:var(--bio-muted);font-size:.8em;line-height:1.65}
+.bio-pricing-foot p{margin:0}
+.bio-pricing-foot a{color:var(--bio-ink);text-underline-offset:.25em}
+.bio-pricing-foot a:hover{text-decoration:underline}
+.site-footer{color:var(--bio-ink)!important}
+.site-footer :is(h2,p,nav,.text-inverse,.text-inverse-muted){color:var(--bio-ink)!important}
+.site-footer .footer-strip{font-size:clamp(13px,.9vw,16px);color:var(--bio-ink)!important}
+.site-footer .footer-strip :is(a,p){color:inherit!important}
+.site-footer .footer-strip-social{display:flex;align-items:center;gap:1rem}
+.bio-social-link{display:inline-flex!important;align-items:center;justify-content:center;width:56px;height:56px;padding:0!important;border-radius:50%;transition:background-color .2s,transform .2s}
+.bio-social-link:hover{background:#17353210;transform:translateY(-2px)}
+.bio-social-link svg{display:block;width:30px;height:30px}
+.bio-social-link[aria-label='小红书'] svg{width:50px;height:30px}
+.bio-social-link:focus-visible{outline:2px solid #173532;outline-offset:3px}
+.site-footer .button{background:var(--bio-ink)!important;color:#f7f6ed!important}
+.site-footer [aria-label='Footer navigation']{display:flex;gap:1.7rem;flex-wrap:wrap}
+.site-footer .s-picture img{opacity:.8}
+.bio-pricing :focus-visible,.bio-language:focus-visible,.bio-login:focus-visible{outline:2px solid #698a79;outline-offset:5px}
+#product,#research,#personal,#evidence{scroll-margin-top:5rem}
+@media(max-width:1023px){
+  .site-header .header-language{align-self:flex-start;padding-left:.9375rem;gap:2rem}
+  .bio-pricing-intro{grid-template-columns:1fr;gap:1.7rem}
+  .bio-plan{padding:1.7rem 1.15rem}
+  .bio-pricing-foot{padding-inline:1.15rem}
+}
+@media(max-width:700px){
+  .o-home-hero h1,.o-home-hero h1 .hero-line{font-size:clamp(3.2rem,13vw,4.5rem)!important;line-height:1.17!important;font-family:var(--bio-display)!important;font-weight:400!important}
+  .site-header .brand img{width:115px;min-width:0}
+  .site-header .header-action{font-size:.75rem!important;gap:.45rem;padding-inline:.75rem}
+  .bio-personal-visual{width:100%;margin-top:.8rem}
+  .bio-pricing{padding-inline:1.25rem;padding-block:4.5rem}
+  .bio-pricing-intro{margin-bottom:2.5rem}
+  .bio-pricing h2{font-size:2rem}
+  .bio-plan-grid{grid-template-columns:1fr;gap:.35rem}
+  .bio-plan{display:grid;grid-template-columns:1fr auto;column-gap:1rem;padding:1.7rem 1.1rem;border-bottom:1px solid #62766b24;border-radius:0}
+  .bio-plan--recommended{border-radius:1rem}
+  .bio-plan-head,.bio-plan-use{grid-column:1}
+  .bio-plan-use{margin:.35rem 0 1rem;font-size:.78rem}
+  .bio-plan-head>span{display:none}
+  .bio-plan-price{grid-column:2;grid-row:1/span 2;align-self:center;margin:0}
+  .bio-plan-price strong{font-size:2.7rem}
+  .bio-plan-credits{grid-column:1;margin:0;align-self:center;font-size:.8rem}
+  .bio-plan-action{grid-column:2;border:0;padding:.3rem 0;font-size:.8rem;align-self:center}
+  .bio-pricing-foot{padding:1.3rem 1.1rem 0;gap:.7rem;font-size:.75rem}
+  .site-footer [aria-label='Footer navigation']{gap:1.1rem;font-size:.8rem}
+}
+@media(prefers-reduced-motion:reduce){.bio-plan-action,.bio-language,.bio-login,.bio-social-link{transition:none}}

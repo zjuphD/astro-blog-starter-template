@@ -1,0 +1,1 @@
+.t-gsap-group{position:relative}.t-gsap-move{transition:transform var(--t-gsap-duration,.4s) cubic-bezier(.22,1,.36,1)}@media (prefers-reduced-motion:reduce){.t-gsap-move{transition:none}}
