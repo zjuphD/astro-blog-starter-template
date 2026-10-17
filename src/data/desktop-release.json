@@ -1,0 +1,13 @@
+{
+  "version": "0.1.2",
+  "channel": "beta",
+  "platform": "darwin-arm64",
+  "filename": "BioSeeki-Beta-0.1.2-arm64.dmg",
+  "downloadUrl": "https://dl.bioseeki.com/desktop/beta/0.1.2/BioSeeki-Beta-0.1.2-arm64.dmg",
+  "checksumUrl": "https://dl.bioseeki.com/desktop/beta/0.1.2/BioSeeki-Beta-0.1.2-arm64.dmg.sha256",
+  "bytes": 686850308,
+  "sha256": "3e5b8c21cf0afb81ce07a7d187013a0d0135b0cc4aa27a7416a205e72872291d",
+  "minimumMacOS": "14.0",
+  "notarized": true,
+  "releasedOn": "2026-10-17"
+}

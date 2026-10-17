@@ -2,6 +2,8 @@
 // (src/components/bioseeki/Home.astro) contains no user-facing text of its own.
 // Strings rendered with set:html may contain <strong>/<em>/<a>; they are authored here, never user input.
 import type { AstroGlobal } from "astro";
+import desktopRelease from "../data/desktop-release.json";
+const minimumMacOS = desktopRelease.minimumMacOS.replace(/\.0$/, "");
 
 export type Lang = "zh" | "en";
 export const LANGS: Lang[] = ["zh", "en"];
@@ -48,7 +50,7 @@ const zh = {
     sub: "交给它<strong>论文、数据表或实验记录</strong>，帮你检索文献、对照翻译、分析绘图、起草论文和制作组会 PPT。<strong>结果文件与来源</strong>保存在你的课题里，下次接着做。",
     download: "下载 Mac 版", cta: "注册账号 ↗", demo: "观看 45 秒演示 ↓",
     explore: "看看能做什么 ↓",
-    meta: "Mac Beta · macOS 11+ · Apple 芯片",
+    meta: `Mac Beta ${desktopRelease.version} · macOS ${minimumMacOS}+ · Apple 芯片`,
   },
   ticker: ["文献检索", "对照翻译", "生信分析", "科研绘图", "论文写作", "组会 PPT", "GeneCode", "文献雷达", "课题资料导入"],
   tools: {
@@ -168,7 +170,7 @@ const zh = {
     eyebrow: "下载与开始使用", title: "下载客户端，从下一个科研问题开始。",
     lede: "安装后先登录 BioSeeki 账号，选好课题目录，就能开始。无需邀请码，也不用自备模型 API。",
     app: "BioSeeki for macOS", badge: "Mac Beta",
-    specs: [["芯片", "Apple 芯片（M1 / M2 / M3 / M4）"], ["系统", "macOS 11 及以上"], ["Windows", "开发中"]],
+    specs: [["版本", `${desktopRelease.version} Beta`], ["芯片", "Apple 芯片（M 系列）"], ["系统", `macOS ${minimumMacOS} 及以上`], ["Windows", "开发中"]],
     note: "暂不支持 Intel 芯片的 Mac。",
     cta: "下载 Mac 版",
     soon: "安装包正在签名与公证，很快开放下载。",
@@ -193,7 +195,7 @@ const zh = {
       { q: "已有实验记录和其他 Agent 的工作怎么导入？", a: "在课题资料中选择目标课题，导入文件或资料文件夹，预览后收录。支持 PDF、Word、Markdown、文本、表格及常见 JSON/JSONL 对话导出；重要摘录可由你选入课题记忆。不是所有 Agent 的专有格式都能直接解析，必要时先导出为文本。" },
       { q: "文献雷达会在我关机后继续跑吗？", a: "目前定时跟进依赖客户端与本地服务运行。关机、休眠或退出可能漏跑，可在恢复后补查。日报与周报会标明检索失败或不完整；它不能代替穷尽的系统综述检索。" },
       { q: "我的文件会被上传吗？", a: "项目文件保存在你的电脑上。发给模型的只有你输入的内容、你主动引用的文件，以及完成当前任务实际读取的片段，按需读取，不会整目录打包。私有科研内容不会用于训练 BioSeeki 的模型。" },
-      { q: "支持哪些系统？", a: "目前提供 Mac Beta，需要 macOS 11 及以上、Apple 芯片（M 系列）。Intel Mac 暂不支持；Windows 版本正在测试中。" },
+      { q: "支持哪些系统？", a: `目前提供 Mac Beta，需要 macOS ${minimumMacOS} 及以上、Apple 芯片（M 系列）。Intel Mac 暂不支持；Windows 版本正在测试中。` },
       { q: "需要自己准备模型 API 吗？", a: "不需要。安装后登录 BioSeeki 账号即可使用内置模型，不用自己创建或填入 API 密钥。用量以 credits 计，额度与订阅可在个人中心查看。" },
       { q: "结果还需要我检查吗？", a: "需要。你可以回读引用来源，检查分析方法、样本设计和最终图表；引用检验辅助核对 DOI、撤稿与版本。AI 仍可能误读图表或给出不合适的方法，不能代替你的科研判断。" },
       { q: "GeneCode 是什么？", a: "GeneCode 是 BioSeeki 内的分子生物学序列工作台，可以查看质粒图谱、特征注释、引物、酶切位点和序列比对，协作设计克隆方案；也可单独打开网页版使用。" },
@@ -237,7 +239,7 @@ const en: Copy = {
     sub: "Bring your <strong>papers, data tables or lab records</strong>. Search literature, read translations beside the original, run analyses, make figures and prepare a research presentation. <strong>Outputs and sources</strong> stay in your project, ready to continue.",
     download: "Download for Mac", cta: "Create account ↗", demo: "Watch the 45-second demo ↓",
     explore: "Explore the capabilities ↓",
-    meta: "Mac Beta · macOS 11+ · Apple silicon",
+    meta: `Mac Beta ${desktopRelease.version} · macOS ${minimumMacOS}+ · Apple silicon`,
   },
   ticker: ["Literature search", "Bilingual reading", "Bioinformatics", "Research figures", "Paper writing", "Research slides", "GeneCode", "Literature radar", "Project imports"],
   tools: {
@@ -357,7 +359,7 @@ const en: Copy = {
     eyebrow: "Download & get started", title: "Download the app and start with your next research question.",
     lede: "Install, sign in to your BioSeeki account and choose a project folder. No invite code or model API of your own is needed.",
     app: "BioSeeki for macOS", badge: "Mac Beta",
-    specs: [["Chip", "Apple silicon (M1 / M2 / M3 / M4)"], ["System", "macOS 11 or later"], ["Windows", "In progress"]],
+    specs: [["Version", `${desktopRelease.version} Beta`], ["Chip", "Apple silicon (M series)"], ["System", `macOS ${minimumMacOS} or later`], ["Windows", "In progress"]],
     note: "Intel Macs are not supported yet.",
     cta: "Download for Mac",
     soon: "The installer is being signed and notarized; the download opens shortly.",
@@ -382,7 +384,7 @@ const en: Copy = {
       { q: "Can I import lab records and work from another Agent?", a: "Select a target project in Project materials, import files or a folder and review the import. PDF, Word, Markdown, text, tables and common JSON/JSONL conversation exports are supported. Choose important excerpts for project memory. Proprietary Agent formats may need to be exported as text first." },
       { q: "Does literature radar run when my computer is off?", a: "Scheduled updates currently depend on the app and local service running. Shutdown, sleep or quitting can cause missed runs; check again after resuming. Digests mark failed or incomplete searches. Radar is not an exhaustive systematic-review search." },
       { q: "Are my files uploaded?", a: "Project files stay on your computer. What goes to the model is only what you type, files you explicitly reference, and the fragments actually read to complete the current task — read on demand, never a whole folder. Private research content is not used to train BioSeeki's models." },
-      { q: "Which systems are supported?", a: "The Mac Beta needs macOS 11 or later on Apple silicon (M series). Intel Macs aren't supported yet; a Windows version is in testing." },
+      { q: "Which systems are supported?", a: `The Mac Beta needs macOS ${minimumMacOS} or later on Apple silicon (M series). Intel Macs aren't supported yet; a Windows version is in testing.` },
       { q: "Do I need my own model API?", a: "No. Sign in to your BioSeeki account in the app to use the included models, without creating or entering an API key. Usage is counted in credits; view your allowance and subscriptions in your account." },
       { q: "Do I still need to check the results?", a: "Yes. Read the cited sources, inspect the methods and sample design, and review the final figures. Citation checks help verify DOIs, retractions and versions. AI can misread figures or choose unsuitable methods; it does not replace your scientific judgement." },
       { q: "What is GeneCode?", a: "GeneCode is BioSeeki's molecular-biology sequence workspace. Inspect plasmid maps, feature annotations, primers, restriction sites and alignments, and work on cloning plans. It can also be opened separately in the browser." },

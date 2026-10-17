@@ -14,6 +14,7 @@ import CapabilityShowcase from "./CapabilityShowcase.astro";
 import { glyphHtml } from "./glyphs";
 import { ICONS, ICON_VIEWBOX } from "./icons";
 import { COPY, type Lang } from "../../i18n/bioseeki";
+import desktopRelease from "../../data/desktop-release.json";
 import { SAME_AS, VERIFY } from "../../seo";
 
 interface Props { lang: Lang }
@@ -21,10 +22,8 @@ const { lang } = Astro.props;
 const t = COPY[lang];
 // Flip on once public/bioseeki/hero-loop-{light,dark}.{webm,mp4,jpg} are committed.
 const heroVideo = true;
-// 下载按钮指向的安装包地址。留空 = 按钮显示「即将上线」且不可点（安装包还没上传）；
-// 等签名 + 公证好的 DMG 传到 R2 后，把地址填在这里即可（例：
-// https://dl.bioseeki.com/mac/Bioseeki-0.1.0-arm64.dmg），其它地方都不用改。
-const MAC_DMG_URL = "";
+// One verified release supplies every download button and its published metadata.
+const MAC_DMG_URL = desktopRelease.downloadUrl;
 // 首屏 / 导航 / 下载区的「下载」按钮共用这一个开关：有地址就直接下载，没有就跳到下载区（那里如实说明状态并提供邮件获取）。
 const dlHref = MAC_DMG_URL || "#download";
 const dlAttr = MAC_DMG_URL ? "" : undefined;
@@ -60,7 +59,8 @@ const jsonLd = [
     publisher: { "@id": ORG },
     name: "BioSeeki",
     applicationCategory: "ScienceApplication",
-    operatingSystem: "macOS 11+ (Apple silicon)",
+    operatingSystem: `macOS ${desktopRelease.minimumMacOS.replace(/\.0$/, "")}+ (Apple silicon)`,
+    softwareVersion: desktopRelease.version,
     description: t.jsonLdDescription,
     url: t.canonical,
     image: "https://bioseeki.com/bioseeki/demo-poster.jpg",
