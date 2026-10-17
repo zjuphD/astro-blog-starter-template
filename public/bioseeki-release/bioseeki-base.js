@@ -6,6 +6,7 @@ const destinations={
   login:portalOrigin+'/sign-in?redirect=/me',
   signup:portalOrigin+'/sign-up?redirect=/me',
   subscribe:portalOrigin+'/subscriptions',
+  github:'https://github.com/zjuphD/BioSeeki',
   x:'https://x.com/lichenQAQ',
   xiaohongshu:'https://xhslink.cn/o/1FHuh0e2oVK',
 };
@@ -27,6 +28,8 @@ function anchor(text,href,cls=''){
   return a;
 }
 const socialIcons={
+  // GitHub mark from Primer Octicons: https://github.com/primer/octicons.
+  github:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M10.226 17.284c-2.965-.36-5.054-2.493-5.054-5.256 0-1.123.404-2.336 1.078-3.144-.292-.741-.247-2.314.09-2.965.898-.112 2.111.36 2.83 1.01.853-.269 1.752-.404 2.853-.404 1.1 0 1.999.135 2.807.382.696-.629 1.932-1.1 2.83-.988.315.606.36 2.179.067 2.942.72.854 1.101 2 1.101 3.167 0 2.763-2.089 4.852-5.098 5.234.763.494 1.28 1.572 1.28 2.807v2.336c0 .674.561 1.056 1.235.786 4.066-1.55 7.255-5.615 7.255-10.646C23.5 6.188 18.334 1 11.978 1 5.62 1 .5 6.188.5 12.545c0 4.986 3.167 9.12 7.435 10.669.606.225 1.19-.18 1.19-.786V20.63a2.9 2.9 0 0 1-1.078.224c-1.483 0-2.359-.808-2.987-2.313-.247-.607-.517-.966-1.034-1.033-.27-.023-.359-.135-.359-.27 0-.27.45-.471.898-.471.652 0 1.213.404 1.797 1.235.45.651.921.943 1.483.943.561 0 .92-.202 1.437-.719.382-.381.674-.718.944-.943"/></svg>',
   x:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.9 2H22l-7.3 8.3L23 22h-6.5l-5.1-6.7L5.5 22H2.3l7.6-8.8L1 2h6.6l4.6 6.1L18.9 2ZM17.8 20h1.8L6.6 3.9H4.7Z"/></svg>',
   mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.75" y="5" width="18.5" height="14" rx="2.2"/><path d="m3.5 6.2 8.5 6.5 8.5-6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   xiaohongshu:'<svg viewBox="0 0 40 24" aria-hidden="true"><rect x="1" y="1" width="38" height="22" rx="6" fill="none" stroke="currentColor" stroke-width="1.3"/><text x="20" y="16.1" text-anchor="middle" fill="currentColor" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10.5" font-weight="600" letter-spacing="-.5">小红书</text></svg>',
@@ -101,7 +104,7 @@ function brand(){
   if(footer&&!footer.dataset.bioFooter){
     footer.dataset.bioFooter='true';
     const social=footer.querySelector('.footer-strip-social');
-    if(social){social.setAttribute('aria-label','BioSeeki 社交与联系');social.replaceChildren(socialLink('X',destinations.x,socialIcons.x),socialLink('邮箱：support@bioseeki.com','mailto:support@bioseeki.com',socialIcons.mail),socialLink('小红书',destinations.xiaohongshu,socialIcons.xiaohongshu));}
+    if(social){social.setAttribute('aria-label','BioSeeki 社交与联系');social.replaceChildren(socialLink('GitHub：BioSeeki',destinations.github,socialIcons.github),socialLink('X',destinations.x,socialIcons.x),socialLink('邮箱：support@bioseeki.com','mailto:support@bioseeki.com',socialIcons.mail),socialLink('小红书',destinations.xiaohongshu,socialIcons.xiaohongshu));}
     const nav=footer.querySelector('[aria-label="Footer navigation"]');
     if(nav)nav.replaceChildren(anchor('下载 Mac Beta',destinations.download),anchor('定价','#pricing'),anchor('隐私政策','/privacy'),anchor('服务条款','/terms'));
   }
