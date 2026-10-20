@@ -1,5 +1,46 @@
 [
   {
+    "id": "2026-10-15-10-36469-001c-171937",
+    "manual": false,
+    "briefingDate": "2026-10-20",
+    "publishedAt": "2026-10-15",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "临床研究",
+    "titleZh": "Faster but Not Truer, Part 1: A Systematic Scoping Review of Artificial Intelligence in Health Economics and Outcomes Research.",
+    "titleOriginal": "Faster but Not Truer, Part 1: A Systematic Scoping Review of Artificial Intelligence in Health Economics and Outcomes Research.",
+    "summary": "Artificial intelligence (AI) is being introduced into every stage of the health economics and outcomes research (HEOR) production line, from literature screening to causal estimation. The field lacks a defensible count of what has been done…",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 83,
+    "tags": [
+      "AI",
+      "蛋白/结构"
+    ],
+    "originalUrl": "https://doi.org/10.36469/001c.171937",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-10-15-10-1001-jama-2026-21868",
+    "manual": false,
+    "briefingDate": "2026-10-20",
+    "publishedAt": "2026-10-15",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Clinician Use of an Artificial Intelligence-Enabled Clinical Information Platform.",
+    "titleOriginal": "Clinician Use of an Artificial Intelligence-Enabled Clinical Information Platform.",
+    "summary": "Importance Despite growing interest in the use of artificial intelligence (AI) in medicine, empirical evidence on how clinicians use these tools is limited. Objective To characterize clinician use of an AI-enabled clinical information platf…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 83,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1001/jama.2026.21868",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-10-09-10-31234-osf-io-a2b9z-v1",
     "manual": false,
     "briefingDate": "2026-10-10",
