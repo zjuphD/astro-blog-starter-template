@@ -205,7 +205,7 @@ const zh = {
     tagA: "把时间，", tagB: "留给发现。", slogan: "有据，而非猜测",
     aria: "页脚导航",
     groups: [
-      { title: "产品", links: [["#download", "下载 Mac 版"], ["#pricing", "定价"], ["/briefing", "前沿快讯 ↗"], ["https://genecode-agent.pages.dev", "GeneCode ↗", "ext"], ["#faq", "常见问题"]] },
+      { title: "产品", links: [["#download", "下载 Mac 版"], ["/changelog", "更新日志"], ["#pricing", "定价"], ["/briefing", "前沿快讯 ↗"], ["https://genecode-agent.pages.dev", "GeneCode ↗", "ext"], ["#faq", "常见问题"]] },
       { title: "账号", links: [[SIGN_IN, "登录 ↗"], [SIGN_UP, "注册 ↗"]] },
       { title: "支持与条款", links: [[`mailto:${MAIL}`, MAIL], ["/terms", "服务条款 ↗"], ["/privacy", "隐私政策 ↗"]] },
     ],
@@ -394,7 +394,7 @@ const en: Copy = {
     tagA: "Leave the time ", tagB: "for discovery.", slogan: "Evidence, not guesswork",
     aria: "Footer",
     groups: [
-      { title: "Product", links: [["#download", "Download for Mac"], ["#pricing", "Pricing"], ["/briefing", "Briefing (中文) ↗"], ["https://genecode-agent.pages.dev", "GeneCode ↗", "ext"], ["#faq", "FAQ"]] },
+      { title: "Product", links: [["#download", "Download for Mac"], ["/changelog", "Changelog (中文)"], ["#pricing", "Pricing"], ["/briefing", "Briefing (中文) ↗"], ["https://genecode-agent.pages.dev", "GeneCode ↗", "ext"], ["#faq", "FAQ"]] },
       { title: "Account", links: [[SIGN_IN, "Sign in ↗"], [SIGN_UP, "Sign up ↗"]] },
       { title: "Support & legal", links: [[`mailto:${MAIL}`, MAIL], ["/terms#english", "Terms ↗"], ["/privacy", "Privacy (中文) ↗"]] },
     ],

@@ -106,7 +106,7 @@ function brand(){
     const social=footer.querySelector('.footer-strip-social');
     if(social){social.setAttribute('aria-label','BioSeeki 社交与联系');social.replaceChildren(socialLink('GitHub：BioSeeki',destinations.github,socialIcons.github),socialLink('X',destinations.x,socialIcons.x),socialLink('邮箱：support@bioseeki.com','mailto:support@bioseeki.com',socialIcons.mail),socialLink('小红书',destinations.xiaohongshu,socialIcons.xiaohongshu));}
     const nav=footer.querySelector('[aria-label="Footer navigation"]');
-    if(nav)nav.replaceChildren(anchor('下载 Mac Beta',destinations.download),anchor('定价','#pricing'),anchor('隐私政策','/privacy'),anchor('服务条款','/terms'));
+    if(nav)nav.replaceChildren(anchor('下载 Mac Beta',destinations.download),anchor('更新日志','/changelog'),anchor('定价','#pricing'),anchor('隐私政策','/privacy'),anchor('服务条款','/terms'));
   }
   footer?.querySelectorAll('p').forEach(p=>{if(p.textContent.includes('Ambi ©'))p.textContent='BioSeeki © 2026';});
   document.title='BioSeeki｜越用越懂你的个人科研 Agent';

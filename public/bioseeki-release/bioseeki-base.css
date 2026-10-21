@@ -1,3 +1,6 @@
+/* Keep FAQ answers in normal flow, including after a viewport or font change. */
+.o-faq .content-wrapper[aria-hidden="false"]{height:auto!important;overflow:visible}
+.o-faq .content-inner>div{margin-top:0}
 /* The adaptation is isolated from both the unmodified reference and the Astro website. */
 /* Win over the later public :root theme without changing the reference route. */
 html:root{--bio-body:'Medium LL','PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif;--bio-display:'Optima','Songti SC','STSong','Noto Serif CJK SC',serif;--font-sans:var(--bio-body);--font-display:var(--bio-display);--bio-ink:#173532;--bio-muted:#678276}
