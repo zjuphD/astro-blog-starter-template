@@ -1,5 +1,47 @@
 [
   {
+    "id": "2026-10-20-10-1007-s00266-026-06295-z",
+    "manual": false,
+    "briefingDate": "2026-10-22",
+    "publishedAt": "2026-10-20",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Artificial Intelligence-Assisted Reconstruction Planning of Cheek Soft Tissue Defects: A Comparative Study Against Surgical Expert Consensus.",
+    "titleOriginal": "Artificial Intelligence-Assisted Reconstruction Planning of Cheek Soft Tissue Defects: A Comparative Study Against Surgical Expert Consensus.",
+    "summary": "Background Reconstructive planning for cheek soft tissue defects requires expert assessment of defect size and location to preserve aesthetic harmony. Artificial intelligence (AI), particularly large language models (LLMs), has emerged as a…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 83,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1007/s00266-026-06295-z",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-10-20-10-1016-j-slast-2026-100473",
+    "manual": false,
+    "briefingDate": "2026-10-22",
+    "publishedAt": "2026-10-20",
+    "category": "蛋白质与结构生物学",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "A Cloud-Enabled LIMS-QMS Platform With Large Language Model-Assisted Standard Operating Procedure Generation for GLP/GMP-Aligned Theranostics Laboratory Operations.",
+    "titleOriginal": "A Cloud-Enabled LIMS-QMS Platform With Large Language Model-Assisted Standard Operating Procedure Generation for GLP/GMP-Aligned Theranostics Laboratory Operations.",
+    "summary": "Theranostic development centers operate under stringent good laboratory practice (GLP) and good manufacturing practice (GMP) requirements that fragmented, paper-based workflows cannot adequately support. This paper presents the design, regu…",
+    "whyItMatters": "关注点在于 AI 是否提升结构解析、功能预测或蛋白设计能力，以及预测结果能否经实验验证。",
+    "score": 81,
+    "tags": [
+      "AI",
+      "蛋白/结构",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1016/j.slast.2026.100473",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-10-15-10-36469-001c-171937",
     "manual": false,
     "briefingDate": "2026-10-20",
@@ -265,28 +307,6 @@
       "药物发现"
     ],
     "originalUrl": "https://doi.org/10.1002/pds.70452",
-    "editorialMode": "rules",
-    "editorialReason": "通过 V2 规则筛选与多维评分。"
-  },
-  {
-    "id": "2026-09-25-10-64898-2026-09-20-752967",
-    "manual": false,
-    "briefingDate": "2026-09-30",
-    "publishedAt": "2026-09-25",
-    "category": "AI 药物发现",
-    "source": "Europe PMC",
-    "sourceType": "方法/模型",
-    "titleZh": "AnewDDE: An Agentic Drug Discovery Engine for Biomolecular Interaction Modelling and Closed-Loop Design",
-    "titleOriginal": "AnewDDE: An Agentic Drug Discovery Engine for Biomolecular Interaction Modelling and Closed-Loop Design",
-    "summary": "Accurate modelling of biomolecular interactions is fundamental to drug discovery, yet current artificial intelligence (AI) workflows remain fragmented across structure prediction, affinity estimation, molecular design, and experimental deci…",
-    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
-    "score": 82,
-    "tags": [
-      "AI",
-      "蛋白/结构",
-      "药物发现"
-    ],
-    "originalUrl": "https://doi.org/10.64898/2026.09.20.752967",
     "editorialMode": "rules",
     "editorialReason": "通过 V2 规则筛选与多维评分。"
   },
