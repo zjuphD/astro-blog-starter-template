@@ -1,5 +1,32 @@
 [
   {
+    "version": "0.1.11",
+    "date": "2026-10-23",
+    "title": "在应用内下载更新，重启即可升级",
+    "items": [
+      {
+        "feature": "模型选择",
+        "description": "按日常、进阶和深度选择七款模型，可接入自定义模型；DeepSeek 显示峰谷时段与倍率。",
+        "en": "Choose from seven models grouped by everyday, advanced and deep tasks, or connect your own provider. DeepSeek includes peak and off-peak pricing information."
+      },
+      {
+        "feature": "应用内更新",
+        "description": "在 BioSeeki 内检查版本和下载更新，左下角图标持续显示后台下载状态；完成后，点击「重启更新」即可升级。",
+        "en": "Check and download updates inside BioSeeki. The sidebar icon keeps download progress visible; restart to install when you are ready."
+      },
+      {
+        "feature": "增量下载",
+        "description": "复用上一次更新包中未变化的内容，减少后续更新的下载量；首次更新或无法复用时自动下载完整更新包。",
+        "en": "Reuse unchanged content from the previous update to reduce later downloads, with a full-download fallback when needed."
+      },
+      {
+        "feature": "更新重试",
+        "description": "关闭面板后继续后台下载，网络或磁盘问题可在面板内重试，已有对话、课题和设置保留。",
+        "en": "Continue downloading after closing the panel, retry network or storage failures, and keep conversations, projects and settings."
+      }
+    ]
+  },
+  {
     "version": "0.1.8",
     "date": "2026-10-23",
     "title": "按任务选择模型，接入自己的模型服务",
