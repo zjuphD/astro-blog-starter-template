@@ -1,5 +1,32 @@
 [
   {
+    "version": "0.1.8",
+    "date": "2026-10-23",
+    "title": "按任务选择模型，接入自己的模型服务",
+    "items": [
+      {
+        "feature": "模型选择",
+        "description": "按「日常、进阶、深度」分组查看模型，自行选择本次任务使用的模型，并查看对应的积分倍率。",
+        "en": "Choose a model for each task from Everyday, Advanced and Deep groups, with credit multipliers shown alongside each model."
+      },
+      {
+        "feature": "自定义模型",
+        "description": "从模型菜单直接进入配置，接入自己的模型供应商、本地服务或兼容 OpenAI、Anthropic 协议的 API。",
+        "en": "Open custom model settings from the model menu and connect a provider, local service, or OpenAI- and Anthropic-compatible API."
+      },
+      {
+        "feature": "思考等级提示",
+        "description": "悬停模型即可查看默认思考等级，在不同模型之间移动时即时更新。",
+        "en": "Hover over a model to see its default reasoning level, with immediate updates as you move between models."
+      },
+      {
+        "feature": "实验记录导出",
+        "description": "改进记录中公式的呈现与 Word、PDF 导出，让记录内容更易阅读和整理。",
+        "en": "Improve formula rendering and Word/PDF export for clearer experimental records."
+      }
+    ]
+  },
+  {
     "version": "0.1.7",
     "date": "2026-10-21",
     "title": "让课题工作更连贯",
