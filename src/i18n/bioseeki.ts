@@ -157,7 +157,7 @@ const zh = {
   },
   pricing: {
     eyebrow: "定价", title: "选一个档位，开始你的研究。",
-    lede: "月付订阅，人民币结算。每份套餐包含固定 credits，套餐额度到期失效；注册即送 1,000 credits。",
+    lede: "月付订阅，人民币结算。每份套餐包含固定 credits，套餐额度到期失效；注册即送 500 credits。",
     per: "/ 月",
     plans: [
       { name: "Plus", price: "69", credits: "2,000", sub: "日常问答与轻量检索", tag: "" },
@@ -346,7 +346,7 @@ const en: Copy = {
   },
   pricing: {
     eyebrow: "Pricing", title: "Pick a plan and start your research.",
-    lede: "Monthly subscriptions, billed in CNY. Each plan includes a fixed credit allowance that expires with the plan. New accounts get 1,000 credits.",
+    lede: "Monthly subscriptions, billed in CNY. Each plan includes a fixed credit allowance that expires with the plan. New accounts get 500 credits.",
     per: "/ month",
     plans: [
       { name: "Plus", price: "69", credits: "2,000", sub: "Everyday Q&A and light literature search", tag: "" },
