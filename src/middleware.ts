@@ -45,7 +45,12 @@ export const onRequest = defineMiddleware(async (context, next) => {
     if (assets) {
       const url = new URL(context.url);
       url.pathname = isHomepage ? "/bioseeki-release/" : `/bioseeki-release${pathname}`;
-      const response = await assets.fetch(new Request(url, context.request));
+      // Pass a URL across the binding boundary: the local proxy and Astro can
+      // use different Request constructors, even though production shares one.
+      const response = await assets.fetch(url.href, {
+        method: context.request.method,
+        headers: context.request.headers,
+      });
       const headers = new Headers(response.headers);
       headers.set("Cache-Control", isHomepage ? "no-cache, must-revalidate" : "public, max-age=3600");
       if (isHomepage) {

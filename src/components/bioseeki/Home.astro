@@ -22,11 +22,11 @@ const { lang } = Astro.props;
 const t = COPY[lang];
 // Flip on once public/bioseeki/hero-loop-{light,dark}.{webm,mp4,jpg} are committed.
 const heroVideo = true;
-// One verified release supplies every download button and its published metadata.
+// Published metadata stays authoritative; visitors choose the installer on the shared download page.
 const MAC_DMG_URL = desktopRelease.downloadUrl;
-// 首屏 / 导航 / 下载区的「下载」按钮共用这一个开关：有地址就直接下载，没有就跳到下载区（那里如实说明状态并提供邮件获取）。
-const dlHref = MAC_DMG_URL || "#download";
-const dlAttr = MAC_DMG_URL ? "" : undefined;
+// All homepage entries navigate to the platform chooser instead of starting a Mac download.
+const dlHref = lang === "en" ? "/download?lang=en" : "/download";
+const dlAttr = undefined;
 const mailto = `mailto:${t.links.mail}?subject=${encodeURIComponent(t.download.mailSubject)}&body=${encodeURIComponent(t.download.mailBody)}`;
 // 定价卡上的额度条按各档 credits 占最大档的比例画。
 const creditsOf = (c) => Number(String(c).replace(/,/g, ""));
@@ -59,13 +59,13 @@ const jsonLd = [
     publisher: { "@id": ORG },
     name: "BioSeeki",
     applicationCategory: "ScienceApplication",
-    operatingSystem: `macOS ${desktopRelease.minimumMacOS.replace(/\.0$/, "")}+ (Apple silicon)`,
+    operatingSystem: `Windows x64; macOS ${desktopRelease.minimumMacOS.replace(/\.0$/, "")}+ (Apple silicon)`,
     softwareVersion: desktopRelease.version,
     description: t.jsonLdDescription,
     url: t.canonical,
     image: "https://bioseeki.com/bioseeki/demo-poster.jpg",
     inLanguage: t.htmlLang,
-    ...(MAC_DMG_URL ? { downloadUrl: MAC_DMG_URL } : {}),
+    downloadUrl: "https://bioseeki.com/download",
   },
   {
     "@context": "https://schema.org",
@@ -1077,7 +1077,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
         <a role="menuitem" href="https://api.bioseeki.com/me?action=logout"><svg aria-hidden="true"><use href="#i-signout"/></svg>{lang === 'zh' ? '退出登录' : 'Sign out'}</a>
       </div>
     </div>
-    <a class="btn btn-primary btn-sm nav-dl" href={dlHref} download={dlAttr}><svg class="btn-ico btn-ico-fill" aria-hidden="true"><use href="#i-apple"/></svg>{t.nav.download}</a>
+    <a class="btn btn-primary btn-sm nav-dl" href={dlHref} download={dlAttr}><svg class="btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3v14m-5-5 5 5 5-5M5 21h14"/></svg>{t.nav.download}</a>
   </div>
 </nav>
 
@@ -1097,7 +1097,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
         <h1 class="reveal"><span class="line"><span class="rise" style="--rd:.1s">{t.hero.h1a}</span></span><span class="line"><span class="rise" style="--rd:.24s"><em>{t.hero.h1b}</em>{lang === "zh" ? "。" : "."}</span></span></h1>
         <p class="hero-sub reveal" style="--d:.16s" set:html={t.hero.sub} />
         <div class="hero-ctas reveal" style="--d:.24s">
-          <a class="btn btn-primary" href={dlHref} download={dlAttr}><svg class="btn-ico btn-ico-fill" aria-hidden="true"><use href="#i-apple"/></svg>{t.hero.download}</a>
+          <a class="btn btn-primary" data-bio-home-download="primary" href={dlHref} download={dlAttr}><svg class="btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3v14m-5-5 5 5 5-5M5 21h14"/></svg>{t.hero.download}</a>
           <a class="btn btn-ghost" href={t.links.signUp}><Label text={t.hero.cta} /></a>
         </div>
         <p class="hero-meta reveal" style="--d:.28s"><span>{t.hero.meta}</span><a class="hero-demo" href="#tools"><Label text={t.hero.explore} /></a></p>
@@ -1228,7 +1228,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
     <p class="dl-note">{t.download.note}</p>
     <div class="dl-actions">
       {MAC_DMG_URL
-        ? <a class="btn btn-primary dl-btn" href={MAC_DMG_URL} download><svg class="btn-ico btn-ico-fill" aria-hidden="true"><use href="#i-apple"/></svg>{t.download.cta}</a>
+        ? <a class="btn btn-primary dl-btn" href={dlHref}><svg class="btn-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 3v14m-5-5 5 5 5-5M5 21h14"/></svg>{t.download.cta}</a>
         : <>
             <p class="dl-soon"><span class="live-dot" aria-hidden="true"></span>{t.download.soon}</p>
             <a class="btn btn-primary dl-btn" href={mailto}><Label text={t.download.mailCta} /></a>
@@ -1617,5 +1617,6 @@ body[data-lang="en"] .brand-sub{ display:none; }
   window.addEventListener("pageshow", sync); window.addEventListener("focus", sync); sync();
 })();
 </script>
+<script is:inline type="module" src="/download-platform.js?v=20261024"></script>
 </body>
 </html>

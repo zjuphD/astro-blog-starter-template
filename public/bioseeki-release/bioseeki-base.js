@@ -1,4 +1,6 @@
 /* BioSeeki landing-page navigation and presentation. */
+let refreshDownloadLinks = () => {};
+import('/download-platform.js?v=20261024').then(module => { refreshDownloadLinks = () => module.refreshHomeDownloadLinks(document, navigator); refreshDownloadLinks(); }).catch(() => {});
 const portalOrigin='https://api.bioseeki.com';
 const destinations={
   download:'/download',
@@ -97,7 +99,7 @@ function brand(){
   const faq=document.querySelector('.o-faq');
   if(faq&&!document.querySelector('#pricing')){
     const section=document.createElement('section');section.className='bio-pricing';section.id='pricing';section.setAttribute('aria-labelledby','bio-pricing-title');
-    section.innerHTML=`<div class="bio-pricing-intro"><div><p class="bio-eyebrow">按你的研究节奏</p><h2 id="bio-pricing-title">从一个问题开始。<br>让研究，接着向前。</h2></div><p>月付订阅，人民币结算。<br>每份套餐包含固定 credits。</p></div><div class="bio-plan-grid">${plans.map((p,i)=>`<article class="bio-plan ${i===1?'bio-plan--recommended':''}"><div class="bio-plan-head"><h3>${p.name}</h3>${i===1?'<span>日常科研</span>':''}</div><p class="bio-plan-use">${p.use}</p><p class="bio-plan-price"><span>¥</span><strong>${p.price}</strong><span> / 月</span></p><p class="bio-plan-credits"><strong>${p.credits}</strong> credits / 月</p><a href="${destinations.subscribe}" data-local-destination="${destinations.subscribe}" class="bio-plan-action">选择 ${p.name}<span aria-hidden="true">↗</span></a></article>`).join('')}</div><div class="bio-pricing-foot"><p>先试着开始。<a href="${destinations.signup}" data-local-destination="${destinations.signup}">注册即送 1,000 credits ↗</a></p><p>套餐额度到期失效；具体权益以订阅页为准。</p></div>`;
+    section.innerHTML=`<div class="bio-pricing-intro"><div><p class="bio-eyebrow">按你的研究节奏</p><h2 id="bio-pricing-title">从一个问题开始。<br>让研究，接着向前。</h2></div><p>月付订阅，人民币结算。<br>每份套餐包含固定 credits。</p></div><div class="bio-plan-grid">${plans.map((p,i)=>`<article class="bio-plan ${i===1?'bio-plan--recommended':''}"><div class="bio-plan-head"><h3>${p.name}</h3>${i===1?'<span>日常科研</span>':''}</div><p class="bio-plan-use">${p.use}</p><p class="bio-plan-price"><span>¥</span><strong>${p.price}</strong><span> / 月</span></p><p class="bio-plan-credits"><strong>${p.credits}</strong> credits / 月</p><a href="${destinations.subscribe}" data-local-destination="${destinations.subscribe}" class="bio-plan-action">选择 ${p.name}<span aria-hidden="true">↗</span></a></article>`).join('')}</div><div class="bio-pricing-foot"><p>先试着开始。<a href="${destinations.signup}" data-local-destination="${destinations.signup}">注册即送 500 credits ↗</a></p><p>套餐额度到期失效；具体权益以订阅页为准。</p></div>`;
     faq.before(section);
   }
   const footer=document.querySelector('footer');if(footer)footer.id='download';
@@ -106,9 +108,10 @@ function brand(){
     const social=footer.querySelector('.footer-strip-social');
     if(social){social.setAttribute('aria-label','BioSeeki 社交与联系');social.replaceChildren(socialLink('GitHub：BioSeeki',destinations.github,socialIcons.github),socialLink('X',destinations.x,socialIcons.x),socialLink('邮箱：support@bioseeki.com','mailto:support@bioseeki.com',socialIcons.mail),socialLink('小红书',destinations.xiaohongshu,socialIcons.xiaohongshu));}
     const nav=footer.querySelector('[aria-label="Footer navigation"]');
-    if(nav)nav.replaceChildren(anchor('下载 Mac Beta',destinations.download),anchor('更新日志','/changelog'),anchor('定价','#pricing'),anchor('隐私政策','/privacy'),anchor('服务条款','/terms'));
+    if(nav)nav.replaceChildren(anchor('下载 BioSeeki',destinations.download),anchor('更新日志','/changelog'),anchor('定价','#pricing'),anchor('隐私政策','/privacy'),anchor('服务条款','/terms'));
   }
   footer?.querySelectorAll('p').forEach(p=>{if(p.textContent.includes('Ambi ©'))p.textContent='BioSeeki © 2026';});
+  refreshDownloadLinks();
   document.title='BioSeeki｜越用越懂你的个人科研 Agent';
 }
 let scheduled=false;
