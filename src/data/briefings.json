@@ -1,5 +1,45 @@
 [
   {
+    "id": "2026-10-21-10-1007-s11060-026-05832-9",
+    "manual": false,
+    "briefingDate": "2026-10-24",
+    "publishedAt": "2026-10-21",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "临床研究",
+    "titleZh": "Artificial intelligence for symptom assessment and patient-reported outcomes in neuro-oncology.",
+    "titleOriginal": "Artificial intelligence for symptom assessment and patient-reported outcomes in neuro-oncology.",
+    "summary": "Purpose Patient-reported outcomes (PROs) are critical tools for measuring how patients experience their illness and treatment. Neuropsychiatric symptoms, headaches, seizures, and neurological deficits evolve over time and impact quality of …",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 83,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1007/s11060-026-05832-9",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-10-21-10-1177-02683555261497308",
+    "manual": false,
+    "briefingDate": "2026-10-24",
+    "publishedAt": "2026-10-21",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "Artificial intelligence in varicose veins: Comparative insights from other vascular diseases, evidence gaps, and future prospects.",
+    "titleOriginal": "Artificial intelligence in varicose veins: Comparative insights from other vascular diseases, evidence gaps, and future prospects.",
+    "summary": "This review provides a comprehensive overview of the performance of artificial intelligence (AI) in varicose veins (VV), covering applications in image recognition, postoperative management, risk factor and biomarker analysis, and the use o…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 81,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1177/02683555261497308",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-10-21-10-64898-2026-10-20-26365969",
     "manual": false,
     "briefingDate": "2026-10-23",
@@ -267,48 +307,6 @@
       "AI"
     ],
     "originalUrl": "https://doi.org/10.21203/rs.3.rs-10627241/v1",
-    "editorialMode": "rules",
-    "editorialReason": "通过 V2 规则筛选与多维评分。"
-  },
-  {
-    "id": "2026-09-30-10-1080-00029157-2026-2736088",
-    "manual": false,
-    "briefingDate": "2026-10-02",
-    "publishedAt": "2026-09-30",
-    "category": "精准医疗",
-    "source": "Europe PMC",
-    "sourceType": "方法/模型",
-    "titleZh": "Augmenting the hypnotic imagination: practical applications of artificial intelligence for clinical hypnosis.",
-    "titleOriginal": "Augmenting the hypnotic imagination: practical applications of artificial intelligence for clinical hypnosis.",
-    "summary": "Artificial intelligence (AI), particularly large language models (LLMs), offers clinical hypnotists a powerful and immediately accessible set of tools for enhancing practice. Despite growing interest at the intersection of AI and mental hea…",
-    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
-    "score": 83,
-    "tags": [
-      "AI",
-      "药物发现"
-    ],
-    "originalUrl": "https://doi.org/10.1080/00029157.2026.2736088",
-    "editorialMode": "rules",
-    "editorialReason": "通过 V2 规则筛选与多维评分。"
-  },
-  {
-    "id": "2026-09-28-10-1093-milmed-usag452",
-    "manual": false,
-    "briefingDate": "2026-10-02",
-    "publishedAt": "2026-09-28",
-    "category": "精准医疗",
-    "source": "Europe PMC",
-    "sourceType": "方法/模型",
-    "titleZh": "Critical Thinking, Human Judgment, and Artificial Intelligence in Combat Casualty Care: Implications for Military Medical Education and Practice.",
-    "titleOriginal": "Critical Thinking, Human Judgment, and Artificial Intelligence in Combat Casualty Care: Implications for Military Medical Education and Practice.",
-    "summary": "Artificial intelligence (AI) is rapidly transforming healthcare through advances in machine learning, predictive analytics, and large language models. These technologies offer substantial opportunities to improve diagnostic support, informa…",
-    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
-    "score": 78,
-    "tags": [
-      "AI",
-      "蛋白/结构"
-    ],
-    "originalUrl": "https://doi.org/10.1093/milmed/usag452",
     "editorialMode": "rules",
     "editorialReason": "通过 V2 规则筛选与多维评分。"
   },
