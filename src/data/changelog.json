@@ -1,5 +1,32 @@
 [
   {
+    "version": "0.1.12",
+    "date": "2026-10-25",
+    "title": "让长任务更连贯，PPT 预览更顺畅",
+    "items": [
+      {
+        "feature": "任务继续",
+        "description": "改进长回答和多步骤任务的继续处理，减少生成过程中意外结束或停在操作说明的情况。",
+        "en": "Improve continuation of long answers and multi-step tasks, reducing early stops and replies that describe an action without carrying it out."
+      },
+      {
+        "feature": "长会话衔接",
+        "description": "改进长对话的整理与任务衔接，方便接着已有的研究进展继续工作。",
+        "en": "Improve context organization in long conversations so work can continue from existing research progress."
+      },
+      {
+        "feature": "任务清单",
+        "description": "任务结束时核对清单，明确区分已完成和仍待核对的步骤，便于查看下一步。",
+        "en": "Reconcile the checklist when a turn ends and distinguish completed steps from those still needing review."
+      },
+      {
+        "feature": "PPT 预览",
+        "description": "未改动的演示文稿可复用已有预览，减少重复等待，方便继续检查和调整内容。",
+        "en": "Reuse existing previews for unchanged presentations, reducing repeated waits while reviewing and refining slides."
+      }
+    ]
+  },
+  {
     "version": "0.1.11",
     "date": "2026-10-23",
     "title": "在应用内下载更新，重启即可升级",
