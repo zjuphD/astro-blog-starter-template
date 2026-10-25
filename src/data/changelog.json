@@ -1,5 +1,27 @@
 [
   {
+    "version": "0.1.13",
+    "date": "2026-10-25",
+    "title": "更新更顺畅，下载更轻便",
+    "items": [
+      {
+        "feature": "应用内更新",
+        "description": "修复部分版本无法启用应用内更新的问题，可直接在 BioSeeki 中检查和下载新版。",
+        "en": "Restore in-app update checks and downloads for affected Mac releases."
+      },
+      {
+        "feature": "重启安装",
+        "description": "安装时提供等待说明，避免重复打开旧版影响升级，完成后自动打开。",
+        "en": "Explain the installation wait, prevent reopening the old version from interrupting an upgrade, and reopen automatically when finished."
+      },
+      {
+        "feature": "增量下载",
+        "description": "复用未变化的大资源，减少后续更新的下载量；首次更新或无法复用时仍可下载完整更新包。",
+        "en": "Reuse unchanged large resources to reduce subsequent downloads, with a full-update fallback when reuse is unavailable."
+      }
+    ]
+  },
+  {
     "version": "0.1.12",
     "date": "2026-10-25",
     "title": "让长任务更连贯，PPT 预览更顺畅",
