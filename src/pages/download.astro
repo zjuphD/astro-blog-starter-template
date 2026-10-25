@@ -2,35 +2,39 @@
 export const prerender = false;
 import mac from '../data/desktop-release.json';
 import windows from '../data/desktop-release-windows.json';
+import windowsStore from '../data/windows-store.json';
 const en = Astro.url.searchParams.get('lang') === 'en';
+const storeHref = `${windowsStore.listingUrl}?hl=${en ? 'en-US' : 'zh-CN'}`;
 const minimumMacOS = mac.minimumMacOS.replace(/\.0$/, '');
 const t = en ? {
   title: 'Your next research question starts here.',
   lede: 'Literature, data, experiment notes and GeneCode. Continue your research in one desktop workspace.',
   choose: 'Choose the version for your computer.', windows: 'Download for Windows', mac: 'Download for macOS',
+  store: 'Install from Microsoft Store', direct: 'Download .exe', installerVersion: 'EXE version', installerChecksum: 'EXE checksum (SHA-256)',
   version: 'Version', system: 'System', windowsFormat: '64-bit Windows', macFormat: 'Apple silicon (M series)',
   macSystem: `macOS ${minimumMacOS} or later`, macNote: 'Intel Macs are not supported yet.',
-  windowsNote: 'Install BioSeeki, sign in, and start with your research.',
+  windowsNote: 'Install and get updates through Microsoft Store, or download the installer directly.',
   checksum: 'SHA-256 checksum', changelog: 'Changelog', home: 'Back to the website',
   setup: 'Install and get started', account: 'Create an account', accountLead: 'New to BioSeeki?',
   windowsGuide: 'Install on Windows', macGuide: 'Install on macOS',
-  windowsSteps: ['Open the downloaded installer.', 'Follow the setup wizard to complete installation.', 'Open BioSeeki and sign in to your account.'],
+  windowsSteps: ['Choose Microsoft Store or download the .exe installer.', 'Select “Get” in the Store, or open the .exe and follow the setup wizard.', 'Open BioSeeki and sign in to your account.'],
   macSteps: ['Open the downloaded DMG.', 'Open BioSeeki Beta and choose “Install to Applications”, or drag it into Applications.', 'Open BioSeeki from Applications and sign in to your account.'],
-  update: 'Already using BioSeeki? Choose “Check for updates” in the app’s account menu.',
+  update: 'For the Store version, get updates through Microsoft Store. For the direct-download version, choose “Check for updates” in the app’s account menu.',
   privacy: 'Privacy', terms: 'Terms', support: 'Help & support', footer: 'Your research, ready to continue.',
 } : {
   title: '从下一个科研问题开始。',
   lede: '读文献、分析数据、记录实验，与 GeneCode 一起完成序列和分子设计。',
   choose: '选择适合你电脑的版本。', windows: '下载 Windows 版', mac: '下载 macOS 版',
+  store: '从 Microsoft Store 安装', direct: '直接下载 .exe', installerVersion: 'EXE 版本', installerChecksum: 'EXE 校验值 SHA-256',
   version: '版本', system: '系统', windowsFormat: '64 位 Windows', macFormat: 'Apple 芯片（M 系列）',
   macSystem: `macOS ${minimumMacOS} 及以上`, macNote: '暂不支持 Intel 芯片的 Mac。',
-  windowsNote: '下载安装包，按向导完成安装，再登录 BioSeeki 开始使用。',
+  windowsNote: '通过 Microsoft Store 安装与更新，也可直接下载安装包。',
   checksum: '校验值 SHA-256', changelog: '更新日志', home: '返回官网',
   setup: '安装与开始使用', account: '创建账户', accountLead: '还没有账号？',
   windowsGuide: '在 Windows 上安装', macGuide: '在 macOS 上安装',
-  windowsSteps: ['打开下载好的安装包。', '按安装向导完成安装。', '打开 BioSeeki，登录账号即可开始。'],
+  windowsSteps: ['选择 Microsoft Store 安装，或下载 .exe 安装包。', '在商店中点击「获取」，或打开 .exe 并按向导完成安装。', '打开 BioSeeki，登录账号即可开始。'],
   macSteps: ['打开下载好的 DMG 文件。', '双击 BioSeeki Beta，选择「安装到应用程序」，或拖入「Applications」文件夹。', '从「应用程序」打开 BioSeeki，登录账号即可开始。'],
-  update: '已经在使用 BioSeeki？可在客户端账户菜单中选择「检查更新」。',
+  update: '商店版通过 Microsoft Store 更新；官网下载安装的版本，可在客户端账户菜单中选择「检查更新」。',
   privacy: '隐私政策', terms: '服务条款', support: '帮助与支持', footer: '让研究，接着向前。',
 };
 const platforms = [
@@ -66,9 +70,12 @@ const guides = [{ id: 'windows', title: t.windowsGuide, steps: t.windowsSteps },
             <h2 id={`${platform.id}-title`}>{platform.name}</h2>
           </div><span class="platform-hint" data-platform-hint hidden></span></div>
           <p class="platform-subtitle">{platform.format}</p>
-          <a class="download-button" href={platform.release.downloadUrl} download={platform.release.filename}><span>{platform.label}</span><span class="download-size">{Math.round(platform.release.bytes / 1_000_000)} MB <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v12m-4-4 4 4 4-4M4 17h12" /></svg></span></a>
-          <dl class="specs"><div><dt>{t.version}</dt><dd>{platform.release.version} Beta</dd></div><div><dt>{t.system}</dt><dd>{platform.system}</dd></div></dl>
-          <div class="platform-foot"><p>{platform.note}</p><a href={platform.release.checksumUrl}>{t.checksum}<span aria-hidden="true"> ↗</span></a></div>
+          <div class:list={['platform-actions', { 'windows-actions': platform.id === 'windows' }]}>
+            {platform.id === 'windows' && <a class="store-button" href={storeHref} aria-label={t.store}><img src={`/badges/microsoft-store-${en ? 'en-us' : 'zh-cn'}.svg`} alt={t.store} width="161" height="44" /></a>}
+            <a class:list={['download-button', { 'direct-download': platform.id === 'windows' }]} href={platform.release.downloadUrl} download={platform.release.filename}><span>{platform.id === 'windows' ? t.direct : platform.label}</span><span class="download-size">{Math.round(platform.release.bytes / 1_000_000)} MB <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v12m-4-4 4 4 4-4M4 17h12" /></svg></span></a>
+          </div>
+          <dl class="specs"><div><dt>{platform.id === 'windows' ? t.installerVersion : t.version}</dt><dd>{platform.release.version} Beta</dd></div><div><dt>{t.system}</dt><dd>{platform.system}</dd></div></dl>
+          <div class="platform-foot"><p>{platform.note}</p><a href={platform.release.checksumUrl}>{platform.id === 'windows' ? t.installerChecksum : t.checksum}<span aria-hidden="true"> ↗</span></a></div>
         </article>)}
       </div>
     </section>
@@ -88,7 +95,11 @@ const guides = [{ id: 'windows', title: t.windowsGuide, steps: t.windowsSteps },
   .site-header,main,footer{width:min(1120px,calc(100% - 80px));margin-inline:auto}.site-header{display:flex;justify-content:space-between;align-items:center;padding-block:30px}.brand img{display:block;width:146px;height:auto}nav{display:flex;align-items:center;gap:28px;font-size:13px}nav a{transition:color .18s}nav a:hover{color:#567e70}nav span{padding-left:3px;color:#596f63}
   main{padding-block:45px 60px}.intro{margin-bottom:44px;max-width:920px}.eyebrow{margin:0 0 17px;font-size:11px;letter-spacing:.13em;color:#596f63}h1,h2{font-family:Optima,'Songti SC',STSong,serif;font-weight:400;letter-spacing:-.035em}.title-intro,.title-tail{display:inline-block}h1{font-size:clamp(36px,4.5vw,58px);line-height:1.25;margin:0 0 20px;text-wrap:balance}.lede{font-size:15px;line-height:1.85;color:#596f63;margin:0;max-width:48em;text-wrap:pretty}.download-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px;font-size:13px}.download-heading p{margin:0}.download-heading>span{font-size:11px;color:#596f63;letter-spacing:.03em}
   .platform-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.platform{padding:30px 32px 26px;background:#faf9f5;border:1px solid #dedfd5;border-radius:20px;scroll-margin-top:24px}.platform.is-selected{border-color:#8eaa9c;box-shadow:0 0 0 1px #8eaa9c22}.platform-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:36px}.platform-name{display:flex;align-items:center;gap:13px}.platform-icon{width:28px;height:30px;flex:none}.windows-icon{width:26px;height:26px}h2{font-size:28px;line-height:1.25;margin:0}.platform-hint{font-size:11px;color:#567e70;white-space:nowrap}.platform-hint::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:#567e70;vertical-align:middle;margin-right:7px}.platform-subtitle{font-size:12px;color:#596f63;margin:12px 0 23px}.download-button{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:52px;padding:13px 19px;border-radius:12px;background:#173532;color:#faf9f5;font-size:14px;transition:background .18s,transform .18s}.download-button:hover{background:#2d5148}.download-button:active{transform:translateY(1px)}.download-size{display:flex;align-items:center;gap:11px;font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap;color:#ecede5}.download-size svg{height:17px;width:17px;stroke:currentColor;stroke-width:1.3;fill:none;stroke-linecap:round;stroke-linejoin:round}.specs{margin:23px 0 0;font-size:12px}.specs>div{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding-block:10px;border-bottom:1px solid #e3e3da}.specs dt{color:#596f63;white-space:nowrap}.specs dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}.platform-foot{padding-top:16px;color:#596f63;font-size:12px}.platform-foot p{margin:0 0 15px;min-height:2lh;max-width:34em;text-wrap:pretty}.platform-foot a{font-size:11px;text-decoration:underline;text-decoration-color:#a4b2a8;text-underline-offset:4px}.platform-foot a:hover{color:#173532}
+  .windows-actions{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:14px}.store-button{display:inline-flex;align-items:center;justify-content:center;min-height:52px;border-radius:8px;transition:opacity .18s}.store-button img{display:block;width:190px;height:auto}.store-button:hover{opacity:.85}.direct-download{background:transparent;color:#173532;border:1px solid #a8b9ad;font-size:13px;padding-inline:14px}.direct-download .download-size{color:#596f63}.direct-download:hover{background:#edf1e9}.update-note p{max-width:62em}
   .setup{margin-top:43px}.setup-heading{display:flex;justify-content:space-between;align-items:baseline;gap:18px;margin-bottom:18px}.setup h2{font-size:23px}.setup-heading p{margin:0;font-size:12px;color:#596f63}.setup-heading a{text-decoration:underline;text-underline-offset:4px;color:#173532}.guide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.guide{border-top:1px solid #d5d9ce;border-bottom:1px solid #d5d9ce}.guide summary{display:flex;align-items:center;justify-content:space-between;cursor:pointer;list-style:none;padding:17px 0;font-size:13px}.guide summary::-webkit-details-marker{display:none}.disclosure{position:relative;width:12px;height:12px}.disclosure::before,.disclosure::after{content:'';position:absolute;left:0;top:5px;width:11px;height:1px;background:#596f63}.disclosure::after{transform:rotate(90deg);transition:transform .15s}.guide[open] .disclosure::after{transform:rotate(0)}.guide ol{counter-reset:steps;list-style:none;padding:0 18px 17px 0;margin:0;display:grid;gap:11px;color:#596f63;font-size:12px;line-height:1.9}.guide li{display:grid;grid-template-columns:21px 1fr;gap:8px;counter-increment:steps}.guide li::before{content:counter(steps,decimal-leading-zero);font-size:10px;font-variant-numeric:tabular-nums;color:#567e70;padding-top:2px}.update-note{display:flex;justify-content:space-between;gap:28px;align-items:baseline;margin-top:24px;font-size:12px;color:#596f63}.update-note p{margin:0;line-height:1.85}.update-note>a{white-space:nowrap;text-decoration:underline;text-underline-offset:4px}footer{border-top:1px solid #d5d9ce;padding-block:24px 30px;display:flex;justify-content:space-between;gap:20px;font-size:11px;color:#596f63}footer>div{display:flex;gap:22px}footer nav{font-size:11px;gap:22px}
   @media(max-width:760px){.site-header,main,footer{width:calc(100% - 40px)}.site-header{padding-block:23px}.brand img{width:132px}.site-header nav{gap:18px;font-size:12px}.back{display:none}main{padding-block:29px 42px}.intro{margin-bottom:31px}h1{font-size:36px;max-width:12em;margin-bottom:15px}.lede{font-size:13px}.eyebrow{font-size:10px;margin-bottom:14px}.download-heading{font-size:12px}.download-heading>span{display:none}.platform-grid{grid-template-columns:1fr;gap:16px}.platform{padding:24px}.platform-heading{min-height:32px}h2{font-size:27px}.platform-subtitle{margin:9px 0 18px}.download-button{min-height:50px}.specs{margin-top:15px}.platform-foot{padding-top:14px}.platform-foot p{min-height:0;margin-bottom:12px}.setup{margin-top:34px}.setup-heading{align-items:flex-start;flex-direction:column;gap:10px}.setup h2{font-size:23px}.guide-grid{grid-template-columns:1fr;gap:0}.guide+.guide{border-top:0}.update-note{flex-direction:column;gap:14px}footer{flex-direction:column;gap:17px}footer>div{flex-wrap:wrap;gap:12px}footer nav{gap:22px}}
-  @media(prefers-reduced-motion:reduce){:global(html){scroll-behavior:auto}.download-button,.disclosure::after{transition:none}}
+  .direct-download>span:first-child{white-space:nowrap}
+  @media(min-width:761px) and (max-width:1100px){.windows-actions{grid-template-columns:1fr}.store-button{justify-self:start}.platform-actions{min-height:118px}}
+  @media(max-width:480px){.windows-actions{grid-template-columns:1fr;gap:12px}.store-button{justify-self:start}}
+  @media(prefers-reduced-motion:reduce){:global(html){scroll-behavior:auto}.download-button,.store-button,.disclosure::after{transition:none}}
 </style>
