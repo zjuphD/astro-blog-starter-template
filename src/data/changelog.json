@@ -1,5 +1,37 @@
 [
   {
+    "version": "0.1.15",
+    "date": "2026-10-27",
+    "title": "Mac：科研环境与学术模板更新",
+    "items": [
+      {
+        "feature": "电脑体检",
+        "description": "查看芯片、内存和磁盘余量，按分析类型了解当前电脑能否运行以及需要准备什么。",
+        "en": "Check your processor, memory and free disk space, with guidance for each analysis workflow."
+      },
+      {
+        "feature": "下载与环境准备",
+        "description": "实测下载源速度并自动选择，也可手动切换；下载、安装和验证阶段更清楚，取消后可重新准备。",
+        "en": "Measure download sources and choose automatically or manually, with clearer download, installation and verification stages."
+      },
+      {
+        "feature": "测序数据分析",
+        "description": "新增从双端 FASTQ 开始的 RNA-seq、CUT&Tag 分析流程，可衔接质量检查、比对和后续分析。",
+        "en": "Start RNA-seq and CUT&Tag workflows from paired-end FASTQ files, connecting quality checks, alignment and downstream analysis."
+      },
+      {
+        "feature": "学术 PPT 模板",
+        "description": "新增经典学术、极简期刊、暗场成像和文献精读四套模板，便于组织组会汇报与论文解读。",
+        "en": "Four new academic presentation templates support lab meetings and paper discussions."
+      },
+      {
+        "feature": "任务与结果保护",
+        "description": "改进文件工具调用兼容性，支持使用已有参考索引；数据转换失败时保留已有结果，减少重复工作。",
+        "en": "Improve file-tool compatibility, accept existing reference indexes and preserve previous results when a conversion fails."
+      }
+    ]
+  },
+  {
     "version": "0.1.13",
     "date": "2026-10-25",
     "title": "更新更顺畅，下载更轻便",
