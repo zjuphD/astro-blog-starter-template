@@ -1,12 +1,12 @@
 {
-  "version": "0.1.15",
+  "version": "0.1.16",
   "channel": "beta",
   "platform": "win32-x64",
-  "filename": "Bioseeki-Beta-Setup-0.1.15.exe",
-  "downloadUrl": "https://dl.bioseeki.com/desktop/beta/0.1.15/Bioseeki-Beta-Setup-0.1.15.exe",
-  "checksumUrl": "https://dl.bioseeki.com/desktop/beta/0.1.15/Bioseeki-Beta-Setup-0.1.15.exe.sha256",
-  "bytes": 581374574,
-  "sha256": "f864d589db9934078da23942d87caa59998c033e58d23d6be246585e6ac38e5f",
+  "filename": "Bioseeki-Beta-Setup-0.1.16.exe",
+  "downloadUrl": "https://dl.bioseeki.com/desktop/beta/0.1.16/Bioseeki-Beta-Setup-0.1.16.exe",
+  "checksumUrl": "https://dl.bioseeki.com/desktop/beta/0.1.16/Bioseeki-Beta-Setup-0.1.16.exe.sha256",
+  "bytes": 581386947,
+  "sha256": "3ef86b20f30ff9b169b41d63039be8bd701e86dffa8ecdb3e6bbe05f2023b1c5",
   "signed": false,
   "releasedOn": "2026-10-28"
 }
