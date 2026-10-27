@@ -1,5 +1,26 @@
 [
   {
+    "id": "2026-10-23-10-1016-j-blre-2026-101440",
+    "manual": false,
+    "briefingDate": "2026-10-27",
+    "publishedAt": "2026-10-23",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "Artificial intelligence in myeloproliferative neoplasms: From digital bone marrow pathology to clinical decision support.",
+    "titleOriginal": "Artificial intelligence in myeloproliferative neoplasms: From digital bone marrow pathology to clinical decision support.",
+    "summary": "Myeloproliferative neoplasms (MPN) are clonal hematopoietic stem cell disorders whose diagnosis, prognostication, and management depend on integrating heterogeneous clinical, morphological, and molecular data. This narrative review (PubMed/…",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 81,
+    "tags": [
+      "AI",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1016/j.blre.2026.101440",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-10-23-10-1080-17410541-2026-2753744",
     "manual": false,
     "briefingDate": "2026-10-26",
@@ -265,26 +286,6 @@
       "AI"
     ],
     "originalUrl": "https://doi.org/10.64898/2026.10.02.26364620",
-    "editorialMode": "rules",
-    "editorialReason": "通过 V2 规则筛选与多维评分。"
-  },
-  {
-    "id": "2026-10-01-10-1007-s44379-026-00099-3",
-    "manual": false,
-    "briefingDate": "2026-10-05",
-    "publishedAt": "2026-10-01",
-    "category": "AI for Science",
-    "source": "Europe PMC",
-    "sourceType": "方法/模型",
-    "titleZh": "LLM-driven design of physics-constrained constitutive models: Two agents are better than one.",
-    "titleOriginal": "LLM-driven design of physics-constrained constitutive models: Two agents are better than one.",
-    "summary": "Developing constitutive models that capture how materials deform under load traditionally requires years of specialized expertise in continuum mechanics, machine learning, and scientific programming. Large language models (LLMs) have recent…",
-    "whyItMatters": "关注点在于该方法是否把 AI 从辅助分析推进到可验证的科研工作流，并带来可重复的效率或发现增益。",
-    "score": 77,
-    "tags": [
-      "AI"
-    ],
-    "originalUrl": "https://doi.org/10.1007/s44379-026-00099-3",
     "editorialMode": "rules",
     "editorialReason": "通过 V2 规则筛选与多维评分。"
   },
