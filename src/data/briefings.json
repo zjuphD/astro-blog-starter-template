@@ -1,5 +1,46 @@
 [
   {
+    "id": "2026-10-27-10-1192-bjo-2026-12129",
+    "manual": false,
+    "briefingDate": "2026-10-29",
+    "publishedAt": "2026-10-27",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Beyond the hype: why artificial intelligence is not a shortcut to solving mental illness.",
+    "titleOriginal": "Beyond the hype: why artificial intelligence is not a shortcut to solving mental illness.",
+    "summary": "More than one billion people worldwide live with a mental health disorder, and rising prevalence continues to outpace the capacity of mental health services. Artificial intelligence, and large language models in particular, have been widely…",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 78,
+    "tags": [
+      "AI",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1192/bjo.2026.12129",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-10-26-10-64898-2026-10-22-26366227",
+    "manual": false,
+    "briefingDate": "2026-10-29",
+    "publishedAt": "2026-10-26",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Current gaps in downstream applications of fMRI foundation models: lessons learned from BrainLM & BrainHarmonix on Prevent-AD",
+    "titleOriginal": "Current gaps in downstream applications of fMRI foundation models: lessons learned from BrainLM & BrainHarmonix on Prevent-AD",
+    "summary": "Foundation models have driven major advancements in the language and vision domains, as seen in the popularity of Artificial Intelligence (AI) tools, and a growing number of studies are bringing the approach to human brain imaging. Whether …",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 83,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.64898/2026.10.22.26366227",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-10-27-10-1177-07067437261499503",
     "manual": false,
     "briefingDate": "2026-10-28",
