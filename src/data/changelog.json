@@ -1,5 +1,32 @@
 [
   {
+    "version": "0.1.17",
+    "date": "2026-10-30",
+    "title": "Mac：学术 PPT 制作与文件保护",
+    "items": [
+      {
+        "feature": "学术 PPT 制作",
+        "description": "优化四套学术模板的制作流程，完善模板排版与讲稿更新。",
+        "en": "Improve the workflow for four academic templates, slide layout and speaker-note updates."
+      },
+      {
+        "feature": "文字与图片排版",
+        "description": "改善中英混排和日期显示，遇到图片重名或页面格式问题时提供清晰提示。",
+        "en": "Improve mixed Chinese and English text and date layout, with clearer guidance for image naming and slide formatting."
+      },
+      {
+        "feature": "按位点挑选引物",
+        "description": "按目标位点的距离范围筛选候选引物，输出可核对坐标与导入文件。",
+        "en": "Filter candidate primers by distance from target sites, with coordinates for review and files for import."
+      },
+      {
+        "feature": "原始文件保护",
+        "description": "避免输出覆盖原始序列，保存失败时保留已有结果。",
+        "en": "Prevent outputs from overwriting source sequences and preserve existing results if saving fails."
+      }
+    ]
+  },
+  {
     "version": "0.1.15",
     "date": "2026-10-27",
     "title": "Mac：科研环境与学术模板更新",

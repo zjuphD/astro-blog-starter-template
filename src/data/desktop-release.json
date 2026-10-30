@@ -1,13 +1,13 @@
 {
-  "version": "0.1.15",
+  "version": "0.1.17",
   "channel": "beta",
   "platform": "darwin-arm64",
-  "filename": "BioSeeki-Beta-0.1.15-arm64.dmg",
-  "downloadUrl": "https://dl.bioseeki.com/desktop/beta/0.1.15/BioSeeki-Beta-0.1.15-arm64.dmg",
-  "checksumUrl": "https://dl.bioseeki.com/desktop/beta/0.1.15/BioSeeki-Beta-0.1.15-arm64.dmg.sha256",
-  "bytes": 594759364,
-  "sha256": "6ccc3d69743ee2eba7c5b62f11e5c484e24415fd8a21127e580a1d64e6ccc2e6",
+  "filename": "BioSeeki-Beta-0.1.17-arm64.dmg",
+  "downloadUrl": "https://dl.bioseeki.com/desktop/beta/0.1.17/BioSeeki-Beta-0.1.17-arm64.dmg",
+  "checksumUrl": "https://dl.bioseeki.com/desktop/beta/0.1.17/BioSeeki-Beta-0.1.17-arm64.dmg.sha256",
+  "bytes": 594814660,
+  "sha256": "9fd37eea59bb8ae4253d68b8112b1135de83f4cf46b8c6a01399d41c99d84b96",
   "minimumMacOS": "14.0",
   "notarized": true,
-  "releasedOn": "2026-10-27"
+  "releasedOn": "2026-10-30"
 }
