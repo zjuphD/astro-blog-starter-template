@@ -1,5 +1,25 @@
 [
   {
+    "id": "2026-10-30-10-9758-cpn-26-1519",
+    "manual": false,
+    "briefingDate": "2026-10-30",
+    "publishedAt": "2026-10-30",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "Artificial Intelligence-driven Biomarker Discovery for Precision Psychiatry.",
+    "titleOriginal": "Artificial Intelligence-driven Biomarker Discovery for Precision Psychiatry.",
+    "summary": "Poor phenotype quality and small cohorts remain major constraints in psychiatric biomarker research, and recent methodological advances increasingly address them. Language models turn clinical text into analysable variables at a scale manua…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 81,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.9758/cpn.26.1519",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-10-27-10-1192-bjo-2026-12129",
     "manual": false,
     "briefingDate": "2026-10-29",
