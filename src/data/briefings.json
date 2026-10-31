@@ -1,5 +1,46 @@
 [
   {
+    "id": "2026-10-29-10-1037-ccp0001034",
+    "manual": false,
+    "briefingDate": "2026-10-31",
+    "publishedAt": "2026-10-29",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Evaluating large language models versus human therapists in generating interventions for patients with depression in psychodynamic psychotherapy.",
+    "titleOriginal": "Evaluating large language models versus human therapists in generating interventions for patients with depression in psychodynamic psychotherapy.",
+    "summary": "Recent advances in artificial intelligence, especially the rise of large language models (LLMs), hold great promise for transforming mental health care, but their growing integration also raises pressing questions about their ability to del…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 88,
+    "tags": [
+      "AI",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1037/ccp0001034",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-10-28-10-1007-s00266-026-06392-z",
+    "manual": false,
+    "briefingDate": "2026-10-31",
+    "publishedAt": "2026-10-28",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "Artificial Intelligence in Facelift Surgery: A Systematic Review of Objective Outcome Assessment and Patient-Perceived Rejuvenation.",
+    "titleOriginal": "Artificial Intelligence in Facelift Surgery: A Systematic Review of Objective Outcome Assessment and Patient-Perceived Rejuvenation.",
+    "summary": "Artificial intelligence (AI) has emerged as a tool for objective outcome assessment in facelift surgery (rhytidectomy), yet the clinical validity and limitations of these technologies remain incompletely characterized. This review evaluates…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 76,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1007/s00266-026-06392-z",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-10-30-10-9758-cpn-26-1519",
     "manual": false,
     "briefingDate": "2026-10-30",
