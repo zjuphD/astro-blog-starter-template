@@ -1,5 +1,32 @@
 [
   {
+    "version": "0.1.18",
+    "date": "2026-11-02",
+    "title": "Mac：课题判断与证据追踪",
+    "items": [
+      {
+        "feature": "课题判断候选",
+        "description": "深度研究或数据分析产生的新依据可先核对，再确认保存到课题记忆。",
+        "en": "Review new evidence from deep research or data analysis before confirming updates to project memory."
+      },
+      {
+        "feature": "预期与实际对照",
+        "description": "分析前登记比较规则，完成后对照结果表，区分支持、反对与无法确定。",
+        "en": "Register comparison rules before an analysis, then compare results as supporting, contradicting or undetermined."
+      },
+      {
+        "feature": "证据状态与复查",
+        "description": "查看判断中的支持与反对依据；来源失效时保留待复查提示和历史记录。",
+        "en": "Review supporting and opposing evidence, with review reminders and revision history when sources become unavailable."
+      },
+      {
+        "feature": "结果表与会话记忆",
+        "description": "完善 CSV、TSV 结果表校验和会话记忆提取，让课题进展更便于核对与延续。",
+        "en": "Improve CSV and TSV result validation and session-memory extraction for more traceable research progress."
+      }
+    ]
+  },
+  {
     "version": "0.1.17",
     "date": "2026-10-30",
     "title": "Mac：学术 PPT 制作与文件保护",
