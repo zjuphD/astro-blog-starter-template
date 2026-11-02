@@ -1,5 +1,48 @@
 [
   {
+    "id": "2026-11-01-10-1002-cncr-70652",
+    "manual": false,
+    "briefingDate": "2026-11-02",
+    "publishedAt": "2026-11-01",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "Generative artificial intelligence in medical oncology: A clinically focused narrative review of large language, vision-language, and agentic artificial intelligence systems.",
+    "titleOriginal": "Generative artificial intelligence in medical oncology: A clinically focused narrative review of large language, vision-language, and agentic artificial intelligence systems.",
+    "summary": "Rapid advances in cancer genetics and genomics, pathophysiology, diagnostics, and therapeutics have substantially increased the complexity of clinical oncology. Integrating large and diverse data streams into timely, patient-specific decisi…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 81,
+    "tags": [
+      "AI",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1002/cncr.70652",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-10-31-10-1093-nar-gkag1098",
+    "manual": false,
+    "briefingDate": "2026-11-02",
+    "publishedAt": "2026-10-31",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "PROTAC-DB 4.0: an expanded knowledgebase of targeted protein degradation modalities with AI-powered knowledge discovery.",
+    "titleOriginal": "PROTAC-DB 4.0: an expanded knowledgebase of targeted protein degradation modalities with AI-powered knowledge discovery.",
+    "summary": "Proteolysis-targeting chimeras (PROTACs) represent an emerging therapeutic modality that harnesses the ubiquitin-proteasome system to induce targeted protein degradation (TPD). Their event-driven and catalytic mechanisms provide new opportu…",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 82,
+    "tags": [
+      "AI",
+      "蛋白/结构",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1093/nar/gkag1098",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-11-01-10-1111-dar-70272",
     "manual": false,
     "briefingDate": "2026-11-01",
