@@ -1,5 +1,47 @@
 [
   {
+    "id": "2026-11-02-10-1080-27697061-2026-2755960",
+    "manual": false,
+    "briefingDate": "2026-11-04",
+    "publishedAt": "2026-11-02",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "临床研究",
+    "titleZh": "Artificial Intelligence in Dietary Management and Nutritional Interventions: A Narrative Review of Current Evidence, Applications, and Translational Challenges.",
+    "titleOriginal": "Artificial Intelligence in Dietary Management and Nutritional Interventions: A Narrative Review of Current Evidence, Applications, and Translational Challenges.",
+    "summary": "This narrative review examines the applications of artificial intelligence (AI) in nutrition and dietetics, focusing on AI-assisted dietary assessment, precision nutrition, generative AI for dietary counselling, and the ethical, regulatory,…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 83,
+    "tags": [
+      "AI"
+    ],
+    "originalUrl": "https://doi.org/10.1080/27697061.2026.2755960",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-11-01-10-1021-acs-molpharmaceut-6c00594",
+    "manual": false,
+    "briefingDate": "2026-11-04",
+    "publishedAt": "2026-11-01",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "临床研究",
+    "titleZh": "AI-Assisted Analysis of Clinical Trials to Identify Failed Drugs for Revival via Drug Delivery Technologies.",
+    "titleOriginal": "AI-Assisted Analysis of Clinical Trials to Identify Failed Drugs for Revival via Drug Delivery Technologies.",
+    "summary": "Numerous drug candidates showed great promise in experimental and preclinical investigations but failed in clinical trials. One cause to this problem may be nonspecific drug biodistribution, leading to adverse effects in healthy organs. Dru…",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 82,
+    "tags": [
+      "AI",
+      "蛋白/结构",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1021/acs.molpharmaceut.6c00594",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-11-01-10-1002-cncr-70652",
     "manual": false,
     "briefingDate": "2026-11-02",
