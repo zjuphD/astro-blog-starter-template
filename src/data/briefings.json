@@ -1,5 +1,48 @@
 [
   {
+    "id": "2026-11-04-10-1002-acr-80197",
+    "manual": false,
+    "briefingDate": "2026-11-05",
+    "publishedAt": "2026-11-04",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Artificial Intelligence-Driven Extraction of Patient-Reported Pain Outcomes in Osteoarthritis Using Large Language Models.",
+    "titleOriginal": "Artificial Intelligence-Driven Extraction of Patient-Reported Pain Outcomes in Osteoarthritis Using Large Language Models.",
+    "summary": "Objective Patient-reported outcome measures (PROMs) are central to assessing symptom burden and treatment response in Osteoarthritis (OA) but are often embedded in unstructured clinical notes. We evaluated whether prompt-engineered large la…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 88,
+    "tags": [
+      "AI",
+      "蛋白/结构"
+    ],
+    "originalUrl": "https://doi.org/10.1002/acr.80197",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-11-02-10-64898-2026-10-30-763264",
+    "manual": false,
+    "briefingDate": "2026-11-05",
+    "publishedAt": "2026-11-02",
+    "category": "AI 药物发现",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Decoding antibody-antigen recognition: the BL8 language and its application in calibrating deep learning predictions",
+    "titleOriginal": "Decoding antibody-antigen recognition: the BL8 language and its application in calibrating deep learning predictions",
+    "summary": "Antibodies are central to immunology and therapeutics, and understanding how they recognize antigens is essential to rational drug design. This recognition depends on the interplay of interface geometry, physicochemical interactions, sequen…",
+    "whyItMatters": "关注点在于 AI 是否真正提升靶点发现、分子筛选或研发决策效率，以及关键结果是否得到数据或实验验证。",
+    "score": 80,
+    "tags": [
+      "AI",
+      "蛋白/结构",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.64898/2026.10.30.763264",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-11-02-10-1080-27697061-2026-2755960",
     "manual": false,
     "briefingDate": "2026-11-04",
