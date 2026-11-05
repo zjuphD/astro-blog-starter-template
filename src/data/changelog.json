@@ -1,5 +1,32 @@
 [
   {
+    "version": "0.1.19",
+    "date": "2026-11-06",
+    "title": "Mac：Fiji 图像分析与序列文档操作",
+    "items": [
+      {
+        "feature": "连接 Fiji 图像分析",
+        "description": "连接已配置 CopilotJ 的 Fiji，读取图像与测量结果，在授权后运行分析宏；可独立控制图像分享。",
+        "en": "Connect Fiji configured with CopilotJ, read images and measurements, and run approved analysis macros with separate image-sharing controls."
+      },
+      {
+        "feature": "测量结果核对",
+        "description": "更完整地核对测量表中的数值、标签与文本，及时识别结果变化。",
+        "en": "Compare complete measurement tables, including values, labels and text, to identify changes reliably."
+      },
+      {
+        "feature": "GeneCode 文档操作",
+        "description": "新建、打开和复制序列文档，保留注释并保存结果，让不同方案分别成稿。",
+        "en": "Create, open and duplicate sequence documents, preserve annotations and save separate versions of your designs."
+      },
+      {
+        "feature": "当前编辑内容预览",
+        "description": "根据编辑器中的当前内容生成和确认补丁预览，改善未保存文档的操作衔接。",
+        "en": "Generate and confirm patch previews against the current editor content, including unsaved document changes."
+      }
+    ]
+  },
+  {
     "version": "0.1.18",
     "date": "2026-11-02",
     "title": "Mac：课题判断与证据追踪",
