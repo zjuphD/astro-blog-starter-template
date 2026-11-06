@@ -1,5 +1,47 @@
 [
   {
+    "id": "2026-11-03-10-21203-rs-3-rs-11399586-v1",
+    "manual": false,
+    "briefingDate": "2026-11-06",
+    "publishedAt": "2026-11-03",
+    "category": "基因组与单细胞",
+    "source": "Europe PMC",
+    "sourceType": "预印本",
+    "titleZh": "Silent methodological failures in AI-assisted science: benchmarking large language model agents for virtual gene knockout analysis",
+    "titleOriginal": "Silent methodological failures in AI-assisted science: benchmarking large language model agents for virtual gene knockout analysis",
+    "summary": "Abstract Large language models (LLMs) are increasingly deployed as autonomous agents in computational biology, yet their reliability in executing complex scientific workflows remains poorly characterized. Here, we benchmarked five LLM agent…",
+    "whyItMatters": "关注点在于 AI 是否能从高维组学数据中提取可解释、可复现的生物学信号，并在独立数据集上保持稳定。",
+    "score": 78,
+    "tags": [
+      "AI",
+      "单细胞/空间组学"
+    ],
+    "originalUrl": "https://doi.org/10.21203/rs.3.rs-11399586/v1",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-11-02-10-20944-preprints202611-0067-v1",
+    "manual": false,
+    "briefingDate": "2026-11-06",
+    "publishedAt": "2026-11-02",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "预印本",
+    "titleZh": "Deep Looking in Digital Pathology: An Explainable Federated Learning Framework for Lung Cancer Classification",
+    "titleOriginal": "Deep Looking in Digital Pathology: An Explainable Federated Learning Framework for Lung Cancer Classification",
+    "summary": "Background: /Objectives: Lung cancer is the leading cause of cancer death worldwide, and growing slide volumes add to pathologists’ cognitive load. Deep learning can assist histopathological diagnosis, but two obstacles limit its clinical u…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 78,
+    "tags": [
+      "AI",
+      "蛋白/结构"
+    ],
+    "originalUrl": "https://doi.org/10.20944/preprints202611.0067.v1",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-11-04-10-1002-acr-80197",
     "manual": false,
     "briefingDate": "2026-11-05",
