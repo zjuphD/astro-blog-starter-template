@@ -1,5 +1,27 @@
 [
   {
+    "id": "2026-11-02-10-1007-s11524-026-01170-3",
+    "manual": false,
+    "briefingDate": "2026-11-07",
+    "publishedAt": "2026-11-02",
+    "category": "基因组与单细胞",
+    "source": "Europe PMC",
+    "sourceType": "方法/模型",
+    "titleZh": "Exploring Spatial Inequities and Livability: A Mixed-Methods Study Using Artificial Intelligence and Community Insights.",
+    "titleOriginal": "Exploring Spatial Inequities and Livability: A Mixed-Methods Study Using Artificial Intelligence and Community Insights.",
+    "summary": "Rapid urbanization has intensified health and social inequities through the uneven distribution of infrastructure, services, and public space. In St. Louis, Missouri (USA), these disparities remain geographically concentrated and rooted in …",
+    "whyItMatters": "关注点在于 AI 是否能从高维组学数据中提取可解释、可复现的生物学信号，并在独立数据集上保持稳定。",
+    "score": 77,
+    "tags": [
+      "AI",
+      "单细胞/空间组学",
+      "蛋白/结构"
+    ],
+    "originalUrl": "https://doi.org/10.1007/s11524-026-01170-3",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-11-03-10-21203-rs-3-rs-11399586-v1",
     "manual": false,
     "briefingDate": "2026-11-06",
