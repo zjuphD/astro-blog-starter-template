@@ -1,5 +1,47 @@
 [
   {
+    "id": "2026-11-06-10-1097-mnh-0000000000001234",
+    "manual": false,
+    "briefingDate": "2026-11-10",
+    "publishedAt": "2026-11-06",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "临床研究",
+    "titleZh": "Artificial intelligence in dialysis.",
+    "titleOriginal": "Artificial intelligence in dialysis.",
+    "summary": "Purpose of review Artificial intelligence (AI) and machine learning in dialysis have matured beyond the initial phase of algorithm development. Recent work has shifted toward clinical implementation, evaluation, and governance. During the p…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 83,
+    "tags": [
+      "AI",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1097/mnh.0000000000001234",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
+    "id": "2026-11-05-10-1097-ogx-0000000000001619",
+    "manual": false,
+    "briefingDate": "2026-11-10",
+    "publishedAt": "2026-11-05",
+    "category": "精准医疗",
+    "source": "Europe PMC",
+    "sourceType": "综述",
+    "titleZh": "The Expanding Role of the Physician Informaticist in Obstetrics and Gynecology: Bridging Digital Innovation and Clinical Care.",
+    "titleOriginal": "The Expanding Role of the Physician Informaticist in Obstetrics and Gynecology: Bridging Digital Innovation and Clinical Care.",
+    "summary": "Importance Digital transformation has fundamentally reshaped obstetrics and gynecology (OB/GYN). Electronic health records (EHRs), clinical decision support systems (CDSS), telehealth, and artificial intelligence (AI) are now central to car…",
+    "whyItMatters": "关注点在于 AI 与计算方法能否改善临床决策、患者分层或医疗流程，并通过独立验证证明其可推广性。",
+    "score": 75,
+    "tags": [
+      "AI",
+      "药物发现"
+    ],
+    "originalUrl": "https://doi.org/10.1097/ogx.0000000000001619",
+    "editorialMode": "rules",
+    "editorialReason": "通过 V2 规则筛选与多维评分。"
+  },
+  {
     "id": "2026-11-02-10-1007-s11524-026-01170-3",
     "manual": false,
     "briefingDate": "2026-11-07",
