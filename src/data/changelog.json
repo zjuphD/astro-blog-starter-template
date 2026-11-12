@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.1.20",
+    "date": "2026-11-12",
+    "title": "Mac 长对话续接",
+    "items": [
+      {
+        "feature": "长对话恢复",
+        "description": "修复长对话中摘要截断导致会话反复中断的问题，并保留近期对话以便继续。",
+        "en": "Long conversations can recover when a history summary is truncated, with recent messages preserved."
+      }
+    ]
+  },
+  {
     "version": "0.1.19",
     "date": "2026-11-06",
     "title": "Mac：Fiji 图像分析与序列文档操作",
