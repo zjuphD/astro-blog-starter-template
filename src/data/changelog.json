@@ -1,5 +1,27 @@
 [
   {
+    "version": "0.1.22",
+    "date": "2026-11-13",
+    "title": "Mac：GeneCode 与知识库稳定性修复",
+    "items": [
+      {
+        "feature": "GeneCode",
+        "description": "编辑器完成加载后才接收命令。旧窗口的请求不会干扰新窗口，关联超时后可检查状态并重试。",
+        "en": "GeneCode waits for the editor to load before delivering commands. Requests from older windows cannot interfere, and association can be checked and retried after a timeout."
+      },
+      {
+        "feature": "知识库导入",
+        "description": "重试会继续处理尚未提交的失败条目。取消会阻止迟到的读取结果入库，并保留已经提交的条目。",
+        "en": "Retry resumes failed items that have not been committed. Cancellation stops late read results from being imported and retains committed items."
+      },
+      {
+        "feature": "研究任务",
+        "description": "插件重载时，旧实例清理和迟到的初始化不会撤销或接管当前任务保护。",
+        "en": "During plugin reloads, cleanup and delayed initialization from older instances cannot remove or take over current task protection."
+      }
+    ]
+  },
+  {
     "version": "0.1.21",
     "date": "2026-11-13",
     "title": "Mac：课题、实验记录与 GeneCode",
