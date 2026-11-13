@@ -1,5 +1,32 @@
 [
   {
+    "version": "0.1.21",
+    "date": "2026-11-13",
+    "title": "Mac：课题、实验记录与 GeneCode",
+    "items": [
+      {
+        "feature": "新会话与本地课题",
+        "description": "新会话使用界面显示的默认模型。账户服务暂时不可达时，已验证过的用户仍可打开本地课题。",
+        "en": "New conversations use the default model shown in the app. Previously verified users can still open local projects when the account service is temporarily unavailable."
+      },
+      {
+        "feature": "知识库与记忆",
+        "description": "重新导入同一来源后，默认检索使用最新版，历史引用仍可打开。导入对话时，助手回复和工具输出不会被误列为待确认记忆。",
+        "en": "Reimported sources use their latest version in search while existing citations still open. Assistant replies and tool outputs no longer appear as pending memories when importing conversations."
+      },
+      {
+        "feature": "GeneCode 与实验记录",
+        "description": "打开空白序列标签时解除旧序列关联。导出 Word 和 PDF 时保留无法解析的原始字段，关闭或切换预览后仍可继续操作。",
+        "en": "Opening a blank sequence tab clears the previous GeneCode association. Word and PDF exports retain fields that could not be parsed, and exports finishing in the background respect the current preview."
+      },
+      {
+        "feature": "保存与恢复",
+        "description": "修复慢网下登录状态被旧回调覆盖的问题。磁盘写入中断后可重新导入，任务日志尾部不完整时可继续保存。",
+        "en": "Delayed login responses can no longer replace a newer session. Imports can be retried after an interrupted write, and task history can continue saving after an incomplete final entry."
+      }
+    ]
+  },
+  {
     "version": "0.1.20",
     "date": "2026-11-12",
     "title": "Mac 长对话续接",
