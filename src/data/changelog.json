@@ -1,5 +1,27 @@
 [
   {
+    "version": "0.1.23",
+    "date": "2026-11-14",
+    "title": "Mac：论文组会 PPT 制作优化",
+    "items": [
+      {
+        "feature": "论文组会 PPT",
+        "description": "从论文 PDF 生成组会 PPT：集中读取正文与图表，减少重复准备步骤。",
+        "en": "Create journal-club presentations from paper PDFs with consolidated reading of text and figures."
+      },
+      {
+        "feature": "图文排版与来源",
+        "description": "改进原图裁剪、图文布局与文字对比度，保留可编辑文字、讲稿和来源页码。",
+        "en": "Improve original-figure crops, slide layouts and text contrast while retaining editable text, speaker notes and source pages."
+      },
+      {
+        "feature": "导出与预览",
+        "description": "生成后直接检查整页预览；修复 Mac 预览中的编辑器虚线框，避免重复导出未改动的页面。",
+        "en": "Review full-slide previews directly after generation; remove editor guides from Mac previews and reuse unchanged exports."
+      }
+    ]
+  },
+  {
     "version": "0.1.22",
     "date": "2026-11-13",
     "title": "Mac：GeneCode 与知识库稳定性修复",
