@@ -1,5 +1,32 @@
 [
   {
+    "version": "0.1.24",
+    "date": "2026-11-18",
+    "title": "Mac：科研绘图、资料目录与对照阅读",
+    "items": [
+      {
+        "feature": "科研绘图与额度",
+        "description": "接入 GPT Image 2.6，免费、69 元、149 元和 299 元套餐每月分别可生成 5、25、50 和 100 次。预览、下载和重复导出不再扣生成次数。",
+        "en": "Generate research illustrations with GPT Image 2.6. Monthly limits are 5, 25, 50 and 100 for the free, RMB 69, RMB 149 and RMB 299 plans. Previews, downloads and repeated exports do not consume another generation."
+      },
+      {
+        "feature": "图片转可编辑 SVG/PPT",
+        "description": "默认免费本地转换；需要改善结果时，可主动点击 AI 检测与修复，按当前模型用量计费，失败保留上一版。",
+        "en": "Convert images locally to editable SVG and PPT by default. Optional AI review and repair uses the selected model and its normal usage billing; unsuccessful repairs retain the previous result."
+      },
+      {
+        "feature": "资料目录、搜索与导入",
+        "description": "支持多层文件夹、空目录、统一文件名与全文搜索，以及保留目录层级的批量导入，引用继续对应来源文件与版本。",
+        "en": "Organize nested and empty folders, search filenames or full text from one entry, and import folders with their hierarchy intact. Citations retain their source file and version."
+      },
+      {
+        "feature": "自适应对照阅读",
+        "description": "原文与译文可换行对照，窄窗口按段落上下排列，放大后不会把译文推出窗口；保留原版面查看、引用定位和断点补译。",
+        "en": "Read reflowing original and translated text side by side, with stacked paragraphs in narrow windows. Zooming keeps both texts accessible, while original-layout viewing, citation navigation and resumable translation remain available."
+      }
+    ]
+  },
+  {
     "version": "0.1.23",
     "date": "2026-11-14",
     "title": "Mac：论文组会 PPT 制作优化",
