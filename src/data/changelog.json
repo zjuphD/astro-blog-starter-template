@@ -1,5 +1,27 @@
 [
   {
+    "version": "0.1.25",
+    "date": "2026-11-23",
+    "title": "Mac 版新增我的文献和中文日报",
+    "items": [
+      {
+        "feature": "文件夹式论文库",
+        "description": "在「我的文献」中创建多层文件夹、导入 PDF、移动和收藏论文，点击论文即可打开阅读器。",
+        "en": "Create nested folders, import PDFs, move or save papers, and open a paper in the reader."
+      },
+      {
+        "feature": "文献雷达与周报",
+        "description": "论文库、文献雷达和文献周报集中在同一入口，日报和周报中的条目可收藏到指定文件夹。",
+        "en": "Open your library, literature radar and weekly digest in one place. Save papers from either report to a folder."
+      },
+      {
+        "feature": "中文摘要与来源",
+        "description": "有原文摘要的条目优先显示中文摘要，可展开原文核对。原始来源未提供摘要时会明确标注。",
+        "en": "Read Chinese summaries alongside the source abstracts and see when the source has no abstract."
+      }
+    ]
+  },
+  {
     "version": "0.1.24",
     "date": "2026-11-20",
     "title": "Mac：科研绘图、资料目录与对照阅读",
