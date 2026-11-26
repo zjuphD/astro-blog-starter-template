@@ -1,5 +1,32 @@
 [
   {
+    "version": "0.1.26",
+    "date": "2026-11-26",
+    "title": "Mac 工作台顶栏与科研流程更新",
+    "items": [
+      {
+        "feature": "Mac 顶栏和侧栏",
+        "description": "在工作台标题栏的空白区操作窗口。收起侧栏后，标题自动避开左上角按钮。",
+        "en": "Move or resize the window from the workspace title bars. Titles clear the top-left controls when the sidebar is collapsed."
+      },
+      {
+        "feature": "论文库和阅读器",
+        "description": "改进 PDF 题录与正文检索。阅读器支持按页翻译、全文搜索和跨页定位。",
+        "en": "Find papers by metadata and full text, translate one page, and jump to matching passages across the PDF."
+      },
+      {
+        "feature": "科研绘图与论文组图",
+        "description": "可把绘图加入组图工程，原位替换面板，选择期刊尺寸预设，导出高分辨率 TIFF 和 PNG。",
+        "en": "Send illustrations to a figure project, replace panels in place, choose journal presets, and export high-resolution TIFF or PNG."
+      },
+      {
+        "feature": "研究任务和项目资料",
+        "description": "优化资料导入、记忆审核、实验记录和研究任务定时操作。",
+        "en": "Refinements to project imports, memory review, experiment records, and scheduled research tasks."
+      }
+    ]
+  },
+  {
     "version": "0.1.25",
     "date": "2026-11-23",
     "title": "Mac 版新增我的文献和中文日报",
