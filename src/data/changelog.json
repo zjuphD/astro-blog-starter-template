@@ -1,5 +1,17 @@
 [
   {
+    "version": "0.1.27",
+    "date": "2026-11-27",
+    "title": "Mac 首页 Fiji 状态显示修复",
+    "items": [
+      {
+        "feature": "Fiji 连接状态",
+        "description": "首页和聊天输入框移除常驻的 Fiji 状态按钮。请在设置的外部工具中查看连接状态和手动检测。",
+        "en": "Fiji connection status is now shown in Settings under External tools, where you can also check the connection."
+      }
+    ]
+  },
+  {
     "version": "0.1.26",
     "date": "2026-11-26",
     "title": "Mac 工作台顶栏与科研流程更新",
