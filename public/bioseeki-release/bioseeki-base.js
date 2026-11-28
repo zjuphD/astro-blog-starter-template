@@ -17,9 +17,9 @@ const destinations={
   xiaohongshu:'https://xhslink.cn/o/1FHuh0e2oVK',
 };
 const plans=[
-  {name:'Plus',price:'69',credits:'2,000',use:text('日常问答与轻量检索','Everyday questions and quick searches')},
-  {name:'Pro',price:'149',credits:'5,000',use:text('常规科研分析与长文写作','Research analysis and long-form writing')},
-  {name:'Heavy',price:'299',credits:'12,000',use:text('高强度长任务与深度推理','Long-running tasks and in-depth reasoning')},
+  {name:'Plus',price:'69',credits:'2,000',monthlyImages:25,use:text('日常问答与轻量检索','Everyday questions and quick searches')},
+  {name:'Pro',price:'149',credits:'5,000',monthlyImages:50,use:text('常规科研分析与长文写作','Research analysis and long-form writing')},
+  {name:'Heavy',price:'299',credits:'12,000',monthlyImages:100,use:text('高强度长任务与深度推理','Long-running tasks and in-depth reasoning')},
 ];
 let leftHero=false;
 function refreshHeroReturn(){
@@ -117,20 +117,33 @@ function brand(){
     const month=text('月','month');
     section.innerHTML=`
       <div class="bio-pricing-intro"><div>
-        <p class="bio-eyebrow">${text('按你的研究节奏','Plans and pricing')}</p>
+        <p class="bio-eyebrow">${text('订阅价格','Plans and pricing')}</p>
         <h2 id="bio-pricing-title">${text('从一个问题开始。','Start with a question.')}<br>${text('让研究，接着向前。','Keep your research moving.')}</h2>
-      </div><p>${text('月付订阅，人民币结算。','Monthly subscriptions, billed in Chinese yuan.')}<br>${text('每份套餐包含固定 credits。','Each plan includes a monthly credit allowance.')}</p></div>
+      </div><p>${text('用同一账号登录，手机端和电脑端共用积分。','Your phone and computer share one credit balance when you use the same account.')}<br>${text('按月订阅，以人民币结算。','Plans are billed monthly in Chinese yuan.')}</p></div>
       <div class="bio-plan-grid">${plans.map((p,i)=>`
         <article class="bio-plan ${i===1?'bio-plan--recommended':''}">
           <div class="bio-plan-head"><h3>${p.name}</h3>${i===1?`<span>${text('日常科研','Everyday research')}</span>`:''}</div>
           <p class="bio-plan-use">${p.use}</p>
           <p class="bio-plan-price"><span>¥</span><strong>${p.price}</strong><span> / ${month}</span></p>
-          <p class="bio-plan-credits"><strong>${p.credits}</strong> credits / ${month}</p>
+          <dl class="bio-plan-allowances">
+            <div><dt>${text('每月积分','Monthly credits')}</dt><dd class="bio-plan-credits"><strong>${p.credits}</strong></dd></div>
+            <div><dt>${text('每月科研生图','Monthly image generations')}</dt><dd><strong>${p.monthlyImages}</strong>${text(' 次','')}</dd></div>
+          </dl>
+          <ul class="bio-plan-features">
+            <li>${text('支持深度能力模型','Access to advanced reasoning models')}</li>
+            <li>${text('支持联网搜索','Web search')}</li>
+          </ul>
           <a href="${destinations.subscribe}" data-local-destination="${destinations.subscribe}" class="bio-plan-action">${text('选择','Choose')} ${p.name}<span aria-hidden="true">↗</span></a>
         </article>`).join('')}</div>
-      <div class="bio-pricing-foot"><p>${text('先试着开始。','Try BioSeeki. ')}<a href="${destinations.signup}" data-local-destination="${destinations.signup}">${text('注册即送 500 credits','Get 500 credits when you sign up')} ↗</a></p>
-        <p>${text('套餐额度到期失效；具体权益以订阅页为准。','Unused credits expire at the end of the billing period. See the subscription page for plan details.')}</p></div>`;
+      <div class="bio-pricing-foot">
+        <p class="bio-free-plan"><strong>${text('免费版','Free plan')}</strong>
+          <span>${text('注册赠送 500 积分，每月含 5 次科研生图。','Get 500 credits when you sign up and 5 image generations each month.')}</span>
+          <a href="${destinations.signup}" data-local-destination="${destinations.signup}">${text('免费注册','Sign up')} <span aria-hidden="true">↗</span></a></p>
+        <p>${text('套餐积分到期失效，具体权益以订阅页为准。','Unused plan credits expire at the end of the billing period. See the subscription page for details.')}</p></div>`;
     faq.before(section);
+    if(location.hash==='#pricing'){
+      requestAnimationFrame(()=>section.scrollIntoView({behavior:'instant',block:'start'}));
+    }
   }
   const footer=document.querySelector('footer');if(footer)footer.id='download';
   if(footer&&!footer.dataset.bioFooter){
