@@ -111,6 +111,7 @@ function brand(){
     }
   }
   const faq=document.querySelector('.o-faq');
+  if(faq)faq.id='faq';
   if(faq&&!document.querySelector('#pricing')){
     const section=document.createElement('section');section.className='bio-pricing';section.id='pricing';section.setAttribute('aria-labelledby','bio-pricing-title');
     const month=text('月','month');
@@ -137,7 +138,13 @@ function brand(){
     const social=footer.querySelector('.footer-strip-social');
     if(social){social.setAttribute('aria-label',text('BioSeeki 社交与联系','Find BioSeeki'));social.replaceChildren(socialLink(text('GitHub：BioSeeki','BioSeeki on GitHub'),destinations.github,socialIcons.github),socialLink('X',destinations.x,socialIcons.x),socialLink(text('邮箱：support@bioseeki.com','Email support@bioseeki.com'),'mailto:support@bioseeki.com',socialIcons.mail),socialLink(text('小红书','RedNote'),destinations.xiaohongshu,socialIcons.xiaohongshu));}
     const nav=footer.querySelector('[aria-label="Footer navigation"]');
-    if(nav)nav.replaceChildren(anchor(text('下载 BioSeeki','Download BioSeeki'),destinations.download),anchor(text('更新日志','Changelog'),'/changelog'),anchor(text('定价','Pricing'),'#pricing'),anchor(text('隐私政策','Privacy policy'),'/privacy'),anchor(text('服务条款','Terms of service'),'/terms'));
+    if(nav)nav.replaceChildren(
+      anchor(text('下载 BioSeeki','Download BioSeeki'),destinations.download),
+      anchor(text('更新日志','Changelog (Chinese)'),'/changelog'),
+      anchor(text('定价','Pricing'),'#pricing'),
+      anchor(text('隐私政策','Privacy policy'),text('/privacy','/privacy#english')),
+      anchor(text('服务条款','Terms of service'),text('/terms','/terms#english')),
+    );
   }
   footer?.querySelectorAll('p').forEach(p=>{if(p.textContent.includes('Ambi ©'))p.textContent='BioSeeki © 2026';});
   refreshDownloadLinks();
