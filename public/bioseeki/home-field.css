@@ -11,6 +11,13 @@ bio-home-field {
   overflow: hidden;
   pointer-events: none;
   user-select: none;
+  /* Fade the horizon, glyphs and static fallback together onto the page beneath. */
+  --home-edge: linear-gradient(to bottom,
+    #000 80%, rgb(0 0 0 / .96) 83%, rgb(0 0 0 / .78) 86%,
+    rgb(0 0 0 / .48) 90%, rgb(0 0 0 / .16) 94.5%,
+    rgb(0 0 0 / .025) 98%, transparent 100%);
+  -webkit-mask-image: var(--home-edge);
+  mask-image: var(--home-edge);
 }
 bio-home-field::before,
 bio-home-field canvas {

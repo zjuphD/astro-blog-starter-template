@@ -8,8 +8,15 @@ html:root{--bio-body:'Medium LL','PingFang SC','Microsoft YaHei','Noto Sans CJK 
 :root :is(main,footer) :is(h1,h2,h3,h4),:root .font-display{font-family:var(--font-display)}
 :root :is(main,footer) :is(h1,h2),:root .font-display{font-weight:400;letter-spacing:-.035em}
 /* Without the card fly-through the hero takes a single viewport. */
-#product.o-home-hero{isolation:isolate;--pin:0svh!important;--copy-lift:2svh!important;--copy-lift-phone:1svh!important}
+#product.o-home-hero{isolation:isolate;z-index:1;--pin:0svh!important;--copy-lift:2svh!important;--copy-lift-phone:1svh!important}
 #product.o-home-hero .s-sticky-outer>.s-sticky{position:relative;top:auto}
+/* Carry the glow into the opening paragraph without enlarging the hero's hit area. */
+#product > bio-home-field { bottom:calc(0px - clamp(48px, 10svh, 100px)); }
+/* The scroll component measures its stage on mount, before the adapter assigns #product. */
+.o-home-hero + .o-text-arc:has(> div > .wrap.relative) { padding-block-start:clamp(52px, 11svh, 112px); }
+.o-home-hero + .o-text-arc:has(> div > .wrap.sticky) { margin-block-start:max(-24svh, -225px); }
+.o-home-hero + .o-text-arc > div > .wrap.sticky { height:max(320px, 62svh); }
+.o-home-hero + .o-text-arc h2 .s-split-word { opacity:1!important; filter:none!important; }
 /* Landscape phones and short desktop windows must scroll to every action. */
 @media (max-height: 32rem) {
   #product .s-sticky-outer, #product .s-sticky > .relative,

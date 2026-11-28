@@ -20,6 +20,8 @@ import { SAME_AS, VERIFY } from "../../seo";
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const t = COPY[lang];
+// Flip on once public/bioseeki/hero-loop-{light,dark}.{webm,mp4,jpg} are committed.
+const heroVideo = true;
 // Published metadata stays authoritative; visitors choose the installer on the shared download page.
 const MAC_DMG_URL = desktopRelease.downloadUrl;
 // All homepage entries navigate to the platform chooser instead of starting a Mac download.
@@ -414,7 +416,14 @@ section{ padding:clamp(4.5rem,10vh,8rem) 0; }
   color:var(--sage-deep); background:var(--key-bg); box-shadow:var(--key); }
 
 /* ============ HERO ============ */
-.hero{ position:relative; isolation:isolate; background:var(--mist); padding:clamp(7rem,14vh,9rem) 0 clamp(3rem,6vh,4.5rem); min-height:min(100svh,860px); display:flex; align-items:center; }
+.hero{ position:relative; padding:clamp(7rem,14vh,9rem) 0 clamp(3rem,6vh,4.5rem); min-height:min(100svh,860px); display:flex; align-items:center; }
+.hero::before{
+  content:""; position:absolute; z-index:-1; pointer-events:none;
+  left:50%; top:0; width:min(1200px,100%); height:100%; transform:translateX(-50%);
+  background:
+    radial-gradient(40% 50% at 22% 42%, color-mix(in srgb, var(--sage) 14%, transparent), transparent 70%),
+    radial-gradient(30% 40% at 80% 50%, color-mix(in srgb, var(--ochre) 9%, transparent), transparent 70%);
+}
 .hero-grid{ max-width:46rem; }
 .hero .eyebrow{ display:flex; align-items:center; gap:10px; }
 .hero .eyebrow::before{ content:""; width:22px; height:1px; flex:none; background:var(--ochre); }
@@ -743,6 +752,26 @@ footer{ padding:clamp(3.5rem,8vh,5.5rem) 0 2.5rem; }
 .bound h3{ font-size:1.08rem; font-weight:600; margin-bottom:.25rem; line-height:1.4; }
 .bound p{ font-size:.95rem; color:var(--ink-soft); line-height:1.6; }
 
+/* ============ HERO BACKGROUND VIDEO ============ */
+.hero-video{ position:absolute; inset:0; z-index:-1; overflow:hidden; pointer-events:none;
+  /* weighted to the right so the helix stays clear of the headline and body copy */
+  -webkit-mask-image:radial-gradient(ellipse 62% 80% at 80% 42%, #000 30%, transparent 78%);
+  mask-image:radial-gradient(ellipse 62% 80% at 80% 42%, #000 30%, transparent 78%); }
+/* The loops are rendered on white (light) / black (dark). Blending the masked container —
+   not the <video>, whose backdrop inside the mask group would be empty — drops that
+   ground so only the helix sits on the page background. */
+.hero-video{ mix-blend-mode:multiply; }
+.hv{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.hv-dark{ display:none; }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .hero-video{ mix-blend-mode:screen; }
+  :root:not([data-theme="light"]) .hv-light{ display:none; }
+  :root:not([data-theme="light"]) .hv-dark{ display:block; }
+}
+:root[data-theme="dark"] .hero-video{ mix-blend-mode:screen; }
+:root[data-theme="dark"] .hv-light{ display:none; }
+:root[data-theme="dark"] .hv-dark{ display:block; }
+
 /* ============ LANGUAGE SWITCH: segmented control ============ */
 .seg{ display:inline-flex; align-items:center; gap:2px; padding:2px; border-radius:10px; flex:none;
   background:color-mix(in srgb, var(--ink) 5%, transparent); box-shadow:inset 0 0 0 1px var(--line); }
@@ -880,6 +909,11 @@ body[data-lang="en"] .brand-sub{ display:none; }
 .play-ico::after{ content:""; position:absolute; inset:-5px; border-radius:50%; border:1.5px solid rgba(255,255,255,.6); animation:ring 2.6s var(--ease) infinite; pointer-events:none; }
 @keyframes ring{ 0%{ transform:scale(.86); opacity:.9; } 100%{ transform:scale(1.4); opacity:0; } }
 
+/* hero: the helix drifts down and fades as the page scrolls away from it */
+@supports (animation-timeline: scroll()){
+  .hero-video{ animation:helix-drift linear both; animation-timeline:scroll(root); animation-range:0 100vh; }
+  @keyframes helix-drift{ to{ transform:translateY(16vh); opacity:.35; } }
+}
 
 /* ============ RESPONSIVE ============ */
 /* nav: 7 links + language toggle + 3 actions. Measured with .tools/site-navcheck.mjs: links need ~1030px in zh
@@ -930,6 +964,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
   .hero-meta > span + a::before{ display:none; }
   /* small enough that a 12-character Chinese clause fits one line, so 。 never wraps alone */
   .section-title{ font-size:clamp(1.55rem,7.2vw,1.9rem); }
+  .hero-video{ display:none; }
   .marquee-group{ padding:13px 0; }
   .marquee-group span{ padding:0 1.3rem; font-size:.86rem; }
   /* phones: every ruled grid becomes a list — icon left, text right */
@@ -968,7 +1003,7 @@ body[data-lang="en"] .brand-sub{ display:none; }
 /* ============ TOUCH, FORCED COLOURS, REDUCED MOTION ============ */
 @media (hover:none){ .btn:hover{ transform:none; } }
 @media (forced-colors: active){
-  .orbs::before,.orbs::after,.nav::after,.spot-edge::before,.cfx{ display:none; }
+  .orbs::before,.orbs::after,.hero::before,.nav::after,.spot-edge::before,.cfx{ display:none; }
 }
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior:auto; }
@@ -992,14 +1027,13 @@ body[data-lang="en"] .brand-sub{ display:none; }
   .badge .dot-i,.play-ico::after,.spin{ animation:none !important; }
   .nav-ind,.log::after,.log-n,.ai,.ico-box{ transition:none !important; }
   .faq::details-content{ transition:none; }
+  .hero-video{ animation:none !important; }
   .cfx{ display:none; }
   .btn,.btn .ai,.faq-ic,.play-pill,.card-link,.demo-foot a,.hero-demo,.seg a{ transition:none !important; }
   .btn:hover,.btn:active{ transform:none !important; }
   .wire-flow{ animation:none; stroke-dasharray:none; opacity:.5; }
 }
 </style>
-<link rel="stylesheet" href="/bioseeki/home-field.css"/>
-<script is:inline type="module" src="/bioseeki/home-field.js"></script>
 </head>
 <body data-lang={lang}>
 
@@ -1048,7 +1082,14 @@ body[data-lang="en"] .brand-sub{ display:none; }
 </nav>
 
 <header class="hero" id="top">
-  <bio-home-field aria-hidden="true"></bio-home-field>
+  {heroVideo && <div class="hero-video" aria-hidden="true">
+    <video class="hv hv-light" muted loop playsinline preload="none" poster="/bioseeki/hero-loop-light.jpg" data-hero-video>
+      <source src="/bioseeki/hero-loop-light.webm" type="video/webm"><source src="/bioseeki/hero-loop-light.mp4" type="video/mp4">
+    </video>
+    <video class="hv hv-dark" muted loop playsinline preload="none" poster="/bioseeki/hero-loop-dark.jpg" data-hero-video>
+      <source src="/bioseeki/hero-loop-dark.webm" type="video/webm"><source src="/bioseeki/hero-loop-dark.mp4" type="video/mp4">
+    </video>
+  </div>}
   <div class="wrap">
     <div class="hero-grid">
       <div>
@@ -1370,9 +1411,6 @@ body[data-lang="en"] .brand-sub{ display:none; }
     };
     window.addEventListener("pointermove", function(e){
       if (e.pointerType === "touch") return;
-      if (e.target.closest?.("header.hero")) {
-        root.classList.add("fx-away"); hideBase(); return;
-      }
       tx = e.clientX; ty = e.clientY;
       onGlass = !!(e.target.closest && e.target.closest(".glass, .nav"));
       if (onGlass) hideBase(); else showBase(tx, ty);
@@ -1533,6 +1571,19 @@ body[data-lang="en"] .brand-sub{ display:none; }
     pv.addEventListener("play", started);
   }
 
+  /* hero background loop: play only the variant for the current theme; never with reduced motion */
+  var heroVideos = Array.prototype.slice.call(document.querySelectorAll("[data-hero-video]"));
+  if (heroVideos.length && !reduced && window.matchMedia("(min-width: 561px)").matches){
+    var pickVideo = function(){
+      heroVideos.forEach(function(v){
+        if (getComputedStyle(v).display === "none"){ v.pause(); return; }
+        if (v.preload !== "auto"){ v.preload = "auto"; v.load(); }
+        var p = v.play(); if (p && p.catch) p.catch(function(){});
+      });
+    };
+    pickVideo();
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", pickVideo);
+  }
 })();
 </script>
 <script is:inline>
