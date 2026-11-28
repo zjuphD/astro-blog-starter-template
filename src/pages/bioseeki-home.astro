@@ -1,11 +1,7 @@
 ---
 export const prerender = false;
-import Home from "../components/bioseeki/Home.astro";
-import { detectLang } from "../i18n/bioseeki";
+import { homepageResponse } from "../landing-page";
 
-// `/` on bioseeki.com lands here (index.astro rewrites by host). Language comes from
-// ?lang= (remembered in a cookie), then the cookie, then Accept-Language; default zh.
-const lang = detectLang(Astro);
-Astro.response.headers.set("Vary", "Accept-Language, Cookie");
+if (Astro.url.searchParams.get("lang") === "en") return Astro.redirect("/en");
+return homepageResponse("zh-CN", Astro.request.method);
 ---
-<Home lang={lang} />

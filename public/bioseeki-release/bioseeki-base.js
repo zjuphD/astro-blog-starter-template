@@ -2,9 +2,13 @@
 let refreshDownloadLinks = () => {};
 import('/download-platform.js?v=20261024').then(module => { refreshDownloadLinks = () => module.refreshHomeDownloadLinks(document, navigator); refreshDownloadLinks(); }).catch(() => {});
 const portalOrigin='https://api.bioseeki.com';
+const pageLanguage=document.documentElement.lang;
+const english=pageLanguage==='en';
+const homePath=english?'/en':'/';
+const pageTitle=document.title;
+const text=(zh,en)=>english?en:zh;
 const destinations={
   download:'/download',
-  english:'/en',
   login:portalOrigin+'/sign-in?redirect=/me',
   signup:portalOrigin+'/sign-up?redirect=/me',
   subscribe:portalOrigin+'/subscriptions',
@@ -13,9 +17,9 @@ const destinations={
   xiaohongshu:'https://xhslink.cn/o/1FHuh0e2oVK',
 };
 const plans=[
-  {name:'Plus',price:'69',credits:'2,000',use:'日常问答与轻量检索'},
-  {name:'Pro',price:'149',credits:'5,000',use:'常规科研分析与长文写作'},
-  {name:'Heavy',price:'299',credits:'12,000',use:'高强度长任务与深度推理'},
+  {name:'Plus',price:'69',credits:'2,000',use:text('日常问答与轻量检索','Everyday questions and quick searches')},
+  {name:'Pro',price:'149',credits:'5,000',use:text('常规科研分析与长文写作','Research analysis and long-form writing')},
+  {name:'Heavy',price:'299',credits:'12,000',use:text('高强度长任务与深度推理','Long-running tasks and in-depth reasoning')},
 ];
 let leftHero=false;
 function refreshHeroReturn(){
@@ -34,7 +38,7 @@ const socialIcons={
   github:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M10.226 17.284c-2.965-.36-5.054-2.493-5.054-5.256 0-1.123.404-2.336 1.078-3.144-.292-.741-.247-2.314.09-2.965.898-.112 2.111.36 2.83 1.01.853-.269 1.752-.404 2.853-.404 1.1 0 1.999.135 2.807.382.696-.629 1.932-1.1 2.83-.988.315.606.36 2.179.067 2.942.72.854 1.101 2 1.101 3.167 0 2.763-2.089 4.852-5.098 5.234.763.494 1.28 1.572 1.28 2.807v2.336c0 .674.561 1.056 1.235.786 4.066-1.55 7.255-5.615 7.255-10.646C23.5 6.188 18.334 1 11.978 1 5.62 1 .5 6.188.5 12.545c0 4.986 3.167 9.12 7.435 10.669.606.225 1.19-.18 1.19-.786V20.63a2.9 2.9 0 0 1-1.078.224c-1.483 0-2.359-.808-2.987-2.313-.247-.607-.517-.966-1.034-1.033-.27-.023-.359-.135-.359-.27 0-.27.45-.471.898-.471.652 0 1.213.404 1.797 1.235.45.651.921.943 1.483.943.561 0 .92-.202 1.437-.719.382-.381.674-.718.944-.943"/></svg>',
   x:'<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.9 2H22l-7.3 8.3L23 22h-6.5l-5.1-6.7L5.5 22H2.3l7.6-8.8L1 2h6.6l4.6 6.1L18.9 2ZM17.8 20h1.8L6.6 3.9H4.7Z"/></svg>',
   mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2.75" y="5" width="18.5" height="14" rx="2.2"/><path d="m3.5 6.2 8.5 6.5 8.5-6.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  xiaohongshu:'<svg viewBox="0 0 40 24" aria-hidden="true"><rect x="1" y="1" width="38" height="22" rx="6" fill="none" stroke="currentColor" stroke-width="1.3"/><text x="20" y="16.1" text-anchor="middle" fill="currentColor" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="10.5" font-weight="600" letter-spacing="-.5">小红书</text></svg>',
+  xiaohongshu:`<svg viewBox="0 0 40 24" aria-hidden="true"><rect x="1" y="1" width="38" height="22" rx="6" fill="none" stroke="currentColor" stroke-width="1.3"/><text x="20" y="16.1" text-anchor="middle" fill="currentColor" font-family="PingFang SC,Microsoft YaHei,sans-serif" font-size="${text('10.5','8')}" font-weight="600" letter-spacing="-.5">${text('小红书','RedNote')}</text></svg>`,
 };
 function socialLink(name,href,icon){
   const a=anchor('',href,'bio-social-link');
@@ -43,19 +47,19 @@ function socialLink(name,href,icon){
   return a;
 }
 function brand(){
-  if(document.documentElement.lang!=='zh-CN')document.documentElement.lang='zh-CN';
+  if(document.documentElement.lang!==pageLanguage)document.documentElement.lang=pageLanguage;
   document.querySelector('#reference-note')?.remove();
   document.querySelector('.local-visual-label')?.remove();
   document.querySelectorAll('img[src="/images/ambi-logo.svg"]').forEach(img=>{img.src='/product-assets/bioseeki-logo.svg';img.alt='BioSeeki';});
   document.querySelectorAll('img[src="/images/ambi-mark.svg"]').forEach(img=>{img.src='/product-assets/brand-mark.svg';img.alt='';});
-  document.querySelectorAll('a.brand').forEach(a=>{a.setAttribute('aria-label','BioSeeki');a.href='/';});
+  document.querySelectorAll('a.brand').forEach(a=>{a.setAttribute('aria-label','BioSeeki');a.href=homePath;});
   const header=document.querySelector('.site-header');
   if(header&&!header.dataset.bioHeader){
     header.dataset.bioHeader='true';
     const list=header.querySelector('.nav-list');
     if(list){
       const prototype=list.firstElementChild;
-      const items=[['产品','#product'],['科研场景','#research'],['定价','#pricing']].map(([text,href])=>{
+      const items=[[text('产品','Product'),'#product'],[text('科研场景','Research workflows'),'#research'],[text('定价','Pricing'),'#pricing']].map(([text,href])=>{
         const li=prototype.cloneNode(true),link=li.querySelector('a');
         link.textContent=text;link.href=href;link.className='nav-link';
         delete link.dataset.localDestination;link.removeAttribute('target');return li;
@@ -63,7 +67,9 @@ function brand(){
       list.replaceChildren(...items);
     }
     const language=header.querySelector('.header-language');
-    language?.replaceChildren(anchor('EN',destinations.english,'bio-language'),anchor('登录',destinations.login,'bio-login'));
+    const switcher=anchor(text('EN','中文'),english?'/':'/en','bio-language');
+    switcher.lang=switcher.hreflang=text('en','zh-CN');
+    language?.replaceChildren(switcher,anchor(text('登录','Sign in'),destinations.login,'bio-login'));
   }
   const hero=document.querySelector('.o-home-hero');
   if(hero){
@@ -97,27 +103,45 @@ function brand(){
     personal.id='personal';
     if(!personal.querySelector('.bio-personal-visual')){
       const figure=document.createElement('figure');figure.className='bio-personal-visual';
-      figure.innerHTML='<img src="/product-assets/concepts-v2/memory.png" width="1536" height="1024" loading="lazy" alt="课题记忆、知识库与研究进展连接在一起" />';
+      const img=document.createElement('img');
+      img.src='/product-assets/concepts-v2/memory.png';img.width=1536;img.height=1024;img.loading='lazy';
+      img.alt=text('课题记忆、知识库与研究进展连接在一起','Project memory, the library and research progress in one workspace');
+      figure.append(img);
       personal.append(figure);
     }
   }
   const faq=document.querySelector('.o-faq');
   if(faq&&!document.querySelector('#pricing')){
     const section=document.createElement('section');section.className='bio-pricing';section.id='pricing';section.setAttribute('aria-labelledby','bio-pricing-title');
-    section.innerHTML=`<div class="bio-pricing-intro"><div><p class="bio-eyebrow">按你的研究节奏</p><h2 id="bio-pricing-title">从一个问题开始。<br>让研究，接着向前。</h2></div><p>月付订阅，人民币结算。<br>每份套餐包含固定 credits。</p></div><div class="bio-plan-grid">${plans.map((p,i)=>`<article class="bio-plan ${i===1?'bio-plan--recommended':''}"><div class="bio-plan-head"><h3>${p.name}</h3>${i===1?'<span>日常科研</span>':''}</div><p class="bio-plan-use">${p.use}</p><p class="bio-plan-price"><span>¥</span><strong>${p.price}</strong><span> / 月</span></p><p class="bio-plan-credits"><strong>${p.credits}</strong> credits / 月</p><a href="${destinations.subscribe}" data-local-destination="${destinations.subscribe}" class="bio-plan-action">选择 ${p.name}<span aria-hidden="true">↗</span></a></article>`).join('')}</div><div class="bio-pricing-foot"><p>先试着开始。<a href="${destinations.signup}" data-local-destination="${destinations.signup}">注册即送 500 credits ↗</a></p><p>套餐额度到期失效；具体权益以订阅页为准。</p></div>`;
+    const month=text('月','month');
+    section.innerHTML=`
+      <div class="bio-pricing-intro"><div>
+        <p class="bio-eyebrow">${text('按你的研究节奏','Plans and pricing')}</p>
+        <h2 id="bio-pricing-title">${text('从一个问题开始。','Start with a question.')}<br>${text('让研究，接着向前。','Keep your research moving.')}</h2>
+      </div><p>${text('月付订阅，人民币结算。','Monthly subscriptions, billed in Chinese yuan.')}<br>${text('每份套餐包含固定 credits。','Each plan includes a monthly credit allowance.')}</p></div>
+      <div class="bio-plan-grid">${plans.map((p,i)=>`
+        <article class="bio-plan ${i===1?'bio-plan--recommended':''}">
+          <div class="bio-plan-head"><h3>${p.name}</h3>${i===1?`<span>${text('日常科研','Everyday research')}</span>`:''}</div>
+          <p class="bio-plan-use">${p.use}</p>
+          <p class="bio-plan-price"><span>¥</span><strong>${p.price}</strong><span> / ${month}</span></p>
+          <p class="bio-plan-credits"><strong>${p.credits}</strong> credits / ${month}</p>
+          <a href="${destinations.subscribe}" data-local-destination="${destinations.subscribe}" class="bio-plan-action">${text('选择','Choose')} ${p.name}<span aria-hidden="true">↗</span></a>
+        </article>`).join('')}</div>
+      <div class="bio-pricing-foot"><p>${text('先试着开始。','Try BioSeeki. ')}<a href="${destinations.signup}" data-local-destination="${destinations.signup}">${text('注册即送 500 credits','Get 500 credits when you sign up')} ↗</a></p>
+        <p>${text('套餐额度到期失效；具体权益以订阅页为准。','Unused credits expire at the end of the billing period. See the subscription page for plan details.')}</p></div>`;
     faq.before(section);
   }
   const footer=document.querySelector('footer');if(footer)footer.id='download';
   if(footer&&!footer.dataset.bioFooter){
     footer.dataset.bioFooter='true';
     const social=footer.querySelector('.footer-strip-social');
-    if(social){social.setAttribute('aria-label','BioSeeki 社交与联系');social.replaceChildren(socialLink('GitHub：BioSeeki',destinations.github,socialIcons.github),socialLink('X',destinations.x,socialIcons.x),socialLink('邮箱：support@bioseeki.com','mailto:support@bioseeki.com',socialIcons.mail),socialLink('小红书',destinations.xiaohongshu,socialIcons.xiaohongshu));}
+    if(social){social.setAttribute('aria-label',text('BioSeeki 社交与联系','Find BioSeeki'));social.replaceChildren(socialLink(text('GitHub：BioSeeki','BioSeeki on GitHub'),destinations.github,socialIcons.github),socialLink('X',destinations.x,socialIcons.x),socialLink(text('邮箱：support@bioseeki.com','Email support@bioseeki.com'),'mailto:support@bioseeki.com',socialIcons.mail),socialLink(text('小红书','RedNote'),destinations.xiaohongshu,socialIcons.xiaohongshu));}
     const nav=footer.querySelector('[aria-label="Footer navigation"]');
-    if(nav)nav.replaceChildren(anchor('下载 BioSeeki',destinations.download),anchor('更新日志','/changelog'),anchor('定价','#pricing'),anchor('隐私政策','/privacy'),anchor('服务条款','/terms'));
+    if(nav)nav.replaceChildren(anchor(text('下载 BioSeeki','Download BioSeeki'),destinations.download),anchor(text('更新日志','Changelog'),'/changelog'),anchor(text('定价','Pricing'),'#pricing'),anchor(text('隐私政策','Privacy policy'),'/privacy'),anchor(text('服务条款','Terms of service'),'/terms'));
   }
   footer?.querySelectorAll('p').forEach(p=>{if(p.textContent.includes('Ambi ©'))p.textContent='BioSeeki © 2026';});
   refreshDownloadLinks();
-  document.title='BioSeeki｜越用越懂你的个人科研 Agent';
+  if(document.title!==pageTitle)document.title=pageTitle;
 }
 let scheduled=false;
 const observer=new MutationObserver(()=>{
@@ -126,6 +150,7 @@ const observer=new MutationObserver(()=>{
 observer.observe(document.body,{subtree:true,childList:true});
 addEventListener('load',brand,{once:true});brand();
 document.addEventListener('click',event=>{
+  if(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
   const a=event.target.closest?.('a');if(!a)return;
   const url=new URL(a.href,location.href);
   const oldSegments={features:'#research',hardware:'#research',trust:'#evidence',about:'#personal'};

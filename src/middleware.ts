@@ -34,17 +34,22 @@ export const onRequest = defineMiddleware(async (context, next) => {
   }
   const isAiseeki = ["aiseeki.com", "www.aiseeki.com"].includes(context.url.hostname);
   if (isAiseeki) return next();
-  if (pathname === "/" && context.url.searchParams.get("lang") === "en") {
-    return context.redirect("/en", 302);
+  if (pathname === "/en/" || (pathname === "/" && context.url.searchParams.get("lang") === "en")) {
+    const canonical = new URL(context.url);
+    canonical.searchParams.delete("lang");
+    return context.redirect("/en" + canonical.search, 302);
   }
   const isHomepage = pathname === "/";
+  if (isHomepage && context.cookies.get("lang")?.value === "en") {
+    context.cookies.set("lang", "zh", { path: "/", maxAge: 60 * 60 * 24 * 365, sameSite: "lax" });
+  }
   const isBrandAsset = ["/bioseeki-base.css", "/bioseeki-base.js", "/release-runtime.js", "/site.webmanifest", "/web-app-manifest-512x512.png"].includes(pathname)
     || ["/_nuxt/", "/product-assets/", "/images/", "/fonts/"].some(prefix => pathname.startsWith(prefix));
-  if (isHomepage || isBrandAsset) {
+  if (isBrandAsset) {
     const assets = context.locals.runtime?.env?.ASSETS;
     if (assets) {
       const url = new URL(context.url);
-      url.pathname = isHomepage ? "/bioseeki-release/" : `/bioseeki-release${pathname}`;
+      url.pathname = `/bioseeki-release${pathname}`;
       // Pass a URL across the binding boundary: the local proxy and Astro can
       // use different Request constructors, even though production shares one.
       const response = await assets.fetch(url.href, {
@@ -52,10 +57,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
         headers: context.request.headers,
       });
       const headers = new Headers(response.headers);
-      headers.set("Cache-Control", isHomepage ? "no-cache, must-revalidate" : "public, max-age=3600");
-      if (isHomepage) {
-        headers.set("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self' https://api.bioseeki.com; worker-src 'self' blob:; frame-src 'self'; form-action 'none'; base-uri 'self'");
-      }
+      headers.set("Cache-Control", "public, max-age=3600");
       return new Response(response.body, {status: response.status, statusText: response.statusText, headers});
     }
   }

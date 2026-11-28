@@ -34,6 +34,10 @@ html:root{--bio-body:'Medium LL','PingFang SC','Microsoft YaHei','Noto Sans CJK 
 .o-home-hero h1{font-size:clamp(4rem,8.5vw,8.5rem);line-height:1.12;width:max-content;max-width:100%;text-align:center}
 .bio-hero-copy{align-items:center;text-align:center}
 .bio-hero-copy .bio-hero-info{margin-inline:auto}
+.bio-home-static{max-width:40rem;margin:10vh auto;padding:2rem;color:var(--bio-ink)}
+.bio-home-static h1{margin:2rem 0 1rem;font-size:clamp(2rem,6vw,4rem)}
+.bio-home-static p{margin-bottom:1.5rem;line-height:1.6}
+.bio-home-static a{margin-inline-end:1.5rem;text-decoration:underline}
 /* Center the Chinese words optically; terminal punctuation hangs outside their measure. */
 .bio-title-body{display:inline-block;position:relative;white-space:nowrap;font:inherit;letter-spacing:inherit}
 .bio-title-end{position:absolute;inset-inline-start:100%;top:0;white-space:nowrap;font:inherit;letter-spacing:0}
@@ -89,7 +93,7 @@ html:root{--bio-body:'Medium LL','PingFang SC','Microsoft YaHei','Noto Sans CJK 
 .bio-social-link{display:inline-flex!important;align-items:center;justify-content:center;width:56px;height:56px;padding:0!important;border-radius:50%;transition:background-color .2s,transform .2s}
 .bio-social-link:hover{background:#17353210;transform:translateY(-2px)}
 .bio-social-link svg{display:block;width:30px;height:30px}
-.bio-social-link[aria-label='小红书'] svg{width:50px;height:30px}
+.bio-social-link[href^='https://xhslink.cn/'] svg{width:50px;height:30px}
 .bio-social-link:focus-visible{outline:2px solid #173532;outline-offset:3px}
 .site-footer .button{background:var(--bio-ink)!important;color:#f7f6ed!important}
 .site-footer [aria-label='Footer navigation']{display:flex;gap:1.7rem;flex-wrap:wrap}

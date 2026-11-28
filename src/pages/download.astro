@@ -54,7 +54,7 @@ const guides = [{ id: 'windows', title: t.windowsGuide, steps: t.windowsSteps },
 <body>
   <a class="skip-link" href="#downloads">{en ? 'Skip to downloads' : '跳到下载区域'}</a>
   <header class="site-header">
-    <a class="brand" href="/" aria-label="BioSeeki"><img src="/product-assets/bioseeki-logo.svg" alt="BioSeeki" width="146" height="35" /></a>
+    <a class="brand" href={en ? '/en' : '/'} aria-label="BioSeeki"><img src="/product-assets/bioseeki-logo.svg" alt="BioSeeki" width="146" height="35" /></a>
     <nav aria-label={en ? 'Navigation' : '导航'}><a href="/changelog">{t.changelog}<span aria-hidden="true"> ↗</span></a><a class="back" href={en ? '/en' : '/'}>{t.home}<span aria-hidden="true"> ↗</span></a></nav>
   </header>
   <main data-download-page>
