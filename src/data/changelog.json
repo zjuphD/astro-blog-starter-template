@@ -1,5 +1,27 @@
 [
   {
+    "version": "0.1.29",
+    "date": "2026-11-29",
+    "title": "Mac 首页外观与手机连接更新",
+    "items": [
+      {
+        "feature": "首页与外观",
+        "description": "首页光效默认开启，移动鼠标可照亮背景，点击会产生波纹，静置后停帧。在「设置 → 通用 → 首页动态背景」中关闭后，下次启动会记住选择。账户菜单可直接切换主题。",
+        "en": "The interactive home background is on by default. Move the pointer for a glow or click for ripples. The animation pauses when idle. Turn it off in Settings → General to keep it off across restarts. Switch themes from the account menu."
+      },
+      {
+        "feature": "手机连接",
+        "description": "在设置的「手机连接」中开启跨网访问。可授权所有当前和以后新增的课题，也可选择部分课题。手机可以回到同一个电脑会话继续追问。",
+        "en": "Phone Connection settings let you share all current and future projects or choose individual projects. Open a computer conversation on your phone and continue the same thread."
+      },
+      {
+        "feature": "登录页",
+        "description": "登录页使用与桌面客户端一致的立体折带图标。",
+        "en": "The sign-in screen uses the same folded ribbon logo as the desktop app."
+      }
+    ]
+  },
+  {
     "version": "0.1.27",
     "date": "2026-11-27",
     "title": "Mac 首页 Fiji 状态显示修复",
