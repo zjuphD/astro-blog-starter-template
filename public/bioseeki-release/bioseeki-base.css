@@ -7,6 +7,23 @@ html:root{--bio-body:'Medium LL','PingFang SC','Microsoft YaHei','Noto Sans CJK 
 :root body{font-family:var(--font-sans)}
 :root :is(main,footer) :is(h1,h2,h3,h4),:root .font-display{font-family:var(--font-display)}
 :root :is(main,footer) :is(h1,h2),:root .font-display{font-weight:400;letter-spacing:-.035em}
+/* Without the card fly-through the hero takes a single viewport. */
+#product.o-home-hero{isolation:isolate;--pin:0svh!important;--copy-lift:2svh!important;--copy-lift-phone:1svh!important}
+#product.o-home-hero .s-sticky-outer>.s-sticky{position:relative;top:auto}
+/* Landscape phones and short desktop windows must scroll to every action. */
+@media (max-height: 32rem) {
+  #product .s-sticky-outer, #product .s-sticky > .relative,
+  #product .s-sticky .s-tween.h-full { height:auto; }
+  #product .s-sticky .s-tween.flex.h-full {
+    min-height:calc(100svh - var(--header-height));
+    padding-block:1.25rem;
+  }
+  #product .bio-hero-copy h1, #product .bio-hero-copy h1 .hero-line {
+    font-size:clamp(2.5rem, 10svh, 3.6rem)!important;
+    line-height:1.1!important;
+  }
+  #product .bio-hero-copy > .bio-hero-info { margin-block-start:1rem; }
+}
 .o-home-hero h1{font-size:clamp(4rem,8.5vw,8.5rem);line-height:1.12;width:max-content;max-width:100%;text-align:center}
 .bio-hero-copy{align-items:center;text-align:center}
 .bio-hero-copy .bio-hero-info{margin-inline:auto}

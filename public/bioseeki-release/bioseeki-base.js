@@ -68,6 +68,11 @@ function brand(){
   const hero=document.querySelector('.o-home-hero');
   if(hero){
     hero.id='product';
+    if (!hero.querySelector(':scope > bio-home-field')) {
+      const field = document.createElement('bio-home-field');
+      field.setAttribute('aria-hidden', 'true');
+      hero.prepend(field);
+    }
     const heading=hero.querySelector('h1');
     if(heading){
       heading.parentElement.classList.add('bio-hero-copy');
